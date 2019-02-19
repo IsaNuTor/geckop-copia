@@ -7,6 +7,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'perfil', component: PerfilComponent },
+    { path: 'acreedores', component: AcreedoresComponent},
     /*{ path: '', component: Component },
     { path: '', component: Component },
     { path: '', component: Component },

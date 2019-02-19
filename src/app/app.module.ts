@@ -13,13 +13,19 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { AcreedoresComponent } from './components/acreedores/acreedores.component';
+import { TablaAcreedoresComponent } from './components/tabla-acreedores/tabla-acreedores.component';
+import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    PerfilComponent
+    PerfilComponent,
+    AcreedoresComponent,
+    TablaAcreedoresComponent,
+    AddAcreedorComponent
   ],
   imports: [
     BrowserModule,

@@ -11,15 +11,18 @@
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="active">Perfil</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['acreedores']" routerLinkActive="active">Acreedores</a>
+            </li>
         </ul>
         <span class="navbar-text">
       <button (click)="login()"
         *ngIf="!auth.isAuthenticated()"
-        type="button" 
+        type="button"
         class="btn btn-outline-primary btn-sm">Login</button>
 
         <button (click)="salir()"
-        type="button" 
+        type="button"
         *ngIf="auth.isAuthenticated()"
         class="btn btn-outline-primary btn-sm">Salir</button>
     </span>
