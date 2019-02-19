@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { AcreedoresComponent } from './components/acreedores/acreedores.component';
 
 
 
