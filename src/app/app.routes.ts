@@ -2,12 +2,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { AcreedoresComponent } from './components/acreedores/acreedores.component';
-
+import {AuthGuardService} from "./services/auth-guard.service";
 
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
-    { path: 'perfil', component: PerfilComponent },
+    { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService]},
     { path: 'acreedores', component: AcreedoresComponent},
     /*{ path: '', component: Component },
     { path: '', component: Component },

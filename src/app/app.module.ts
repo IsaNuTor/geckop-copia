@@ -7,6 +7,7 @@ import { APP_ROUTING } from './app.routes';
 
 // Servicios
 import {AuthService} from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { AcreedoresComponent } from './components/acreedores/acreedores.component';
 import { TablaAcreedoresComponent } from './components/tabla-acreedores/tabla-acreedores.component';
 import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.com
     APP_ROUTING
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

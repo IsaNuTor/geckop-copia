@@ -9,7 +9,7 @@
                 <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="active">Perfil</a>
+                <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="active" *ngIf="auth.isAuthenticated()">Perfil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['acreedores']" routerLinkActive="active">Acreedores</a>
