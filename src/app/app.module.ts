@@ -17,6 +17,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { AcreedoresComponent } from './components/acreedores/acreedores.component';
 import { TablaAcreedoresComponent } from './components/tabla-acreedores/tabla-acreedores.component';
 import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.component';
+import { AddOrdenComponent } from './components/add-orden/add-orden.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.com
     PerfilComponent,
     AcreedoresComponent,
     TablaAcreedoresComponent,
-    AddAcreedorComponent
+    AddAcreedorComponent,
+    AddOrdenComponent
   ],
   imports: [
     BrowserModule,
