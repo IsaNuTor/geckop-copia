@@ -1,0 +1,21 @@
+.form-control:focus{
+border-color: #228B22;
+border-width: 2px;
+box-shadow: none;
+}
+
+
+.custom-select:focus{
+border-color: #228B22;
+border-width: 2px;
+box-shadow: none;
+}
+
+.custom-select option{
+    background-color: #ffffff;
+
+}
+
+.custom-select option:hover{
+    box-shadow: 0 0 10px 100px #228B22 inset !important;
+}
