@@ -9,25 +9,37 @@
                 <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="active" *ngIf="auth.isAuthenticated()">Perfil</a>
+                <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="active">Perfil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['acreedores']" routerLinkActive="active">Acreedores</a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" [routerLink]="['orden']" routerLinkActive="active">Nueva Orden</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['login']" routerLinkActive="active">Login</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['registro']" routerLinkActive="active">Registro</a>
+            </li>
+
         </ul>
+        <!--
         <span class="navbar-text">
       <button (click)="login()"
-        *ngIf="!auth.isAuthenticated()"
         type="button"
         class="btn btn-outline-primary btn-sm">Login</button>
 
+        <button (click)="registrar()"
+        type="submit"
+        class="btn btn-outline-primary btn-sm">Registro</button>
+
         <button (click)="salir()"
-        type="button"
-        *ngIf="auth.isAuthenticated()"
-        class="btn btn-outline-primary btn-sm">Salir</button>
-    </span>
+        type="submit"
+        class="btn btn-outline-primary btn-sm">Salir</button> 
+        </span>-->
     </div>
 </nav>

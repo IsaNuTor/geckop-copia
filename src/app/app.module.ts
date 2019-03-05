@@ -19,6 +19,10 @@ import { TablaAcreedoresComponent } from './components/tabla-acreedores/tabla-ac
 import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.component';
 import { AddOrdenComponent } from './components/add-orden/add-orden.component';
 
+// Login y registro
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +33,16 @@ import { AddOrdenComponent } from './components/add-orden/add-orden.component';
     AcreedoresComponent,
     TablaAcreedoresComponent,
     AddAcreedorComponent,
-    AddOrdenComponent
+    AddOrdenComponent,
+
+    FormRegistroUsuariosComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING
+    APP_ROUTING,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,

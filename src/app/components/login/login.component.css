@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+.cont-login {
+    width: 330px;
+    height: 485px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    border-radius: 2%;
+    padding: 70px 30px;
+}
+
+.cont-login .imagenUsuario {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: 35px;
+    left: 110px;
+}
+
+.cont-login h1 {
+    padding: 100px 0 0;
+    margin-bottom: -5px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.cont-login .cont-email,
+.cont-login .cont-password {
+    padding-right: 20px;
+    width: 100%;
+}
+
+.cont-login .cont-email img,
+.cont-login .cont-password img {
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.cont-login input[type="text"],
+.cont-login input[type="password"] {
+    width: 89%;
+    margin: 20px 0 0;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    padding-left: 3px;
+}
+
+.cont-login input[type="submit"] {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 0;
+    height: 40px;
+    border: none;
+    background: #015c04;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.cont-login input[type="submit"]:hover {
+    background: #29a329;
+}
+
+.cont-login a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 25px;
+    color: darkgray;
+}
+
+.cont-login a:hover {
+    color: #fff;
+}
