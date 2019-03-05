@@ -13,7 +13,7 @@ const APP_ROUTES: Routes = [
     { path: 'orden', component: AddOrdenComponent },
     { path: 'registro', component: FormRegistroUsuariosComponent },
     { path: 'login', component: LoginComponent },
-    /*{ path: '', component: Component },*/
+    { path: 'perfil', component: PerfilComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' } // Por defecto redirecciona a esta ruta si llega
 ];
 
