@@ -23,19 +23,19 @@ CREATE TABLE Proyecto(
 /*Tabla de ralación entre los participantes y un proyecto*/
 CREATE TABLE Usuario_Proyecto(
 	usuario 	VARCHAR(9) PRIMARY KEY,
-	proyecto 	VARCHAR(9)  PRIMARY KEY,
-	FOREIGN KEY (dni) REFERENCES Usuario(dni),
-	FOREIGN KEY (acronimo) REFERENCES Proyecto(acronimo)
+	proyecto 	VARCHAR(9)  NOT NULL,
+	FOREIGN KEY (usuario) REFERENCES Usuario(dni),
+	FOREIGN KEY (proyecto) REFERENCES Proyecto(acronimo)
 );
 
---Valoraciones campo
-CREATE TABLE Otros_gasto(
+ /*Valoraciones campo*/
+CREATE TABLE Otro_gasto(
 	titulo		VARCHAR(25) PRIMARY KEY,
-	importe 	INT(6),	NOT NULL,
-	iva			INT(6),	NOT NULL,
-	comentario	VARCHAR(200), NOT NULL,
-	proyecto	VARCHAR(9),	NOT NULL,
-	FOREIGN KEY (acronimo) REFERENCES Proyecto(acronimo)
+	importe 	INT(6)	NOT NULL,
+	iva			INT(6)	NOT NULL,
+	comentario	VARCHAR(200) NOT NULL,
+	proyecto	VARCHAR(9)	NOT NULL,
+	FOREIGN KEY (proyecto) REFERENCES Proyecto(acronimo)
 
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE Acreedor(
 );
 
 
---Guarda los eventos y sus datos
+ /*Guarda los eventos y sus datos*/
 CREATE TABLE Orden(
 	id 			INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	numeracion  INT(6) UNSIGNED NOT NULL,
@@ -59,25 +59,25 @@ CREATE TABLE Orden(
 	FOREIGN KEY (acreedor) REFERENCES Acreedor(iban)
 );
 
-CREATE TABLE Imagen_Orden(
-	imagen 	INT(6) UNSIGNED NOT NULL PRIMARY KEY,
-	gasto  INT(6) UNSIGNED AUTO_INCREMENT NOT NULL  PRIMARY KEY,
-	FOREIGN KEY (gasto) REFERENCES Gasto(id)
-);
-
 CREATE TABLE Tipo(
 	nombre 	VARCHAR(15) NOT NULL PRIMARY KEY
 );
 
---Guarda las imagenes referenciadas al campo que pertenecen
+ /*Guarda las imagenes referenciadas al campo que pertenecen*/
 CREATE TABLE Gasto(
 	id  INT(6) UNSIGNED AUTO_INCREMENT NOT NULL  PRIMARY KEY,
 	descripcion VARCHAR(30),
-	importe 	INT(6),	NOT NULL,
-	iva			INT(6),	NOT NULL,
-	comentario	VARCHAR(200), NOT NULL,
+	importe 	INT(6)	NOT NULL,
+	iva			INT(6)	NOT NULL,
+	comentario	VARCHAR(200) NOT NULL,
 	orden		INT(6) UNSIGNED,
 	tipo		VARCHAR(15),
 	FOREIGN KEY (orden) REFERENCES Orden(id),
 	FOREIGN KEY (tipo) REFERENCES Tipo(nombre)
+);
+
+CREATE TABLE Imagen_Orden(
+	imagen 	INT(6) UNSIGNED NOT NULL PRIMARY KEY,
+	gasto  INT(6) UNSIGNED,
+	FOREIGN KEY (gasto) REFERENCES Gasto(id)
 );
