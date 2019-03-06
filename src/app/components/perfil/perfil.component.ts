@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styles: ['./perfil.component.css']
+  styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
 
@@ -13,7 +13,7 @@ export class PerfilComponent implements OnInit {
   constructor() {
     this.perfilUser = new FormGroup({
       nombre: new FormControl('', Validators.required),
-      apellidos: new FormControl('', Validators.required),
+      nif: new FormControl('', Validators.required),
       correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
       iban: new FormControl('', Validators.required)
     });
