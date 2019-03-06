@@ -6,7 +6,7 @@ import { APP_ROUTING } from './app.routes';
 
 
 // Servicios
-
+import { DbConnectionService } from './services/db-connection.service';
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -44,6 +44,7 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule
   ],
   providers: [
+    DbConnectionService
   ],
   bootstrap: [AppComponent]
 })
