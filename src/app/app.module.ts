@@ -6,8 +6,7 @@ import { APP_ROUTING } from './app.routes';
 
 
 // Servicios
-import {AuthService} from './services/auth.service';
-import { AuthGuardService } from './services/auth-guard.service';
+
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -45,8 +44,6 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule
   ],
   providers: [
-    AuthService,
-    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
