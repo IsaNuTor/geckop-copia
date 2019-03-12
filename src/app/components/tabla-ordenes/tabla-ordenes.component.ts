@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-tabla-ordenes',
   templateUrl: './tabla-ordenes.component.html',
@@ -12,8 +12,7 @@ export class TablaOrdenesComponent implements OnInit {
   ngOnInit() {
   }
 
-
-  buscador(){
+ 
   $(document).ready(function() {
   $(".search").keyup(function () {
     var searchTerm = $(".search").val();
@@ -39,7 +38,7 @@ export class TablaOrdenesComponent implements OnInit {
   if(jobCount == '0') {$('.no-result').show();}
     else {$('.no-result').hide();}
 		  });
-});
-  }  
+	});
+  
 
 }
