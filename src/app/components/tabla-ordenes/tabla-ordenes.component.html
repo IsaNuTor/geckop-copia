@@ -1,11 +1,10 @@
-
-<!--<div class="form-row">
+<div class="form-row">
     <div class="col">
-        <input type="text" class="search form-control form-control-sm" id="numeracion" placeholder="Numeración">
+        <input type="text" class="form-control form-control-sm" id="numeracion" placeholder="Numeración">
     </div>
 
     <div class="col">
-        <select class="form-control form-control-sm results">
+        <select class="form-control form-control-sm">
           <option selected>Seleccione Estado</option>
           <option value="aprobada">Aprobada</option>
           <option value="cancelada">Cancelada</option>
@@ -15,7 +14,7 @@
 </div>
 
 <p></p>
-<table class="table">
+<table class="table" id="tablaOrdenes">
   <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
@@ -44,43 +43,6 @@
       <td>Botón</td>
     </tr>
   </tbody>
-</table>-->
-
-
-<div class="form-group pull-right">
-    <input type="text" class="search form-control form-control-sm" id="numeracion" placeholder="Numeración">
-</div>
-<span class="counter pull-right"></span>
-<table class="table table-hover table-bordered results">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Estado</th>
-      <th scope="col">Numeración</th>
-      <th scope="col">Button</th>
-    </tr>
-    <tr class="warning no-result">
-      <td colspan="4"><i class="fa fa-warning"></i> No result</td>
-    </tr>
-  </thead>
-  <tbody>
-     <tr>
-      <th scope="row">1</th>
-      <td>Aprobada</td>
-      <td>id1a</td>
-      <td>Botón</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Cancelada</td>
-      <td>id2c</td>
-      <td>Botón</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Espera</td>
-      <td>id3e</td>
-      <td>Botón</td>
-    </tr>
-  </tbody>
 </table>
+
+
