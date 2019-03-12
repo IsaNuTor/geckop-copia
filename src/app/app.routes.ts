@@ -3,7 +3,8 @@ import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { AcreedoresComponent } from './components/acreedores/acreedores.component';
 import { AddOrdenComponent } from './components/add-orden/add-orden.component';
-
+import { ProyectosComponent } from './components/proyectos/proyectos.component';
+//Registro y Login
 import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
 
@@ -14,6 +15,7 @@ const APP_ROUTES: Routes = [
     { path: 'registro', component: FormRegistroUsuariosComponent },
     { path: 'login', component: LoginComponent },
     { path: 'perfil', component: PerfilComponent },
+    { path: 'proyectos', component: ProyectosComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' } // Por defecto redirecciona a esta ruta si llega
 ];
 

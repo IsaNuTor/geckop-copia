@@ -17,6 +17,9 @@ import { AcreedoresComponent } from './components/acreedores/acreedores.componen
 import { TablaAcreedoresComponent } from './components/tabla-acreedores/tabla-acreedores.component';
 import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.component';
 import { AddOrdenComponent } from './components/add-orden/add-orden.component';
+import { ProyectosComponent } from './components/proyectos/proyectos.component';
+import { TablaOrdenesComponent } from './components/tabla-ordenes/tabla-ordenes.component';
+import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.component';
 
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -35,7 +38,10 @@ import { LoginComponent } from './components/login/login.component';
     AddOrdenComponent,
 
     FormRegistroUsuariosComponent,
-    LoginComponent
+    LoginComponent,
+    ProyectosComponent,
+    TablaOrdenesComponent,
+    InfoProyectoComponent
   ],
   imports: [
     BrowserModule,
