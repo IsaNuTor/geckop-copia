@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { AcreedoresComponent } from './components/acreedores/acreedores.component';
+import { AcreedoresComponent } from './acreedores/acreedores.component';
 import { AddOrdenComponent } from './components/add-orden/add-orden.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 //Registro y Login

@@ -1,4 +1,4 @@
-<table class="table">
+<!--<table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Nombre</th>
@@ -21,4 +21,28 @@
       <td>Botón</td>
     </tr>
   </tbody>
-</table>
+</table>-->
+
+<div class="card border-secondary mb-3">
+  <div class="card-header">Acreedores</div>
+  <div class="card-body text-secondary">
+    <h5 class="card-title">Listado de acreedores</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>nif</th>
+          <th>iban</th>
+          <th>nombre</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let acreedor of acreedores">
+          <td>{{ acreedor.nif }}</td>
+          <td>{{ acreedor.iban }}</td>
+          <td>{{ acreedor.nombre }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

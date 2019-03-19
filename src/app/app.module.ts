@@ -4,16 +4,19 @@ import { NgModule } from '@angular/core';
 // Rutas
 import { APP_ROUTING } from './app.routes';
 
+// Backend
+import { HttpClientModule } from '@angular/common/http';
 
 // Servicios
 import { DbConnectionService } from './services/db-connection.service';
+import { AcreedorService } from './acreedores/acreedor.service';
 
 // Componentes
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { AcreedoresComponent } from './components/acreedores/acreedores.component';
+import { AcreedoresComponent } from './acreedores/acreedores.component';
 import { TablaAcreedoresComponent } from './components/tabla-acreedores/tabla-acreedores.component';
 import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.component';
 import { AddOrdenComponent } from './components/add-orden/add-orden.component';
@@ -47,10 +50,12 @@ import { LoginComponent } from './components/login/login.component';
     BrowserModule,
     APP_ROUTING,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
-    DbConnectionService
+    DbConnectionService,
+    AcreedorService
   ],
   bootstrap: [AppComponent]
 })
