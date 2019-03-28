@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 // Servicios
 import { DbConnectionService } from './services/db-connection.service';
 import { AcreedorService } from './acreedores/acreedor.service';
-
+import { UsuarioService} from './usuario/usuario.service';
 // Componentes
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -55,7 +55,9 @@ import { LoginComponent } from './components/login/login.component';
   ],
   providers: [
     DbConnectionService,
+    UsuarioService,
     AcreedorService
+
   ],
   bootstrap: [AppComponent]
 })

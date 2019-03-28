@@ -8,14 +8,17 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 
-export class AcreedorService {
+export class UsuarioService {
 
   private urlEndPoint:string = 'http://localhost:8080/api/usuario';
 
   constructor(private http: HttpClient) { }
 
   // Nos devuelve los clientes.
-  login(): Observable<Usuario> {
-     return this.http.post<Usuario>(this.urlEndPoint);
+  login(usuario:string, pass:string): Observable<Usuario> {
+     return this.http.post<Usuario>(this.urlEndPoint, {
+        dni: usuario,
+        password: pass
+     });
   }
 }
