@@ -1,12 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-// Rutas
-import { APP_ROUTING } from './app.routes';
-
-// Backend
-import { HttpClientModule } from '@angular/common/http';
-
 // Servicios
 import { DbConnectionService } from './services/db-connection.service';
 import { AcreedorService } from './acreedores/acreedor.service';
@@ -29,6 +23,23 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
 
+// Rutas
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {path:'', redirectTo:'login',pathMatch: 'full'},
+  {path:'acreedores', component: AcreedoresComponent},
+  //{path: 'acreedores/form-acreedores.component', component: FormAcreedoresComponent},
+  {path:'perfil', component: PerfilComponent},
+  {path:'orden', component: AddOrdenComponent},
+  {path:'proyectos', component: ProyectosComponent},
+  {path:'login', component: LoginComponent},
+  {path:'registro', component: FormRegistroUsuariosComponent}
+];
+
+// Backend
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +50,6 @@ import { LoginComponent } from './components/login/login.component';
     TablaAcreedoresComponent,
     AddAcreedorComponent,
     AddOrdenComponent,
-
     FormRegistroUsuariosComponent,
     LoginComponent,
     ProyectosComponent,
@@ -48,9 +58,9 @@ import { LoginComponent } from './components/login/login.component';
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(routes),
     HttpClientModule
   ],
   providers: [
