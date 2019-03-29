@@ -3,20 +3,19 @@ import { NgModule } from '@angular/core';
 
 // Servicios
 import { DbConnectionService } from './services/db-connection.service';
-import { AcreedorService } from './acreedores/acreedor.service';
+import { AcreedorService } from './components/acreedores/acreedor.service';
 import { UsuarioService} from './usuario/usuario.service';
 // Componentes
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { AcreedoresComponent } from './acreedores/acreedores.component';
-import { TablaAcreedoresComponent } from './components/tabla-acreedores/tabla-acreedores.component';
-import { AddAcreedorComponent } from './components/add-acreedor/add-acreedor.component';
+import { AcreedoresComponent } from './components/acreedores/acreedores.component';
 import { AddOrdenComponent } from './components/add-orden/add-orden.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { TablaOrdenesComponent } from './components/tabla-ordenes/tabla-ordenes.component';
 import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.component';
+import { FormAcreedoresComponent } from './components/acreedores/form-acreedores.component';
 
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -29,7 +28,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path:'', redirectTo:'login',pathMatch: 'full'},
   {path:'acreedores', component: AcreedoresComponent},
-  //{path: 'acreedores/form-acreedores.component', component: FormAcreedoresComponent},
+  {path: 'acreedores/form-acreedores.component', component: FormAcreedoresComponent},
   {path:'perfil', component: PerfilComponent},
   {path:'orden', component: AddOrdenComponent},
   {path:'proyectos', component: ProyectosComponent},
@@ -47,8 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     PerfilComponent,
     AcreedoresComponent,
-    TablaAcreedoresComponent,
-    AddAcreedorComponent,
+    FormAcreedoresComponent,
     AddOrdenComponent,
     FormRegistroUsuariosComponent,
     LoginComponent,
