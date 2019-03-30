@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 // Servicios
 import { DbConnectionService } from './services/db-connection.service';
 import { AcreedorService } from './components/acreedores/acreedor.service';
-import { UsuarioService} from './usuario/usuario.service';
+import { UsuarioService} from './components/usuario/usuario.service';
+
 // Componentes
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';

@@ -12,17 +12,17 @@
     <div class="cont-login">
         <img src="assets/geckop.png" class="imagenUsuario" alt="imagen del logo">
         <h1>LOGIN</h1>
-        <form action="">
+        <form (ngSubmit)="login()">
             <!--Email-->
             <div class="cont-email">
                 <img src="assets/iconos/user.png" alt="icono usuario">
-                <input type="text" placeholder="DNI">
+                <input type="text" placeholder="DNI" name="dni" [(ngModel)]="usuario.dni">
             </div>
 
             <!--Password-->
             <div class="cont-password">
                 <img src="assets/iconos/lock.png" alt="icono usuario">
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" name="password" [(ngModel)]="usuario.password">
             </div>
             <input type="submit" value="Log in">
 

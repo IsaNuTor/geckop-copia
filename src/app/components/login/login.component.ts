@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../../usuario/usuario';
-import { UsuarioService } from '../../usuario/usuario.service';
+import { Usuario } from '../usuario/usuario';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +9,21 @@ import { UsuarioService } from '../../usuario/usuario.service';
 })
 export class LoginComponent implements OnInit {
 
+  private usuario: Usuario = new Usuario();
   constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit() {
-    this.usuarioService.login('05464654K', 'pass').subscribe(
+  }
+
+  public login(): void{
+    this.usuarioService.login(this.usuario).subscribe(
         res => {
-          console.log(res);
-        ///  alert(res);
+        //  console.log(res);
+          alert(res);
         }
 
     );
-
   }
+
 
 }
