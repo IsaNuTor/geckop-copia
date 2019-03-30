@@ -38,6 +38,7 @@ const routes: Routes = [
 
 // Backend
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     ProyectosComponent,
     TablaOrdenesComponent,
-    InfoProyectoComponent
+    InfoProyectoComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
