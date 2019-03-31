@@ -1,6 +1,7 @@
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 
-<form [formGroup]="forma" (ngSubmit)="guardarCambios()">
+<!--<form [formGroup]="forma" (ngSubmit)="registro()">-->
+<form (ngSubmit)="registro()">
     <div class="cont-registro">
         <div class="registro-izq">
             <img src="assets/marca.jpg" alt="logo geckop">
@@ -9,34 +10,48 @@
         <div class="registro-der">
 
             <h2>Registro</h2>
+            <!--
+            <input id="placeColor" type="text" placeholder="DNI" formControlName="dni" name="dni">
 
-            <input id="placeColor" type="text" placeholder="Nombre" formControlName="nombre">
+            <input id="placeColor" type="text" placeholder="Nombre" formControlName="nombre" name="nombre">
 
             <!--<div id="alertas" *ngIf="forma.controls['nombre'].errors?.required">
                 El nombre es necesario
-            </div>-->
+            </div>
 
-            <input id="placeColor" type="text" placeholder="Apellidos" formControlName="apellidos">
+            <input id="placeColor" type="text" placeholder="Apellido1" formControlName="apellido1" name="apellido1">
 
-            <input id="placeColor" type="email" placeholder="Correo electrónico" formControlName="correo">
+            <input id="placeColor" type="text" placeholder="Apellido2" formControlName="apellido2" name="apellido2">
 
-            <input id="placeColor" type="password" placeholder="Contraseña" formControlName="password">
+            <input id="placeColor" type="email" placeholder="Correo electrónico" formControlName="email" name="email">
 
-            <input id="placeColor" type="password" placeholder="Repetir contraseña" formControlName="password">
+            <input id="placeColor" type="password" placeholder="Contraseña" formControlName="password" name="password">
+
+            <!--<input id="placeColor" type="password" placeholder="Repetir contraseña" formControlName="password">-->
+
+            <input id="placeColor" type="text" placeholder="DNI" [(ngModel)]="usuario.dni" name="dni">
+
+            <input id="placeColor" type="text" placeholder="Nombre" [(ngModel)]="usuario.nombre" name="nombre">
+
+            <input id="placeColor" type="text" placeholder="Apellido1" [(ngModel)]="usuario.apellido1" name="apellido1">
+
+            <input id="placeColor" type="text" placeholder="Apellido2" [(ngModel)]="usuario.apellido2" name="apellido2">
+
+            <input id="placeColor" type="email" placeholder="Correo electrónico" [(ngModel)]="usuario.email" name="email">
+
+            <input id="placeColor" type="password" placeholder="Contraseña" [(ngModel)]="usuario.password" name="password">
 
             <div id="checkTerm">
                 <label><input type="checkbox" value="checkTerminos"> Al registrarse, aceptas nuestras <a href="#">Condiciones de uso</a> y <a href="#">Política de privacidad.</a></label>
             </div>
 
-            <button type="submit">
-                 Registrar
-            </button>
+            <input type="submit" value="Registrarse">
 
             <div id="iniciarSesion">
                 <label>¿Ya tienes una cuenta? <a href="#">Iniciar sesión</a></label>
             </div>
 
-            <!--{{forma.valid}}-->
+
         </div>
 
 

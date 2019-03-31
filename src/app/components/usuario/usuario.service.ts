@@ -18,4 +18,8 @@ export class UsuarioService {
   public login(usuario:Usuario): Observable<Usuario> {
      return this.http.post<Usuario>(this.urlEndPoint, usuario,  {headers: this.httpHeaders});
   }
+  // Nos devuelve los clientes.
+  public registro(usuario:Usuario): Observable<Usuario> {
+     return this.http.put<Usuario>(this.urlEndPoint, usuario,  {headers: this.httpHeaders});
+  }
 }
