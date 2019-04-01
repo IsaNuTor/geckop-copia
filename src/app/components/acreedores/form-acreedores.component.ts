@@ -13,7 +13,7 @@ export class FormAcreedoresComponent implements OnInit {
 
   private acreedor: Acreedor = new Acreedor()
   private titulo:string = "Crear Nuevo Acreedor"
-
+  
   constructor(private acreedorService: AcreedorService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
@@ -47,7 +47,7 @@ export class FormAcreedoresComponent implements OnInit {
     this.acreedorService.actualizarAcreedor(this.acreedor).subscribe(
       acreedor => {
         this.router.navigate(['/acreedores'])
-        swal.fire('Actualizar acreedor', `Acreedor ${acreedor.nombre} editado con éxito`, 'success')  
+        swal.fire('Actualizar acreedor', `Acreedor ${acreedor.nombre} editado con éxito`, 'success')
       }
     )
   }

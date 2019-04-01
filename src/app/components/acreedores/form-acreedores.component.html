@@ -1,11 +1,16 @@
 <div class="card">
   <div class="card bg-dark">
-    <div class="card-header text-white">
+    <div class="card-header text-white" *ngIf="!acreedor.nif else bloqueActualizarTitulo">
       {{titulo}}
     </div>
+    <ng-template #bloqueActualizarTitulo>
+      <div class="card-header text-white">
+        Editar Acreedor
+      </div>
+    </ng-template>
   </div>
 
-  <form *ngIf="acreedor" class="m-3">
+  <form *ngIf= "acreedor" class="m-3">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="nombre">   Nombre</label>
@@ -24,7 +29,9 @@
       </div>
     </div>
 
-    <!--<button class="btn btn-success" role="button" (click)="crearAcreedor()">Crear</button>-->
-    <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Editar</button>
+    <button id="crear" class="btn btn-success" role="button" (click)="crearAcreedor()" *ngIf="((click)!='crearAcreedor()') else bloqueActualizar">Crear</button>
+    <ng-template #bloqueActualizar>
+      <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Editar</button>
+    </ng-template>
   </form>
   </div>

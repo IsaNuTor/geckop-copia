@@ -19,7 +19,7 @@ export class AcreedorService {
   }
 
   crearAcreedor(acreedor: Acreedor) : Observable<Acreedor> {
-    return this.http.post<Acreedor>(this.urlEndPoint, acreedor, {headers: this.httpHeaders});
+    return this.http.post<Acreedor>(`${this.urlEndPoint}`, acreedor, {headers: this.httpHeaders});
   }
 
   // Devuelve acreedor mediante el nif
