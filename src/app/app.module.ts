@@ -34,7 +34,8 @@ const routes: Routes = [
   {path:'orden', component: AddOrdenComponent},
   {path:'proyectos', component: ProyectosComponent},
   {path:'login', component: LoginComponent},
-  {path:'registro', component: FormRegistroUsuariosComponent}
+  {path:'registro', component: FormRegistroUsuariosComponent},
+  {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent}
 ];
 
 // Backend

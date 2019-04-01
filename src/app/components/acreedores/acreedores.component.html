@@ -6,12 +6,13 @@
       <button class="btn btn-rounded btn btn-success" types="button" [routerLink] = "['/acreedores/form-acreedores.component']">Nuevo Acreedor</button>
     </div>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped text-center">
       <thead class="thead-dark">
         <tr>
           <th>Nombre</th>
           <th>Nif</th>
           <th>Iban</th>
+          <th>Editar</th>
         </tr>
       </thead>
 
@@ -20,6 +21,9 @@
           <td>{{ acreedor.nombre }}</td>
           <td>{{ acreedor.nif }}</td>
           <td>{{ acreedor.iban }}</td>
+          <td>
+            <button type="button" class="btn btn-success" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedor.nif]">Editar</button>
+          </td>
         </tr>
       </tbody>
     </table>

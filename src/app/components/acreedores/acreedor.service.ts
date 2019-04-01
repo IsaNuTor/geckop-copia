@@ -21,4 +21,8 @@ export class AcreedorService {
   crearAcreedor(acreedor: Acreedor) : Observable<Acreedor> {
     return this.http.post<Acreedor>(this.urlEndPoint, acreedor, {headers: this.httpHeaders});
   }
+
+  getAcreedor(nif:string): Observable<Acreedor> {
+    return this.http.get<Acreedor>(`${this.urlEndPoint}/${nif}`)
+  }
 }
