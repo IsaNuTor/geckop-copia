@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <form (ngSubmit) = "crearAcreedor()" class="m-3">
+  <form *ngIf="acreedor" class="m-3">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="nombre">   Nombre</label>
@@ -24,6 +24,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success" role="button">Crear</button>
+    <!--<button class="btn btn-success" role="button" (click)="crearAcreedor()">Crear</button>-->
+    <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Editar</button>
   </form>
   </div>

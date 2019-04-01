@@ -22,7 +22,13 @@ export class AcreedorService {
     return this.http.post<Acreedor>(this.urlEndPoint, acreedor, {headers: this.httpHeaders});
   }
 
+  // Devuelve acreedor mediante el nif
   getAcreedor(nif:string): Observable<Acreedor> {
-    return this.http.get<Acreedor>(`${this.urlEndPoint}/${nif}`)
+    return this.http.get<Acreedor>(`${this.urlEndPoint}/${nif}`);
   }
+
+  actualizarAcreedor(acreedor: Acreedor): Observable<Acreedor> {
+    return this.http.put<Acreedor>(`${this.urlEndPoint}/${acreedor.nif}`, acreedor, {headers: this.httpHeaders});
+  }
+
 }

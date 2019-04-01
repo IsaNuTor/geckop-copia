@@ -42,4 +42,13 @@ export class FormAcreedoresComponent implements OnInit {
       }
     )
   }
+
+  actualizarAcreedor(): void {
+    this.acreedorService.actualizarAcreedor(this.acreedor).subscribe(
+      acreedor => {
+        this.router.navigate(['/acreedores'])
+        swal.fire('Actualizar acreedor', `Acreedor ${acreedor.nombre} editado con éxito`, 'success')  
+      }
+    )
+  }
 }
