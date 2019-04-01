@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Acreedor } from './acreedor';
 import { AcreedorService } from './acreedor.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-form-acreedores',
@@ -20,7 +21,7 @@ export class FormAcreedoresComponent implements OnInit {
   ngOnInit() {
     this.cargarAcreedor()
   }
-  
+
   cargarAcreedor(): void {
     this.activatedRoute.params.subscribe(params => {
       let nif = params['nif']
@@ -34,7 +35,11 @@ export class FormAcreedoresComponent implements OnInit {
 
   public crearAcreedor(): void {
     this.acreedorService.crearAcreedor(this.acreedor).subscribe(
-      response => this.router.navigate(['/acreedores'])
+      acreedor =>
+      {
+        this.router.navigate(['/acreedores'])
+        swal.fire('Nuevo Acreedor', `Acreedor ${acreedor.nombre} creado con éxito`, 'success')
+      }
     )
   }
 }
