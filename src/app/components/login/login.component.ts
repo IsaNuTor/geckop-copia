@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../usuario/usuario';
 import { UsuarioService } from '../usuario/usuario.service';
-
+import {SesionService} from '../../services/sesion/sesion.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,8 +18,12 @@ export class LoginComponent implements OnInit {
   public login(): void{
     this.usuarioService.login(this.usuario).subscribe(
         res => {
-        //  console.log(res);
-          alert(res);
+          if(res != null){
+            new SesionService(res);
+            alert("Se ha iniciado sesion correctamente");
+          }else{
+            alert("No se ha iniciado sesion");
+          }
         });
   }
 

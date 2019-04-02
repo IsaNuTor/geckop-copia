@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { DbConnectionService } from './services/db-connection.service';
 import { AcreedorService } from './components/acreedores/acreedor.service';
 import { UsuarioService} from './components/usuario/usuario.service';
+import { SesionService} from './services/sesion/sesion.service';
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -68,7 +69,8 @@ import { FooterComponent } from './components/footer/footer.component';
   providers: [
     DbConnectionService,
     UsuarioService,
-    AcreedorService
+    AcreedorService,
+    SesionService
 
   ],
   bootstrap: [AppComponent]
