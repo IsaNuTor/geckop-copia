@@ -13,19 +13,24 @@ export class FormAcreedoresComponent implements OnInit {
 
   private acreedor: Acreedor = new Acreedor()
   private titulo:string = "Crear Nuevo Acreedor"
-  
+  botonCrear:boolean;
+
   constructor(private acreedorService: AcreedorService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute) {
+
+    }
 
   ngOnInit() {
-    this.cargarAcreedor()
+    this.cargarAcreedor();
   }
 
   cargarAcreedor(): void {
     this.activatedRoute.params.subscribe(params => {
       let nif = params['nif']
       if(nif) {
+        this.botonCrear = true; // AÑADIDO PARA QUE CAMBIE EL BOTÓN Y LA ACCIÓN EN EL FORMULARIO
+        //console.log(this.botonCrear);
         this.acreedorService.getAcreedor(nif).subscribe(
           (acreedor) => this.acreedor = acreedor
         )
