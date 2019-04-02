@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Acreedor } from './acreedor';
 import { AcreedorService } from './acreedor.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-acreedores',
@@ -18,4 +19,29 @@ export class AcreedoresComponent implements OnInit {
     );
   }
 
+  delete(acreedor: Acreedor): void {
+    swal.fire({
+    title: '¿Estás seguro?',
+    text: `¿Seguro que desea eliminar al acreedor ${acreedor.nombre}?`,
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminarlo',
+    cancelButtonText: 'No, cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.acreedorService.borrar(acreedor.nif).subscribe (
+          response => {
+            this.acreedores = this.acreedores.filter(acr => acr !== acreedor),
+            swal.fire(
+              'Acreedor eliminado',
+              'El acreedor ${acreedor.nombre} eliminado con éxito',
+              'success'
+            )
+          }
+        );
+      }
+    })
+  }
 }

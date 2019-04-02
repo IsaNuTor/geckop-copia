@@ -13,6 +13,7 @@
           <th>Nif</th>
           <th>Iban</th>
           <th>Editar</th>
+          <th>Borrar</th>
         </tr>
       </thead>
 
@@ -23,6 +24,9 @@
           <td>{{ acreedor.iban }}</td>
           <td>
             <button type="button" class="btn btn-success" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedor.nif]">Editar</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" name="button" (click)='delete(acreedor)' >Borrar</button>
           </td>
         </tr>
       </tbody>

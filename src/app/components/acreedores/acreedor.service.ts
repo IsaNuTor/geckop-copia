@@ -31,4 +31,7 @@ export class AcreedorService {
     return this.http.put<Acreedor>(`${this.urlEndPoint}/${acreedor.nif}`, acreedor, {headers: this.httpHeaders});
   }
 
+  borrar(nif: String): Observable<Acreedor> {
+    return this.http.delete<Acreedor>(`${this.urlEndPoint}/${nif}`, {headers: this.httpHeaders});
+  }
 }
