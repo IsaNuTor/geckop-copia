@@ -31,12 +31,12 @@ export class AcreedoresComponent implements OnInit {
     cancelButtonText: 'No, cancelar'
     }).then((result) => {
       if (result.value) {
-        this.acreedorService.borrar(acreedor.nif).subscribe (
+        this.acreedorService.borrarAcreedor(acreedor.nif).subscribe (
           response => {
             this.acreedores = this.acreedores.filter(acr => acr !== acreedor),
             swal.fire(
               'Acreedor eliminado',
-              'El acreedor ${acreedor.nombre} eliminado con éxito',
+              `El acreedor ${acreedor.nombre} ha sido eliminado con éxito`,
               'success'
             )
           }
