@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Acreedor } from './acreedor';
 import { AcreedorService } from './acreedor.service';
 import { Router, ActivatedRoute } from '@angular/router';
-//import swal from 'sweetalert2'
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-form-acreedores',
@@ -43,7 +43,7 @@ export class FormAcreedoresComponent implements OnInit {
       acreedor =>
       {
         this.router.navigate(['/acreedores'])
-        //swal.fire('Nuevo Acreedor', `Acreedor ${acreedor.nombre} creado con éxito`, 'success')
+        swal.fire('Nuevo Acreedor', `Acreedor ${acreedor.nombre} creado con éxito`, 'success')
       }
     )
   }
@@ -52,7 +52,7 @@ export class FormAcreedoresComponent implements OnInit {
     this.acreedorService.actualizarAcreedor(this.acreedor).subscribe(
       acreedor => {
         this.router.navigate(['/acreedores'])
-        //swal.fire('Actualizar acreedor', `Acreedor ${acreedor.nombre} editado con éxito`, 'success')
+        swal.fire('Actualizar acreedor', `Acreedor ${acreedor.nombre} editado con éxito`, 'success')
       }
     )
   }
