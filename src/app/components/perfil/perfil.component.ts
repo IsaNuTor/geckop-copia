@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
@@ -25,6 +26,28 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    if (window.localStorage) {
+        var nombre = sessionStorage.getItem("nombre");
+        if(nombre != null){
+          swal.fire({
+                      type: 'success',
+                      title: 'Hola '+ nombre,
+                      text: 'Te has logueado correctamente'
+                    })
+        }else {
+            swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'No te has logueado aun!'
+                      })
+      }
+    }else{
+        swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: 'Tu Browser no soporta nuestra App!'
+                })
+      }
+    }
 
 }

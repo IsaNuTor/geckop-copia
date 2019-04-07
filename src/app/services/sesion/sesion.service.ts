@@ -4,14 +4,16 @@ import { Usuario} from '../../components/usuario/usuario';
   providedIn: 'root'
 })
 export class SesionService {
-  usuario: Usuario;
-  isLog: boolean;
 
-  constructor(user: Usuario) {
-      this.isLog = true;
-      this.usuario = new Usuario();
-   }
+    public guardarSesion(usuario: Usuario){
+      sessionStorage.setItem("isLog", "true"); //OJO SOLO GUARDA STRING NO SE UEDE USAR COMO BOOL
+      sessionStorage.setItem("nombre", usuario.nombre);
+      sessionStorage.setItem("email", usuario.email);
+      sessionStorage.setItem("dni", usuario.dni);
+      //localStorage.setItem("nombreCompleto", usuario.getNombreCompleto());
+    }
 
+    /*
     public isLogged():boolean{
       return this.isLog;
     }
@@ -29,6 +31,6 @@ export class SesionService {
     public getNombreCompleto():string{
       return this.usuario.getNombreCompleto();
     }
-
+    */
 
 }

@@ -6,7 +6,7 @@ export class Usuario {
   apellido2:string;
   email:string;
 
-  
+
   public getDni():string{
     return this.dni;
   }

@@ -18,7 +18,7 @@ export class UsuarioService {
   // Nos devuelve los clientes.
   public login(usuario:Usuario): Observable<Usuario> {
 
-     return this.http.post<Usuario>(this.urlLogin, usuario,  {headers: this.httpHeaders});
+     return this.http.post<Usuario>(this.urlLogin, usuario, {headers: this.httpHeaders});
 
   }
   // Nos devuelve los clientes.
