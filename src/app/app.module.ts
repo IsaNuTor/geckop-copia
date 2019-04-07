@@ -7,17 +7,23 @@ import { AcreedorService } from './components/acreedores/acreedor.service';
 import { UsuarioService} from './components/usuario/usuario.service';
 import { SesionService} from './services/sesion/sesion.service';
 
-// Componentes
+// COMPONENTES
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
+// Menú
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+// Acreedores
 import { AcreedoresComponent } from './components/acreedores/acreedores.component';
-import { AddOrdenComponent } from './components/add-orden/add-orden.component';
+import { FormAcreedoresComponent } from './components/acreedores/form-acreedores.component';
+
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { TablaOrdenesComponent } from './components/tabla-ordenes/tabla-ordenes.component';
 import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.component';
-import { FormAcreedoresComponent } from './components/acreedores/form-acreedores.component';
+
+// órdenes
+import { OrdenesComponent } from './components/ordenes/ordenes.component';
+import { AddOrdenComponent } from './components/ordenes/add-orden/add-orden.component';
 
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -31,8 +37,9 @@ const routes: Routes = [
   {path:'', redirectTo:'login',pathMatch: 'full'},
   {path:'acreedores', component: AcreedoresComponent},
   {path: 'acreedores/form-acreedores.component', component: FormAcreedoresComponent},
+  {path: 'ordenes/add-orden/add-orden.component', component: AddOrdenComponent},
   {path:'perfil', component: PerfilComponent},
-  {path:'orden', component: AddOrdenComponent},
+  {path:'ordenes', component: OrdenesComponent},
   {path:'proyectos', component: ProyectosComponent},
   {path:'login', component: LoginComponent},
   {path:'registro', component: FormRegistroUsuariosComponent},
@@ -42,6 +49,7 @@ const routes: Routes = [
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +65,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ProyectosComponent,
     TablaOrdenesComponent,
     InfoProyectoComponent,
-    FooterComponent
+    FooterComponent,
+    OrdenesComponent
   ],
   imports: [
     BrowserModule,
