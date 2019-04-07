@@ -1,6 +1,52 @@
-<h1>Tus Proyectos</h1>
+<div class="card-body text-secondary">
+    <h4 class="card-title">Tus Proyectos</h4>
+
+    <div class="my-3">
+      <button class="btn btn-rounded btn btn-success" types="button" [routerLink] = "['/proyectos/form-proyectos.component']">Nuevo Proyecto</button>
+    </div>
 
 
+    <!--Lista desplegable-->
+    <div class="form-group my-3">
+    <label for="ordenProyectos">Ordenar por:</label>
+      <select class="custom-select">
+        <option selected>Seleccione</option>
+        <option value="estado">Estado</option>
+        <option value="acronimo">Acrónimo</option>
+        <option value="nombre">Nombre</option>
+      </select>
+    </div>
 
-<h3>Nueva Orden</h3>
-<app-add-orden></app-add-orden>
+    <table class="table table-bordered table-striped text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th>Fecha de Inicio</th>
+          <th>Fecha de Cierre</th>
+          <th>Nombre</th>
+          <th>Acrónimo</th>
+          <th>Presupuesto</th>
+          <th>Nºcontabilidad</th>
+          <th>Investigadores</th>
+          <th>Editar</th>
+          <th>Borrar</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+<!--
+      <tbody>
+        <tr *ngFor="let acreedor of acreedores">
+          <td>{{ acreedor.nombre }}</td>
+          <td>{{ acreedor.nif }}</td>
+          <td>{{ acreedor.iban }}</td>
+          <td>
+            <button type="button" class="btn btn-success" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedor.nif]">Editar</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" name="button" (click)='delete(acreedor)' >Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+
+-->
+    </table>
+  </div>

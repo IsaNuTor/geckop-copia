@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card bg-dark">
+    <div class="card-header text-white">
+      {{tituloProyectos}}
+    </div>
+  </div>
+
+  <form class="m-3">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="fechaInicio">   Fecha de Inicio</label>
+        <input type="text" class="form-control" [(ngModel)]="proyecto.fechaInicio" id="fechaInicio" placeholder="fecha de inicio" name="fechaInicio">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="nif">   Fecha de Cierre</label>
+        <input type="text" class="form-control" [(ngModel)]="proyecto.fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="iban">Nombre</label>
+        <input type="text" class="form-control" [(ngModel)]="proyecto.nombre" id="nombre" placeholder="nombre del proyecto" name="nombre">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="nif">   Acrónimo</label>
+        <input type="text" class="form-control" [(ngModel)]="proyecto.acronimo" id="acronimo" placeholder="acrónimo" name="acronimo">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="iban">Presupuesto</label>
+        <input type="text" class="form-control" [(ngModel)]="proyecto.presupuesto" id="presupuesto" placeholder="presupuesto del proyecto" name="presupuesto">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="nif">   Nº de contabilidad</label>
+        <input type="text" class="form-control" [(ngModel)]="proyecto.nContabilidad" id="nContabilidad" placeholder="Número de contabilidad" name="nContabilidad">
+      </div>
+    </div>
+
+    <div class="card bg-dark">
+      <div class="card-header text-white">
+        Investigadores del proyecto
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="form-row">
+        <div class="form-group col-md-6 mt-2 ml-3">
+          <button class="btn btn-success" role="button" (click)="crearAcreedor()">Añadir investigadores</button>
+          <button class="btn btn-success ml-5" role="button" (click)="crearAcreedor()">Añadir IP</button>
+        </div>
+      </div>
+      <br>
+        <h3>TABLA DE USUARIOS (COMPONENTE DE USUARIOS) HACERLA</h3>
+      <br>
+    </div>
+    <button class="btn btn-success" role="button" (click)="crearAcreedor()">Crear</button>
+  </form>
+  </div>

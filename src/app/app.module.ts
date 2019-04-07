@@ -17,13 +17,16 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { AcreedoresComponent } from './components/acreedores/acreedores.component';
 import { FormAcreedoresComponent } from './components/acreedores/form-acreedores.component';
 
+//Proyectos
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
-import { TablaOrdenesComponent } from './components/tabla-ordenes/tabla-ordenes.component';
+import { FormProyectosComponent } from './components/proyectos/form-proyectos.component';
+
 import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.component';
 
 // órdenes
 import { OrdenesComponent } from './components/ordenes/ordenes.component';
 import { AddOrdenComponent } from './components/ordenes/add-orden/add-orden.component';
+import { TablaOrdenesComponent } from './components/tabla-ordenes/tabla-ordenes.component';
 
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -41,6 +44,7 @@ const routes: Routes = [
   {path:'perfil', component: PerfilComponent},
   {path:'ordenes', component: OrdenesComponent},
   {path:'proyectos', component: ProyectosComponent},
+  {path: 'proyectos/form-proyectos.component', component: FormProyectosComponent},
   {path:'login', component: LoginComponent},
   {path:'registro', component: FormRegistroUsuariosComponent},
   {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent}
@@ -49,7 +53,6 @@ const routes: Routes = [
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
-
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { FooterComponent } from './components/footer/footer.component';
     TablaOrdenesComponent,
     InfoProyectoComponent,
     FooterComponent,
-    OrdenesComponent
+    OrdenesComponent,
+    FormProyectosComponent
   ],
   imports: [
     BrowserModule,
