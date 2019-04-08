@@ -10,14 +10,31 @@ export class SesionService {
       sessionStorage.setItem("nombre", usuario.nombre);
       sessionStorage.setItem("email", usuario.email);
       sessionStorage.setItem("dni", usuario.dni);
-      //localStorage.setItem("nombreCompleto", usuario.getNombreCompleto());
+      sessionStorage.setItem("apellido1", usuario.apellido1);
+      sessionStorage.setItem("apellido2", usuario.apellido2);
+      sessionStorage.setItem("nombreCompleto", usuario.nombre + " " + usuario.apellido1 + " " + usuario.apellido2);
     }
 
-    /*
-    public isLogged():boolean{
-      return this.isLog;
+    public cerrarSesion(){
+      sessionStorage.removeItem("isLog");
+      sessionStorage.removeItem("nombre");
+      sessionStorage.removeItem("email");
+      sessionStorage.removeItem("dni");
+      sessionStorage.removeItem("apellido1");
+      sessionStorage.removeItem("apellido2");
+      sessionStorage.removeItem("nombreCompleto");
     }
 
+    public isLogin():boolean{
+      if( sessionStorage.getItem("isLog") == "true" )
+        return true;
+      else
+        return false;
+    }
+    public getNombre():string{
+      return sessionStorage.getItem("nombre");
+    }
+/*
     public getDni():string{
       return this.usuario.getDni();
     }

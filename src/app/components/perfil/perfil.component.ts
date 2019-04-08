@@ -26,7 +26,8 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (window.localStorage) {
+    //
+    /*if (window.localStorage) {
         var nombre = sessionStorage.getItem("nombre");
         if(nombre != null){
           swal.fire({
@@ -47,7 +48,7 @@ export class PerfilComponent implements OnInit {
                   title: 'Oops...',
                   text: 'Tu Browser no soporta nuestra App!'
                 })
-      }
+      }*/
     }
 
 }

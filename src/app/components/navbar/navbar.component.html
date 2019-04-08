@@ -32,19 +32,27 @@
             <a class="nav-link" routerLink="/registro">Registro</a>
           </li>
         </ul>
-        <!--
+
+
+<!--Bloques botón-->
         <span class="navbar-text">
-      <button (click)="login()"
-        type="button"
-        class="btn btn-outline-primary btn-sm">Login</button>
+            <button (click)="salir()" *ngIf="isLog; else notLogged"
+              type="submit"
+              class="btn btn-outline-success btn-sm">Salir
+            </button>
 
-        <button (click)="registrar()"
-        type="submit"
-        class="btn btn-outline-primary btn-sm">Registro</button>
+          <ng-template #notLogged>
+            <button (click)="login()"
+              type="button"
+              class="btn btn-outline-success btn-sm">Login
+            </button>
+            <button (click)="registrar()"
+              type="submit"
+              class="btn btn-outline-success btn-sm">Registro
+            </button>
+          </ng-template>
+        </span>
 
-        <button (click)="salir()"
-        type="submit"
-        class="btn btn-outline-primary btn-sm">Salir</button>
-        </span>-->
     </div>
+
 </nav>
