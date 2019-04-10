@@ -33,6 +33,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
 
+// usuarios
+import { TablaUsuariosComponent } from './components/tabla-usuarios/tabla-usuarios.component';
 // Rutas
 import { RouterModule, Routes } from '@angular/router';
 
@@ -47,12 +49,15 @@ const routes: Routes = [
   {path: 'proyectos/form-proyectos.component', component: FormProyectosComponent},
   {path:'login', component: LoginComponent},
   {path:'registro', component: FormRegistroUsuariosComponent},
-  {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent}
+  {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
+  {path: "proyectos/form-proyectos.component/tabla-usuarios/tabla-usuarios.component", component: TablaUsuariosComponent}
+
 ];
 
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -70,7 +75,8 @@ import { FooterComponent } from './components/footer/footer.component';
     InfoProyectoComponent,
     FooterComponent,
     OrdenesComponent,
-    FormProyectosComponent
+    FormProyectosComponent,
+    TablaUsuariosComponent
   ],
   imports: [
     BrowserModule,

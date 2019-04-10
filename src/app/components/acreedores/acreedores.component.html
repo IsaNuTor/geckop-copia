@@ -6,7 +6,7 @@
       <button class="btn btn-rounded btn btn-success" types="button" [routerLink] = "['/acreedores/form-acreedores.component']">Nuevo Acreedor</button>
     </div>
 
-    <table class="table table-bordered table-striped text-center">
+    <table class="table table-bordered table-striped text-center" *ngIf="acreedores!=NULL">
       <thead class="thead-dark">
         <tr>
           <th>Nombre</th>
@@ -31,4 +31,8 @@
         </tr>
       </tbody>
     </table>
+
+    <div *ngIf="acreedores?.lenght==0" class="alert alert-info">
+      No hay acreedores en la base de datos.
+    </div>
   </div>

@@ -1,0 +1,24 @@
+<!--<h1><b>Investigadores</b></h1>-->
+<div class="card-body text-secondary">
+
+    <table class="table table-bordered table-striped text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th>Tipo</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <!--Tabla que mira si el usuario es ip o no-->
+          <td>TIPO</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.apellido1 }}</td>
+          <td>{{ usuario.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>

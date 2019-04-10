@@ -48,14 +48,16 @@
     <div class="card">
       <div class="form-row">
         <div class="form-group col-md-6 mt-2 ml-3">
-          <button class="btn btn-success" role="button" (click)="crearAcreedor()">Añadir investigadores</button>
+
+          <button class="btn btn-success" types="button" [routerLink] = "['tabla-usuarios/tabla-usuarios.component']">Añadir investigadores</button>
           <button class="btn btn-success ml-5" role="button" (click)="crearAcreedor()">Añadir IP</button>
         </div>
       </div>
-      <br>
-        <h3>TABLA DE USUARIOS (COMPONENTE DE USUARIOS) HACERLA</h3>
+
+      <app-tabla-usuarios></app-tabla-usuarios>
       <br>
     </div>
+    <br>
     <button class="btn btn-success" role="button" (click)="crearAcreedor()">Crear</button>
   </form>
   </div>
