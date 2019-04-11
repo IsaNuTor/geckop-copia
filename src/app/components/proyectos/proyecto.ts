@@ -5,4 +5,6 @@ export class Proyecto {
   acronimo: string;
   presupuesto: number;
   nContabilidad: number;
+  ip1: string;
+  ip2: string;
 }
