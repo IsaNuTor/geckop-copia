@@ -7,4 +7,5 @@ export class Proyecto {
   nContabilidad: number;
   ip1: string;
   ip2: string;
+  listaUsuarios: Usuario[];
 }

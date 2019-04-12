@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Proyecto } from './proyecto';
-
+import {TablaUsuariosComponent} from '../tabla-usuarios/tabla-usuarios.component';
 @Component({
   selector: 'app-form-proyectos',
   templateUrl: './form-proyectos.component.html',
@@ -8,12 +8,25 @@ import { Proyecto } from './proyecto';
 })
 export class FormProyectosComponent implements OnInit {
 
-  private proyecto: Proyecto = new Proyecto()
+  proyecto: Proyecto = new Proyecto();
+  investigadores: Usuarios[] = new Array<Usuario>();
   tituloProyectos:string = "Crear Nuevo Proyecto";
+  // = new TablaUsuariosComponent();
+  constructor(listaUsuarios:TablaUsuariosComponent) {
 
-  constructor() { }
-
-  ngOnInit() {
   }
 
+  ngOnInit() {
+
+
+  }
+  public anadirInvestigadores(): void{
+  /*  this.listaUsuarios.getListaInvestigadoresAnadidos().subscribe(
+      investigadores => this.investigadores = investigadores
+    );*/
+    this.investigadores = this.listaUsuarios.getListaInvestigadoresAnadidos().slice();
+
+
+    alert(this.investigadores);
+  }
 }
