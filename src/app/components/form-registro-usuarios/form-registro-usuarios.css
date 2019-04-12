@@ -118,23 +118,7 @@ a:hover {
     color: #000;
 }
 
-.registro-der button[type="submit"] {
-    width: 85%;
-    align-content: center;
-    display: block;
-    margin: auto;
-    padding: 0;
-    height: 40px;
-    border: none;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 20px;
-    border-bottom: 2px solid #000;
-    background-color: rgb(11, 36, 11);
-    /* Black */
-}
-
-.registro-der button[type="submit"]:hover {
-    background: rgba(11, 36, 11, 0.75);
-    color: #fff;
+.btnRegistro {
+  align-content: center;
+  margin-left: 35%;
 }
