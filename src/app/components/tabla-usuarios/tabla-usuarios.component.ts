@@ -10,12 +10,23 @@ import {UsuarioService} from '../usuario/usuario.service';
 export class TablaUsuariosComponent implements OnInit {
 
   usuarios: Usuario[];
+  usuarios_anadidos: Usuario[];
+
   constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit() {
     this.usuarioService.getUsuarios().subscribe(
       usuarios => this.usuarios = usuarios
     );
+  }
+
+  public anadirInvestigador(): void{
+    let aux: Usuario = new Usuario();
+    aux.nombre = usuario.nombre;
+    aux.email = usuario.email;
+    aux.apellido1 = usuario.apellido1;
+    usuarios_anadidos.push(aux);
+
   }
 
 }

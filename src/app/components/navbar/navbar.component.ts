@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit{
                       location.reload();
                     }
                 })
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
 
   }
 
