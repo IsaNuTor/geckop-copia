@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import swal from 'sweetalert2';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Proyecto } from '../../../services/proyecto/proyecto';
-import {UsuarioService} from '../../../services/usuario/usuario.service';
+import { ProyectoService } from '../../../services/proyecto/proyecto.service';
+import { UsuarioProyectoService } from '../../../services/usuario-proyecto/usuario-proyecto.service';
+import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Usuario } from '../../../services/usuario/usuario';
-import{UsuarioProyectoService} from '../../../services/usuario-proyecto/usuario-proyecto.service'
+import {SesionService} from '../../../services/sesion/sesion.service';
+
+
 @Component({
   selector: 'app-form-proyectos',
   templateUrl: './form-proyectos.component.html',
@@ -11,11 +17,18 @@ import{UsuarioProyectoService} from '../../../services/usuario-proyecto/usuario-
 export class FormProyectosComponent implements OnInit {
 
   proyecto: Proyecto = new Proyecto();
+
   tituloProyectos:string = "Crear Nuevo Proyecto";
   usuarios: Usuario[];
   usuarios_anadidos: Usuario[];
-  // = new TablaUsuariosComponent();
-  constructor( private usuarioService: UsuarioService, private usuarioProyecto: UsuarioProyectoService) { }
+
+  constructor(
+               private proyectoService: ProyectoService,
+               private usuarioService: UsuarioService,
+               private usuarioProyectoService: UsuarioProyectoService,
+               private sesionService: SesionService,
+               private router: Router,
+               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.usuarioService.getUsuarios().subscribe(
@@ -30,15 +43,22 @@ export class FormProyectosComponent implements OnInit {
   }
 
 
-  public anadirInvestigadores(): void{
+/*  public anadirInvestigadores(): void{
       this.usuarioProyecto.guardarUsuariosProyecto(this.usuarios_anadidos, "AAA");
-  }
+  }*/
 
 
-  public guardarProyecto(){
+  public crearProyecto(){
     //post proyecto
-
+    this.proyectoService.insertarProyecto(this.proyecto).subscribe(
+        res => {
+          if(res != null)
+          alert("proyecto guardado" + res.acronimo);
+          else
+          alert("proyecto no guardado" + res.acronimo);
+        });
     //post inv-proyecto
+  //  this.usuarioProyectoService.guardarUsuariosProyecto(this.usuarios_anadidos, this.proyecto.acronimo);
 
   }
 }

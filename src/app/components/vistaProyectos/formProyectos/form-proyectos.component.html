@@ -41,14 +41,9 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="ip1">IP</label>
-        <input type="text" class="form-control" [(ngModel)]="proyecto.ip1" id="ip1" placeholder="Nombre IP" name="ip1">
-      </div>
-      <div class="form-group col-md-4">
         <label for="ip2">   IP 2</label>
         <input type="text" class="form-control" [(ngModel)]="proyecto.ip2" id="ip2" placeholder="Nombre de ip2" name="ip2">
       </div>
-      <button class="btn btn-success ml-auto mr-auto mt-4 w-20 h-25" role="button" (click)="crearAcreedor()">Añadir IP</button>
     </div>
 
 
@@ -59,15 +54,6 @@
     </div>
 
     <div class="card">
-      <div class="form-row">
-        <div class="form-group col-md-6 mt-2 ml-3">
-
-        <!--  <button class="btn btn-success" types="button" [routerLink] = "['tabla-usuarios/tabla-usuarios.component']">Añadir investigadores</button> -->
-          <button class="btn btn-success" types="button" (click)="anadirInvestigadores()">Añadir investigadores</button>
-        </div>
-      </div>
-      <!--<h1><b>Investigadores</b></h1>-->
-
       <div class="row">
 
         <!--TABLA IZQUIERDA-->
@@ -124,6 +110,6 @@
       <br>
     </div>
     <br>
-    <button class="btn btn-success" role="button" (click)="crearAcreedor()">Crear</button>
+    <button class="btn btn-success" role="button" (click)="crearProyecto()">Crear</button>
   </form>
   </div>

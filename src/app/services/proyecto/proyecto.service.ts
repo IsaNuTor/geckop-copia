@@ -16,7 +16,8 @@ export class ProyectoService {
   constructor(private http: HttpClient) { }
 
   // Guarda el proyecto
-  public guardarProyecto(proyecto:Proyecto): Observable<Proyecto> {
+  public insertarProyecto(proyecto:Proyecto): Observable<Proyecto> {
+    alert("entra en guardar proyecto");
      return this.http.post<Proyecto>(this.urlProyecto, proyecto, {headers: this.httpHeaders});
 
   }
