@@ -7,7 +7,7 @@ import { AcreedorService } from './services/acreedor/acreedor.service';
 import { UsuarioService} from './services/usuario/usuario.service';
 import { SesionService} from './services/sesion/sesion.service';
 import { ProyectoService} from './services/proyecto/proyecto.service';
-
+import { UsuarioProyectoService} from './services/usuario-proyecto/usuario-proyecto.service';
 // COMPONENTES
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -87,7 +87,8 @@ import { FooterComponent } from './components/footer/footer.component';
     DbConnectionService,
     UsuarioService,
     AcreedorService,
-    SesionService
+    SesionService,
+    UsuarioProyectoService
 
   ],
   bootstrap: [AppComponent]

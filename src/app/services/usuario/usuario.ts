@@ -6,4 +6,9 @@ export class Usuario {
   apellido2:string;
   email:string;
   tipo: string;
+
+
+  public getDni(): string{
+    return this.dni;
+  }
 }

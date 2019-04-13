@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Proyecto } from '../../../services/proyecto/proyecto';
 import {UsuarioService} from '../../../services/usuario/usuario.service';
 import { Usuario } from '../../../services/usuario/usuario';
-
+import{UsuarioProyectoService} from '../../../services/usuario-proyecto/usuario-proyecto.service'
 @Component({
   selector: 'app-form-proyectos',
   templateUrl: './form-proyectos.component.html',
@@ -15,7 +15,7 @@ export class FormProyectosComponent implements OnInit {
   usuarios: Usuario[];
   usuarios_anadidos: Usuario[];
   // = new TablaUsuariosComponent();
-  constructor( private usuarioService: UsuarioService) { }
+  constructor( private usuarioService: UsuarioService, private usuarioProyecto: UsuarioProyectoService) { }
 
   ngOnInit() {
     this.usuarioService.getUsuarios().subscribe(
@@ -31,10 +31,7 @@ export class FormProyectosComponent implements OnInit {
 
 
   public anadirInvestigadores(): void{
-  /*  this.listaUsuarios.getListaInvestigadoresAnadidos().subscribe(
-      investigadores => this.investigadores = investigadores
-    );*/
-    alert(this.usuarios_anadidos);
+      this.usuarioProyecto.guardarUsuariosProyecto(this.usuarios_anadidos, "AAA");
   }
 
 
