@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Acreedor } from './acreedor';
-import { AcreedorService } from './acreedor.service';
+import { Acreedor } from '../../../services/acreedor/acreedor';
+import { AcreedorService } from '../../../services/acreedor/acreedor.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2'
 

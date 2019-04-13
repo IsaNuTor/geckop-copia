@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 
 // Servicios
 import { DbConnectionService } from './services/db-connection.service';
-import { AcreedorService } from './components/acreedores/acreedor.service';
-import { UsuarioService} from './components/usuario/usuario.service';
+import { AcreedorService } from './services/acreedor/acreedor.service';
+import { UsuarioService} from './services/usuario/usuario.service';
 import { SesionService} from './services/sesion/sesion.service';
+import { ProyectoService} from './services/proyecto/proyecto.service';
 
 // COMPONENTES
 import { AppComponent } from './app.component';
@@ -14,12 +15,12 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 // Acreedores
-import { AcreedoresComponent } from './components/acreedores/acreedores.component';
-import { FormAcreedoresComponent } from './components/acreedores/form-acreedores.component';
+import { AcreedoresComponent } from './components/vistaAcreedores/acreedores.component';
+import { FormAcreedoresComponent } from './components/vistaAcreedores/formAcreedores/form-acreedores.component';
 
 //Proyectos
-import { ProyectosComponent } from './components/proyectos/proyectos.component';
-import { FormProyectosComponent } from './components/proyectos/form-proyectos.component';
+import { ProyectosComponent } from './components/vistaProyectos/proyectos.component';
+import { FormProyectosComponent } from './components/vistaProyectos/formProyectos/form-proyectos.component';
 
 import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.component';
 
@@ -33,8 +34,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
 
-// usuarios
-import { TablaUsuariosComponent } from './components/tabla-usuarios/tabla-usuarios.component';
+
 // Rutas
 import { RouterModule, Routes } from '@angular/router';
 
@@ -49,8 +49,7 @@ const routes: Routes = [
   {path: 'proyectos/form-proyectos.component', component: FormProyectosComponent},
   {path:'login', component: LoginComponent},
   {path:'registro', component: FormRegistroUsuariosComponent},
-  {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
-  {path: "proyectos/form-proyectos.component/tabla-usuarios/tabla-usuarios.component", component: TablaUsuariosComponent}
+  {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent}
 
 ];
 
@@ -75,8 +74,7 @@ import { FooterComponent } from './components/footer/footer.component';
     InfoProyectoComponent,
     FooterComponent,
     OrdenesComponent,
-    FormProyectosComponent,
-    TablaUsuariosComponent
+    FormProyectosComponent
   ],
   imports: [
     BrowserModule,
