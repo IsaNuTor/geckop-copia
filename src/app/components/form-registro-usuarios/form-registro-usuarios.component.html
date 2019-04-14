@@ -1,7 +1,7 @@
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 
 <!--<form [formGroup]="forma" (ngSubmit)="registro()">-->
-<form (ngSubmit)="registro()">
+<form (ngSubmit)="registro()" #usuarioForm="ngForm">
     <div class="cont-registro">
         <div class="registro-izq">
             <img src="assets/marca.jpg" alt="logo geckop">
@@ -10,42 +10,61 @@
         <div class="registro-der">
 
             <h2>Registro</h2>
-            <!--
-            <input id="placeColor" type="text" placeholder="DNI" formControlName="dni" name="dni">
 
-            <input id="placeColor" type="text" placeholder="Nombre" formControlName="nombre" name="nombre">
-
-            <!--<div id="alertas" *ngIf="forma.controls['nombre'].errors?.required">
-                El nombre es necesario
+            <input id="placeColor" type="text" placeholder="DNI" [(ngModel)]="usuario.dni" name="dni" required minlength="9" #dni="ngModel">
+            <div class="alert alert-danger" *ngIf="dni.invalid && (dni.dirty || dni.touched)">
+              <div *ngIf = "dni.errors.required || dni.errors.invalid">
+                dni no puede estar vacio
+              </div>
+              <div *ngIf = "dni.errors.minlength">
+                dni debe tener 8 dígitos y 1 letra.
+              </div>
             </div>
 
-            <input id="placeColor" type="text" placeholder="Apellido1" formControlName="apellido1" name="apellido1">
+            <input id="placeColor" type="text" placeholder="Nombre" [(ngModel)]="usuario.nombre" name="nombre" required maxlenght="20" #nombre="ngModel">
+            <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <div *ngIf = "nombre.errors.required">
+                Nombre no puede estar vacio
+              </div>
+              <div *ngIf = "nombre.errors.maxlenght">
+                Nombre no puede tener más de 20 letras
+              </div>
+            </div>
 
-            <input id="placeColor" type="text" placeholder="Apellido2" formControlName="apellido2" name="apellido2">
+            <input id="placeColor" type="text" placeholder="Primer apellido" [(ngModel)]="usuario.apellido1" name="apellido1" required #apellido1="ngModel">
+            <div class="alert alert-danger" *ngIf="apellido1.invalid && (apellido1.dirty || apellido1.touched)">
+              <div *ngIf = "apellido1.errors.required">
+                Primer apellido no puede estar vacio
+              </div>
+            </div>
 
-            <input id="placeColor" type="email" placeholder="Correo electrónico" formControlName="email" name="email">
+            <input id="placeColor" type="text" placeholder="Segundo apellido" [(ngModel)]="usuario.apellido2" name="apellido2" required #apellido2="ngModel">
+            <div class="alert alert-danger" *ngIf="apellido2.invalid && (apellido2.dirty || apellido2.touched)">
+              <div *ngIf = "apellido2.errors.required">
+                Segundo apellido no puede estar vacio
+              </div>
+            </div>
 
-            <input id="placeColor" type="password" placeholder="Contraseña" formControlName="password" name="password">
+            <input id="placeColor" type="email" placeholder="Correo electrónico" [(ngModel)]="usuario.email" name="email" required email #email="ngModel">
+            <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div *ngIf = "email.errors.required">
+                Email no puede estar vacio
+              </div>
+              <div *ngIf = "email.errors.email">
+                Email debe tener un formato válido
+              </div>
+            </div>
 
-            <!--<input id="placeColor" type="password" placeholder="Repetir contraseña" formControlName="password">-->
-
-            <input id="placeColor" type="text" placeholder="DNI" [(ngModel)]="usuario.dni" name="dni">
-
-            <input id="placeColor" type="text" placeholder="Nombre" [(ngModel)]="usuario.nombre" name="nombre">
-
-            <input id="placeColor" type="text" placeholder="Apellido1" [(ngModel)]="usuario.apellido1" name="apellido1">
-
-            <input id="placeColor" type="text" placeholder="Apellido2" [(ngModel)]="usuario.apellido2" name="apellido2">
-
-            <input id="placeColor" type="email" placeholder="Correo electrónico" [(ngModel)]="usuario.email" name="email">
-
-            <input id="placeColor" type="password" placeholder="Contraseña" [(ngModel)]="usuario.password" name="password">
+            <input id="placeColor" type="password" placeholder="Contraseña" [(ngModel)]="usuario.password" name="password" required>
 
             <div id="checkTerm">
-                <label><input type="checkbox" value="checkTerminos"> Al registrarse, aceptas nuestras <a href="#">Condiciones de uso</a> y <a href="#">Política de privacidad.</a></label>
+              <label for="checkTerminos">
+                  <input type="checkbox" id="checkTerminos" value="checkTerminos" name="checkTerminos"> Al registrarse, aceptas nuestras <a href="#">Condiciones de uso</a> y <a href="#">Política de privacidad.</a>
+
+              </label>
             </div>
 
-            <button class="btn btn-dark btnRegistro" role="button" (click)="registro()">Registrarse</button>
+            <button class="btn btn-dark btnRegistro" role="button" (click)="registro()" [disabled]="!usuarioForm.form.valid">Registrarse</button>
 
             <div id="iniciarSesion">
                 <label>¿Ya tienes una cuenta? <a href="#">Iniciar sesión</a></label>
