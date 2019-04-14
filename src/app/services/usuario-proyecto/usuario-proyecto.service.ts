@@ -12,19 +12,19 @@ import {Usuario} from '../usuario/usuario';
 
 export class UsuarioProyectoService {
   usuariosProyecto: UsuarioProyecto[] = new Array<UsuarioProyecto>();
-  urlUsuarioProyecto:string = 'http://localhost:8080/api/usuariosproyecto';
+  urlUsuarioProyecto:string = 'http://localhost:8080/api/usuarioproyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
-  public guardarUsuariosProyecto(usuarios: Usuario[], acronimo: string){
-    let ok = true;
-    while(ok && usuarios.length > 0){
-        let usuarioProyecto: UsuarioProyecto = new UsuarioProyecto(usuarios.pop().dni, acronimo);
-        if( this.http.post<UsuarioProyecto>(this.urlUsuarioProyecto, usuarioProyecto, {headers: this.httpHeaders}) == null)
-          ok=false;
-    }
+  public insertarUsuariosProyecto(dni: string, acronimo: string): Observable<UsuarioProyecto>{
+    alert(dni + " " + acronimo);
+    var usuarioProyecto: UsuarioProyecto = new UsuarioProyecto();
+    usuarioProyecto.dni = dni; usuarioProyecto.acronimo = acronimo;
+    alert(usuarioProyecto.dni + " " + usuarioProyecto.acronimo);
 
-    alert("Sale del bucle de usuarios");
+      return  this.http.post<UsuarioProyecto>(this.urlUsuarioProyecto, usuarioProyecto, {headers: this.httpHeaders});
+
+
 
   }
 }

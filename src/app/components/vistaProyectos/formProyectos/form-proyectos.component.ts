@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Proyecto } from '../../../services/proyecto/proyecto';
 import { ProyectoService } from '../../../services/proyecto/proyecto.service';
 import { UsuarioProyectoService } from '../../../services/usuario-proyecto/usuario-proyecto.service';
+import { UsuarioProyecto } from '../../../services/usuario-proyecto/usuario-proyecto';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Usuario } from '../../../services/usuario/usuario';
 import {SesionService} from '../../../services/sesion/sesion.service';
@@ -58,7 +59,11 @@ export class FormProyectosComponent implements OnInit {
           alert("proyecto no guardado" + res.acronimo);
         });
     //post inv-proyecto
-  //  this.usuarioProyectoService.guardarUsuariosProyecto(this.usuarios_anadidos, this.proyecto.acronimo);
 
+    while( this.usuarios_anadidos.length > 0){
+          this.usuarioProyectoService.insertarUsuariosProyecto(this.usuarios_anadidos.pop().dni, this.proyecto.acronimo).subscribe();
+      }
+
+      alert("Sale del bucle de usuarios");
   }
 }

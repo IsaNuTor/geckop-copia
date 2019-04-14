@@ -17,7 +17,6 @@ export class ProyectoService {
 
   // Guarda el proyecto
   public insertarProyecto(proyecto:Proyecto): Observable<Proyecto> {
-    alert("entra en guardar proyecto");
      return this.http.post<Proyecto>(this.urlProyecto, proyecto, {headers: this.httpHeaders});
 
   }
