@@ -38,11 +38,13 @@ export class SesionService {
     public getNombreCompleto():string{
       return sessionStorage.getItem("nombre") + " " + sessionStorage.getItem("apellido1") + " " + sessionStorage.getItem("apellido2")  ;
     }
-/*
+
     public getDni():string{
-      return this.usuario.getDni();
+      return sessionStorage.getItem("dni");
     }
 
+
+/*
     public getEmail():string{
       return this.usuario.getEmail();
     }

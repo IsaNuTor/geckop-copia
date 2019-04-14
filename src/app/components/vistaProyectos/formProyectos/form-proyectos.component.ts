@@ -8,7 +8,7 @@ import { UsuarioProyecto } from '../../../services/usuario-proyecto/usuario-proy
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Usuario } from '../../../services/usuario/usuario';
 import {SesionService} from '../../../services/sesion/sesion.service';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-proyectos',
@@ -52,13 +52,23 @@ export class FormProyectosComponent implements OnInit {
 
   public crearProyecto(){
     //post proyecto
+    this.proyecto.ip1 = this.sesionService.getDni();
     this.proyectoService.insertarProyecto(this.proyecto).subscribe(
         res => {
-          if(res != null)
-          alert("proyecto guardado" + res.acronimo);
-          else
-          alert("proyecto no guardado" + res.acronimo);
-        });
+          if(res != null){
+            const ToastrModule = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+
+                  ToastrModule.fire({
+                    type: 'success',
+                    title: 'Guardado '+res.acronimo
+                  })
+            }
+          });
     //post inv-proyecto
 
     while( this.usuarios_anadidos.length > 0){

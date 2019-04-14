@@ -17,12 +17,10 @@ export class UsuarioProyectoService {
   constructor(private http: HttpClient) { }
 
   public insertarUsuariosProyecto(dni: string, acronimo: string): Observable<UsuarioProyecto>{
-    alert(dni + " " + acronimo);
     var usuarioProyecto: UsuarioProyecto = new UsuarioProyecto();
     usuarioProyecto.dni = dni; usuarioProyecto.acronimo = acronimo;
-    alert(usuarioProyecto.dni + " " + usuarioProyecto.acronimo);
-
-      return  this.http.post<UsuarioProyecto>(this.urlUsuarioProyecto, usuarioProyecto, {headers: this.httpHeaders});
+    
+    return  this.http.post<UsuarioProyecto>(this.urlUsuarioProyecto, usuarioProyecto, {headers: this.httpHeaders});
 
 
 
