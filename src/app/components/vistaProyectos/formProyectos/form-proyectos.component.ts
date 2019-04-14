@@ -18,8 +18,10 @@ import {SesionService} from '../../../services/sesion/sesion.service';
 export class FormProyectosComponent implements OnInit {
 
   proyecto: Proyecto = new Proyecto();
-
   tituloProyectos:string = "Crear Nuevo Proyecto";
+
+  sesion: SesionService = new SesionService();
+  nombreIP1:string = this.sesion.getNombreCompleto();
   usuarios: Usuario[];
   usuarios_anadidos: Usuario[];
 
@@ -42,7 +44,6 @@ export class FormProyectosComponent implements OnInit {
     //Podemos hacer que se quite de la otra lista
     this.usuarios_anadidos.push(usuario);
   }
-
 
 /*  public anadirInvestigadores(): void{
       this.usuarioProyecto.guardarUsuariosProyecto(this.usuarios_anadidos, "AAA");

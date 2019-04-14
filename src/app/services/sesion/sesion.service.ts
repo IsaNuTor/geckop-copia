@@ -34,6 +34,10 @@ export class SesionService {
     public getNombre():string{
       return sessionStorage.getItem("nombre");
     }
+
+    public getNombreCompleto():string{
+      return sessionStorage.getItem("nombre") + " " + sessionStorage.getItem("apellido1") + " " + sessionStorage.getItem("apellido2")  ;
+    }
 /*
     public getDni():string{
       return this.usuario.getDni();

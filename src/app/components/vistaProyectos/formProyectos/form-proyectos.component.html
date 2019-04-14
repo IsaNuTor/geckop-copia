@@ -41,11 +41,14 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
+        <label for="ip2">   IP 1</label>
+        <input type="text" class="form-control" [(ngModel)]="proyecto.ip1" id="ip1" placeholder={{nombreIP1}} name="ip1" disabled>
+      </div>
+      <div class="form-group col-md-6">
         <label for="ip2">   IP 2</label>
         <input type="text" class="form-control" [(ngModel)]="proyecto.ip2" id="ip2" placeholder="Nombre de ip2" name="ip2">
       </div>
     </div>
-
 
     <div class="card bg-dark">
       <div class="card-header text-white">
