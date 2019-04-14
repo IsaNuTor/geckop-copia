@@ -45,6 +45,11 @@ export class LoginComponent implements OnInit {
                       text: 'Algo ha fallado!'
                     })
           }
-        });
+        }, error => {
+          if(error.status == 500) {
+            swal.fire('Error Login', 'Usuario o contraseña incorrectas', 'error');
+          }
+        }
+      );
   }
 }
