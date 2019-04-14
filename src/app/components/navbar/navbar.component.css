@@ -1,4 +1,12 @@
 .btn{
   margin-right: 10px;
 }
-  
+
+.loginreg {
+  width: 100%;
+  height: 50px;
+}
+
+.loginreg .navbar-text {
+  float: right;
+}
