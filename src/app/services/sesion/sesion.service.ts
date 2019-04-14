@@ -34,10 +34,11 @@ export class SesionService {
     public getNombre():string{
       return sessionStorage.getItem("nombre");
     }
-/*
     public getDni():string{
-      return this.usuario.getDni();
+      return sessionStorage.getItem("dni");
     }
+/*
+
 
     public getEmail():string{
       return this.usuario.getEmail();
