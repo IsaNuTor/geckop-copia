@@ -7,7 +7,7 @@ import { UsuarioProyectoService } from '../../../services/usuario-proyecto/usuar
 import { UsuarioProyecto } from '../../../services/usuario-proyecto/usuario-proyecto';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Usuario } from '../../../services/usuario/usuario';
-import {SesionService} from '../../../services/sesion/sesion.service';
+import { SesionService } from '../../../services/sesion/sesion.service';
 import { ToastrModule } from 'ngx-toastr';
 
 @Component({
@@ -20,8 +20,7 @@ export class FormProyectosComponent implements OnInit {
   proyecto: Proyecto = new Proyecto();
   tituloProyectos:string = "Crear Nuevo Proyecto";
 
-  sesion: SesionService = new SesionService();
-  nombreIP1:string = this.sesion.getNombreCompleto();
+  nombreIP1:string = "";
   usuarios: Usuario[];
   usuarios_anadidos: Usuario[];
 
@@ -38,11 +37,28 @@ export class FormProyectosComponent implements OnInit {
       usuarios => this.usuarios = usuarios
     );
     this.usuarios_anadidos = new Array<Usuario>();
+    this.nombreIP1 = this.sesionService.getNombreCompleto();
   }
 
   public anadirInvestigador(usuario: Usuario): void{
     //Podemos hacer que se quite de la otra lista
+    this.usuarios.splice(this.usuarios.indexOf(usuario), 1);
     this.usuarios_anadidos.push(usuario);
+  }
+  public quitarInvestigador(usuario: Usuario): void{
+    //Podemos hacer que se quite de la otra lista
+    this.usuarios_anadidos.splice(this.usuarios_anadidos.indexOf(usuario), 1);
+    this.usuarios.push(usuario);
+  }
+
+  public hacerIP2(usuario){
+    this.proyecto.ip2 = usuario.dni;
+  }
+  public quitarIP2(){
+    this.proyecto.ip2 = null;
+  }
+  public cancelar(){
+    this.router.navigate(['/proyectos']);
   }
 
 /*  public anadirInvestigadores(): void{
@@ -60,7 +76,7 @@ export class FormProyectosComponent implements OnInit {
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 3000
+                    timer: 5000
                   });
 
                   ToastrModule.fire({
@@ -75,6 +91,6 @@ export class FormProyectosComponent implements OnInit {
           this.usuarioProyectoService.insertarUsuariosProyecto(this.usuarios_anadidos.pop().dni, this.proyecto.acronimo).subscribe();
       }
 
-      alert("Sale del bucle de usuarios");
+      this.router.navigate(['/proyectos']);
   }
 }

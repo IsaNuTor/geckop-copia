@@ -26,27 +26,28 @@
           <th>Acrónimo</th>
           <th>Presupuesto</th>
           <th>Nºcontabilidad</th>
-          <th>Investigadores</th>
           <th>Editar</th>
           <th>Borrar</th>
-          <th>Estado</th>
         </tr>
       </thead>
-<!--
+
       <tbody>
-        <tr *ngFor="let acreedor of acreedores">
-          <td>{{ acreedor.nombre }}</td>
-          <td>{{ acreedor.nif }}</td>
-          <td>{{ acreedor.iban }}</td>
+        <tr *ngFor="let proyecto of proyectos">
+          <td>{{ proyecto.fechaInicio }}</td>
+          <td>{{ proyecto.fechaCierre }}</td>
+          <td>{{ proyecto.nombre }}</td>
+          <td>{{ proyecto.acronimo }}</td>
+          <td>{{ proyecto.presupuesto }}</td>
+          <td>{{ proyecto.nContabilidad }}</td>
           <td>
-            <button type="button" class="btn btn-success" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedor.nif]">Editar</button>
+            <button type="button" class="btn btn-success" name="button" >Editar</button>
           </td>
           <td>
-            <button type="button" class="btn btn-danger" name="button" (click)='delete(acreedor)' >Borrar</button>
+            <button type="button" class="btn btn-danger" name="button" >Borrar</button>
           </td>
         </tr>
       </tbody>
 
--->
+
     </table>
   </div>

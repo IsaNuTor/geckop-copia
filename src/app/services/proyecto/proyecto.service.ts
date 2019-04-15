@@ -18,6 +18,8 @@ export class ProyectoService {
   // Guarda el proyecto
   public insertarProyecto(proyecto:Proyecto): Observable<Proyecto> {
      return this.http.post<Proyecto>(this.urlProyecto, proyecto, {headers: this.httpHeaders});
-
   }
+  public getProyectos(): Observable<Proyecto[]> {
+       return this.http.get<Proyecto[]>(this.urlProyecto);
+    }
 }

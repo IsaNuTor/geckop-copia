@@ -40,13 +40,20 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-6 mb-3">
         <label for="ip2">   IP 1</label>
         <input type="text" class="form-control" [(ngModel)]="proyecto.ip1" id="ip1" placeholder={{nombreIP1}} name="ip1" disabled>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-5 mb-3">
         <label for="ip2">   IP 2</label>
-        <input type="text" class="form-control" [(ngModel)]="proyecto.ip2" id="ip2" placeholder="Nombre de ip2" name="ip2">
+        <!---->
+        <input type="text" class="form-control" [(ngModel)]="proyecto.ip2" id="ip2" placeholder={{nombreIP2}} name="ip2" disabled >
+      </div>
+      <div class="form-group col-md-1 mb-3">
+        <br>
+        <button type="button" class="btn btn-link" name="button"  (click)="quitarIP2()" [hidden]="proyecto.ip2==NULL">
+              <img src="assets/iconos/menos.png" class="rounded" alt="Quitar IP2">
+        </button>
       </div>
     </div>
 
@@ -65,17 +72,14 @@
               <thead class="thead-dark">
                 <tr>
                   <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Email</th>
                   <th>Añadir</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr *ngFor="let usuario of usuarios">
-                  <td>{{ usuario.nombre }}</td>
-                  <td>{{ usuario.apellido1 }}</td>
-                  <td>{{ usuario.email }}</td>
+                  <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
+
                   <td><button type="button" class="btn btn-link" name="button"  (click)="anadirInvestigador(usuario)">
                         <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador">
                       </button>
@@ -91,20 +95,26 @@
             <table class="table table-bordered table-striped text-center">
               <thead class="thead-dark">
                 <tr>
-                  <th>Tipo</th>
                   <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Email</th>
+                  <th>Quitar</th>
+                  <th [hidden]="proyecto.ip2!=NULL">IP 2</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr *ngFor="let usuario of usuarios_anadidos">
-                  <!--Tabla que mira si el usuario es ip o no-->
-                  <td>TIPO</td>
-                  <td>{{ usuario.nombre }}</td>
-                  <td>{{ usuario.apellido1 }}</td>
-                  <td>{{ usuario.email }}</td>
+                  <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
+
+                  <td>
+                      <button type="button" class="btn btn-link" name="button"  (click)="quitarInvestigador(usuario)">
+                        <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador">
+                      </button>
+                  </td>
+                  <td [hidden]="proyecto.ip2!=NULL">
+                      <button type="button" class="btn btn-link" name="button"  (click)="hacerIP2(usuario)" >
+                        <img src="assets/iconos/mas.png" class="rounded" alt="Hacer IP2">
+                      </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -114,5 +124,6 @@
     </div>
     <br>
     <button class="btn btn-success" role="button" (click)="crearProyecto()">Crear</button>
+    <button class="btn btn-danger" role="button" (click)="cancelar()">Cancelar</button>
   </form>
   </div>
