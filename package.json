@@ -24,6 +24,7 @@
     "angularjs-toast": "^2.0.3",
     "auth0-js": "^9.10.0",
     "core-js": "^2.5.4",
+    "cors": "^2.8.5",
     "jquery": "^3.3.1",
     "ngx-toastr": "^10.0.2",
     "rxjs": "~6.3.3",

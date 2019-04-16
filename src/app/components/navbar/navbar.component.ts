@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class NavbarComponent implements OnInit{
 
-  title:string = 'Geckop'
+  title:string = 'GECKOP'
   isLog:boolean = this.sesionService.isLogin();
   constructor(
     private sesionService: SesionService,
@@ -34,10 +34,6 @@ export class NavbarComponent implements OnInit{
                 })
     this.router.navigate(['/login']);
 
-  }
-
-  registrar() {
-    console.log('Hola');
   }
 
   ngOnInit(){

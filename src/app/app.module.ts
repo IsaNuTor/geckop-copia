@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 // Menú
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MenuVerticalComponent } from './components/menu-vertical/menu-vertical.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 // Acreedores
 import { AcreedoresComponent } from './components/vistaAcreedores/acreedores.component';
@@ -34,12 +35,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
 
-
 // Rutas
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {path:'', redirectTo:'login',pathMatch: 'full'},
+  {path:'home', component: HomeComponent},
   {path:'acreedores', component: AcreedoresComponent},
   {path: 'acreedores/form-acreedores.component', component: FormAcreedoresComponent},
   {path: 'ordenes/add-orden/add-orden.component', component: AddOrdenComponent},
@@ -57,7 +58,6 @@ const routes: Routes = [
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +74,8 @@ import { FooterComponent } from './components/footer/footer.component';
     InfoProyectoComponent,
     FooterComponent,
     OrdenesComponent,
-    FormProyectosComponent
+    FormProyectosComponent,
+    MenuVerticalComponent
   ],
   imports: [
     BrowserModule,

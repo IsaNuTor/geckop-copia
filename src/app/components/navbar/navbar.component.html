@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">{{title}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" routerLink="/home">GECKOP</a>
+    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button>-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto" *ngIf="isLog">
           <!--<li class="nav-item">
@@ -23,14 +23,14 @@
           <li class="nav-item"  routerLinkActive="active">
             <a class="nav-link" routerLink="/proyectos">Proyectos</a>
           </li>
-
+          <!--
           <li class="nav-item"  routerLinkActive="active">
             <a class="nav-link" routerLink="/login">Login</a>
           </li>
 
           <li class="nav-item"  routerLinkActive="active">
             <a class="nav-link" routerLink="/registro">Registro</a>
-          </li>
+          </li>-->
         </ul>
 
 
@@ -47,10 +47,10 @@
         type="button"
         class="btn btn-outline-success btn-sm" routerLink="/login">Login
       </button>
-      <button (click)="registrar()"
+      <!--<button (click)="registrar()"
         type="submit"
         class="btn btn-outline-success btn-sm" routerLink="/registro">Registro
-      </button>
+      </button>-->
     </ng-template>
   </span>
 
