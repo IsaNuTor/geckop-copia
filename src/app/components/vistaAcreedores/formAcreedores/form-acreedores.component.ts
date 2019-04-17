@@ -43,7 +43,29 @@ export class FormAcreedoresComponent implements OnInit {
       acreedor =>
       {
         this.router.navigate(['/acreedores'])
-        swal.fire('Nuevo Acreedor', `Acreedor ${acreedor.nombre} creado con éxito`, 'success')
+        if(acreedor != null){
+          const ToastrModule = swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 5000
+                });
+
+                ToastrModule.fire({
+                  type: 'success',
+                  title: 'Guardado '+acreedor.nombre,
+
+                })
+          }else{
+            swal.fire({
+                        type: 'error',
+                        title: 'Error!',
+                        text: 'El acreedor no se ha podido crear',
+                        onClose: () => {
+                              location.reload();
+                            }
+                      })
+          }
       }
     )
   }

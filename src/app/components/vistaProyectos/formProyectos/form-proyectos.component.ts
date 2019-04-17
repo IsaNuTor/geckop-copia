@@ -69,9 +69,10 @@ export class FormProyectosComponent implements OnInit {
   public crearProyecto(){
     //post proyecto
     this.proyecto.ip1 = this.sesionService.getDni();
+    
     this.proyectoService.insertarProyecto(this.proyecto).subscribe(
         res => {
-          if(res != null){
+          if(res){
             const ToastrModule = swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -81,8 +82,18 @@ export class FormProyectosComponent implements OnInit {
 
                   ToastrModule.fire({
                     type: 'success',
-                    title: 'Guardado '+res.acronimo
+                    title: 'Guardado '+res.acronimo,
+
                   })
+            }else{
+              swal.fire({
+                          type: 'error',
+                          title: 'Error!',
+                          text: 'El proyecto no se ha podido crear',
+                          onClose: () => {
+                                location.reload();
+                              }
+                        })
             }
           });
     //post inv-proyecto

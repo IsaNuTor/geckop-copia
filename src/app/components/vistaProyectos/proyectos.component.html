@@ -1,5 +1,4 @@
 <div class="card-body text-secondary">
-  <app-menu-vertical></app-menu-vertical>
     <h4 class="card-title">Tus Proyectos</h4>
     <div class="my-3">
       <button class="btn btn-rounded btn btn-success" types="button" [routerLink] = "['/proyectos/form-proyectos.component']">Nuevo Proyecto</button>
@@ -40,10 +39,14 @@
           <td>{{ proyecto.presupuesto }}</td>
           <td>{{ proyecto.nContabilidad }}</td>
           <td>
-            <button type="button" class="btn btn-success" name="button" >Editar</button>
+            <button type="button" class="btn btn-link" name="button" >
+              <img src="assets/iconos/editar.png" class="rounded" alt="Editar Proyecto">
+            </button>
           </td>
           <td>
-            <button type="button" class="btn btn-danger" name="button" >Borrar</button>
+            <button type="button" class="btn btn-link" name="button" (click)="borrarProyecto(proyecto)" >
+              <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
+            </button>
           </td>
         </tr>
       </tbody>

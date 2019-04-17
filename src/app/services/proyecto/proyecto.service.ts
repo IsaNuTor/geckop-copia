@@ -22,4 +22,8 @@ export class ProyectoService {
   public getProyectos(): Observable<Proyecto[]> {
        return this.http.get<Proyecto[]>(this.urlProyecto);
     }
+
+  public borrarProyecto(proyecto: Proyecto): Observable<Proyecto> {
+      return this.http.delete<Proyecto>(`${this.urlProyecto}/${proyecto.acronimo}`, {headers: this.httpHeaders});
+    }
 }
