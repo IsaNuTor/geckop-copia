@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SesionService } from '../../services/sesion/sesion.service';
 
 @Component({
   selector: 'app-menu-vertical',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuVerticalComponent implements OnInit {
 
-  constructor() { }
+  isLog:boolean = this.sesionService.isLogin();
+  constructor(private sesionService: SesionService) {
+      }
 
   ngOnInit() {
+    this.isLog = this.sesionService.isLogin();
   }
 
 }

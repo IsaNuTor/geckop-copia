@@ -1,14 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" routerLink="/home">GECKOP</a>
+    <a class="navbar-brand titulo-home" routerLink="/home" *ngIf="isLog">GECKOP</a>
     <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto" *ngIf="isLog">
+<!--      <ul class="navbar-nav mr-auto" *ngIf="isLog">
           <!--<li class="nav-item">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>-->
-          <li class="nav-item"  routerLinkActive="active">
+<!--          <li class="nav-item"  routerLinkActive="active">
             <a class="nav-link" routerLink="/perfil">Perfil</a>
           </li>
 
@@ -31,7 +31,8 @@
           <li class="nav-item"  routerLinkActive="active">
             <a class="nav-link" routerLink="/registro">Registro</a>
           </li>-->
-        </ul>
+  <!--      </ul>
+  -->
 
 
         <!--Bloques botón-->

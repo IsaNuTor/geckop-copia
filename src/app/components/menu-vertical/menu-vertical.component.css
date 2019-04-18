@@ -19,7 +19,8 @@
 .raton-menu:hover {
   background-color: rgba(1,90,8);
   color: #fff;
-  transition-duration: 0.5s
+  transition-duration: 0.5s;
+  cursor: pointer;
 }
 .raton-menu:active {
   background-color: rgba(1,90,8);
