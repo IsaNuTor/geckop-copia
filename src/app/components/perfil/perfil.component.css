@@ -26,6 +26,14 @@ form {
     height: 200px;
     float: right;
 }
+/************CONTRASEÑA************/
+.cambioPass {
+  margin-left: 20px;
+}
+
+.cont-pass {
+  margin-top: 300px;
+}
 
 label {
     margin-left: 15%;

@@ -33,11 +33,10 @@
           </li>-->
   <!--      </ul>
   -->
-
-
         <!--Bloques botón-->
         <div class="loginreg">
           <span class="navbar-text">
+            <a *ngIf="isLog" class="iconPerfil" routerLink="/perfil"><img src="../../../assets/iconos/nav-user.png" alt="icono perfil usuario"></a>
               <button (click)="salir()" *ngIf="isLog; else notLogged"
                 type="submit"
                 class="btn btn-outline-success btn-sm">Salir

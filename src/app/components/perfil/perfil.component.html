@@ -3,29 +3,50 @@
 
         <div class="bloque-izq">
             <label for="">Nombre</label>
-            <input id="placeColor" type="text" placeholder="Nombre" formControlName="nombre"><br>
+            <input id="placeColor" type="text" placeholder={{nombreUsuario}} formControlName="nombre"><br>
+
+            <label for="">Primer Apellido</label>
+            <input id="placeColor" type="text" placeholder="{{apellido1Usuario}}">
+            <br>
 
             <label for="">IBAN</label>
             <input id="placeColor" type="text" placeholder="pedirlo cuando se registe 1 proyecto" formControlName="iban">
             <br>
-            <button type="submit">
-                Modificar
-            </button>
         </div>
 
         <div class="bloque-der">
             <label for="">NIF</label>
-            <input id="placeColor" type="text" placeholder="valor registrado" formControlName="nif"><br>
+            <input id="placeColor" type="text" placeholder="{{dniUsuario}}" formControlName="nif"><br>
+
+            <label for="">Segundo Apellido</label>
+            <input id="placeColor" type="text" placeholder="{{apellido2Usuario}}">
+            <br>
 
             <label for="">Correo</label>
-            <input id="placeColor" type="email" placeholder="Correo registrado bd" formControlName="correo">
+            <input id="placeColor" type="email" placeholder="Correo registrado bd" formControlName="correo"><br>
         </div>
+  <div class="cont-pass">
+    <div class="card">
+      <div class="card bg-dark">
+        <div class="card-header text-white">
+          Cambiar Contraseña
+        </div>
+      </div>
 
+      <div class="cambioPass">
+          <input id="placeColor" type="text" placeholder="Contraseña actual" ><br>
 
+          <input id="placeColor" type="text" placeholder="Contraseña nueva" ><br>
 
-
-
+          <input id="placeColor" type="text" placeholder="Repite la contraseña nueva"><br>
+      </div>
 
     </div>
+    <br>
+    <button class="btn btn-success" type="submit">Guardar</button>
+
+    </div>
+  </div>
+
     <!--{{forma.valid}}-->
 </form>

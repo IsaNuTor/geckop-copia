@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { UsuarioService } from '../../services/usuario/usuario.service';
+import { Usuario } from '../../services/usuario/usuario';
+import { SesionService } from '../../services/sesion/sesion.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -10,8 +13,14 @@ import swal from 'sweetalert2';
 export class PerfilComponent implements OnInit {
 
   perfilUser: FormGroup;
+  nombreUsuario:string = "";
+  apellido1Usuario:string = "";
+  apellido2Usuario:string = "";
+  dniUsuario:string = "";
+  ibanUsuario:string = "";
+  correoUsuario:string = "";
 
-  constructor() {
+  constructor(private sesionService: SesionService) {
     this.perfilUser = new FormGroup({
       nombre: new FormControl('', Validators.required),
       nif: new FormControl('', Validators.required),
@@ -26,6 +35,13 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.nombreUsuario = this.sesionService.getNombre();
+    //this.apellido1Usuario = this.sesionService.getApellido1();
+    //this.apellido2Usuario = this.sesionService.getApellido2();
+    this.dniUsuario = this.sesionService.getDni();
+    //this.ibanUsuario = this.sesionService.getIban();
+    //this.correoUsuario = this.sesionService.getCorreo();
+
     //
     /*if (window.localStorage) {
         var nombre = sessionStorage.getItem("nombre");

@@ -19,3 +19,8 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+.loginreg .navbar-text .iconPerfil {
+  padding-top: -200px;
+  margin-right: 10px;
+}
