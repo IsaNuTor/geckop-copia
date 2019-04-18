@@ -1,7 +1,7 @@
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 
 <!--<form [formGroup]="forma" (ngSubmit)="registro()">-->
-<form (ngSubmit)="registro()" #usuarioForm="ngForm">
+<form [formGroup]="formRegistro" (ngSubmit)="registro()" #usuarioForm="ngForm">
     <div class="cont-registro">
         <div class="registro-izq">
             <img src="assets/marca.jpg" alt="logo geckop">
@@ -10,7 +10,7 @@
         <div class="registro-der">
 
             <h2>Registro</h2>
-
+            <!--
             <input id="placeColor" type="text" placeholder="DNI" [(ngModel)]="usuario.dni" name="dni" required minlength="9" #dni="ngModel">
             <div class="alert alert-danger" *ngIf="dni.invalid && (dni.dirty || dni.touched)">
               <div *ngIf = "dni.errors.required || dni.errors.invalid">
@@ -19,9 +19,16 @@
               <div *ngIf = "dni.errors.minlength">
                 dni debe tener 8 dígitos y 1 letra.
               </div>
+            </div>-->
+            <input id="placeColor" formControlName="dni" type="text" placeholder="DNI" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))">
+            <div class="alert alert-danger" *ngIf="formRegistro.get('dni').errors && formRegistro.get('dni').dirty">
+              <p *ngIf="formRegistro.get('dni').hasError('required')">Nombre no puede estar vacio</p>
+              <p *ngIf="formRegistro.get('dni').hasError('minlength')">Mínimo de 9 caracteres</p>
+              <p *ngIf="formRegistro.get('dni').hasError('maxlength')">Máximo de 10 caracteres</p>
+              <p *ngIf="formRegistro.get('dni').errors?.pattern">Formato erróneo</p>
             </div>
 
-            <input id="placeColor" type="text" placeholder="Nombre" [(ngModel)]="usuario.nombre" name="nombre" required maxlenght="20" #nombre="ngModel">
+            <!--<input id="placeColor" type="text" placeholder="Nombre" [(ngModel)]="usuario.nombre" name="nombre" required maxlenght="20" #nombre="ngModel">
             <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
               <div *ngIf = "nombre.errors.required">
                 Nombre no puede estar vacio
@@ -29,23 +36,39 @@
               <div *ngIf = "nombre.errors.maxlenght">
                 Nombre no puede tener más de 20 letras
               </div>
+            </div>-->
+
+            <input id="placeColor" formControlName="nombre" type="text" placeholder="Nombre">
+            <div class="alert alert-danger" *ngIf="formRegistro.get('nombre').errors && formRegistro.get('nombre').dirty">
+              <p *ngIf="formRegistro.get('nombre').hasError('required')">Nombre no puede estar vacio</p>
+              <p *ngIf="formRegistro.get('nombre').hasError('maxlength')">Máximo de 20 caracteres</p>
             </div>
 
-            <input id="placeColor" type="text" placeholder="Primer apellido" [(ngModel)]="usuario.apellido1" name="apellido1" required #apellido1="ngModel">
+            <!--<input id="placeColor" type="text" placeholder="Primer apellido" [(ngModel)]="usuario.apellido1" name="apellido1" required #apellido1="ngModel">
             <div class="alert alert-danger" *ngIf="apellido1.invalid && (apellido1.dirty || apellido1.touched)">
               <div *ngIf = "apellido1.errors.required">
                 Primer apellido no puede estar vacio
               </div>
+            </div>-->
+            <input id="placeColor" formControlName="apellido1" type="text" placeholder="Primer apellido">
+            <div class="alert alert-danger" *ngIf="formRegistro.get('apellido1').errors && formRegistro.get('apellido1').dirty">
+              <p *ngIf="formRegistro.get('apellido1').hasError('required')">Primer apellido no puede estar vacio</p>
+              <p *ngIf="formRegistro.get('apellido1').hasError('maxlength')">Máximo de 20 caracteres</p>
             </div>
 
-            <input id="placeColor" type="text" placeholder="Segundo apellido" [(ngModel)]="usuario.apellido2" name="apellido2" required #apellido2="ngModel">
+            <!--<input id="placeColor" type="text" placeholder="Segundo apellido" [(ngModel)]="usuario.apellido2" name="apellido2" required #apellido2="ngModel">
             <div class="alert alert-danger" *ngIf="apellido2.invalid && (apellido2.dirty || apellido2.touched)">
               <div *ngIf = "apellido2.errors.required">
                 Segundo apellido no puede estar vacio
               </div>
+            </div>-->
+            <input id="placeColor" formControlName="apellido2" type="text" placeholder="Segundo apellido">
+            <div class="alert alert-danger" *ngIf="formRegistro.get('apellido2').errors && formRegistro.get('apellido2').dirty">
+              <p *ngIf="formRegistro.get('apellido2').hasError('required')">Segundo apellido no puede estar vacio</p>
+              <p *ngIf="formRegistro.get('apellido2').hasError('maxlength')">Máximo de 20 caracteres</p>
             </div>
 
-            <input id="placeColor" type="email" placeholder="Correo electrónico" [(ngModel)]="usuario.email" name="email" required email #email="ngModel">
+            <!--<input id="placeColor" type="email" placeholder="Correo electrónico" [(ngModel)]="usuario.email" name="email" required email #email="ngModel">
             <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
               <div *ngIf = "email.errors.required">
                 Email no puede estar vacio
@@ -53,9 +76,20 @@
               <div *ngIf = "email.errors.email">
                 Email debe tener un formato válido
               </div>
+            </div>-->
+            <input id="placeColor" type="email" placeholder="Correo electrónico" formControlName="correo">
+            <div class="alert alert-danger" *ngIf="formRegistro.get('correo').errors && formRegistro.get('correo').dirty">
+              <p *ngIf="formRegistro.get('correo').hasError('required')">Email no puede estar vacio</p>
+              <p *ngIf="formRegistro.get('correo').hasError('email')">Formato erróneo</p>
             </div>
 
-            <input id="placeColor" type="password" placeholder="Contraseña" [(ngModel)]="usuario.password" name="password" required>
+            <!--<input id="placeColor" type="password" placeholder="Contraseña" [(ngModel)]="usuario.password" name="password" required>-->
+            <input id="placeColor" type="password" placeholder="Contraseña" formControlName="password">
+            <div class="alert alert-danger" *ngIf="formRegistro.get('password').errors && formRegistro.get('password').dirty">
+              <p *ngIf="formRegistro.get('password').hasError('required')">Email no puede estar vacio</p>
+              <p *ngIf="formRegistro.get('password').hasError('minlength')">Mínimo de 5 caracteres</p>
+              <p *ngIf="formRegistro.get('password').hasError('maxlength')">Máximo de 10 caracteres</p>
+            </div>
 
             <div id="checkTerm">
               <label for="checkTerminos">
@@ -64,17 +98,12 @@
               </label>
             </div>
 
-            <button class="btn btn-dark btnRegistro" role="button" (click)="registro()" [disabled]="!usuarioForm.form.valid">Registrarse</button>
-
+            <!--<button class="btn btn-dark btnRegistro" role="button" (click)="registro()" [disabled]="!usuarioForm.form.valid">Registrarse</button>
+            -->
+            <button type="submit" [disabled]="formRegistro.invalid" class="btn btn-dark btnRegistro" role="button">Registrarse</button>
             <div id="iniciarSesion">
                 <label>¿Ya tienes una cuenta? <a href="#">Iniciar sesión</a></label>
             </div>
-
-
         </div>
-
-
-
     </div>
-
 </form>

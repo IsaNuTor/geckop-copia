@@ -6,6 +6,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
