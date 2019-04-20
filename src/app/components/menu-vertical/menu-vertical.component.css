@@ -42,3 +42,10 @@ button{
   outline-color: white;
   outline: none;
 }
+
+.list-group-item:focus{
+  border-color: #228B22;
+  border-width: 1px;
+  box-shadow: none;
+  outline: none;
+}

@@ -22,7 +22,7 @@
             </div>-->
             <input id="placeColor" formControlName="dni" type="text" placeholder="DNI" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))">
             <div class="alert alert-danger" *ngIf="formRegistro.get('dni').errors && formRegistro.get('dni').dirty">
-              <p *ngIf="formRegistro.get('dni').hasError('required')">Nombre no puede estar vacio</p>
+              <p *ngIf="formRegistro.get('dni').hasError('required')">DNI no puede estar vacio</p>
               <p *ngIf="formRegistro.get('dni').hasError('minlength')">Mínimo de 9 caracteres</p>
               <p *ngIf="formRegistro.get('dni').hasError('maxlength')">Máximo de 10 caracteres</p>
               <p *ngIf="formRegistro.get('dni').errors?.pattern">Formato erróneo</p>

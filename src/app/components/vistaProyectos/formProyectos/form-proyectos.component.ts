@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+
 import { Proyecto } from '../../../services/proyecto/proyecto';
 import { ProyectoService } from '../../../services/proyecto/proyecto.service';
 import { UsuarioProyectoService } from '../../../services/usuario-proyecto/usuario-proyecto.service';
@@ -18,6 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
 export class FormProyectosComponent implements OnInit {
 
   proyecto: Proyecto = new Proyecto();
+  formProyecto: FormGroup;
   tituloProyectos:string = "Crear Nuevo Proyecto";
 
   nombreIP1:string = "";
@@ -30,7 +33,27 @@ export class FormProyectosComponent implements OnInit {
                private usuarioProyectoService: UsuarioProyectoService,
                private sesionService: SesionService,
                private router: Router,
-               private activatedRoute: ActivatedRoute) { }
+               private activatedRoute: ActivatedRoute,
+               public fb: FormBuilder
+   )
+   {
+                   this.formProyecto = this.fb.group({
+                     fechaInicio: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+                     fechaCierre: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+                     nombre: ['', [Validators.required, Validators.maxLength(20)]],
+                     acronimo: ['', [Validators.required, Validators.maxLength(20)]],
+                     presupuesto: ['', [Validators.required, Validators.max(100000000)]],
+                     nContabilidad: ['', [Validators.required, Validators.max(100000000)]],
+                     ip1: ['', [Validators.required, Validators.maxLength(20)]],
+                     ip2: ['', [Validators.required, Validators.maxLength(20)]]
+                   });
+    }
+
+  saveData() {
+    console.log(this.formProyecto.value);
+    this.proyecto = this.formProyecto.value
+    console.log(this.proyecto);
+  }
 
   ngOnInit() {
     this.usuarioService.getUsuarios().subscribe(
@@ -42,6 +65,7 @@ export class FormProyectosComponent implements OnInit {
 
   public anadirInvestigador(usuario: Usuario): void{
     //Podemos hacer que se quite de la otra lista
+
     this.usuarios.splice(this.usuarios.indexOf(usuario), 1);
     this.usuarios_anadidos.push(usuario);
   }
@@ -68,8 +92,10 @@ export class FormProyectosComponent implements OnInit {
 
   public crearProyecto(){
     //post proyecto
+
+    this.proyecto = this.formProyecto.value;
     this.proyecto.ip1 = this.sesionService.getDni();
-    
+
     this.proyectoService.insertarProyecto(this.proyecto).subscribe(
         res => {
           if(res){

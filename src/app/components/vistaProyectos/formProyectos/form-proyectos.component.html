@@ -18,13 +18,23 @@
     </div>
 
     <div class="form-row">
+
       <div class="form-group col-md-6">
         <label for="nombre">Nombre</label>
         <input type="text" class="form-control" [(ngModel)]="proyecto.nombre" id="nombre" placeholder="nombre del proyecto" name="nombre">
+        <div class="alert alert-danger" *ngIf="formProyecto.get('nombre').errors && formProyecto.get('nombre').dirty">
+          <p *ngIf="formProyecto.get('nombre').hasError('required')">No puede estar vacio</p>
+          <p *ngIf="formProyecto.get('nombre').hasError('maxlength')">Máximo 20 caracteres</p>
+        </div>
       </div>
+
       <div class="form-group col-md-6">
         <label for="acronimo">   Acrónimo</label>
         <input type="text" class="form-control" [(ngModel)]="proyecto.acronimo" id="acronimo" placeholder="acrónimo" name="acronimo">
+        <div class="alert alert-danger" *ngIf="formProyecto.get('acronimo').errors && formProyecto.get('acronimo').dirty">
+          <p *ngIf="formProyecto.get('acronimo').hasError('required')">No puede estar vacio</p>
+          <p *ngIf="formProyecto.get('acronimo').hasError('maxlength')">Máximo 20 caracteres</p>
+        </div>
       </div>
     </div>
 
@@ -32,10 +42,19 @@
       <div class="form-group col-md-6">
         <label for="presupuesto">Presupuesto</label>
         <input type="text" class="form-control" [(ngModel)]="proyecto.presupuesto" id="presupuesto" placeholder="presupuesto del proyecto" name="presupuesto">
+        <div class="alert alert-danger" *ngIf="formProyecto.get('presupuesto').errors && formProyecto.get('presupuesto').dirty">
+          <p *ngIf="formProyecto.get('presupuesto').hasError('required')">No puede estar vacio</p>
+          <p *ngIf="formProyecto.get('presupuesto').hasError('max')">Máximo 100000000€</p>
+        </div>
       </div>
+
       <div class="form-group col-md-6">
         <label for="nContabilidad">   Nº de contabilidad</label>
         <input type="text" class="form-control" [(ngModel)]="proyecto.nContabilidad" id="nContabilidad" placeholder="Número de contabilidad" name="nContabilidad">
+        <div class="alert alert-danger" *ngIf="formProyecto.get('nContabilidad').errors && formProyecto.get('nContabilidad').dirty">
+          <p *ngIf="formProyecto.get('nContabilidad').hasError('required')">No puede estar vacio</p>
+          <p *ngIf="formProyecto.get('nContabilidad').hasError('max')">Máximo 100000000</p>
+        </div>
       </div>
     </div>
 
@@ -80,7 +99,7 @@
                 <tr *ngFor="let usuario of usuarios">
                   <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
 
-                  <td><button type="button" class="btn btn-link" name="button"  (click)="anadirInvestigador(usuario)">
+                  <td><button type="button" class="btn btn-link" name="button"  (click)="anadirInvestigador(usuario)" [disabled]="formProyecto.invalid">
                         <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador">
                       </button>
                   </td>

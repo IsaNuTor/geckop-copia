@@ -88,3 +88,12 @@ body {
 .cont-login a:hover {
     color: #fff;
 }
+
+
+
+.input:focus{
+  border-color: #228B22;
+  border-width: 1px;
+  box-shadow: none;
+  outline: none;
+}
