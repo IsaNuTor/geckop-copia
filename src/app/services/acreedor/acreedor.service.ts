@@ -3,6 +3,7 @@ import { Acreedor } from './acreedor';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {URL_BACKEND} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'

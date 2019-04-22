@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario} from '../usuario/usuario';
+import {URL_BACKEND} from '../../config/config';
 @Injectable({
   providedIn: 'root'
 })
