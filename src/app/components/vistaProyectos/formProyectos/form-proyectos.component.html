@@ -70,7 +70,7 @@
       </div>
       <div class="form-group col-md-1 mb-3">
         <br>
-        <button type="button" class="btn btn-link" name="button"  (click)="quitarIP2()" [hidden]="proyecto.ip2==NULL">
+        <button type="button" class="btn btn-link" name="button"  (click)="quitarIP2()"!--[hidden]="proyecto.ip2==null">
               <img src="assets/iconos/menos.png" class="rounded" alt="Quitar IP2">
         </button>
       </div>
@@ -99,7 +99,7 @@
                 <tr *ngFor="let usuario of usuarios">
                   <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
 
-                  <td><button type="button" class="btn btn-link" name="button"  (click)="anadirInvestigador(usuario)" [disabled]="formProyecto.invalid">
+                  <td><button type="button" class="btn btn-link" name="button"  (click)="anadirInvestigador(usuario)"> <!--[disabled]="formProyecto.invalid"-->
                         <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador">
                       </button>
                   </td>
@@ -116,7 +116,7 @@
                 <tr>
                   <th>Nombre</th>
                   <th>Quitar</th>
-                  <th [hidden]="proyecto.ip2!=NULL">IP 2</th>
+                  <th [hidden]="proyecto.ip2!=null">IP 2</th>
                 </tr>
               </thead>
 

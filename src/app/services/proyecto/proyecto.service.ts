@@ -11,8 +11,8 @@ import {Proyecto} from './proyecto'
 })
 export class ProyectoService {
 
-  private urlProyecto:string = 'http://localhost:8080/api/proyecto';
-  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  urlProyecto:string = 'http://localhost:8080/api/proyecto';
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
   // Guarda el proyecto

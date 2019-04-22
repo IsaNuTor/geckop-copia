@@ -11,10 +11,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class UsuarioService {
 
-  private urlLogin:string = 'http://localhost:8080/api/login';
-  private urlRegistro:string = 'http://localhost:8080/api/registro';
-  private urlEndPoint:string = 'http://localhost:8080/api/usuario';
-  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  urlLogin:string = 'http://localhost:8080/api/login';
+  urlRegistro:string = 'http://localhost:8080/api/registro';
+  urlEndPoint:string = 'http://localhost:8080/api/usuario';
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
   // Nos devuelve el usuario.

@@ -24,6 +24,7 @@ export class FormProyectosComponent implements OnInit {
   tituloProyectos:string = "Crear Nuevo Proyecto";
 
   nombreIP1:string = "";
+  nombreIP2:string = "";
   usuarios: Usuario[];
   usuarios_anadidos: Usuario[];
 

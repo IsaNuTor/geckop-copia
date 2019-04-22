@@ -13,8 +13,8 @@ import swal from 'sweetalert2'
 })
 export class FormAcreedoresComponent implements OnInit {
 
-  private acreedor: Acreedor = new Acreedor()
-  private titulo:string = "Crear Nuevo Acreedor"
+  acreedor: Acreedor = new Acreedor()
+  titulo:string = "Crear Nuevo Acreedor"
   botonCrear:boolean;
   formAcreedores: FormGroup;
 

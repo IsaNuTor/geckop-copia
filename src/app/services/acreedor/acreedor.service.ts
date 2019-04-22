@@ -9,8 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AcreedorService {
 
-  private urlEndPoint:string = 'http://localhost:8080/api/acreedores';
-  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  urlEndPoint:string = 'http://localhost:8080/api/acreedores';
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {}
   // Nos devuelve los acreedores.
