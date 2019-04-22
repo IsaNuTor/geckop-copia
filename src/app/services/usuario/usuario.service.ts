@@ -15,6 +15,10 @@ export class UsuarioService {
   urlLogin:string = 'http://localhost:8080/api/login';
   urlRegistro:string = 'http://localhost:8080/api/registro';
   urlEndPoint:string = 'http://localhost:8080/api/usuario';
+  /*urlLogin:string = URL_BACKEND + '/api/login';
+  urlRegistro:string = URL_BACKEND + '/api/registro';
+  urlEndPoint:string = URL_BACKEND + '/api/usuario';
+  */
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 

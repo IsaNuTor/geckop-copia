@@ -11,6 +11,7 @@ import {URL_BACKEND} from '../../config/config';
 export class AcreedorService {
 
   urlEndPoint:string = 'http://localhost:8080/api/acreedores';
+  //urlEndPoint:string = URL_BACKEND + '/api/acreedores';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {}

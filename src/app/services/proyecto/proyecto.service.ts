@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs';
-import {URL_BACKEND} from '../../config/config';
 
 /*Clases Propias*/
 import {Proyecto} from './proyecto'
+import {URL_BACKEND} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ import {Proyecto} from './proyecto'
 export class ProyectoService {
 
   urlProyecto:string = 'http://localhost:8080/api/proyecto';
+  //urlProyecto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
