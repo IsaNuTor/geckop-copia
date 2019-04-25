@@ -43,20 +43,26 @@ form {
     height: 100%;
     border-radius: 0 2% 2% 0;
     float: right;
-    background: green;
+    background:#343a40; 
     display: block;
     justify-content: center;
     align-items: center;
 }
 
 .registro-der h2 {
-    color: rgb(11, 36, 11);
-    font-family: 'Sofia';
-    font-weight: bold;
+    color:#28a745;
+   /* color: white;
+    background-color: #28a745;*/
+   /* font-family: 'Sofia';*/
+   font-family: "Tw Cen MT";
     font-size: 3.8em;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
+    width: 4em;
+    margin-left: 1em;
+    border-radius: 0.2em;
+    
 }
 
 #alertas {
@@ -88,10 +94,12 @@ form {
 
 .registro-der input[type="text"],
 .registro-der input[type="password"],
-.registro-der input[type="email"] {
+.registro-der input[type="email"]
+ {
     width: 85%;
     display: block;
     margin: 20px auto;
+    margin-bottom: 10px;
     height: 40px;
     border: none;
     border-bottom: 1px solid #000;
@@ -101,7 +109,16 @@ form {
     padding-left: 3px;
 }
 
-#checkTerm,
+#checkTerm{
+    margin-left: 20px;
+    color: #fff;
+}
+label{
+    color: white;
+}
+.registro-der input[type="checkbox"]{
+    color: #fff;
+}
 #alertas {
     margin: 22px 7%;
 }
@@ -111,14 +128,32 @@ form {
 }
 
 a {
-    color: #fff;
+    color: #228B22;
 }
 
 a:hover {
-    color: #000;
+    color: #228B22;
 }
 
 .btnRegistro {
   align-content: center;
   margin-left: 35%;
 }
+
+.alerta{
+    color: red;
+    padding-left: 28px ;
+}
+
+
+
+.registro-der input[type="text"]:focus,
+.registro-der input[type="password"]:focus,
+.registro-der input[type="email"]:focus{
+    border:solid;
+    border-color: #228B22;
+    border-width: 2px;
+    box-shadow: none;
+    outline: none;
+  }
+  

@@ -17,6 +17,7 @@ export class FormRegistroUsuariosComponent implements OnInit{
 
   private usuario: Usuario = new Usuario();
   formRegistro: FormGroup;
+  private formValid: boolean = true;
   //forma: FormGroup;
 
 /*  constructor(private usuarioService: UsuarioService) {
@@ -41,12 +42,14 @@ export class FormRegistroUsuariosComponent implements OnInit{
       nombre: ['', [Validators.required, Validators.maxLength(20)]],
       apellido1: ['', [Validators.required, Validators.maxLength(20)]],
       apellido2: ['', [Validators.required, Validators.maxLength(20)]],
-      correo: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.formValid = true;
+  }
 
   /*Obtendremos la información del usuario después de validarlo todo*/
   saveData() {
@@ -58,45 +61,28 @@ export class FormRegistroUsuariosComponent implements OnInit{
   public registro(): void{
     //console.log(this.forma.value);
     //console.log(this.forma);
-    this.usuario = this.formRegistro.value;
-    this.usuarioService.registro(this.usuario).subscribe(
-        res => {
-        //  console.log(res);
-        /*Pequeño mensaje de que se ha registrado con éxito*/
-          const ToastrModule = swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 2500
-          });
-          ToastrModule.fire({
-            type: 'success',
-            title: 'Registrado con éxito'
-          })
-          this.router.navigate(['/login']);
+    this.formValid = this.formRegistro.status == 'VALID'
+    if(this.formValid){
+      this.usuario = this.formRegistro.value;
+      this.usuarioService.registro(this.usuario).subscribe(
+          res => {
+            if(res != null){
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2500
+              });
+              ToastrModule.fire({
+                type: 'success',
+                title: 'Registrado con éxito'
+              })
+              this.router.navigate(['/login']);
+          }
+            
         });
+    }
 
   }
-/* VALIDAR SOLO DNI ESPAÑOL
-  public validar(value){
-    var validChars = 'TRWAGMYFPDXBNJZSQVHLCKET';
-    var nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
-    var nieRexp = /^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
-    var str = value.toString().toUpperCase();
 
-    if (!nifRexp.test(str) && !nieRexp.test(str)) return false;
-
-    var nie = str
-        .replace(/^[X]/, '0')
-        .replace(/^[Y]/, '1')
-        .replace(/^[Z]/, '2');
-
-    var letter = str.substr(-1);
-    var charIndex = parseInt(nie.substr(0, 8)) % 23;
-
-    if (validChars.charAt(charIndex) === letter) return true;
-
-    return false;
-  }
-*/
 }
