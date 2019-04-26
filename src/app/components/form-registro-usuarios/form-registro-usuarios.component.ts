@@ -18,32 +18,18 @@ export class FormRegistroUsuariosComponent implements OnInit{
   private usuario: Usuario = new Usuario();
   formRegistro: FormGroup;
   private formValid: boolean = true;
-  //forma: FormGroup;
-
-/*  constructor(private usuarioService: UsuarioService) {
-    this.forma = new FormGroup({
-      dni: new FormControl('', Validators.required),
-      nombre: new FormControl('', Validators.required),
-      apellido1: new FormControl('', Validators.required),
-      apellido2: new FormControl('', Validators.required),
-      correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      password: new FormControl('', Validators.required)
-    });
-  }*/
-
-
 
   constructor(private usuarioService: UsuarioService,
           public fb: FormBuilder,
           private router: Router,
   ){
     this.formRegistro = this.fb.group({
-      dni: ['', [Validators.required, Validators.pattern, Validators.minLength(9), Validators.maxLength(20)]],
-      nombre: ['', [Validators.required, Validators.maxLength(20)]],
-      apellido1: ['', [Validators.required, Validators.maxLength(20)]],
-      apellido2: ['', [Validators.required, Validators.maxLength(20)]],
+      dni: ['', [Validators.required, Validators.pattern, Validators.minLength(9)]],
+      nombre: ['', [Validators.required]],
+      apellido1: ['', [Validators.required]],
+      apellido2: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 

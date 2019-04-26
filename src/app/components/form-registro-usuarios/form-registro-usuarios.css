@@ -13,7 +13,7 @@ form {
 
 .cont-registro {
     width: 65%;
-    height: 650px;
+    min-height: 633px;
     background: #fff;
     clear: both;
     border-radius: 2%;
@@ -25,7 +25,7 @@ form {
 
 .registro-izq {
     width: 46%;
-    height: 100%;
+    min-height: 100%;
     border-radius: 2% 0 0 2%;
     padding-top: 27%;
     float: left;
@@ -40,7 +40,7 @@ form {
 
 .registro-der {
     width: 54%;
-    height: 100%;
+    min-height: 100%;
     border-radius: 0 2% 2% 0;
     float: right;
     background:#343a40; 
