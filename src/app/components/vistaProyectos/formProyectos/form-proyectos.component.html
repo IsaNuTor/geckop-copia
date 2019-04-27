@@ -5,15 +5,18 @@
     </div>
   </div>
 
-  <form class="m-3">
+  <form [formGroup]="formProyecto" class="m-3">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="fechaInicio">   Fecha de Inicio</label>
-        <input type="date" class="form-control" [(ngModel)]="proyecto.fechaInicio" id="fechaInicio" placeholder="fecha de inicio" name="fechaInicio">
+        <input type="date" class="form-control" formControlName="fechaInicio" id="fechaInicio" placeholder="fecha de inicio" name="fechaInicio">
       </div>
       <div class="form-group col-md-6">
         <label for="fechaCierre">   Fecha de Cierre</label>
-        <input type="date" class="form-control" [(ngModel)]="proyecto.fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">
+        <input type="date" class="form-control" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">
+        <div class="alerta">
+          <small *ngIf="!formValid && proyecto.fechaInicio > proyecto.fechaCierre">Las fechas introducidas no son válidas <br></small>
+        </div>
       </div>
     </div>
 
@@ -21,39 +24,36 @@
 
       <div class="form-group col-md-6">
         <label for="nombre">Nombre</label>
-        <input type="text" class="form-control" [(ngModel)]="proyecto.nombre" id="nombre" placeholder="nombre del proyecto" name="nombre">
-        <div class="alert alert-danger" *ngIf="formProyecto.get('nombre').errors && formProyecto.get('nombre').dirty">
-          <p *ngIf="formProyecto.get('nombre').hasError('required')">No puede estar vacio</p>
-          <p *ngIf="formProyecto.get('nombre').hasError('maxlength')">Máximo 20 caracteres</p>
+        <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="nombre del proyecto" name="nombre" maxlength="20">
+        <div class="alerta">
+          <small *ngIf="!formValid && formProyecto.get('nombre').hasError('required')">No puede estar vacio <br></small>
         </div>
       </div>
 
       <div class="form-group col-md-6">
         <label for="acronimo">   Acrónimo</label>
-        <input type="text" class="form-control" [(ngModel)]="proyecto.acronimo" id="acronimo" placeholder="acrónimo" name="acronimo">
-        <div class="alert alert-danger" *ngIf="formProyecto.get('acronimo').errors && formProyecto.get('acronimo').dirty">
-          <p *ngIf="formProyecto.get('acronimo').hasError('required')">No puede estar vacio</p>
-          <p *ngIf="formProyecto.get('acronimo').hasError('maxlength')">Máximo 20 caracteres</p>
+        <input type="text" class="form-control" formControlName="acronimo" id="acronimo" placeholder="acrónimo" name="acronimo" maxlength="20">
+        <div class="alerta">
+          <small *ngIf="!formValid && formProyecto.get('acronimo').hasError('required')">No puede estar vacio <br></small>
         </div>
       </div>
+
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="presupuesto">Presupuesto</label>
-        <input type="text" class="form-control" [(ngModel)]="proyecto.presupuesto" id="presupuesto" placeholder="presupuesto del proyecto" name="presupuesto">
-        <div class="alert alert-danger" *ngIf="formProyecto.get('presupuesto').errors && formProyecto.get('presupuesto').dirty">
-          <p *ngIf="formProyecto.get('presupuesto').hasError('required')">No puede estar vacio</p>
-          <p *ngIf="formProyecto.get('presupuesto').hasError('max')">Máximo 100000000€</p>
+        <input type="text" class="form-control" formControlName="presupuesto" id="presupuesto" placeholder="presupuesto del proyecto" name="presupuesto"  maxlength="8">
+        <div class="alerta">
+          <small *ngIf="!formValid && formProyecto.get('presupuesto').hasError('required')">No puede estar vacio <br></small>
         </div>
       </div>
 
       <div class="form-group col-md-6">
         <label for="nContabilidad">   Nº de contabilidad</label>
-        <input type="text" class="form-control" [(ngModel)]="proyecto.nContabilidad" id="nContabilidad" placeholder="Número de contabilidad" name="nContabilidad">
-        <div class="alert alert-danger" *ngIf="formProyecto.get('nContabilidad').errors && formProyecto.get('nContabilidad').dirty">
-          <p *ngIf="formProyecto.get('nContabilidad').hasError('required')">No puede estar vacio</p>
-          <p *ngIf="formProyecto.get('nContabilidad').hasError('max')">Máximo 100000000</p>
+        <input type="text" class="form-control" formControlName="nContabilidad" id="nContabilidad" placeholder="Número de contabilidad" name="nContabilidad" maxlength="16">
+        <div class="alerta">
+          <small *ngIf="!formValid && formProyecto.get('nContabilidad').hasError('required')">No puede estar vacio <br></small>
         </div>
       </div>
     </div>
@@ -61,20 +61,16 @@
     <div class="form-row">
       <div class="form-group col-md-6 mb-3">
         <label for="ip2">   IP 1</label>
-        <input type="text" class="form-control" [(ngModel)]="proyecto.ip1" id="ip1" placeholder={{nombreIP1}} name="ip1" disabled>
+        <input type="text" class="form-control" formControlName="ip1" id="ip1" placeholder={{nombreIP1}} name="ip1" disabled>
       </div>
-      <div class="form-group col-md-5 mb-3">
-        <label for="ip2">   IP 2</label>
-        <!---->
-        <input type="text" class="form-control" [(ngModel)]="proyecto.ip2" id="ip2" placeholder={{nombreIP2}} name="ip2" disabled >
-      </div>
-      <div class="form-group col-md-1 mb-3">
-        <br>
-        <button type="button" class="btn btn-link" name="button"  (click)="quitarIP2()"[hidden]="proyecto.ip2==null">
-              <img src="assets/iconos/menos.png" class="rounded" alt="Quitar IP2">
-        </button>
-      </div>
-    </div>
+        <div class="form-group col-md-5 mb-3">
+            <label for="ip2">   IP 2</label>
+             
+              <select   class="form-control" id="ip2" formControlName="ip2" name="ip2">
+                <option *ngFor="let usuario of usuarios_anadidos" value="{{usuario.dni}}">{{ usuario.nombre }} {{usuario.apellido1}} {{usuario.apellido2}} </option>
+              </select>
+          </div>
+        </div>
 
     <div class="card bg-dark">
       <div class="card-header text-white">
@@ -116,7 +112,6 @@
                 <tr>
                   <th>Nombre</th>
                   <th>Quitar</th>
-                  <th [hidden]="proyecto.ip2!=null">IP 2</th>
                 </tr>
               </thead>
 
@@ -127,11 +122,6 @@
                   <td>
                       <button type="button" class="btn btn-link" name="button"  (click)="quitarInvestigador(usuario)">
                         <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador">
-                      </button>
-                  </td>
-                  <td [hidden]="proyecto.ip2!=NULL">
-                      <button type="button" class="btn btn-link" name="button"  (click)="hacerIP2(usuario)" >
-                        <img src="assets/iconos/mas.png" class="rounded" alt="Hacer IP2">
                       </button>
                   </td>
                 </tr>

@@ -1,6 +1,5 @@
-form {
+/*form {
     width: 100%;
-    /*Centrarlo*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,8 +24,9 @@ form {
     width: 50%;
     height: 200px;
     float: right;
-}
+}*/
 /************CONTRASEÑA************/
+/*
 .cambioPass {
   margin-left: 20px;
 }
@@ -54,10 +54,10 @@ input[type="email"] {
     border-radius: 3px;
     border: 1px solid rgba(168, 168, 168, 0.877);
 }
-
+*/
 
 /*Boton*/
-
+/*
 .bloque-izq button[type="submit"] {
     width: 40%;
     align-content: center;
@@ -70,7 +70,7 @@ input[type="email"] {
     font-size: 18px;
     border-radius: 3px;
     background-color: rgb(39, 124, 39);
-    /* Black */
+    
 }
 
 .bloque-izq button[type="submit"]:hover {
@@ -78,3 +78,28 @@ input[type="email"] {
     ;
     color: #fff;
 }
+*/
+
+.card{
+    max-width: 80%;
+}
+
+.card-img{
+    width: 60%;
+    height: 75%;
+    border-style: none;
+    margin-left: 10%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.input-group>.custom-select:not(:first-child), .input-group>.form-control:not(:first-child){
+    margin-left: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+/*h5{
+    vertical-align: middle;
+    margin-left: 35%;
+}*/
+

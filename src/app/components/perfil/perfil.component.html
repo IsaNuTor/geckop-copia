@@ -1,4 +1,69 @@
-<form [formGroup]="perfilUser" (ngSubmit)="modificar()">
+
+
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="../../../assets/iconos/usuario.png" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{nombreUsuario}}</h5>
+
+
+        <!--Cambiar Email-->
+        <div *ngIf="!cambiarEmail" >
+          <label class="text-dark"><b>Email:</b></label>      
+          <span class="text-secondary"> {{emailUsuario}}</span> 
+          <button type="button" class="btn btn-link" name="button" (click) = "modificarEmail()">
+            <img src="assets/iconos/editar.png" class="rounded" alt="Editar">
+          </button>        
+          <br> 
+        </div>
+
+        <div *ngIf="cambiarEmail" class="input-group input-group-sm mb-3">
+            <label class="text-dark"><b>Email: </b></label> 
+            <input type="text" class="form-control" placeholder="Email" >
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="cambiarEmail"> <img src="assets/iconos/guardar.png" class="rounded" alt="Editar"></button>
+            </div>
+        </div>
+
+
+        <!--Cambiar IBAN-->
+        <div *ngIf="!cambiarIban"  >
+            <label class="text-dark"><b>IBAN:</b></label>       
+            <span class="text-secondary"> {{ibanUsuario}}</span> 
+            <button type="button" class="btn btn-link" name="button" (click) = "modificarIban()">
+              <img src="assets/iconos/editar.png" class="rounded" alt="Editar">
+            </button>
+            <br>
+        </div>
+        
+
+        <div *ngIf="cambiarIban" class="input-group input-group-sm mb-3">
+          <label class="text-dark"><b>IBAN: </b></label> 
+          <input type="text" class="form-control" placeholder="IBAN">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="cambiarIban"> <img src="assets/iconos/guardar.png" class="rounded" alt="Editar"></button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-dark"><b>Contraseña: </b></label> 
+          <input type="text" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="button-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2"> <img src="assets/iconos/editar.png" class="rounded" alt="Editar"></button>
+          </div>
+        </div>
+        <br>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<form [formGroup]="perfilUser" (ngSubmit)="modificar()">
     <div class="cont-perfil">
 
         <div class="bloque-izq">
@@ -47,6 +112,7 @@
 
     </div>
   </div>
+</form>-->
 
-    <!--{{forma.valid}}-->
-</form>
+
+

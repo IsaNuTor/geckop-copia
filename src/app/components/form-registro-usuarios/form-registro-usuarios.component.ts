@@ -37,21 +37,14 @@ export class FormRegistroUsuariosComponent implements OnInit{
     this.formValid = true;
   }
 
-  /*Obtendremos la información del usuario después de validarlo todo*/
-  saveData() {
-    console.log(this.formRegistro.value);
-    this.usuario = this.formRegistro.value
-    console.log(this.usuario);
-  }
-
   public registro(): void{
     //console.log(this.forma.value);
     //console.log(this.forma);
-    this.formValid = this.formRegistro.status == 'VALID'
+    this.formValid = this.formRegistro.status == 'VALID';
     if(this.formValid){
       this.usuario = this.formRegistro.value;
       this.usuarioService.registro(this.usuario).subscribe(
-          res => {
+          res => { 
             if(res != null){
               const ToastrModule = swal.mixin({
                 toast: true,
@@ -64,9 +57,21 @@ export class FormRegistroUsuariosComponent implements OnInit{
                 title: 'Registrado con éxito'
               })
               this.router.navigate(['/login']);
-          }
+            }else{
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2500
+              });
+              ToastrModule.fire({
+                type: 'error',
+                title: 'No se ha podido registrar. El usuario ya existe'
+              })
+
+            }
             
-        });
+          });
     }
 
   }

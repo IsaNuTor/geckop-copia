@@ -44,15 +44,14 @@ export class SesionService {
       return sessionStorage.getItem("dni");
     }
 
-
-/*
     public getEmail():string{
-      return this.usuario.getEmail();
+      return sessionStorage.getItem("email");
     }
-    public getNombre():string{
-      return this.usuario.getNombre();
+    
+    public getIban():string{
+      return sessionStorage.getItem("iban");    
     }
-    public getNombreCompleto():string{
+    /*public getNombreCompleto():string{
       return this.usuario.getNombreCompleto();
     }
     */

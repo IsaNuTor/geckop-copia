@@ -14,11 +14,11 @@ export class PerfilComponent implements OnInit {
 
   perfilUser: FormGroup;
   nombreUsuario:string = "";
-  apellido1Usuario:string = "";
-  apellido2Usuario:string = "";
-  dniUsuario:string = "";
   ibanUsuario:string = "";
-  correoUsuario:string = "";
+  emailUsuario:string = "";
+  cambiarIban:boolean = false;
+  cambiarEmail:boolean = false;
+
 
   constructor(private sesionService: SesionService) {
     this.perfilUser = new FormGroup({
@@ -29,18 +29,23 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  modificar() {
+  public modificar(): void {
     console.log(this.perfilUser.value);
     console.log(this.perfilUser);
   }
 
+  public modificarIban(): void{
+    this.cambiarIban = true;
+    
+  }
+
+  public modificarEmail(): void{
+    this.cambiarEmail = true;
+  }
   ngOnInit() {
-    this.nombreUsuario = this.sesionService.getNombre();
-    //this.apellido1Usuario = this.sesionService.getApellido1();
-    //this.apellido2Usuario = this.sesionService.getApellido2();
-    this.dniUsuario = this.sesionService.getDni();
+    this.nombreUsuario = this.sesionService.getNombreCompleto();
     //this.ibanUsuario = this.sesionService.getIban();
-    //this.correoUsuario = this.sesionService.getCorreo();
+    this.emailUsuario = this.sesionService.getEmail();
 
     //
     /*if (window.localStorage) {
