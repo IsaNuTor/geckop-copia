@@ -1,4 +1,4 @@
-/*form {
+/*orm {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -92,12 +92,14 @@ input[type="email"] {
     margin-top: 10%;
     margin-bottom: 10%;
 }
+.form-control{
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 1px solid #228B22;
+    border-bottom: 1px solid #228B22;
 
-.input-group>.custom-select:not(:first-child), .input-group>.form-control:not(:first-child){
-    margin-left: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
 }
+
 /*h5{
     vertical-align: middle;
     margin-left: 35%;

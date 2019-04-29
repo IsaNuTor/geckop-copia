@@ -18,6 +18,7 @@ export class PerfilComponent implements OnInit {
   emailUsuario:string = "";
   cambiarIban:boolean = false;
   cambiarEmail:boolean = false;
+  cambiarPass:boolean = false;
 
 
   constructor(private sesionService: SesionService) {
@@ -40,7 +41,11 @@ export class PerfilComponent implements OnInit {
   }
 
   public modificarEmail(): void{
-    this.cambiarEmail = true;
+    this.cambiarEmail = !this.cambiarEmail;
+  }
+
+  public modificarPass(): void{
+    this.cambiarPass = !this.cambiarPass;
   }
   ngOnInit() {
     this.nombreUsuario = this.sesionService.getNombreCompleto();

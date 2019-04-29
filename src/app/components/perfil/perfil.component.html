@@ -1,24 +1,40 @@
 
-
-<div class="card mb-3">
+<!--
+<div class="card mb-3 ">
+ 
   <div class="row no-gutters">
+     <--Imagen--
     <div class="col-md-4">
       <img src="../../../assets/iconos/usuario.png" class="card-img" alt="...">
     </div>
+
+    <--Cuerpo--
     <div class="col-md-8">
       <div class="card-body">
+        <--Titulo--
         <h5 class="card-title">{{nombreUsuario}}</h5>
 
+        <--Form Email--
+        <form>
+          <div class="form-row">
+            <div *ngIf="!cambiarEmail"> 
+                <label class="text-dark"><b>Email:</b></label>      
+                <span class="text-secondary"> {{emailUsuario}}</span> 
+                <button type="button" class="btn btn-link" name="button" (click) = "modificarEmail()">
+                  <img src="assets/iconos/editar2.png" class="align-top" alt="Editar" >
+                </button>        
+            </div>
 
-        <!--Cambiar Email-->
-        <div *ngIf="!cambiarEmail" >
-          <label class="text-dark"><b>Email:</b></label>      
-          <span class="text-secondary"> {{emailUsuario}}</span> 
-          <button type="button" class="btn btn-link" name="button" (click) = "modificarEmail()">
-            <img src="assets/iconos/editar.png" class="rounded" alt="Editar">
-          </button>        
-          <br> 
-        </div>
+            <div *ngIf="form-row cambiarEmail">
+                <label class="text-dark"><b>Email:</b></label>      
+                <input type="text" class="form-control" placeholder="Email" >
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="cambiarEmail"> <img src="assets/iconos/guardar.png" class="rounded" alt="Editar"></button>
+                </div>
+            </div>
+          </div>
+        </form>
+        
 
         <div *ngIf="cambiarEmail" class="input-group input-group-sm mb-3">
             <label class="text-dark"><b>Email: </b></label> 
@@ -29,12 +45,12 @@
         </div>
 
 
-        <!--Cambiar IBAN-->
+        <--Cambiar IBAN--
         <div *ngIf="!cambiarIban"  >
             <label class="text-dark"><b>IBAN:</b></label>       
             <span class="text-secondary"> {{ibanUsuario}}</span> 
             <button type="button" class="btn btn-link" name="button" (click) = "modificarIban()">
-              <img src="assets/iconos/editar.png" class="rounded" alt="Editar">
+              <img src="assets/iconos/editar2.png" class="rounded" alt="Editar">
             </button>
             <br>
         </div>
@@ -48,12 +64,20 @@
           </div>
         </div>
 
-        <div class="input-group input-group-sm mb-3">
+        <div class="input-group input-group-sm mb-2">
             <label class="text-dark"><b>Contraseña: </b></label> 
-          <input type="text" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="button-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2"> <img src="assets/iconos/editar.png" class="rounded" alt="Editar"></button>
+          <input type="password" class="form-control" placeholder="Contraseña Antigua" [disabled]="cambiarPass">
+          <div class="input-group-append mb-2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2"> <img src="assets/iconos/editar2.png" class="rounded" alt="Editar"></button>
           </div>
+        
+        <div  class="input-group input-group-sm mb-2 col-md-6 align-end">
+           <input type="password" class="form-control" placeholder="Contraseña Nueva" [disabled]="cambiarPass">
+        </div>
+        <div  class="input-group input-group-sm mb-2 col-md-6">
+           <input type="password" class="form-control" placeholder="Repite la contraseña" [disabled]="cambiarPass">
+         </div>
+
         </div>
         <br>
 
@@ -61,58 +85,58 @@
     </div>
   </div>
 </div>
+-->
 
-
-<!--<form [formGroup]="perfilUser" (ngSubmit)="modificar()">
-    <div class="cont-perfil">
-
-        <div class="bloque-izq">
-            <label for="">Nombre</label>
-            <input id="placeColor" type="text" placeholder={{nombreUsuario}} formControlName="nombre"><br>
-
-            <label for="">Primer Apellido</label>
-            <input id="placeColor" type="text" placeholder="{{apellido1Usuario}}">
-            <br>
-
-            <label for="">IBAN</label>
-            <input id="placeColor" type="text" placeholder="pedirlo cuando se registe 1 proyecto" formControlName="iban">
-            <br>
-        </div>
-
-        <div class="bloque-der">
-            <label for="">NIF</label>
-            <input id="placeColor" type="text" placeholder="{{dniUsuario}}" formControlName="nif"><br>
-
-            <label for="">Segundo Apellido</label>
-            <input id="placeColor" type="text" placeholder="{{apellido2Usuario}}">
-            <br>
-
-            <label for="">Correo</label>
-            <input id="placeColor" type="email" placeholder="Correo registrado bd" formControlName="correo"><br>
-        </div>
-  <div class="cont-pass">
-    <div class="card">
-      <div class="card bg-dark">
-        <div class="card-header text-white">
-          Cambiar Contraseña
-        </div>
+<div class="card">
+  <div class="row no-gutters"> 
+      <div class="col-md-4">
+          <img src="../../../assets/iconos/usuario.png" class="card-img" alt="Imagen Usuario">
       </div>
+    
+      <div class="col-md-8">
+        
+        <div class="card-title mt-3">
+            <h5>{{nombreUsuario}}</h5>
+        </div>
+      
+        <!--<form class="form-inline">
+          <button *ngIf="!cambiarEmail" class="btn btn-link btn-sm p-0 mr-4 align-top" type="button" (click)="modificarEmail()"> <img src="assets/iconos/editar2.png"  alt="Editar"></button>
+          <button *ngIf= "cambiarEmail" class="btn btn-link btn-sm p-0 mr-4 align-top" type="button" (click)="modificarEmail()"> <img src="assets/iconos/guardar.png" alt="Editar"></button>
 
-      <div class="cambioPass">
-          <input id="placeColor" type="text" placeholder="Contraseña actual" ><br>
+          <span *ngIf="!cambiarEmail">{{nombreUsuario}}</span>
+          <input type="text" class="form-control" placeholder="Email" >
+        </form>-->
+        <form class="form-inline">
+          <div class="input-group-sm">
+              <div class="input-group-prepend-sm border border-success rounded-left">
+                  <img class="p-2 input-group-img" src="assets/iconos/email.png"  alt="Editar">
+              </div>
+              
+              <input *ngIf="!cambiarEmail" class="p-1 border-top border-bottom border-success" placeholder="{{emailUsuario}}">
+              <input *ng If="cambiarEmail" class="form-control" type="password" placeholder="Nuevo Email">
+              <div class="input-group-append-sm border border-success rounded-right" >
+                  <img *ngIf="!cambiarEmail" class="p-2" src="assets/iconos/editar2.png"  alt="Editar" (click)="modificarEmail()">
+                  <img *ngIf="cambiarEmail"  class="p-2" src="assets/iconos/guardar.png" alt="Editar" (click)="modificarEmail()">
+              </div>
 
-          <input id="placeColor" type="text" placeholder="Contraseña nueva" ><br>
+          </div>
+           
+        </form>
+        
+        
 
-          <input id="placeColor" type="text" placeholder="Repite la contraseña nueva"><br>
+        <form class="form-inline">
+          <label>IBAN: </label>
+        </form>
+
+        <form class="form-inline">
+          <label>Contraseña: </label>
+        </form>
+
       </div>
-
-    </div>
-    <br>
-    <button class="btn btn-success" type="submit">Guardar</button>
-
-    </div>
   </div>
-</form>-->
+  
 
 
 
+</div>
