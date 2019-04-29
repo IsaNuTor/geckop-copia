@@ -43,12 +43,12 @@ export class FormProyectosComponent implements OnInit {
       this.formProyecto = this.fb.group({
         fechaInicio: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
         fechaCierre: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-        nombre: ['', [Validators.required, Validators.maxLength(20)]],
-        acronimo: ['', [Validators.required, Validators.maxLength(20)]],
+        nombre: ['', [Validators.required, Validators.maxLength(50)]],
+        acronimo: ['', [Validators.required, Validators.maxLength(50)]],
         presupuesto: ['', [Validators.required, Validators.max(100000000)]],
         nContabilidad: ['', [Validators.required, Validators.max(100000000)]],
-        ip1: ['', [Validators.required, Validators.maxLength(20)]],
-        ip2: ['', [Validators.required, Validators.maxLength(20)]]
+        ip1: ['', [Validators.maxLength(50)]],
+        ip2: ['', [Validators.maxLength(50)]]
       });
     }
 
@@ -90,11 +90,12 @@ export class FormProyectosComponent implements OnInit {
 
   public crearProyecto(){
     //post proyecto
+    this.proyecto.ip1 = this.sesionService.getDni();
 
     this.formValid = (this.formProyecto.status == 'VALID') && ( this.proyecto.fechaInicio < this.proyecto.fechaCierre) 
     this.proyecto = this.formProyecto.value;
 
-    this.proyecto.ip1 = this.sesionService.getDni();
+   
 
     if(this.formValid){
       this.proyectoService.insertarProyecto(this.proyecto).subscribe(
@@ -124,6 +125,7 @@ export class FormProyectosComponent implements OnInit {
         this.router.navigate(['/proyectos']);
 
     }
+    
 
     
     
