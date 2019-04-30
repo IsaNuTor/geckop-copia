@@ -1,20 +1,17 @@
-
 <!--
+
 <div class="card mb-3 ">
  
   <div class="row no-gutters">
-     <--Imagen--
     <div class="col-md-4">
       <img src="../../../assets/iconos/usuario.png" class="card-img" alt="...">
     </div>
 
-    <--Cuerpo--
     <div class="col-md-8">
       <div class="card-body">
-        <--Titulo--
+       
         <h5 class="card-title">{{nombreUsuario}}</h5>
 
-        <--Form Email--
         <form>
           <div class="form-row">
             <div *ngIf="!cambiarEmail"> 
@@ -45,7 +42,7 @@
         </div>
 
 
-        <--Cambiar IBAN--
+   
         <div *ngIf="!cambiarIban"  >
             <label class="text-dark"><b>IBAN:</b></label>       
             <span class="text-secondary"> {{ibanUsuario}}</span> 
@@ -86,7 +83,7 @@
   </div>
 </div>
 -->
-
+<!--
 <div class="card">
   <div class="row no-gutters"> 
       <div class="col-md-4">
@@ -99,17 +96,17 @@
             <h5>{{nombreUsuario}}</h5>
         </div>
       
-        <!--<form class="form-inline">
+        <form class="form-inline">
           <button *ngIf="!cambiarEmail" class="btn btn-link btn-sm p-0 mr-4 align-top" type="button" (click)="modificarEmail()"> <img src="assets/iconos/editar2.png"  alt="Editar"></button>
           <button *ngIf= "cambiarEmail" class="btn btn-link btn-sm p-0 mr-4 align-top" type="button" (click)="modificarEmail()"> <img src="assets/iconos/guardar.png" alt="Editar"></button>
 
           <span *ngIf="!cambiarEmail">{{nombreUsuario}}</span>
           <input type="text" class="form-control" placeholder="Email" >
-        </form>-->
+        </form>
         <form class="form-inline">
           <div class="input-group-sm">
               <div class="input-group-prepend-sm border border-success rounded-left">
-                  <img class="p-2 input-group-img" src="assets/iconos/email.png"  alt="Editar">
+                  <img class="p-2 " src="assets/iconos/email.png"  alt="Editar">
               </div>
               
               <input *ngIf="!cambiarEmail" class="p-1 border-top border-bottom border-success" placeholder="{{emailUsuario}}">
@@ -137,6 +134,91 @@
   </div>
   
 
+
+
+</div>-->
+
+
+
+<div>
+ 
+
+    <div class="row align-items-center">
+
+        <div class="col-sm-4">
+          <img src="../../../assets/iconos/usuario.png" alt="Imagen Usuario"  width="70%">
+        </div>
+
+        <div class="col-sm-8">
+
+          <h4 class="mb-3">{{nombreUsuario}}</h4>
+
+          <div class="row align-items-center mb-2">
+            <div class="col-sm-1">
+              <img src="assets/iconos/email.png"  alt="Email"  width="60%">              
+            </div>
+            <div class="col-sm-5">
+              {{emailUsuario}}
+            </div>
+            <div class="col-sm-3">
+                <input class="form-control" type="text" placeholder="Nuevo Email">
+            </div>
+            <div class="col-sm-1">
+                <img src="assets/iconos/guardar.png"  alt="Contraseña" width="60%">
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-1">
+            <div class="col-sm-1">
+              <img src="assets/iconos/iban.png"  alt="Iban" width="60%">              
+            </div>
+            <div class="col-sm-5">
+              ES12 1234 1234 1234 1234 1234
+            </div>
+            <div class="col-sm-3">
+                <input class="form-control" type="password" placeholder="Nuevo Iban">
+            </div>
+            <div class="col-sm-1">
+              <img src="assets/iconos/guardar.png"  alt="Guardar" width="60%">
+            </div>
+          </div>
+
+          <div class="row align-items-top mb-2">
+
+            <div class="col-sm-1 mt-2">
+              <img src="assets/iconos/pass.png"  alt="Contraseña" width="60%">
+            </div>
+
+            <div class="col-sm-5">
+              <input class="form-control" type="password" placeholder="Contraseña">
+            </div>
+
+            <div class="col-sm-3">
+
+              <div class="row align-items-center">
+                <div class="col-sm">
+                  <input class="form-control" type="password" placeholder="Contraseña Nueva">
+                </div>
+              </div>
+
+              <div class="row align-items-center">
+                <div class="col-sm">
+                  <input class="form-control" type="password" placeholder="Repite Contraseña">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-1 mt-2 pt-3">
+              <img src="assets/iconos/guardar.png"  alt="Contraseña" width="60%">
+            </div>
+
+
+          </div>
+          
+        </div>
+       
+      </div>
 
 
 </div>

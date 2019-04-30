@@ -80,23 +80,13 @@ input[type="email"] {
 }
 */
 
-.card{
-    max-width: 80%;
-}
 
-.card-img{
-    width: 60%;
-    height: 75%;
-    border-style: none;
-    margin-left: 10%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-}
 .form-control{
     border-left: 0px;
     border-right: 0px;
-    border-top: 1px solid #228B22;
+    border-top: 0px;
     border-bottom: 1px solid #228B22;
+    border-radius: 0%;
 
 }
 
