@@ -51,6 +51,10 @@ export class SesionService {
     public getIban():string{
       return sessionStorage.getItem("iban");    
     }
+
+    public setIban(iban:string){
+      sessionStorage.setItem("iban", iban);
+    }
     /*public getNombreCompleto():string{
       return this.usuario.getNombreCompleto();
     }

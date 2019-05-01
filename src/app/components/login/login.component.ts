@@ -6,6 +6,8 @@ import { ToastrModule } from 'ngx-toastr';
 
 import swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Acreedor } from 'src/app/services/acreedor/acreedor';
+import { AcreedorService } from 'src/app/services/acreedor/acreedor.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
+  acreedor: string = "No se ha modificado";
+  
   constructor(private usuarioService: UsuarioService,
+    private acreedorService: AcreedorService,
     private sesionService: SesionService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -30,6 +35,16 @@ export class LoginComponent implements OnInit {
     this.usuarioService.login(this.usuario).subscribe(
         res => {
           if(res != null){
+           
+            this.acreedorService.getAcreedor(res.dni).subscribe( acreedor =>  {
+              if(acreedor != null)
+                this.acreedor = acreedor.iban;
+              else
+                this.acreedor = "Aun no existe IBAN asignado." 
+
+              this.sesionService.setIban(this.acreedor)
+            });
+
             this.sesionService.guardarSesion(res);
             swal.fire({
                         type: 'success',

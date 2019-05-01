@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { UsuarioService } from '../../services/usuario/usuario.service';
-import { Usuario } from '../../services/usuario/usuario';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { SesionService } from '../../services/sesion/sesion.service';
 import swal from 'sweetalert2';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-perfil',
@@ -12,69 +11,58 @@ import swal from 'sweetalert2';
 })
 export class PerfilComponent implements OnInit {
 
-  perfilUser: FormGroup;
+
+  formEmail: FormGroup;
+  formIban: FormGroup;
+  formPass: FormGroup;
+
+  email:string;
+  iban:string;
+  pass:string;
+
   nombreUsuario:string = "";
   ibanUsuario:string = "";
   emailUsuario:string = "";
-  cambiarIban:boolean = false;
-  cambiarEmail:boolean = false;
-  cambiarPass:boolean = false;
 
 
-  constructor(private sesionService: SesionService) {
-    this.perfilUser = new FormGroup({
-      nombre: new FormControl('', Validators.required),
-      nif: new FormControl('', Validators.required),
-      correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      iban: new FormControl('', Validators.required)
-    });
-  }
 
-  public modificar(): void {
-    console.log(this.perfilUser.value);
-    console.log(this.perfilUser);
-  }
-
-  public modificarIban(): void{
-    this.cambiarIban = true;
+  constructor(private sesionService: SesionService,
+              private usuarioService: UsuarioService,
+              private fbEmail: FormBuilder,
+              private fbIban: FormBuilder,
+              private fbPass: FormBuilder
+    ) {
+  
+    this.formEmail = this.fbEmail.group({ 
+      email: ['', [Validators.required, Validators.email]],});
     
+    this.formIban = this.fbIban.group({
+      iban: ['', [Validators.required]]});
+
+    this.formPass = this.fbPass.group({
+      passOriginal: ['', [Validators.required]],
+      passNueva: ['', [Validators.required]],
+      passNueva2: ['', [Validators.required]] });
+ 
   }
 
   public modificarEmail(): void{
-    this.cambiarEmail = !this.cambiarEmail;
+    this.email = this.formEmail.value;
+   // this.usuarioService.setEmail(this.email);
+    
+  }
+
+  public modificarIban(): void{
   }
 
   public modificarPass(): void{
-    this.cambiarPass = !this.cambiarPass;
   }
+
+
   ngOnInit() {
     this.nombreUsuario = this.sesionService.getNombreCompleto();
-    //this.ibanUsuario = this.sesionService.getIban();
-    this.emailUsuario = this.sesionService.getEmail();
-
-    //
-    /*if (window.localStorage) {
-        var nombre = sessionStorage.getItem("nombre");
-        if(nombre != null){
-          swal.fire({
-                      type: 'success',
-                      title: 'Hola '+ nombre,
-                      text: 'Te has logueado correctamente'
-                    })
-        }else {
-            swal.fire({
-                        type: 'error',
-                        title: 'Oops...',
-                        text: 'No te has logueado aun!'
-                      })
-      }
-    }else{
-        swal.fire({
-                  type: 'error',
-                  title: 'Oops...',
-                  text: 'Tu Browser no soporta nuestra App!'
-                })
-      }*/
-    }
+    this.ibanUsuario = this.sesionService.getIban();
+    this.emailUsuario = this.sesionService.getEmail(); 
+  }
 
 }

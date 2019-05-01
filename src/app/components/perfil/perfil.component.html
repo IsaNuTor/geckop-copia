@@ -1,145 +1,3 @@
-<!--
-
-<div class="card mb-3 ">
- 
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="../../../assets/iconos/usuario.png" class="card-img" alt="...">
-    </div>
-
-    <div class="col-md-8">
-      <div class="card-body">
-       
-        <h5 class="card-title">{{nombreUsuario}}</h5>
-
-        <form>
-          <div class="form-row">
-            <div *ngIf="!cambiarEmail"> 
-                <label class="text-dark"><b>Email:</b></label>      
-                <span class="text-secondary"> {{emailUsuario}}</span> 
-                <button type="button" class="btn btn-link" name="button" (click) = "modificarEmail()">
-                  <img src="assets/iconos/editar2.png" class="align-top" alt="Editar" >
-                </button>        
-            </div>
-
-            <div *ngIf="form-row cambiarEmail">
-                <label class="text-dark"><b>Email:</b></label>      
-                <input type="text" class="form-control" placeholder="Email" >
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" id="cambiarEmail"> <img src="assets/iconos/guardar.png" class="rounded" alt="Editar"></button>
-                </div>
-            </div>
-          </div>
-        </form>
-        
-
-        <div *ngIf="cambiarEmail" class="input-group input-group-sm mb-3">
-            <label class="text-dark"><b>Email: </b></label> 
-            <input type="text" class="form-control" placeholder="Email" >
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="cambiarEmail"> <img src="assets/iconos/guardar.png" class="rounded" alt="Editar"></button>
-            </div>
-        </div>
-
-
-   
-        <div *ngIf="!cambiarIban"  >
-            <label class="text-dark"><b>IBAN:</b></label>       
-            <span class="text-secondary"> {{ibanUsuario}}</span> 
-            <button type="button" class="btn btn-link" name="button" (click) = "modificarIban()">
-              <img src="assets/iconos/editar2.png" class="rounded" alt="Editar">
-            </button>
-            <br>
-        </div>
-        
-
-        <div *ngIf="cambiarIban" class="input-group input-group-sm mb-3">
-          <label class="text-dark"><b>IBAN: </b></label> 
-          <input type="text" class="form-control" placeholder="IBAN">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="cambiarIban"> <img src="assets/iconos/guardar.png" class="rounded" alt="Editar"></button>
-          </div>
-        </div>
-
-        <div class="input-group input-group-sm mb-2">
-            <label class="text-dark"><b>Contraseña: </b></label> 
-          <input type="password" class="form-control" placeholder="Contraseña Antigua" [disabled]="cambiarPass">
-          <div class="input-group-append mb-2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2"> <img src="assets/iconos/editar2.png" class="rounded" alt="Editar"></button>
-          </div>
-        
-        <div  class="input-group input-group-sm mb-2 col-md-6 align-end">
-           <input type="password" class="form-control" placeholder="Contraseña Nueva" [disabled]="cambiarPass">
-        </div>
-        <div  class="input-group input-group-sm mb-2 col-md-6">
-           <input type="password" class="form-control" placeholder="Repite la contraseña" [disabled]="cambiarPass">
-         </div>
-
-        </div>
-        <br>
-
-      </div>
-    </div>
-  </div>
-</div>
--->
-<!--
-<div class="card">
-  <div class="row no-gutters"> 
-      <div class="col-md-4">
-          <img src="../../../assets/iconos/usuario.png" class="card-img" alt="Imagen Usuario">
-      </div>
-    
-      <div class="col-md-8">
-        
-        <div class="card-title mt-3">
-            <h5>{{nombreUsuario}}</h5>
-        </div>
-      
-        <form class="form-inline">
-          <button *ngIf="!cambiarEmail" class="btn btn-link btn-sm p-0 mr-4 align-top" type="button" (click)="modificarEmail()"> <img src="assets/iconos/editar2.png"  alt="Editar"></button>
-          <button *ngIf= "cambiarEmail" class="btn btn-link btn-sm p-0 mr-4 align-top" type="button" (click)="modificarEmail()"> <img src="assets/iconos/guardar.png" alt="Editar"></button>
-
-          <span *ngIf="!cambiarEmail">{{nombreUsuario}}</span>
-          <input type="text" class="form-control" placeholder="Email" >
-        </form>
-        <form class="form-inline">
-          <div class="input-group-sm">
-              <div class="input-group-prepend-sm border border-success rounded-left">
-                  <img class="p-2 " src="assets/iconos/email.png"  alt="Editar">
-              </div>
-              
-              <input *ngIf="!cambiarEmail" class="p-1 border-top border-bottom border-success" placeholder="{{emailUsuario}}">
-              <input *ng If="cambiarEmail" class="form-control" type="password" placeholder="Nuevo Email">
-              <div class="input-group-append-sm border border-success rounded-right" >
-                  <img *ngIf="!cambiarEmail" class="p-2" src="assets/iconos/editar2.png"  alt="Editar" (click)="modificarEmail()">
-                  <img *ngIf="cambiarEmail"  class="p-2" src="assets/iconos/guardar.png" alt="Editar" (click)="modificarEmail()">
-              </div>
-
-          </div>
-           
-        </form>
-        
-        
-
-        <form class="form-inline">
-          <label>IBAN: </label>
-        </form>
-
-        <form class="form-inline">
-          <label>Contraseña: </label>
-        </form>
-
-      </div>
-  </div>
-  
-
-
-
-</div>-->
-
-
-
 <div>
  
 
@@ -153,7 +11,7 @@
 
           <h4 class="mb-3">{{nombreUsuario}}</h4>
 
-          <div class="row align-items-center mb-2">
+          <form class="row align-items-center mb-2">
             <div class="col-sm-1">
               <img src="assets/iconos/email.png"  alt="Email"  width="60%">              
             </div>
@@ -166,24 +24,24 @@
             <div class="col-sm-1">
                 <img src="assets/iconos/guardar.png"  alt="Contraseña" width="60%">
             </div>
-          </div>
+          </form>
 
-          <div class="row align-items-center mb-1">
+          <form class="row align-items-center mb-1">
             <div class="col-sm-1">
               <img src="assets/iconos/iban.png"  alt="Iban" width="60%">              
             </div>
             <div class="col-sm-5">
-              ES12 1234 1234 1234 1234 1234
+              {{ibanUsuario}}
             </div>
             <div class="col-sm-3">
-                <input class="form-control" type="password" placeholder="Nuevo Iban">
+                <input class="form-control" type="text" placeholder="Nuevo Iban">
             </div>
             <div class="col-sm-1">
               <img src="assets/iconos/guardar.png"  alt="Guardar" width="60%">
             </div>
-          </div>
+          </form>
 
-          <div class="row align-items-top mb-2">
+          <form class="row align-items-top mb-2">
 
             <div class="col-sm-1 mt-2">
               <img src="assets/iconos/pass.png"  alt="Contraseña" width="60%">
@@ -214,7 +72,7 @@
             </div>
 
 
-          </div>
+          </form>
           
         </div>
        
