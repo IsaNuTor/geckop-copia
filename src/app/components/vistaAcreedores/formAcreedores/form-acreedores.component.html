@@ -19,6 +19,50 @@
       </div>
       <div class="form-group col-md-6">
         <label for="nif">   NIF</label>
+        <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="NIF" name="nif">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="iban">IBAN</label>
+        <input type="text" class="form-control" [(ngModel)]="acreedor.iban" id="iban" placeholder="IBAN" name="iban">
+      </div>
+    </div>
+
+    <button class="btn btn-success" role="button" (click)="crearAcreedor()" *ngIf="!this.botonCrear else bloqueActualizar">Crear</button>
+    <ng-template #bloqueActualizar>
+      <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Editar</button>
+    </ng-template>
+  </form>
+  </div>
+
+
+
+
+
+
+<!--<div class="card">
+  <div class="card bg-dark">
+    <div class="card-header text-white" *ngIf="!this.botonCrear else bloqueActualizar">
+      {{titulo}}
+    </div>
+
+    <ng-template #bloqueActualizar>
+      <div class="card-header text-white">
+        Editar Acreedor
+      </div>
+    </ng-template>
+  </div>
+
+  <form *ngIf= "acreedor" class="m-3">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nombre">   Nombre</label>
+        <input type="text" class="form-control" [(ngModel)]="acreedor.nombre" id="nombre" placeholder="Nombre" name="nombre">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="nif">   NIF</label>
         <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="NIF" name="nif" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))">
         <div class="alert alert-danger" *ngIf="formAcreedores.get('nif').errors && formAcreedores.get('nif').dirty">
           <p *ngIf="formAcreedores.get('nif').hasError('required')">DNI no puede estar vacio</p>
@@ -46,4 +90,4 @@
       <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Editar</button>
     </ng-template>
   </form>
-  </div>
+  </div>-->

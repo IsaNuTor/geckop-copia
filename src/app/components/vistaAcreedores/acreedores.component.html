@@ -1,5 +1,5 @@
 <!--<h1><b>Acreedores</b></h1>-->
-<div class="card-body text-secondary">
+<!--<div class="card-body text-secondary">
     <h5 class="card-title">Listado de Acreedores</h5>
 
     <div class="my-3">
@@ -31,6 +31,41 @@
             <button type="button" class="btn btn-link" name="button" (click)='delete(acreedor)' >
               <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
             </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>-->
+
+  <!--<h1><b>Acreedores</b></h1>-->
+<div class="card-body text-secondary">
+    <h5 class="card-title">Listado de Acreedores</h5>
+
+    <div class="my-3">
+      <button class="btn btn-rounded btn btn-success" types="button" [routerLink] = "['/acreedores/form-acreedores.component']">Nuevo Acreedor</button>
+    </div>
+
+    <table class="table table-bordered table-striped text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Nif</th>
+          <th>Iban</th>
+          <th>Editar</th>
+          <th>Borrar</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let acreedor of acreedores">
+          <td>{{ acreedor.nombre }}</td>
+          <td>{{ acreedor.nif }}</td>
+          <td>{{ acreedor.iban }}</td>
+          <td>
+            <button type="button" class="btn btn-success" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedor.nif]">Editar</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" name="button" (click)='delete(acreedor)' >Borrar</button>
           </td>
         </tr>
       </tbody>
