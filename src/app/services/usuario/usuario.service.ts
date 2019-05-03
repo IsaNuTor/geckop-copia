@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {URL_BACKEND} from '../../config/config';
+import { variable } from '@angular/compiler/src/output/output_ast';
 
 
 @Injectable({
@@ -15,11 +16,22 @@ export class UsuarioService {
   urlLogin:string = 'http://localhost:8080/api/login';
   urlRegistro:string = 'http://localhost:8080/api/registro';
   urlEndPoint:string = 'http://localhost:8080/api/usuario';
+  urlComprobarPass:string = 'http://localhost:8080/api/comprobarPass';
+  urlSetPass:string = 'http://localhost:8080/api/setPass';
+  urlSetEmail:string = 'http://localhost:8080/api/setEmail';
+
+
+
   /*urlLogin:string = URL_BACKEND + '/api/login';
   urlRegistro:string = URL_BACKEND + '/api/registro';
   urlEndPoint:string = URL_BACKEND + '/api/usuario';
+  urlComprobarPass:string = URL_BACKEND + '/api/comprobarPass';
+  urlSetPass:string = URL_BACKEND + '/api/setPass';
+  urlSetEmail:string = URL_BACKEND + '/api/setEmail';
+
   */
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  httpHeaders2 = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
   // Nos devuelve el usuario.
@@ -34,13 +46,23 @@ export class UsuarioService {
   }
 
   // Nos devuelve los usuariso.
-  getUsuarios(): Observable<Usuario[]> {
+  getUsuarios(): Observable<Usuario[]> { 
      return this.http.get<Usuario[]>(this.urlEndPoint);
   }
 
-  /*setEmail(nif:string, email:string): Observable<Usuario> {
-     return this.http.get<Usuario>(this.urlEndPoint);
-  }*/
+  setEmail(nif:string, email:string): Observable<Boolean> {
+    var variables: String[] = [nif, email];
+
+   return this.http.post<Boolean>(this.urlSetEmail, variables, {headers: this.httpHeaders2});
+  }
+  setPass(nif:string, pass:string): Observable<Boolean> {
+   var variables: String[] = [nif, pass];
+   return this.http.post<Boolean>(this.urlSetPass, variables, {headers: this.httpHeaders2});
+  }
+  comprobarContrasena(nif:string, pass:string): Observable<Boolean> {
+   var variables: String[] = [nif, pass];
+   return this.http.post<Boolean>(this.urlComprobarPass, variables, {headers: this.httpHeaders2});
+  }
 
 
 }

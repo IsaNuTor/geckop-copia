@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { SesionService } from '../../services/sesion/sesion.service';
 import swal from 'sweetalert2';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-perfil',
@@ -19,6 +20,7 @@ export class PerfilComponent implements OnInit {
   email:string;
   iban:string;
   pass:string;
+  passNueva:string;
 
   nombreUsuario:string = "";
   ibanUsuario:string = "";
@@ -45,9 +47,9 @@ export class PerfilComponent implements OnInit {
       iban: ['', [Validators.required]]});
 
     this.formPass = this.fbPass.group({
-      passOriginal: ['', [Validators.required]],
-      passNueva: ['', [Validators.required]],
-      passNueva2: ['', [Validators.required]] });
+      passOriginal: ['', [Validators.required]],//, Validators.minLength(5)]],
+      passNueva: ['', [Validators.required, Validators.minLength(5)]],
+      passNueva2: ['', [Validators.required, Validators.minLength(5)]] });
   }
 
   public modificarEmail(): void{
@@ -82,17 +84,48 @@ export class PerfilComponent implements OnInit {
   }
 
   public modificarPass(): void{
-    this.pass = this.formPass.value;
-  
-
-
     if(this.formPass.valid){
-      if(true){//comprobar contraseña en back this.usuarioService.comprobarPass(this.dni, this.passOriginal)
-        //this.usuarioService.setPass(this.dni, this.passNueva)
-      }else{
-        //Contraseñas no coinciden
-        this.passAntigua = false;
-      }
+      this.pass = this.formPass.value.passOriginal;
+      this.passNueva =this.formPass.value.passNueva;
+
+
+      this.usuarioService.comprobarContrasena(this.sesionService.getDni(), this.pass).subscribe( 
+      result=>{
+          if(result){//comprobar contraseña en back this.usuarioService.comprobarPass(this.dni, this.passOriginal)
+            this.usuarioService.setPass(this.sesionService.getDni(), this.passNueva).subscribe(
+              res =>{
+                if(res){
+                  const ToastrModule = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000
+                  });
+
+                  ToastrModule.fire({
+                    type: 'success',
+                    title: 'Guardado correctamente'
+
+                  })
+                }else{
+                  const ToastrModule = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000
+                  });
+
+                  ToastrModule.fire({
+                    type: 'error',
+                    title: 'Fallo al guardar los cambios'
+
+                  })
+                }
+              });
+          }else{
+            this.passAntigua = false;
+          }
+      });
     }else{
       this.passValida=false;
       if(this.formPass.value.passNueva == this.formPass.value.passNueva2){

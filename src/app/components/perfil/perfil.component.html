@@ -58,6 +58,7 @@
               <input class="form-control" type="password" formControlName="passOriginal" placeholder="Contraseña" maxlength="10">
               <div class="alerta">
                 <small *ngIf="!passValida && formPass.get('passOriginal').hasError('required')">No puede estar vacio <br></small>
+               <!-- <small *ngIf="!passValida && formPass.get('password').hasError('minlength')">Mínimo de 5 caracteress<br></small>-->
                 <small *ngIf="!passValida && !passAntigua">Las contraseñas no es correcta <br></small>
               </div>
             </div>
@@ -69,6 +70,7 @@
                   <input class="form-control" type="password" formControlName="passNueva" placeholder="Contraseña Nueva" maxlength="10">
                   <div class="alerta">
                     <small *ngIf="!passValida && formPass.get('passNueva').hasError('required')">No puede estar vacio <br></small>
+                    <small *ngIf="!passValida && formPass.get('password').hasError('minlength')">Mínimo de 5 caracteress<br></small>
                   </div>
                 </div>
               </div>
@@ -78,8 +80,7 @@
                   <input class="form-control" type="password" formControlName="passNueva2" placeholder="Repite Contraseña" maxlength="10">
                   <div class="alerta">
                     <small *ngIf="!passValida && formPass.get('passNueva2').hasError('required')">No puede estar vacio <br></small>
-                  </div>
-                  <div class="alerta">
+                    <small *ngIf="!passValida && formPass.get('password').hasError('minlength')">Mínimo de 5 caracteress<br></small>
                     <small *ngIf="!passValida && !passIguales">Las contraseñas no coinciden <br></small>
                   </div>
                 </div>

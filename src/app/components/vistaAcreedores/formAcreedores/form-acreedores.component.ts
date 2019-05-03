@@ -23,7 +23,7 @@ export class FormAcreedoresComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public fb: FormBuilder
   ) {
-       this.formAcreedores = this.fb.group({
+      this.formAcreedores = this.fb.group({
       nif: ['', [Validators.required, Validators.pattern, Validators.minLength(9)]],
       nombre: ['', [Validators.required]],
       iban: ['', [Validators.required, Validators.minLength(20)]],
