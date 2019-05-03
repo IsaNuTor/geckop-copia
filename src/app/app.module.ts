@@ -26,9 +26,10 @@ import { FormProyectosComponent } from './components/vistaProyectos/formProyecto
 import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.component';
 
 // órdenes
-import { OrdenesComponent } from './components/ordenes/ordenes.component';
-import { AddOrdenComponent } from './components/ordenes/add-orden/add-orden.component';
-import { TablaOrdenesComponent } from './components/tabla-ordenes/tabla-ordenes.component';
+import { AddOrdenComponent } from './components/vista-ordenes/add-orden/add-orden.component';
+import { VistaOrdenesComponent } from './components/vista-ordenes/vista-ordenes.component';
+import { GastosComponent } from './components/vista-ordenes/add-orden/gastos/gastos.component';
+import { FormGastosComponent } from './components/vista-ordenes/add-orden/gastos/form-gastos.component';
 
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -43,20 +44,23 @@ const routes: Routes = [
   {path:'home', component: HomeComponent},
   {path:'acreedores', component: AcreedoresComponent},
   {path: 'acreedores/form-acreedores.component', component: FormAcreedoresComponent},
-  {path: 'ordenes/add-orden/add-orden.component', component: AddOrdenComponent},
+  {path: 'vista-ordenes/add-orden/add-orden.component', component: AddOrdenComponent},
   {path:'perfil', component: PerfilComponent},
-  {path:'ordenes', component: OrdenesComponent},
+  {path:'vista-ordenes', component: VistaOrdenesComponent},
   {path:'proyectos', component: ProyectosComponent},
   {path: 'proyectos/form-proyectos.component', component: FormProyectosComponent},
   {path:'login', component: LoginComponent},
   {path:'registro', component: FormRegistroUsuariosComponent},
-  {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent}
+  {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
+  {path: "add-orden/gastos/form-gastos.component", component:FormGastosComponent}
 
 ];
 
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
+
+
 
 @NgModule({
   declarations: [
@@ -70,12 +74,13 @@ import { FooterComponent } from './components/footer/footer.component';
     FormRegistroUsuariosComponent,
     LoginComponent,
     ProyectosComponent,
-    TablaOrdenesComponent,
     InfoProyectoComponent,
     FooterComponent,
-    OrdenesComponent,
     FormProyectosComponent,
-    MenuVerticalComponent
+    MenuVerticalComponent,
+    VistaOrdenesComponent,
+    GastosComponent,
+    FormGastosComponent
   ],
   imports: [
     BrowserModule,
