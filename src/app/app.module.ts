@@ -8,6 +8,8 @@ import { UsuarioService} from './services/usuario/usuario.service';
 import { SesionService} from './services/sesion/sesion.service';
 import { ProyectoService} from './services/proyecto/proyecto.service';
 import { UsuarioProyectoService} from './services/usuario-proyecto/usuario-proyecto.service';
+import { OrdenService} from './services/orden/orden.service';
+import { GastoService} from './services/gasto/gasto.service';
 // COMPONENTES
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -29,7 +31,7 @@ import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.
 import { AddOrdenComponent } from './components/vista-ordenes/add-orden/add-orden.component';
 import { VistaOrdenesComponent } from './components/vista-ordenes/vista-ordenes.component';
 import { GastosComponent } from './components/vista-ordenes/add-orden/gastos/gastos.component';
-import { FormGastosComponent } from './components/vista-ordenes/add-orden/gastos/form-gastos.component';
+import { FormGastosComponent } from './components/vista-ordenes/add-orden/gastos/form-gastos/form-gastos.component';
 
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -52,15 +54,13 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'registro', component: FormRegistroUsuariosComponent},
   {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
-  {path: "add-orden/gastos/form-gastos.component", component:FormGastosComponent}
+  {path: "add-orden/gastos/form-gastos/form-gastos.component", component:FormGastosComponent}
 
 ];
 
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
-
-
 
 @NgModule({
   declarations: [
@@ -94,8 +94,9 @@ import { FooterComponent } from './components/footer/footer.component';
     UsuarioService,
     AcreedorService,
     SesionService,
-    UsuarioProyectoService
-
+    UsuarioProyectoService,
+    GastoService,
+    OrdenService
   ],
   bootstrap: [AppComponent]
 })
