@@ -24,6 +24,11 @@ export class PerfilComponent implements OnInit {
   ibanUsuario:string = "";
   emailUsuario:string = "";
 
+  emailValido:boolean=true;
+  ibanValido:boolean=true;
+  passIguales:boolean=true;
+  passValida:boolean=true;
+  passAntigua:boolean=true;
 
 
   constructor(private sesionService: SesionService,
@@ -43,19 +48,58 @@ export class PerfilComponent implements OnInit {
       passOriginal: ['', [Validators.required]],
       passNueva: ['', [Validators.required]],
       passNueva2: ['', [Validators.required]] });
- 
   }
 
   public modificarEmail(): void{
-    this.email = this.formEmail.value;
-   // this.usuarioService.setEmail(this.email);
-    
+    if(this.formEmail.valid){
+      this.email = this.formEmail.value.email;
+      //cambiar email usuario Service
+     // this.usuarioService.setEmail(this.dni, this.email);
+    }else{
+      this.emailValido = false;
+    }
+   
   }
 
   public modificarIban(): void{
+    if(this.formIban.valid){
+        //cambiar iban usuario service
+      /*if(this.acreedorService.hayOrdenesIban() ){
+        //this.acreedorService.añadirAcreedor(this.dni, this.iban);
+      }else{
+        //this.acreedorService.editarAcreedor(this.dni, this.iban);
+      }*/
+    }else{
+      this.ibanValido = false;
+    }
+    //cambiar iban usuario service
+    /*if(this.acreedorService.hayOrdenesIban() ){
+       //this.acreedorService.añadirAcreedor(this.dni, this.iban);
+    }else{
+      //this.acreedorService.editarAcreedor(this.dni, this.iban);
+    }*/
+
   }
 
   public modificarPass(): void{
+    this.pass = this.formPass.value;
+  
+
+
+    if(this.formPass.valid){
+      if(true){//comprobar contraseña en back this.usuarioService.comprobarPass(this.dni, this.passOriginal)
+        //this.usuarioService.setPass(this.dni, this.passNueva)
+      }else{
+        //Contraseñas no coinciden
+        this.passAntigua = false;
+      }
+    }else{
+      this.passValida=false;
+      if(this.formPass.value.passNueva == this.formPass.value.passNueva2){
+        this.passIguales=false;
+
+      }
+    }
   }
 
 

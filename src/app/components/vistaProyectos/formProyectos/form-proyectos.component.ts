@@ -6,11 +6,9 @@ import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { Proyecto } from '../../../services/proyecto/proyecto';
 import { ProyectoService } from '../../../services/proyecto/proyecto.service';
 import { UsuarioProyectoService } from '../../../services/usuario-proyecto/usuario-proyecto.service';
-import { UsuarioProyecto } from '../../../services/usuario-proyecto/usuario-proyecto';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Usuario } from '../../../services/usuario/usuario';
 import { SesionService } from '../../../services/sesion/sesion.service';
-import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-proyectos',

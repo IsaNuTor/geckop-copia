@@ -37,7 +37,8 @@ export class UsuarioService {
   getUsuarios(): Observable<Usuario[]> {
      return this.http.get<Usuario[]>(this.urlEndPoint);
   }
-/*setEmail(nif:string, email:string): Observable<Usuario> {
+
+  /*setEmail(nif:string, email:string): Observable<Usuario> {
      return this.http.get<Usuario>(this.urlEndPoint);
   }*/
 

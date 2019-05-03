@@ -15,13 +15,13 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="nombre">   Nombre</label>
-        <input type="text" class="form-control" [(ngModel)]="acreedor.nombre" id="nombre" placeholder="Nombre" name="nombre">
+        <input type="text" class="form-control" [(ngModel)]="acreedor.nombre" id="nombre" placeholder="Nombre" name="nombre" maxLength="50">
       </div>
       <div class="form-group col-md-6">
         <label for="nif">   NIF</label>
-        <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="Nif" name="nif" *ngIf="!this.botonCrear else bloqueActualizarNif">
+        <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="Nif" name="nif" *ngIf="!this.botonCrear else bloqueActualizarNif" maxLength="10">
         <ng-template #bloqueActualizarNif>
-          <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="{{acreedor.nif}}" name="nif" disabled>
+          <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="{{acreedor.nif}}" name="nif"  disabled>
         </ng-template>
       </div>
     </div>
@@ -29,7 +29,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="iban">IBAN</label>
-        <input type="text" class="form-control" [(ngModel)]="acreedor.iban" id="iban" placeholder="IBAN" name="iban">
+        <input type="text" class="form-control" [(ngModel)]="acreedor.iban" id="iban" placeholder="IBAN" name="iban" maxLength="34">
       </div>
     </div>
 
@@ -37,6 +37,8 @@
     <ng-template #bloqueActualizar>
       <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Guardar</button>
     </ng-template>
+
+    <button class="btn btn-danger ml-2" role="button" (click)="cancelar()">Cancelar</button>
   </form>
   </div>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 
 import { Acreedor } from '../../../services/acreedor/acreedor';
 import { AcreedorService } from '../../../services/acreedor/acreedor.service';
@@ -16,29 +16,25 @@ export class FormAcreedoresComponent implements OnInit {
   acreedor: Acreedor = new Acreedor()
   titulo:string = "Crear Nuevo Acreedor"
   botonCrear:boolean;
-  //formAcreedores: FormGroup;
+  formAcreedores: FormGroup;
 
   constructor(private acreedorService: AcreedorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    //public fb: FormBuilder
+    public fb: FormBuilder
   ) {
-    /*  this.formAcreedores = this.fb.group({
-      nif: ['', [Validators.required, Validators.pattern, Validators.minLength(9), Validators.maxLength(20)]],
-      nombre: ['', [Validators.required, Validators.maxLength(20)]],
-      iban: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(20)]],
-    });*/
+       this.formAcreedores = this.fb.group({
+      nif: ['', [Validators.required, Validators.pattern, Validators.minLength(9)]],
+      nombre: ['', [Validators.required]],
+      iban: ['', [Validators.required, Validators.minLength(20)]],
+    });
     }
 
   ngOnInit() {
     this.cargarAcreedor();
   }
 
-  /*saveData() {
-    console.log(this.formAcreedores.value);
-    this.acreedor = this.formAcreedores.value
-    console.log(this.acreedor);
-  }*/
+
 
   cargarAcreedor(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -94,5 +90,10 @@ export class FormAcreedoresComponent implements OnInit {
         swal.fire('Actualizar acreedor', `Acreedor ${acreedor.nombre} editado con éxito`, 'success')
       }
     )
+  }
+
+  
+  public cancelar(){
+    this.router.navigate(['/acreedores']);
   }
 }

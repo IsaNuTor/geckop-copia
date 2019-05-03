@@ -21,3 +21,27 @@
     margin-left: 35%;
 }*/
 
+#usuario{
+    width:70%;
+}
+
+#email{
+    width:60%;
+}
+
+#iban{
+    width:60%;
+}
+
+#pass{
+    width:60%;
+}
+
+.guardar{
+    width:60%;
+}
+
+.alerta{
+    color: red;
+  }
+  

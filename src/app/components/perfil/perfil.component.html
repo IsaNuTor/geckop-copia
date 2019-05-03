@@ -4,71 +4,91 @@
     <div class="row align-items-center">
 
         <div class="col-sm-4">
-          <img src="../../../assets/iconos/usuario.png" alt="Imagen Usuario"  width="70%">
+          <img id="usuario" src="../../../assets/iconos/usuario.png" alt="Imagen Usuario">
         </div>
 
         <div class="col-sm-8">
 
           <h4 class="mb-3">{{nombreUsuario}}</h4>
 
-          <form class="row align-items-center mb-2">
+          <form [formGroup]="formEmail" class="row align-items-center mb-2">
             <div class="col-sm-1">
-              <img src="assets/iconos/email.png"  alt="Email"  width="60%">              
+              <img id="email" src="assets/iconos/email.png" alt="Email">              
             </div>
             <div class="col-sm-5">
               {{emailUsuario}}
             </div>
             <div class="col-sm-3">
-                <input class="form-control" type="text" placeholder="Nuevo Email">
+                <input class="form-control" formControlName="email" type="text" placeholder="Nuevo Email" maxlength="20"> 
+                <div class="alerta">
+                  <small *ngIf="!emailValido && formEmail.get('email').hasError('required')">No puede estar vacio <br></small>
+                  <small *ngIf="!emailValido && formEmail.get('email').hasError('email')">Formato invalido <br></small>
+                </div>
             </div>
             <div class="col-sm-1">
-                <img src="assets/iconos/guardar.png"  alt="Contraseña" width="60%">
+                <img class="guardar" src="assets/iconos/guardar.png" (click)="modificarEmail()" alt="Guardar">
             </div>
           </form>
 
-          <form class="row align-items-center mb-1">
+          <form [formGroup]="formIban" class="row align-items-center mb-1">
             <div class="col-sm-1">
-              <img src="assets/iconos/iban.png"  alt="Iban" width="60%">              
+              <img id="iban" src="assets/iconos/iban.png"  alt="Iban">              
             </div>
             <div class="col-sm-5">
               {{ibanUsuario}}
             </div>
             <div class="col-sm-3">
-                <input class="form-control" type="text" placeholder="Nuevo Iban">
+                <input class="form-control" type="text" formControlName="iban" placeholder="Nuevo Iban" maxlength="34">
+                <div class="alerta">
+                  <small *ngIf="!ibanValido && formIban.get('iban').hasError('required')">No puede estar vacio <br></small>
+                </div>
             </div>
             <div class="col-sm-1">
-              <img src="assets/iconos/guardar.png"  alt="Guardar" width="60%">
+              <img class="guardar" src="assets/iconos/guardar.png" (click)="modificarIban()" alt="Guardar">
             </div>
           </form>
 
-          <form class="row align-items-top mb-2">
+          <form [formGroup]="formPass" class="row align-items-top mb-2">
 
             <div class="col-sm-1 mt-2">
-              <img src="assets/iconos/pass.png"  alt="Contraseña" width="60%">
+              <img id="pass" src="assets/iconos/pass.png"  alt="Contraseña">
             </div>
 
             <div class="col-sm-5">
-              <input class="form-control" type="password" placeholder="Contraseña">
+              <input class="form-control" type="password" formControlName="passOriginal" placeholder="Contraseña" maxlength="10">
+              <div class="alerta">
+                <small *ngIf="!passValida && formPass.get('passOriginal').hasError('required')">No puede estar vacio <br></small>
+                <small *ngIf="!passValida && !passAntigua">Las contraseñas no es correcta <br></small>
+              </div>
             </div>
 
             <div class="col-sm-3">
 
               <div class="row align-items-center">
                 <div class="col-sm">
-                  <input class="form-control" type="password" placeholder="Contraseña Nueva">
+                  <input class="form-control" type="password" formControlName="passNueva" placeholder="Contraseña Nueva" maxlength="10">
+                  <div class="alerta">
+                    <small *ngIf="!passValida && formPass.get('passNueva').hasError('required')">No puede estar vacio <br></small>
+                  </div>
                 </div>
               </div>
 
               <div class="row align-items-center">
                 <div class="col-sm">
-                  <input class="form-control" type="password" placeholder="Repite Contraseña">
+                  <input class="form-control" type="password" formControlName="passNueva2" placeholder="Repite Contraseña" maxlength="10">
+                  <div class="alerta">
+                    <small *ngIf="!passValida && formPass.get('passNueva2').hasError('required')">No puede estar vacio <br></small>
+                  </div>
+                  <div class="alerta">
+                    <small *ngIf="!passValida && !passIguales">Las contraseñas no coinciden <br></small>
+                  </div>
                 </div>
               </div>
 
             </div>
 
             <div class="col-sm-1 mt-2 pt-3">
-              <img src="assets/iconos/guardar.png"  alt="Contraseña" width="60%">
+              <img class="guardar" src="assets/iconos/guardar.png" (click)="modificarPass()" alt="Guardar">
             </div>
 
 
