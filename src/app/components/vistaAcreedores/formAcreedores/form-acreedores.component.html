@@ -19,7 +19,10 @@
       </div>
       <div class="form-group col-md-6">
         <label for="nif">   NIF</label>
-        <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="NIF" name="nif">
+        <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="Nif" name="nif" *ngIf="!this.botonCrear else bloqueActualizarNif">
+        <ng-template #bloqueActualizarNif>
+          <input type="text" class="form-control" [(ngModel)]="acreedor.nif" id="nif" placeholder="{{acreedor.nif}}" name="nif" disabled>
+        </ng-template>
       </div>
     </div>
 
@@ -32,7 +35,7 @@
 
     <button class="btn btn-success" role="button" (click)="crearAcreedor()" *ngIf="!this.botonCrear else bloqueActualizar">Crear</button>
     <ng-template #bloqueActualizar>
-      <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Editar</button>
+      <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Guardar</button>
     </ng-template>
   </form>
   </div>
