@@ -4,5 +4,6 @@ export class Gasto {
   importe: number;
   iva: number;
   tipo: string;
+  id: number;
   //imagen
 }
