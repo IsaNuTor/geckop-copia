@@ -18,21 +18,21 @@
       </thead>
 
       <tbody>
-  <!--      <tr *ngFor="let acreedor of acreedores">
-          <td>{{ acreedor.nombre }}</td>
-          <td>{{ acreedor.nif }}</td>
-          <td>{{ acreedor.iban }}</td>
+        <tr *ngFor="let gasto of gastos">
+          <td>Determinar</td>
+          <td>{{ gasto.importe }}</td>
+          <td>{{ gasto.iva }}</td>
           <td>
-            <button type="button" class="btn btn-link" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedor.nif]">
+            <!--<button type="button" class="btn btn-link" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedor.nif]">
               <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor">
-            </button>
+            </button>-->
           </td>
           <td>
-            <button type="button" class="btn btn-link" name="button" (click)='delete(acreedor)' >
-              <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
+            <button type="button" class="btn btn-link" name="button" (click)='delete(gasto)' >
+              <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar gasto">
             </button>
           </td>
-        </tr>-->
+        </tr>
       </tbody>
     </table>
   </div>

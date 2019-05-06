@@ -2,24 +2,24 @@
 <!-- Entradas simples -->
     <div class="form-group">
         <label for="desc">   Descripción</label>
-        <input type="text" class="form-control" id="desc" placeholder="Descripción">
+        <input type="text" class="form-control" [(ngModel)]="gasto.descripcion" id="desc" name="desc" placeholder="Descripción">
     </div>
 
     <div class="form-row">
         <div class="col">
             <label for="importe">   Importe</label>
-            <input type="text" class="form-control" id="importe" placeholder="Importe">
+            <input type="text" class="form-control" [(ngModel)]="gasto.importe" name="importe" id="importe" placeholder="Importe">
         </div>
         <div class="col">
             <label for="iva">   IVA</label>
-            <input type="text" class="form-control" id="iva" placeholder="IVA">
+            <input type="text" class="form-control" [(ngModel)]="gasto.iva" name="iva" id="iva" placeholder="IVA">
         </div>
     </div>
   <br>
     <!-- Area de texto (Comentarios)-->
       <div class="form-group">
         <label for="comentarios">Comentarios</label>
-        <textarea class="form-control" id="comentarios" rows="3" placeholder="Comentarios..."></textarea>
+        <textarea class="form-control" id="comentarios" [(ngModel)]="gasto.comentarios" name="comentarios" rows="3" placeholder="Comentarios..."></textarea>
       </div>
 
 
@@ -29,6 +29,6 @@
       </div>
 
     <br>
-        <button type="submit" class="btn btn-success">Aceptar</button>&nbsp;&nbsp;
+        <button role="button" class="btn btn-success" (click)="crearGasto()">Aceptar</button>&nbsp;&nbsp;
         <button class="btn btn-danger" role="button" (click)="cancelar()">Cancelar</button>
       </form>

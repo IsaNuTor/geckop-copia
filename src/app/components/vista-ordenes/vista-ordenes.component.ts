@@ -10,6 +10,7 @@ export class VistaOrdenesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
