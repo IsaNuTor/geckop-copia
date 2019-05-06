@@ -20,3 +20,8 @@
 select:hover{
   outline: none;
 }
+
+
+.alerta {
+  color: red;
+}
