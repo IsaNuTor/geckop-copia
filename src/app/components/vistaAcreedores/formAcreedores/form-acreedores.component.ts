@@ -17,6 +17,7 @@ export class FormAcreedoresComponent implements OnInit {
   titulo:string = "Crear Nuevo Acreedor"
   botonCrear:boolean;
   formAcreedores: FormGroup;
+  formValid: boolean = true;
 
   constructor(private acreedorService: AcreedorService,
     private router: Router,
@@ -52,35 +53,39 @@ export class FormAcreedoresComponent implements OnInit {
   public crearAcreedor(): void {
 
     //this.acreedor = this.formAcreedores.value;
-    this.acreedorService.crearAcreedor(this.acreedor).subscribe(
-      acreedor =>
-      {
-        this.router.navigate(['/acreedores'])
-        if(acreedor != null){
-          const ToastrModule = swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 5000
-                });
+    if(this.formAcreedores.valid){
+      this.acreedorService.crearAcreedor(this.acreedor).subscribe(
+        acreedor =>
+        {
+          this.router.navigate(['/acreedores'])
+          if(acreedor != null){
+            const ToastrModule = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000
+                  });
 
-                ToastrModule.fire({
-                  type: 'success',
-                  title: 'Guardado '+acreedor.nombre,
+                  ToastrModule.fire({
+                    type: 'success',
+                    title: 'Guardado '+acreedor.nombre,
 
-                })
-          }else{
-            swal.fire({
-                        type: 'error',
-                        title: 'Error!',
-                        text: 'El acreedor no se ha podido crear',
-                        onClose: () => {
-                              location.reload();
-                            }
-                      })
-          }
-      }
-    )
+                  })
+            }else{
+              swal.fire({
+                          type: 'error',
+                          title: 'Error!',
+                          text: 'El acreedor no se ha podido crear',
+                          onClose: () => {
+                                location.reload();
+                              }
+                        })
+            }
+        }
+      )
+    }else{
+      this.formValid = false;
+    }
   }
 
   actualizarAcreedor(): void {
