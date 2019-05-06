@@ -23,9 +23,9 @@
           <td>{{ gasto.importe }}</td>
           <td>{{ gasto.iva }}</td>
           <td>
-            <!--<button type="button" class="btn btn-link" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedor.nif]">
+            <button type="button" class="btn btn-link" name="button" [routerLink]="['/add-orden/gastos/form-gastos/ver-gasto.component', gasto.id]">
               <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor">
-            </button>-->
+            </button>
           </td>
           <td>
             <button type="button" class="btn btn-link" name="button" (click)='delete(gasto)' >

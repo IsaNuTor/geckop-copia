@@ -23,6 +23,11 @@ export class GastoService {
     return this.http.post<Gasto>(`${this.urlGasto}`, gasto, {headers: this.httpHeaders});
   }
 
+  // Devuelve gasto mediante el id del gasto
+  getGasto(id:number): Observable<Gasto> {
+    return this.http.get<Gasto>(`${this.urlGasto}/${id}`);
+  }
+
   borrarGasto(id: number): Observable<Gasto> {
     return this.http.delete<Gasto>(`${this.urlGasto}/${id}`, {headers: this.httpHeaders});
   }
