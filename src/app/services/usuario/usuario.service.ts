@@ -31,7 +31,6 @@ export class UsuarioService {
 
   */
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-  httpHeaders2 = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
   // Nos devuelve el usuario.
@@ -52,16 +51,15 @@ export class UsuarioService {
 
   setEmail(nif:string, email:string): Observable<Boolean> {
     var variables: String[] = [nif, email];
-
-   return this.http.post<Boolean>(this.urlSetEmail, variables, {headers: this.httpHeaders2});
+   return this.http.post<Boolean>(this.urlSetEmail, variables, {headers: this.httpHeaders});
   }
   setPass(nif:string, pass:string): Observable<Boolean> {
    var variables: String[] = [nif, pass];
-   return this.http.post<Boolean>(this.urlSetPass, variables, {headers: this.httpHeaders2});
+   return this.http.post<Boolean>(this.urlSetPass, variables, {headers: this.httpHeaders});
   }
   comprobarContrasena(nif:string, pass:string): Observable<Boolean> {
    var variables: String[] = [nif, pass];
-   return this.http.post<Boolean>(this.urlComprobarPass, variables, {headers: this.httpHeaders2});
+   return this.http.post<Boolean>(this.urlComprobarPass, variables, {headers: this.httpHeaders});
   }
 
 

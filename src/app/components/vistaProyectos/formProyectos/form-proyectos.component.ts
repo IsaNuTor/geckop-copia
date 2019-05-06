@@ -44,6 +44,7 @@ export class FormProyectosComponent implements OnInit {
         nombre: ['', [Validators.required, Validators.maxLength(50)]],
         acronimo: ['', [Validators.required, Validators.maxLength(50)]],
         presupuesto: ['', [Validators.required, Validators.max(100000000)]],
+        //nContabilidad: ['', [Validators.required, Validators.max(100000000)]],
         nContabilidad: ['', [Validators.required, Validators.max(100000000)]],
         ip1: ['', [Validators.maxLength(50)]],
         ip2: ['', [Validators.maxLength(50)]]
@@ -108,19 +109,31 @@ export class FormProyectosComponent implements OnInit {
 
                     ToastrModule.fire({
                       type: 'success',
-                      title: 'Guardado '+res.acronimo,
-                      onClose: () => {
-                        location.reload();
-                      }
+                      title: 'Guardado '+res.acronimo
                     })
-            } 
+                    //post inv-proyecto
+                this.usuarioProyectoService.insertarUsuariosProyecto(this.proyecto.ip1, this.proyecto.acronimo).subscribe();
+                while( this.usuarios_anadidos.length > 0){
+                      this.usuarioProyectoService.insertarUsuariosProyecto(this.usuarios_anadidos.pop().dni, this.proyecto.acronimo).subscribe();
+                  }
+                  this.router.navigate(['/proyectos']);
+                    location.reload();  
+            }else{
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+              });
+
+              ToastrModule.fire({
+                type: 'error',
+                title: 'El proyecto ya existe'
+              })
+            }
+
           });
-      //post inv-proyecto
-      this.usuarioProyectoService.insertarUsuariosProyecto(this.proyecto.ip1, this.proyecto.acronimo).subscribe();
-      while( this.usuarios_anadidos.length > 0){
-            this.usuarioProyectoService.insertarUsuariosProyecto(this.usuarios_anadidos.pop().dni, this.proyecto.acronimo).subscribe();
-        }
-        this.router.navigate(['/proyectos']);
+      
 
     }
     

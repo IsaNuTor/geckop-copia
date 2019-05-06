@@ -56,7 +56,38 @@ export class PerfilComponent implements OnInit {
     if(this.formEmail.valid){
       this.email = this.formEmail.value.email;
       //cambiar email usuario Service
-     // this.usuarioService.setEmail(this.dni, this.email);
+      this.usuarioService.setEmail(this.sesionService.getDni(), this.email).subscribe(
+        res =>{
+          if(res){
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'success',
+              title: 'Guardado correctamente'
+
+            })
+            this.formEmail.setValue({email: ""});
+            this.emailUsuario = this.email;
+          }else{
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'error',
+              title: 'Fallo al guardar los cambios'
+
+            })
+          }
+        });
     }else{
       this.emailValido = false;
     }
@@ -107,6 +138,7 @@ export class PerfilComponent implements OnInit {
                     title: 'Guardado correctamente'
 
                   })
+                  this.formPass.setValue({passOriginal: "", passNueva: "", passNueva2: "" });
                 }else{
                   const ToastrModule = swal.mixin({
                     toast: true,
