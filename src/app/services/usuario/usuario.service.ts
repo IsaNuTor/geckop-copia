@@ -7,6 +7,7 @@ import {URL_BACKEND} from '../../config/config';
 import { variable } from '@angular/compiler/src/output/output_ast';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,7 +49,7 @@ export class UsuarioService {
   getUsuarios(): Observable<Usuario[]> { 
      return this.http.get<Usuario[]>(this.urlEndPoint);
   }
-
+/*
   setEmail(nif:string, email:string): Observable<Boolean> {
     var variables: String[] = [nif, email];
    return this.http.post<Boolean>(this.urlSetEmail, variables, {headers: this.httpHeaders});
@@ -61,6 +62,8 @@ export class UsuarioService {
    var variables: String[] = [nif, pass];
    return this.http.post<Boolean>(this.urlComprobarPass, variables, {headers: this.httpHeaders});
   }
+*/
 
+  //setUsuario(user: Usuario): Observable<Boolean>{}
 
 }

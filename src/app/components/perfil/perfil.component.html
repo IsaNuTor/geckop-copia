@@ -4,35 +4,35 @@
     <div class="row align-items-center">
 
         <div class="col-sm-4">
-          <img id="usuario" src="../../../assets/iconos/usuario.png" alt="Imagen Usuario">
+          <img class="icon" src="../../../assets/iconos/usuario.png" alt="Imagen Usuario">
         </div>
 
         <div class="col-sm-8">
 
-          <h4 class="mb-3">{{nombreUsuario}}</h4>
+          <h4 class="mb-3">{{nombreCompleto}}</h4>
 
-          <form [formGroup]="formEmail" class="row align-items-center mb-2">
+          <form [formGroup]="formPerfil">
+          <div class="row align-items-center mb-2">
             <div class="col-sm-1">
-              <img id="email" src="assets/iconos/email.png" alt="Email">              
+              <img class="icon" src="assets/iconos/email.png" alt="Email">              
             </div>
             <div class="col-sm-5">
-              {{emailUsuario}}
+              {{user.email}}
             </div>
             <div class="col-sm-3">
                 <input class="form-control" formControlName="email" type="text" placeholder="Nuevo Email" maxlength="20"> 
                 <div class="alerta">
-                  <small *ngIf="!emailValido && formEmail.get('email').hasError('required')">No puede estar vacio <br></small>
-                  <small *ngIf="!emailValido && formEmail.get('email').hasError('email')">Formato invalido <br></small>
+                  <small *ngIf="!emailValido && formPerfil.get('email').hasError('required')">No puede estar vacio <br></small>
+                  <small *ngIf="!emailValido && formPerfil.get('email').hasError('email')">Formato invalido <br></small>
                 </div>
             </div>
-            <div class="col-sm-1">
-                <img class="guardar" src="assets/iconos/guardar.png" (click)="modificarEmail()" alt="Guardar">
-            </div>
-          </form>
 
-          <form [formGroup]="formIban" class="row align-items-center mb-1">
+          </div>
+          
+          <div class="row align-items-center mb-2">
+
             <div class="col-sm-1">
-              <img id="iban" src="assets/iconos/iban.png"  alt="Iban">              
+              <img class="icon" src="assets/iconos/iban.png"  alt="Iban">              
             </div>
             <div class="col-sm-5">
               {{ibanUsuario}}
@@ -43,15 +43,64 @@
                   <small *ngIf="!ibanValido && formIban.get('iban').hasError('required')">No puede estar vacio <br></small>
                 </div>
             </div>
-            <div class="col-sm-1">
-              <img class="guardar" src="assets/iconos/guardar.png" (click)="modificarIban()" alt="Guardar">
-            </div>
-          </form>
+            
+          </div>
 
-          <form [formGroup]="formPass" class="row align-items-top mb-2">
+          <div class="row align-items-center mb-2">
+              <div class="col-sm-1">
+                <img class="icon" src="assets/iconos/telefono.png"  alt="telefono">              
+              </div>
+              <div class="col-sm-5">
+                {{user.telefono}}
+              </div>
+              <div class="col-sm-3">
+                  <input class="form-control" type="text" formControlName="telefono" placeholder="Telefono" maxlength="9">
+              </div>
+          </div>
 
+          <div class="row align-items-center mb-2">
+              <div class="col-sm-1">
+                <img class="icon" src="assets/iconos/departamento.png"  alt="departamento">              
+              </div>
+              <div class="col-sm-5">
+                {{user.departamento}}
+              </div>
+              <div class="col-sm-3">
+                  <input class="form-control" type="text" formControlName="departamento" placeholder="Departamento" maxlength="50">
+              </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+              <div class="col-sm-1">
+                <img class="icon" src="assets/iconos/centro.png"  alt="centro">              
+              </div>
+              <div class="col-sm-5">
+                {{user.centro}}
+              </div>
+              <div class="col-sm-3">
+                  <input class="form-control" type="text" formControlName="centro" placeholder="Centro" maxlength="9">
+              </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+              <div class="col-sm-1">
+                <img class="icon" src="assets/iconos/iban.png"  alt="Iban">              
+              </div>
+              <div class="col-sm-5">
+                {{ibanUsuario}}
+              </div>
+              <div class="col-sm-3">
+                  <input class="form-control" type="text" formControlName="iban" placeholder="Nuevo Iban" maxlength="34">
+                  <div class="alerta">
+                    <small *ngIf="!ibanValido && formIban.get('iban').hasError('required')">No puede estar vacio <br></small>
+                  </div>
+              </div>  
+          </div>
+
+          
+          <div class="row align-items-top mb-2">
             <div class="col-sm-1 mt-2">
-              <img id="pass" src="assets/iconos/pass.png"  alt="Contraseña">
+              <img class="icon" src="assets/iconos/pass.png"  alt="Contraseña">
             </div>
 
             <div class="col-sm-5">
@@ -88,11 +137,12 @@
 
             </div>
 
-            <div class="col-sm-1 mt-2 pt-3">
-              <img class="guardar" src="assets/iconos/guardar.png" (click)="modificarPass()" alt="Guardar">
-            </div>
+          
+          </div>
 
-
+          <div class="row">
+              <button class="btn btn-success" role="button" >Guardar</button>
+          </div>
           </form>
           
         </div>

@@ -4,6 +4,7 @@ import { SesionService } from '../../services/sesion/sesion.service';
 import swal from 'sweetalert2';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Subscriber } from 'rxjs';
+import { Usuario } from 'src/app/services/usuario/usuario';
 
 @Component({
   selector: 'app-perfil',
@@ -13,18 +14,11 @@ import { Subscriber } from 'rxjs';
 export class PerfilComponent implements OnInit {
 
 
-  formEmail: FormGroup;
-  formIban: FormGroup;
-  formPass: FormGroup;
+  user: Usuario = new Usuario();
 
-  email:string;
-  iban:string;
-  pass:string;
-  passNueva:string;
-
-  nombreUsuario:string = "";
+  formPerfil: FormGroup;
   ibanUsuario:string = "";
-  emailUsuario:string = "";
+  nombreCompleto: string = "";
 
   emailValido:boolean=true;
   ibanValido:boolean=true;
@@ -35,26 +29,84 @@ export class PerfilComponent implements OnInit {
 
   constructor(private sesionService: SesionService,
               private usuarioService: UsuarioService,
-              private fbEmail: FormBuilder,
-              private fbIban: FormBuilder,
-              private fbPass: FormBuilder
+              private fbPerfil: FormBuilder
     ) {
   
-    this.formEmail = this.fbEmail.group({ 
-      email: ['', [Validators.required, Validators.email]],});
-    
-    this.formIban = this.fbIban.group({
-      iban: ['', [Validators.required]]});
-
-    this.formPass = this.fbPass.group({
+    this.formPerfil = this.fbPerfil.group({ 
+      email: ['', [Validators.required, Validators.email]],
+      iban: ['', [Validators.required]],
       passOriginal: ['', [Validators.required]],//, Validators.minLength(5)]],
       passNueva: ['', [Validators.required, Validators.minLength(5)]],
-      passNueva2: ['', [Validators.required, Validators.minLength(5)]] });
+      passNueva2: ['', [Validators.required, Validators.minLength(5)]],
+      telefono:[''],
+      departamento:[''],
+      centro:['']
+    });
   }
 
+  ngOnInit() {
+    this.rellenaUser();
+    this.ibanUsuario = this.sesionService.getIban();
+    this.nombreCompleto = this.sesionService.getNombreCompleto();
+  }
+
+  rellenaUser(){
+    this.user.nombre = this.sesionService.getNombre();
+    this.user.apellido1 = this.sesionService.getApellido1();
+    this.user.apellido2 = this.sesionService.getApellido2();
+    this.user.dni = this.sesionService.getDni();
+    this.user.email = this.sesionService.getEmail();
+    this.user.telefono = this.sesionService.getTelefono();
+    this.user.departamento = this.sesionService.getDepartamento();
+    this.user.centro = this.sesionService.getCentro();
+  }
+
+
+
+  
+}
+/*if(this.formEmail.valid){
+  this.usuario = this.formEmail.value.email;
+  //cambiar email usuario Service
+  this.usuarioService.setEmail(this.sesionService.getDni(), this.email).subscribe(
+    res =>{
+      if(res){
+        const ToastrModule = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 5000
+        });
+
+        ToastrModule.fire({
+          type: 'success',
+          title: 'Guardado correctamente'
+
+        })
+        this.formEmail.setValue({email: ""});
+        this.emailUsuario = this.email;
+      }else{
+        const ToastrModule = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 5000
+        });
+
+        ToastrModule.fire({
+          type: 'error',
+          title: 'Fallo al guardar los cambios'
+
+        })
+      }
+    });
+}else{
+  this.emailValido = false;
+}
+  /*
   public modificarEmail(): void{
     if(this.formEmail.valid){
-      this.email = this.formEmail.value.email;
+      this.usuar = this.formEmail.value.email;
       //cambiar email usuario Service
       this.usuarioService.setEmail(this.sesionService.getDni(), this.email).subscribe(
         res =>{
@@ -93,7 +145,7 @@ export class PerfilComponent implements OnInit {
     }
    
   }
-
+*//*
   public modificarIban(): void{
     if(this.formIban.valid){
         //cambiar iban usuario service
@@ -101,7 +153,7 @@ export class PerfilComponent implements OnInit {
         //this.acreedorService.añadirAcreedor(this.dni, this.iban);
       }else{
         //this.acreedorService.editarAcreedor(this.dni, this.iban);
-      }*/
+      }
     }else{
       this.ibanValido = false;
     }
@@ -112,8 +164,8 @@ export class PerfilComponent implements OnInit {
       //this.acreedorService.editarAcreedor(this.dni, this.iban);
     }*/
 
-  }
-
+  
+/*
   public modificarPass(): void{
     if(this.formPass.valid){
       this.pass = this.formPass.value.passOriginal;
@@ -166,12 +218,10 @@ export class PerfilComponent implements OnInit {
       }
     }
   }
+*/
+
+  //setUsuario(){}
 
 
-  ngOnInit() {
-    this.nombreUsuario = this.sesionService.getNombreCompleto();
-    this.ibanUsuario = this.sesionService.getIban();
-    this.emailUsuario = this.sesionService.getEmail(); 
-  }
 
-}
+

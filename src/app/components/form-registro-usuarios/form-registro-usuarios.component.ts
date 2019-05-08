@@ -29,6 +29,9 @@ export class FormRegistroUsuariosComponent implements OnInit{
       apellido2: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(5)]],
+      telefono:[''],
+      departamento: [''],
+      centro:['']
     });
   }
 

@@ -24,12 +24,12 @@
             </div>
            
 
-            <input id="placeColor" formControlName="apellido1" type="text" placeholder="Primer apellido" maxlength="20">
+            <input id="placeColor" formControlName="apellido1" type="text" placeholder="Primer Apellido" maxlength="20">
             <div class="alerta">
               <small *ngIf="!formValid && formRegistro.get('apellido1').hasError('required')">Primer apellido no puede estar vacio<br></small>
             </div>
 
-            <input id="placeColor" formControlName="apellido2" type="text" placeholder="Segundo apellido" maxlength="20">
+            <input id="placeColor" formControlName="apellido2" type="text" placeholder="Segundo Apellido" maxlength="20">
             <div class="alerta">
               <small *ngIf="!formValid && formRegistro.get('apellido2').hasError('required')">Segundo apellido no puede estar vacio<br></small>
             </div>
@@ -46,7 +46,15 @@
               <small *ngIf="!formValid && formRegistro.get('password').hasError('minlength')">Mínimo de 5 caracteress<br></small>
             </div>
 
-            <div id="checkTerm">
+            <!--No tiene mini porque  veces se referencian por la extensión dentro de la universidad-->
+            <input id="placeColor" formControlName="telefono" type="text" placeholder="Teléfono" maxlength="9">
+
+            <input id="placeColor" formControlName="departamento" type="text" placeholder="Departamento" maxlength="50">
+
+            <input id="placeColor" formControlName="centro" type="text" placeholder="Centro" maxlength="50">
+            
+
+            <div id="checkTerm" class="mt-5">
               <label for="checkTerminos">
                   <input type="checkbox" id="checkTerminos" value="checkTerminos" name="checkTerminos"> Al registrarse, aceptas nuestras <a href="#">Condiciones de uso</a> y <a href="#">Política de privacidad.</a>
               </label>
