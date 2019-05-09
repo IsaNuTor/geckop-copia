@@ -4,7 +4,7 @@
     <div class="row align-items-center">
 
         <div class="col-sm-4">
-          <img class="icon" src="../../../assets/iconos/usuario.png" alt="Imagen Usuario">
+          <img id="userIcon" src="../../../assets/iconos/usuario.png" alt="Imagen Usuario">
         </div>
 
         <div class="col-sm-8">
@@ -19,10 +19,9 @@
             <div class="col-sm-5">
               {{user.email}}
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-5">
                 <input class="form-control" formControlName="email" type="text" placeholder="Nuevo Email" maxlength="20"> 
                 <div class="alerta">
-                  <small *ngIf="!emailValido && formPerfil.get('email').hasError('required')">No puede estar vacio <br></small>
                   <small *ngIf="!emailValido && formPerfil.get('email').hasError('email')">Formato invalido <br></small>
                 </div>
             </div>
@@ -37,11 +36,8 @@
             <div class="col-sm-5">
               {{ibanUsuario}}
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-5">
                 <input class="form-control" type="text" formControlName="iban" placeholder="Nuevo Iban" maxlength="34">
-                <div class="alerta">
-                  <small *ngIf="!ibanValido && formIban.get('iban').hasError('required')">No puede estar vacio <br></small>
-                </div>
             </div>
             
           </div>
@@ -53,7 +49,7 @@
               <div class="col-sm-5">
                 {{user.telefono}}
               </div>
-              <div class="col-sm-3">
+              <div class="col-sm-5">
                   <input class="form-control" type="text" formControlName="telefono" placeholder="Telefono" maxlength="9">
               </div>
           </div>
@@ -65,7 +61,7 @@
               <div class="col-sm-5">
                 {{user.departamento}}
               </div>
-              <div class="col-sm-3">
+              <div class="col-sm-5">
                   <input class="form-control" type="text" formControlName="departamento" placeholder="Departamento" maxlength="50">
               </div>
           </div>
@@ -77,26 +73,12 @@
               <div class="col-sm-5">
                 {{user.centro}}
               </div>
-              <div class="col-sm-3">
+              <div class="col-sm-5">
                   <input class="form-control" type="text" formControlName="centro" placeholder="Centro" maxlength="9">
               </div>
           </div>
 
-          <div class="row align-items-center mb-2">
-              <div class="col-sm-1">
-                <img class="icon" src="assets/iconos/iban.png"  alt="Iban">              
-              </div>
-              <div class="col-sm-5">
-                {{ibanUsuario}}
-              </div>
-              <div class="col-sm-3">
-                  <input class="form-control" type="text" formControlName="iban" placeholder="Nuevo Iban" maxlength="34">
-                  <div class="alerta">
-                    <small *ngIf="!ibanValido && formIban.get('iban').hasError('required')">No puede estar vacio <br></small>
-                  </div>
-              </div>  
-          </div>
-
+   
           
           <div class="row align-items-top mb-2">
             <div class="col-sm-1 mt-2">
@@ -104,22 +86,19 @@
             </div>
 
             <div class="col-sm-5">
-              <input class="form-control" type="password" formControlName="passOriginal" placeholder="Contraseña" maxlength="10">
+              <input class="form-control" type="password" formControlName="passOriginal" placeholder="Contraseña Actual" maxlength="10">
               <div class="alerta">
-                <small *ngIf="!passValida && formPass.get('passOriginal').hasError('required')">No puede estar vacio <br></small>
-               <!-- <small *ngIf="!passValida && formPass.get('password').hasError('minlength')">Mínimo de 5 caracteress<br></small>-->
-                <small *ngIf="!passValida && !passAntigua">Las contraseñas no es correcta <br></small>
+                <small *ngIf="!passAntigua">La contraseña no es correcta <br></small>
               </div>
             </div>
 
-            <div class="col-sm-3">
+            <div class="col-sm-5">
 
               <div class="row align-items-center">
                 <div class="col-sm">
                   <input class="form-control" type="password" formControlName="passNueva" placeholder="Contraseña Nueva" maxlength="10">
                   <div class="alerta">
-                    <small *ngIf="!passValida && formPass.get('passNueva').hasError('required')">No puede estar vacio <br></small>
-                    <small *ngIf="!passValida && formPass.get('password').hasError('minlength')">Mínimo de 5 caracteress<br></small>
+                    <small *ngIf="!passValida && formPerfil.get('passNueva').hasError('minlength')">Mínimo de 5 caracteress<br></small>
                   </div>
                 </div>
               </div>
@@ -128,9 +107,8 @@
                 <div class="col-sm">
                   <input class="form-control" type="password" formControlName="passNueva2" placeholder="Repite Contraseña" maxlength="10">
                   <div class="alerta">
-                    <small *ngIf="!passValida && formPass.get('passNueva2').hasError('required')">No puede estar vacio <br></small>
-                    <small *ngIf="!passValida && formPass.get('password').hasError('minlength')">Mínimo de 5 caracteress<br></small>
-                    <small *ngIf="!passValida && !passIguales">Las contraseñas no coinciden <br></small>
+                    <small *ngIf="!passValida && formPerfil.get('passNueva2').hasError('minlength')">Mínimo de 5 caracteress<br></small>
+                    <small *ngIf="!passValida && !passIguales && !vacias">Las contraseñas no coinciden <br></small>
                   </div>
                 </div>
               </div>
@@ -141,7 +119,7 @@
           </div>
 
           <div class="row">
-              <button class="btn btn-success" role="button" >Guardar</button>
+              <button class="btn btn-success" (click)="modificarDatos()" role="button" >Guardar</button>
           </div>
           </form>
           

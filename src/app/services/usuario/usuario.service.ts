@@ -19,7 +19,8 @@ export class UsuarioService {
   urlEndPoint:string = 'http://localhost:8080/api/usuario';
   urlComprobarPass:string = 'http://localhost:8080/api/comprobarPass';
   urlSetPass:string = 'http://localhost:8080/api/setPass';
-  urlSetEmail:string = 'http://localhost:8080/api/setEmail';
+  urlSetUsuario:string = 'http://localhost:8080/api/setUsuario';
+
 
 
 
@@ -54,16 +55,22 @@ export class UsuarioService {
     var variables: String[] = [nif, email];
    return this.http.post<Boolean>(this.urlSetEmail, variables, {headers: this.httpHeaders});
   }
+  */
+/*
   setPass(nif:string, pass:string): Observable<Boolean> {
    var variables: String[] = [nif, pass];
    return this.http.post<Boolean>(this.urlSetPass, variables, {headers: this.httpHeaders});
-  }
+  }*/
+
   comprobarContrasena(nif:string, pass:string): Observable<Boolean> {
    var variables: String[] = [nif, pass];
    return this.http.post<Boolean>(this.urlComprobarPass, variables, {headers: this.httpHeaders});
   }
-*/
 
-  //setUsuario(user: Usuario): Observable<Boolean>{}
+
+  setUsuario(user: Usuario): Observable<Boolean>{
+    return this.http.post<Boolean>(this.urlSetUsuario, user, {headers: this.httpHeaders});
+   
+  }
 
 }
