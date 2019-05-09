@@ -1,33 +1,29 @@
 <div class="card">
   <div class="card bg-dark">
-    <div class="card-header text-white" *ngIf="!this.botonCrear else bloqueActualizar">
+    <div class="card-header text-white" *ngIf="!this.botonCrear">
       {{titulo}}
     </div>
-
-    <ng-template #bloqueActualizar>
-      <div class="card-header text-white">
+¡
+      <div class="card-header text-white" *ngIf="this.botonCrear">
         Editar Acreedor
       </div>
-    </ng-template>
   </div>
 
-  <form *ngIf= "acreedor" class="m-3">
+  <form *ngIf= "acreedor" [formGroup]="formAcreedores" class="m-3">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="nombre">   Nombre</label>
         <input type="text" class="form-control"formControlName="nombre" id="nombre" placeholder="Nombre" name="nombre" maxLength="50">
         <div class="alerta">
-          <small *ngIf="!formValid && formAcreedores.get('nombre').hasError('required')">No puede estar vacio <br></small>         
+          <small *ngIf="!formValid && nombreVacio">No puede estar vacio <br></small>         
         </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="nif">   NIF</label>
-        <input type="text" class="form-control" formControlName="nif" id="nif" placeholder="Nif" name="nif" *ngIf="!this.botonCrear else bloqueActualizarNif" maxLength="10" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))">
-        <ng-template #bloqueActualizarNif>
-          <input type="text" class="form-control" formControlName="nif" id="nif" placeholder="{{acreedor.nif}}" name="nif"  pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" disabled>
-        </ng-template>
+        <label for="nif"> NIF</label>
+        <input type="text" class="form-control" formControlName="nif" id="nif" placeholder="Nif" name="nif" *ngIf="!this.botonCrear" maxLength="10" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))">
+        <input type="text" class="form-control" formControlName="nif" id="nif" placeholder="{{acreedor.nif}}" *ngIf="this.botonCrear" name="nif"  pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" disabled>
         <div class="alerta">
-          <small *ngIf="!formValid && formAcreedores.get('nif').hasError('required')">No puede estar vacio <br></small>         
+          <small *ngIf="!formValid && nifVacio">No puede estar vacio <br></small>         
           <small *ngIf="!formValid && formAcreedores.get('nif').hasError('pattern')">El formato introducido no es válido<br></small>         
           <small *ngIf="!formValid && formAcreedores.get('nif').hasError('minlength')">El campo es demasiado corto<br></small>         
         </div>
@@ -39,16 +35,15 @@
         <label for="iban">IBAN</label>
         <input type="text" class="form-control" formControlName="iban" id="iban" placeholder="IBAN" name="iban" maxLength="34">
         <div class="alerta">
-          <small *ngIf="!formValid && formAcreedores.get('iban').hasError('required')">No puede estar vacio <br></small>         
+          <small *ngIf="!formValid && ibanVacio">No puede estar vacio <br></small>         
           <small *ngIf="!formValid && formAcreedores.get('iban').hasError('minlength')">El campo es demasiado corto <br></small>         
         </div>
       </div>
     </div>
 
-    <button class="btn btn-success" role="button" (click)="crearAcreedor()" *ngIf="!this.botonCrear else bloqueActualizar">Crear</button>
-    <ng-template #bloqueActualizar>
-      <button class="btn btn-success" role="button" (click)="actualizarAcreedor()">Guardar</button>
-    </ng-template>
+    <button class="btn btn-success" role="button" (click)="crearAcreedor()" *ngIf="!this.botonCrear">Crear</button>
+    <button class="btn btn-success" role="button" (click)="actualizarAcreedor()" *ngIf="this.botonCrear">Guardar</button>
+    
 
     <button class="btn btn-danger ml-2" role="button" (click)="cancelar()">Cancelar</button>
   </form>

@@ -11,6 +11,9 @@ import {URL_BACKEND} from '../../config/config';
 export class AcreedorService {
 
   urlEndPoint:string = 'http://localhost:8080/api/acreedores';
+  urlSetAcreedor:string = 'http://localhost:8080/api/setAcreedor';
+  urlCrearAcreedor:string = 'http://localhost:8080/api/crearAcreedor';
+
   //urlEndPoint:string = URL_BACKEND + '/api/acreedores';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -21,7 +24,7 @@ export class AcreedorService {
   }
 
   crearAcreedor(acreedor: Acreedor) : Observable<Acreedor> {
-    return this.http.post<Acreedor>(`${this.urlEndPoint}`, acreedor, {headers: this.httpHeaders});
+    return this.http.post<Acreedor>(this.urlCrearAcreedor, acreedor, {headers: this.httpHeaders});
   }
 
   // Devuelve acreedor mediante el nif
@@ -29,8 +32,8 @@ export class AcreedorService {
     return this.http.get<Acreedor>(`${this.urlEndPoint}/${nif}`);
   }
 
-  actualizarAcreedor(acreedor: Acreedor): Observable<Acreedor> {
-    return this.http.put<Acreedor>(`${this.urlEndPoint}/${acreedor.nif}`, acreedor, {headers: this.httpHeaders});
+  actualizarAcreedor(acreedor: Acreedor): Observable<Boolean> {
+    return this.http.post<Boolean>(this.urlSetAcreedor, acreedor, {headers: this.httpHeaders});
   }
 
   borrarAcreedor(nif: String): Observable<Acreedor> {
