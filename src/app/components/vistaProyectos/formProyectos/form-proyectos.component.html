@@ -66,11 +66,11 @@
         <div class="form-group col-md-6 mb-3">
             <label for="ip2">   IP 2</label>
              
-              <select   class="form-control" id="ip2" formControlName="ip2" name="ip2">
-                <option *ngFor="let usuario of usuarios_anadidos" value="{{usuario.dni}}">{{ usuario.nombre }} {{usuario.apellido1}} {{usuario.apellido2}} </option>
-              </select>
-          </div>
+            <select   class="form-control" id="ip2" formControlName="ip2" name="ip2">
+              <option *ngFor="let usuario of usuarios_anadidos" value="{{usuario.dni}}">{{ usuario.nombre }} {{usuario.apellido1}} {{usuario.apellido2}} </option>
+            </select>
         </div>
+    </div>
 
     <div class="card bg-dark">
       <div class="card-header text-white">
@@ -91,8 +91,8 @@
                 </tr>
               </thead>
 
-              <tbody>
-                <tr *ngFor="let usuario of usuarios">
+              <tbody  *ngFor="let usuario of usuarios">
+                <tr>
                   <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
 
                   <td><button type="button" class="btn btn-link" name="button"  (click)="anadirInvestigador(usuario)"> <!--[disabled]="formProyecto.invalid"-->
@@ -104,35 +104,51 @@
             </table>
           </div>
 
-          <!--TABLA DERECHA-->
-
-          <div class="col-sm">
+        <form class="col-sm" formArrayName="investigadores"  >
+          <!--TABLA DERECHA --- FORMULARIO INVESTIGADORES-->
+          <div >
             <table class="table table-bordered table-striped text-center">
               <thead class="thead-dark">
                 <tr>
                   <th>Nombre</th>
+                  <th>Rol</th>
                   <th>Quitar</th>
                 </tr>
               </thead>
-
-              <tbody>
-                <tr *ngFor="let usuario of usuarios_anadidos">
-                  <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
-
-                  <td>
-                      <button type="button" class="btn btn-link" name="button"  (click)="quitarInvestigador(usuario)">
-                        <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador">
-                      </button>
-                  </td>
-                </tr>
+              
+            
+              <tbody *ngFor="let investigador of usuarios_anadidos; let i = index;">
+                  <tr [formGroupName]="i">
+                    <td>{{ investigador.nombre }} {{ investigador.apellido1 }} {{ investigador.apellido2 }}</td>
+                    <td> 
+                      <select  formControlName="rol" (change)="actualizaRol()" class="form-control" id="rol"  name="rol"> 
+                          <option (onload)="selected" value="Miembro del proyecto" selected >Miembro del proyecto </option>
+                          <option  value="Miembro del equipo de trabajo">Miembro del equipo de trabajo </option>
+                          <option  value="Profesor Invitado">Profesor Invitado</option>
+                      </select>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link" name="button"  (click)="quitarInvestigador(investigador)">
+                          <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador">
+                        </button>
+                    </td>
+                    
+                  </tr>
+                
               </tbody>
             </table>
           </div>
+        </form>
+
       </div>
-      <br>
     </div>
-    <br>
+
+  </form>
+
+  <div class="form-row ml-3 mb-3">
     <button class="btn btn-success" role="button" (click)="crearProyecto()">Crear</button>
     <button class="btn btn-danger" role="button" (click)="cancelar()">Cancelar</button>
-  </form>
   </div>
+  
+ 
+</div>
