@@ -1,15 +1,45 @@
-<!--Lista desplegable-->
-    <div class="form-group">
-      <br>
-        <select class="custom-select">
-          <option selected>Seleccione acreedor</option>
-          <option value="ac1">Acreedor 1</option>
-          <option value="ac2">Acreedor 2</option>
-          <option value="ac3">Acreedor 3</option>
-        </select>
+<div class="card">
+  <div class="card bg-dark">
+    <div class="card-header text-white text-center">
+      ORDEN DE PAGO GASTOS GENERALES
     </div>
+  </div>
 
-<!--GASTOS-->
-<app-gastos></app-gastos><br><br><br>
+  <form>
+    <!--Lista desplegable de acreedores-->
+      <div class="form-group">
+        <br>
+          <select class="custom-select">
+            <option selected>Seleccione acreedor</option>
+            <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{ acreedor.nif }}</option>
+          </select>
+      </div>
 
-<button type="submit" class="btn btn-success">Crear Orden</button>
+      <!--GASTOS-->
+      <app-gastos></app-gastos>
+
+      <!--Memoria explicativa de los gastos-->
+      <br>
+      <div class="form-group">
+        <label class="texto-form" for="exampleFormControlTextarea1">MEMORIA EXPLICATIVA DE LOS GASTOS</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Escribir memoria explicativa" ></textarea>
+      </div>
+
+      <!--Relación con el proyecto-->
+      <br>
+      <div class="form-group">
+        <!--<div class="card bg-light">
+          <div class="card-header text-black text-center" for="exampleFormControlTextarea2">
+            <strong>Relación con el proyecto</strong>
+          </div>
+        </div>-->
+        <label class="texto-form" for="exampleFormControlTextarea2">RELACIÓN CON EL PROYECTO</label>
+        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" placeholder="Escribir relación con el proyecto"></textarea>
+      </div>
+
+    <br>
+    <button class="btn btn-success" role="button" (click)="crearOrden()">Crear Orden</button>
+    <button class="btn btn-danger" role="button" (click)="cancelar()">Cancelar</button>
+    <br><br>
+  </form>
+</div>

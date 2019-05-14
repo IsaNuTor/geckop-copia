@@ -57,7 +57,6 @@ const routes: Routes = [
   {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
   {path: "add-orden/gastos/form-gastos/form-gastos.component", component:FormGastosComponent},
   {path: "add-orden/gastos/form-gastos/ver-gasto.component/:id", component:VerGastoComponent}
-
 ];
 
 // Backend
