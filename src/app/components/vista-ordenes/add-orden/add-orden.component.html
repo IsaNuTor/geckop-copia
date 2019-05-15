@@ -6,14 +6,23 @@
   </div>
 
   <form>
-    <!--Lista desplegable de acreedores-->
-      <div class="form-group">
-        <br>
-          <select class="custom-select">
-            <option selected>Seleccione acreedor</option>
-            <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{ acreedor.nif }}</option>
-          </select>
+    <br>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label class="texto-form">Proyecto</label>
+        <select class="custom-select">
+          <option selected>Seleccione acrónimo del proyecto</option>
+          <option *ngFor="let proyecto of proyectos" value="{{ proyecto.acronimo }}">{{ proyecto.acronimo }}</option>
+        </select>
       </div>
+      <div class="form-group col-md-6">
+        <label class="texto-form">Acreedor</label>
+        <select class="custom-select">
+          <option selected>Seleccione acreedor</option>
+          <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{ acreedor.nif }}</option>
+        </select>
+      </div>
+    </div>
 
       <!--GASTOS-->
       <app-gastos></app-gastos>
@@ -21,8 +30,8 @@
       <!--Memoria explicativa de los gastos-->
       <br>
       <div class="form-group">
-        <label class="texto-form" for="exampleFormControlTextarea1">MEMORIA EXPLICATIVA DE LOS GASTOS</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Escribir memoria explicativa" ></textarea>
+        <label class="texto-form" for="exampleFormControlTextarea1">Memoria explicativa de los gastos</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Escribe la memoria explicativa" ></textarea>
       </div>
 
       <!--Relación con el proyecto-->
@@ -33,8 +42,15 @@
             <strong>Relación con el proyecto</strong>
           </div>
         </div>-->
-        <label class="texto-form" for="exampleFormControlTextarea2">RELACIÓN CON EL PROYECTO</label>
-        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" placeholder="Escribir relación con el proyecto"></textarea>
+        <label class="texto-form" for="exampleFormControlTextarea2">Relación con el proyecto</label>
+        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" placeholder="Escribe la relación con el proyecto"></textarea>
+      </div>
+
+      <!--Observaciones a tener en cuenta a la hora de pagar al acreedor-->
+      <br>
+      <div class="form-group">
+        <label class="texto-form" for="exampleFormControlTextarea2">Observaciones a la hora de pagar al acreedor</label>
+        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" placeholder="Escribe las observaciones que creas correspondientes"></textarea>
       </div>
 
     <br>

@@ -24,14 +24,14 @@ export class FormProyectosComponent implements OnInit {
   tituloProyectos:string = "Crear Nuevo Proyecto";
   formValid: boolean = true;
 
-  
+
   nombreIP1:string = "";
   usuarios: Usuario[];
   usuarios_anadidos: Usuario[];
   investigadores: UsuarioProyecto[];
   invForm: FormArray;
-  
-  
+
+
 
   constructor(
       private proyectoService: ProyectoService,
@@ -55,12 +55,12 @@ export class FormProyectosComponent implements OnInit {
         investigadores: this.fb.array([''])
       });
 
-      
+
       this.invForm = this.formProyecto.get('investigadores') as FormArray;
      //como no me deja inicializar el array a vacio añado un usuario vacio y lo quito al momento
       this.removeInvestigador(0);
     }
-  
+
   //Crea un subformulario para cada investigador que luego transformaremos en un array de investigadores
   crearInvestigador(dni: string): FormGroup{
     return this.fb.group({
@@ -73,7 +73,7 @@ export class FormProyectosComponent implements OnInit {
   addInvestigador(dni: string) {
     this.invForm.push(this.crearInvestigador(dni));
   }
-  
+
   removeInvestigador(index) {
     this.invForm.removeAt(index); //Index en la tabla
   }
@@ -92,11 +92,11 @@ export class FormProyectosComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioService.getUsuarios().subscribe(
-      usuarios =>{ 
+      usuarios =>{
         this.usuarios = usuarios;
          //quita el usuario logueado de la lista a mostrar
         var user: Usuario =  this.usuarios.find(usuario => usuario.dni === this.sesionService.getDni() )
-  
+
         this.nombreIP1 = user.nombre;
         this.usuarios.splice(this.usuarios.indexOf (user), 1);
       }
@@ -107,7 +107,7 @@ export class FormProyectosComponent implements OnInit {
 
   public anadirInvestigador(usuario: Usuario): void{
     //Podemos hacer que se quite de la otra lista
-    
+
     this.addInvestigador(usuario.dni);
 
     this.usuarios.splice(this.usuarios.indexOf(usuario), 1);
@@ -123,7 +123,7 @@ export class FormProyectosComponent implements OnInit {
 
     this.usuarios_anadidos.splice(this.usuarios_anadidos.indexOf(usuario), 1);
     this.usuarios.push(usuario);
-    
+
     this.invForm = this.listaInvestigadores;
     //alert(this.invForm.value);
 
@@ -141,13 +141,13 @@ export class FormProyectosComponent implements OnInit {
 
   public crearProyecto(){
     //post proyecto
-    
-    
-    this.formValid = (this.formProyecto.status == 'VALID') && ( this.proyecto.fechaInicio < this.proyecto.fechaCierre) 
+
+
+    this.formValid = (this.formProyecto.status == 'VALID') && ( this.proyecto.fechaInicio < this.proyecto.fechaCierre)
     this.proyecto = this.formProyecto.value;
     this.proyecto.ip1 = this.sesionService.getDni();
     this.investigadores = this.listaInvestigadores.value;
-   
+
 
     if(this.formValid){
       this.proyectoService.insertarProyecto(this.proyecto).subscribe(
@@ -165,21 +165,21 @@ export class FormProyectosComponent implements OnInit {
                       title: 'Guardado '+res.acronimo
                     })
                     //post inv-proyecto
-                
+
                 var inv = new UsuarioProyecto();
-                inv.dni = this.proyecto.ip1,  
+                inv.dni = this.proyecto.ip1,
                 inv.acronimo = this.proyecto.acronimo;
                 inv.rol = "Miembro del proyecto";
-            
+
                 this.usuarioProyectoService.insertarUsuariosProyecto(inv).subscribe();
-                
+
                 while(this.investigadores.length > 0){
                       var aux = this.investigadores.pop();
                       aux.acronimo = this.proyecto.acronimo;
                       this.usuarioProyectoService.insertarUsuariosProyecto(aux).subscribe();
                   }
                   this.router.navigate(['/proyectos']);
-                   
+
             }else{
               const ToastrModule = swal.mixin({
                 toast: true,
@@ -195,12 +195,6 @@ export class FormProyectosComponent implements OnInit {
             }
 
           });
-      
-
     }
-    
-
-    
-    
   }
 }

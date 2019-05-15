@@ -1,5 +1,12 @@
 export class Orden {
-  estado: string;
+  acron_id: string;
   numeracion: number;
-  id: number;
+  acronimo: string;
+  estado: string;
+  nif_usuario: string;
+  fechaOrden: Date;
+  num_contabilidad: string;
+  memoria: string;
+  relacion: string;
+  nif_acreedor: string
 }
