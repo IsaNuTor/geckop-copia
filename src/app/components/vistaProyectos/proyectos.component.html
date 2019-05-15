@@ -39,7 +39,7 @@
           <td>{{ proyecto.presupuesto }}</td>
           <td>{{ proyecto.nContabilidad }}</td>
           <td>
-            <button type="button" class="btn btn-link" name="button" >
+            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaProyectos/verProyecto/ver-proyecto.component', proyecto.acronimo]" >
               <img src="assets/iconos/editar.png" class="rounded" alt="Editar Proyecto">
             </button>
           </td>

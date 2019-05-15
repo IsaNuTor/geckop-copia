@@ -24,7 +24,7 @@ import { FormAcreedoresComponent } from './components/vistaAcreedores/formAcreed
 //Proyectos
 import { ProyectosComponent } from './components/vistaProyectos/proyectos.component';
 import { FormProyectosComponent } from './components/vistaProyectos/formProyectos/form-proyectos.component';
-
+import { VerProyectoComponent } from './components/vistaProyectos/verProyecto/ver-proyecto.component';
 import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.component';
 
 // órdenes
@@ -56,7 +56,8 @@ const routes: Routes = [
   {path:'registro', component: FormRegistroUsuariosComponent},
   {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
   {path: "add-orden/gastos/form-gastos/form-gastos.component", component:FormGastosComponent},
-  {path: "add-orden/gastos/form-gastos/ver-gasto.component/:id", component:VerGastoComponent}
+  {path: "add-orden/gastos/form-gastos/ver-gasto.component/:id", component:VerGastoComponent},
+  {path: "vistaProyectos/verProyecto/ver-proyecto.component/:acronimo", component:VerProyectoComponent}
 ];
 
 // Backend
@@ -83,7 +84,8 @@ import { FooterComponent } from './components/footer/footer.component';
     VistaOrdenesComponent,
     GastosComponent,
     FormGastosComponent,
-    VerGastoComponent
+    VerGastoComponent,
+    VerProyectoComponent
   ],
   imports: [
     BrowserModule,

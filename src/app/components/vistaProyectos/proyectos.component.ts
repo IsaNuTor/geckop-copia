@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Proyecto } from '../../services/proyecto/proyecto';
 import { ProyectoService } from '../../services/proyecto/proyecto.service';
 import swal from 'sweetalert2';
+import { Pipe, PipeTransform } from '@angular/core';
 @Component({
   selector: 'app-proyectos',
   templateUrl: './proyectos.component.html',

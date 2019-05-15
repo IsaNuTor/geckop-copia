@@ -141,10 +141,11 @@ export class FormProyectosComponent implements OnInit {
 
   public crearProyecto(){
     //post proyecto
-    this.proyecto.ip1 = this.sesionService.getDni();
+    
     
     this.formValid = (this.formProyecto.status == 'VALID') && ( this.proyecto.fechaInicio < this.proyecto.fechaCierre) 
     this.proyecto = this.formProyecto.value;
+    this.proyecto.ip1 = this.sesionService.getDni();
     this.investigadores = this.listaInvestigadores.value;
    
 
@@ -164,10 +165,12 @@ export class FormProyectosComponent implements OnInit {
                       title: 'Guardado '+res.acronimo
                     })
                     //post inv-proyecto
-                    var inv = new UsuarioProyecto();
-                    inv.dni = this.proyecto.ip1,  
-                    inv.acronimo = this.proyecto.acronimo;
-                    inv.rol = "Miembro del proyecto";
+                
+                var inv = new UsuarioProyecto();
+                inv.dni = this.proyecto.ip1,  
+                inv.acronimo = this.proyecto.acronimo;
+                inv.rol = "Miembro del proyecto";
+            
                 this.usuarioProyectoService.insertarUsuariosProyecto(inv).subscribe();
                 
                 while(this.investigadores.length > 0){
