@@ -1,0 +1,13 @@
+.centrar {
+  width: 100%;
+  padding-left: 5%;
+}
+
+.centrar button {
+  font-size: 18px;
+  margin-top: 8%;
+  margin-bottom: 15%;
+  width: 40%;
+  padding: 3%;
+  margin-left: 6%;
+}

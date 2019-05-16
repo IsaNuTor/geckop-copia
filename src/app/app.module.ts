@@ -33,7 +33,7 @@ import { VistaOrdenesComponent } from './components/vista-ordenes/vista-ordenes.
 import { GastosComponent } from './components/vista-ordenes/add-orden/gastos/gastos.component';
 import { FormGastosComponent } from './components/vista-ordenes/add-orden/gastos/form-gastos/form-gastos.component';
 import { VerGastoComponent } from './components/vista-ordenes/add-orden/gastos/form-gastos/ver-gasto.component';
-
+import { VistaOrdenBotonComponent } from './components/vista-ordenes/vista-orden-boton/vista-orden-boton.component';
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
@@ -57,13 +57,13 @@ const routes: Routes = [
   {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
   {path: "add-orden/gastos/form-gastos/form-gastos.component", component:FormGastosComponent},
   {path: "add-orden/gastos/form-gastos/ver-gasto.component/:id", component:VerGastoComponent},
-  {path: "vistaProyectos/verProyecto/ver-proyecto.component/:acronimo", component:VerProyectoComponent}
+  {path: "vistaProyectos/verProyecto/ver-proyecto.component/:acronimo", component:VerProyectoComponent},
+  {path: "vista-ordenes/vista-orden-boton", component:VistaOrdenBotonComponent}
 ];
 
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
-
 
 @NgModule({
   declarations: [
@@ -85,7 +85,8 @@ import { FooterComponent } from './components/footer/footer.component';
     GastosComponent,
     FormGastosComponent,
     VerGastoComponent,
-    VerProyectoComponent
+    VerProyectoComponent,
+    VistaOrdenBotonComponent
   ],
   imports: [
     BrowserModule,

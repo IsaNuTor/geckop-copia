@@ -38,7 +38,7 @@ export class AddOrdenComponent implements OnInit {
   }
 
   public cancelar(){
-    this.router.navigate(['vista-ordenes']);
+    this.router.navigate(['/vista-ordenes/vista-orden-boton']);
   }
 
   public crearOrden(): void {
