@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { Orden } from '../../../services/orden/orden';
 import { OrdenService } from '../../../services/orden/orden.service';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Gasto } from 'src/app/services/gasto/gasto';
 
 @Component({
   selector: 'app-add-orden',
@@ -17,13 +19,44 @@ export class AddOrdenComponent implements OnInit {
 
   acreedores: Acreedor[];
   proyectos: Proyecto[];
-  private orden: Orden = new Orden();
+  orden: Orden = new Orden();
+  gastos: Gasto[];
+
+
+
+  /*Cosas formulario*/
+  formOrden: FormGroup; 
+  formGastos: FormGroup;
+
+  
+  
+
+
 
   constructor(private acreedorService: AcreedorService,
         private router: Router,
-        private activatedRoute: ActivatedRoute,
         private ordenService: OrdenService,
-        private proyectoService: ProyectoService) { }
+        private proyectoService: ProyectoService,
+        private fb: FormBuilder
+        ) { 
+
+          this.formOrden = this.fb.group({
+            proyecto: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+            acreedor: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+            concepto: ['', [Validators.required, Validators.maxLength(50)]],
+            numContabilidad: ['', [Validators.maxLength(50)]],
+            memoria: ['', [Validators.required, Validators.maxLength(50)]],
+            relacion: ['', [Validators.required, Validators.max(100000000)]],
+            observaciones: ['', [Validators.required, Validators.max(100000000)]]
+          });
+          this.formGastos = this.fb.group({
+            nFactura: [ '', Validators.required], //Nº de Factura
+            descripcion: [ '', Validators.required],  //Concepto
+            importe: [ '', Validators.required],  //Importe
+            imagen: [''] //Imagen
+          });
+
+        }
 
   ngOnInit() {
     // Cargamos selector de acreedores.
@@ -35,7 +68,36 @@ export class AddOrdenComponent implements OnInit {
     this.proyectoService.getProyectos().subscribe(
       proyectos => this.proyectos = proyectos
     );
+
+    this.gastos = new Array<Gasto>();
   }
+
+
+  /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
+
+
+  anadirGasto(){  
+
+      var gasto: Gasto = new Gasto();
+      gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
+      
+      gasto.iva = 21;
+      this.gastos.push(gasto);
+      alert(this.formGastos.value + this.gastos);
+
+  }
+
+  eliminarGasto(gasto: Gasto){
+    /*Cogemos el indice */
+    var i = this.gastos.indexOf (gasto); 
+    /*Quitamos el gasto del array de gastos*/
+    this.gastos.splice(i, 1);
+  }
+
+  /*--------------------------------------------------------------------------------------------------------------*/
+  
+
+
 
   public cancelar(){
     this.router.navigate(['/vista-ordenes/vista-orden-boton']);

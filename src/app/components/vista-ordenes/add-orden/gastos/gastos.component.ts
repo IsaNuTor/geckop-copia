@@ -26,7 +26,7 @@ export class GastosComponent implements OnInit {
   delete(gasto: Gasto): void {
     swal.fire({
     title: '¿Estás seguro?',
-    text: `¿Seguro que desea eliminar el gasto ${gasto.tipo}?`,
+    text: `¿Seguro que desea eliminar el gasto ?`,
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -40,7 +40,7 @@ export class GastosComponent implements OnInit {
             this.gastos = this.gastos.filter(gast => gast !== gasto),
             swal.fire(
               'Gasto eliminado',
-              `El gasto ${gasto.tipo} ha sido eliminado con éxito`,
+              `El gasto ha sido eliminado con éxito`,
               'success'
             )
           }

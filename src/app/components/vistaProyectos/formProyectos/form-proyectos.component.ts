@@ -61,6 +61,23 @@ export class FormProyectosComponent implements OnInit {
       this.removeInvestigador(0);
     }
 
+
+    
+  ngOnInit() {
+    this.usuarioService.getUsuarios().subscribe(
+      usuarios =>{
+        this.usuarios = usuarios;
+         //quita el usuario logueado de la lista a mostrar
+        var user: Usuario =  this.usuarios.find(usuario => usuario.dni === this.sesionService.getDni() )
+
+        this.nombreIP1 = user.nombre;
+        this.usuarios.splice(this.usuarios.indexOf (user), 1);
+      }
+
+    );
+    this.usuarios_anadidos = new Array<Usuario>();
+  }
+
   //Crea un subformulario para cada investigador que luego transformaremos en un array de investigadores
   crearInvestigador(dni: string): FormGroup{
     return this.fb.group({
@@ -90,20 +107,6 @@ export class FormProyectosComponent implements OnInit {
     console.log(this.proyecto);
   }
 
-  ngOnInit() {
-    this.usuarioService.getUsuarios().subscribe(
-      usuarios =>{
-        this.usuarios = usuarios;
-         //quita el usuario logueado de la lista a mostrar
-        var user: Usuario =  this.usuarios.find(usuario => usuario.dni === this.sesionService.getDni() )
-
-        this.nombreIP1 = user.nombre;
-        this.usuarios.splice(this.usuarios.indexOf (user), 1);
-      }
-
-    );
-    this.usuarios_anadidos = new Array<Usuario>();
-  }
 
   public anadirInvestigador(usuario: Usuario): void{
     //Podemos hacer que se quite de la otra lista
