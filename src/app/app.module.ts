@@ -55,7 +55,7 @@ const routes: Routes = [
   {path:'registro', component: FormRegistroUsuariosComponent},
   {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
   {path: "add-orden/gastos/form-gastos/form-gastos.component", component:FormGastosComponent},
-  {path: "vistaProyectos/verProyecto/ver-proyecto.component/:acronimo", component:VerProyectoComponent},
+  {path: "vistaProyectos/verProyecto/:acronimo", component:VerProyectoComponent},
   {path: "vista-ordenes/vista-orden-boton", component:VistaOrdenBotonComponent}
 ];
 
@@ -81,7 +81,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MenuVerticalComponent,
     VistaOrdenesComponent,
     GastosComponent,
-    FormGastosComponent,  
+    FormGastosComponent,
     VerProyectoComponent,
     VistaOrdenBotonComponent
   ],

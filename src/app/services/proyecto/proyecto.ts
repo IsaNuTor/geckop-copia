@@ -1,7 +1,7 @@
 export class Proyecto {
   fechaInicio: Date;
   fechaCierre: Date;
-  nombre:string;
+  nombre: string;
   acronimo: string;
   presupuesto: number;
   nContabilidad: number;

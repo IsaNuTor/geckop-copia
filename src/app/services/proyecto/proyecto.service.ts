@@ -14,6 +14,7 @@ import {URL_BACKEND} from '../../config/config';
 export class ProyectoService {
 
   urlProyecto:string = 'http://localhost:8080/api/proyecto';
+  urlProyectoVista:string = 'http://localhost:8080/api/vistaProyectos/verProyecto';
   //urlProyecto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
@@ -24,7 +25,11 @@ export class ProyectoService {
   }
   public getProyectos(): Observable<Proyecto[]> {
        return this.http.get<Proyecto[]>(this.urlProyecto);
-    }
+  }
+
+  public getProyecto(acronimo:String): Observable<Proyecto> {
+       return this.http.get<Proyecto>(`${this.urlProyectoVista}/${acronimo}`);
+  }
 
   public borrarProyecto(proyecto: Proyecto): Observable<Proyecto> {
       return this.http.delete<Proyecto>(`${this.urlProyecto}/${proyecto.acronimo}`, {headers: this.httpHeaders});

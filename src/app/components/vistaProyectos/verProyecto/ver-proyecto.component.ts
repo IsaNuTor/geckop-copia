@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Proyecto } from 'src/app/services/proyecto/proyecto';
 import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
 import { ActivatedRoute } from '@angular/router';
+import { Orden } from 'src/app/services/orden/orden';
+import { UsuarioProyecto } from 'src/app/services/usuario-proyecto/usuario-proyecto';
 
 @Component({
   selector: 'app-ver-proyecto',
@@ -11,10 +13,11 @@ import { ActivatedRoute } from '@angular/router';
 export class VerProyectoComponent implements OnInit {
 
   proyecto: Proyecto;
-  
+  ordenesPendientes: Orden;
+  investigadoresProyecto: UsuarioProyecto;
 
   constructor(
-    proyectoService: ProyectoService,
+    private proyectoService: ProyectoService,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -24,17 +27,18 @@ export class VerProyectoComponent implements OnInit {
 
 
   cargarProyecto(): void {
-    this.activatedRoute.params.subscribe(params => {
-      let acronimo = params['acronimo']
-      if(acronimo) {
+      this.activatedRoute.params.subscribe(params => {
+      let acronimooo = params['acronimo']
+
+      //this.proyecto = new Proyecto();
+      if(acronimooo) {
       //alert(acronimo);
       /*this.proyectoService.getProyecto(acronimo).subscribe(
           (proyecto) => this.proyecto = proyecto
         )*/
+        this.proyectoService.getProyecto(acronimooo).subscribe((proyecto) => this.proyecto = proyecto);
       }
     })
   }
 
 }
-
-
