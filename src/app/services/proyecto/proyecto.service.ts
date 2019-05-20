@@ -20,18 +20,18 @@ export class ProyectoService {
   constructor(private http: HttpClient) { }
 
   // Guarda el proyecto
-  public insertarProyecto(proyecto:Proyecto): Observable<Proyecto> {
+  insertarProyecto(proyecto:Proyecto): Observable<Proyecto> {
      return this.http.post<Proyecto>(this.urlProyecto, proyecto, {headers: this.httpHeaders});
   }
-  public getProyectos(): Observable<Proyecto[]> {
+  getProyectos(): Observable<Proyecto[]> {
        return this.http.get<Proyecto[]>(this.urlProyecto);
   }
 
-  public getProyecto(acronimo:String): Observable<Proyecto> {
+  getProyecto(acronimo:String): Observable<Proyecto> {
        return this.http.get<Proyecto>(`${this.urlProyectoVista}/${acronimo}`);
   }
 
-  public borrarProyecto(proyecto: Proyecto): Observable<Proyecto> {
+  borrarProyecto(proyecto: Proyecto): Observable<Proyecto> {
       return this.http.delete<Proyecto>(`${this.urlProyecto}/${proyecto.acronimo}`, {headers: this.httpHeaders});
     }
 }
