@@ -13,7 +13,9 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="nombre">   Nombre</label>
-        <input type="text" class="form-control"formControlName="nombre" id="nombre" placeholder="Nombre" name="nombre" maxLength="50">
+        <input type="text" class="form-control"formControlName="nombre" id="nombre" placeholder="Nombre" *ngIf="!this.botonCrear" name="nombre" maxLength="50">
+        <input type="text" class="form-control"formControlName="nombre" id="nombre" value="{{acreedor.nombre}}" *ngIf="this.botonCrear" name="nombre" maxLength="50">
+
         <div class="alerta">
           <small *ngIf="!formValid && nombreVacio">No puede estar vacio <br></small>         
         </div>
@@ -21,7 +23,7 @@
       <div class="form-group col-md-6">
         <label for="nif"> NIF</label>
         <input type="text" class="form-control" formControlName="nif" id="nif" placeholder="Nif" name="nif" *ngIf="!this.botonCrear" maxLength="10" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))">
-        <input type="text" class="form-control" formControlName="nif" id="nif" placeholder="{{acreedor.nif}}" *ngIf="this.botonCrear" name="nif"  pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" disabled>
+        <input type="text" class="form-control" formControlName="nif" id="nif" value="{{acreedor.nif}}" *ngIf="this.botonCrear" name="nif"  pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" disabled>
         <div class="alerta">
           <small *ngIf="!formValid && nifVacio">No puede estar vacio <br></small>         
           <small *ngIf="!formValid && formAcreedores.get('nif').hasError('pattern')">El formato introducido no es válido<br></small>         
@@ -33,7 +35,8 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="iban">IBAN</label>
-        <input type="text" class="form-control" formControlName="iban" id="iban" placeholder="IBAN" name="iban" maxLength="34">
+        <input type="text" class="form-control" formControlName="iban" id="iban" placeholder="IBAN" *ngIf="!this.botonCrear" name="iban" maxLength="34">
+        <input type="text" class="form-control" formControlName="iban" id="iban" value="{{acreedor.iban}}" *ngIf="this.botonCrear" name="iban" maxLength="34">
         <div class="alerta">
           <small *ngIf="!formValid && ibanVacio">No puede estar vacio <br></small>         
           <small *ngIf="!formValid && formAcreedores.get('iban').hasError('minlength')">El campo es demasiado corto <br></small>         

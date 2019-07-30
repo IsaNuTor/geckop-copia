@@ -63,6 +63,7 @@ export class PerfilComponent implements OnInit {
     this.user.telefono = this.sesionService.getTelefono();
     this.user.departamento = this.sesionService.getDepartamento();
     this.user.centro = this.sesionService.getCentro();
+    this.user.password = ""; //OJO REVISAR CON PASS ENCRIPTADAS
   }
 
   modificarUsuario(){
@@ -72,7 +73,7 @@ export class PerfilComponent implements OnInit {
     if(this.formPerfil.value.telefono != ""){ this.user.telefono = this.formPerfil.value.telefono; this.modificar = true};
     if(this.formPerfil.value.departamento != ""){ this.user.departamento = this.formPerfil.value.departamento; this.modificar = true}
     if(this.formPerfil.value.centro != "" ){ this.user.centro = this.formPerfil.value.centro; this.modificar = true}
-    //if(this.formPerfil.value.passNueva != "" ){ this.user.password = this.formPerfil.value. passNueva;this.modificar = true}
+    if(this.formPerfil.value.passNueva != "" ){ this.user.password = this.formPerfil.value. passNueva;this.modificar = true}
 
     if(this.modificar){
       this.usuarioService.setUsuario(this.user).subscribe(
@@ -160,114 +161,3 @@ export class PerfilComponent implements OnInit {
 
 
 }
-/*if(this.formEmail.valid){
-  this.usuario = this.formEmail.value.email;
-  //cambiar email usuario Service
-  this.usuarioService.setEmail(this.sesionService.getDni(), this.email).subscribe(
-    res =>{
-      if(res){
-        const ToastrModule = swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 5000
-        });
-
-        ToastrModule.fire({
-          type: 'success',
-          title: 'Guardado correctamente'
-
-        })
-        this.formEmail.setValue({email: ""});
-        this.emailUsuario = this.email;
-      }else{
-        const ToastrModule = swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 5000
-        });
-
-        ToastrModule.fire({
-          type: 'error',
-          title: 'Fallo al guardar los cambios'
-
-        })
-      }
-    });
-}else{
-  this.emailValido = false;
-}
-  /*
-  public modificarEmail(): void{
-    if(this.formEmail.valid){
-      this.usuar = this.formEmail.value.email;
-      //cambiar email usuario Service
-      this.usuarioService.setEmail(this.sesionService.getDni(), this.email).subscribe(
-        res =>{
-          if(res){
-            const ToastrModule = swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 5000
-            });
-
-            ToastrModule.fire({
-              type: 'success',
-              title: 'Guardado correctamente'
-
-            })
-            this.formEmail.setValue({email: ""});
-            this.emailUsuario = this.email;
-          }else{
-            const ToastrModule = swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 5000
-            });
-
-            ToastrModule.fire({
-              type: 'error',
-              title: 'Fallo al guardar los cambios'
-
-            })
-          }
-        });
-    }else{
-      this.emailValido = false;
-    }
-   
-  }
-*//*
- modificarIban(): void{}
-  /*
-    if(this.formIban.valid){
-        //cambiar iban usuario service
-      /*¡¡if(this.acreedorService.hayOrdenesIban() ){
-        //this.acreedorService.añadirAcreedor(this.dni, this.iban);
-      }else{
-        //this.acreedorService.editarAcreedor(this.dni, this.iban);
-      }
-    }else{
-      this.ibanValido = false;
-    }
-    //cambiar iban usuario service
-    if(this.acreedorService.hayOrdenesIban() ){
-       //this.acreedorService.añadirAcreedor(this.dni, this.iban);
-    }else{
-      //this.acreedorService.editarAcreedor(this.dni, this.iban);
-    }
-
-  
-
-  
-
-
- * //setUsuario(){}
-
-*/
-
-
-

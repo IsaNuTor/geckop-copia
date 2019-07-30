@@ -101,10 +101,20 @@ export class FormAcreedoresComponent implements OnInit {
   }
 
   actualizarAcreedor(): void {
+    //alert("nombre:" +this.acreedor.nombre +"nif: "+ this.acreedor.nif +"iban"+ this.acreedor.iban)
     if(this.formAcreedores.valid){
+      this.formAcreedores.value.nif = this.acreedor.nif;
       //si nombre o iban tienen datos actualizamos nuestro acreedor y activamos la actualizacion
-      if(this.formAcreedores.value.nombre != ""){this.actualizar = true; this.acreedor.nombre = this.formAcreedores.value.nombre;}
-      if(this.formAcreedores.value.iban != ""){this.actualizar = true; this.acreedor.iban = this.formAcreedores.value.iban;}
+      if(this.formAcreedores.value.nombre != ""){
+          this.actualizar = true; 
+          this.acreedor.nombre = this.formAcreedores.value.nombre;
+      }else{ this.formAcreedores.value.nombre = this.acreedor.nombre  }
+      
+      if(this.formAcreedores.value.iban != ""){
+        this.actualizar = true; 
+        this.acreedor.iban = this.formAcreedores.value.iban;
+      }else{ this.formAcreedores.value.iban = this.acreedor.iban  }
+     
       if(this.actualizar){ 
         this.acreedorService.actualizarAcreedor(this.acreedor).subscribe(
           resultado => {
@@ -140,9 +150,20 @@ export class FormAcreedoresComponent implements OnInit {
             })
           }
         })
+      }else{
+        this.formValid = false;
+        const Toast = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        });
+        
+        Toast.fire({
+          type: 'error',
+          title: 'No se ha modificado ningún dato. '
+        })
       }
-    }else{
-      this.formValid = false;
     }
   }
 

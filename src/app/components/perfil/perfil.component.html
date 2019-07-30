@@ -20,7 +20,7 @@
               {{user.email}}
             </div>
             <div class="col-sm-5">
-                <input class="form-control" formControlName="email" type="text" placeholder="Nuevo Email" maxlength="20"> 
+                <input class="form-control" formControlName="email" type="text" placeholder="Nuevo Email" maxlength="50"> 
                 <div class="alerta">
                   <small *ngIf="!emailValido && formPerfil.get('email').hasError('email')">Formato invalido <br></small>
                 </div>
@@ -74,7 +74,7 @@
                 {{user.centro}}
               </div>
               <div class="col-sm-5">
-                  <input class="form-control" type="text" formControlName="centro" placeholder="Centro" maxlength="9">
+                  <input class="form-control" type="text" formControlName="centro" placeholder="Centro" maxlength="50">
               </div>
           </div>
 
