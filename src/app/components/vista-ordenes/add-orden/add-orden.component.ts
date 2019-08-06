@@ -25,11 +25,11 @@ export class AddOrdenComponent implements OnInit {
 
 
   /*Cosas formulario*/
-  formOrden: FormGroup; 
+  formOrden: FormGroup;
   formGastos: FormGroup;
 
-  
-  
+
+
 
 
 
@@ -38,7 +38,7 @@ export class AddOrdenComponent implements OnInit {
         private ordenService: OrdenService,
         private proyectoService: ProyectoService,
         private fb: FormBuilder
-        ) { 
+        ) {
 
           this.formOrden = this.fb.group({
             proyecto: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
@@ -76,28 +76,25 @@ export class AddOrdenComponent implements OnInit {
   /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
 
 
-  anadirGasto(){  
+  anadirGasto(){
 
       var gasto: Gasto = new Gasto();
       gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
-      
+
       gasto.iva = 21;
       this.gastos.push(gasto);
-      alert(this.formGastos.value + this.gastos);
+      /*alert(this.formGastos.value + this.gastos);*/
 
   }
 
   eliminarGasto(gasto: Gasto){
     /*Cogemos el indice */
-    var i = this.gastos.indexOf (gasto); 
+    var i = this.gastos.indexOf (gasto);
     /*Quitamos el gasto del array de gastos*/
     this.gastos.splice(i, 1);
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
-  
-
-
 
   public cancelar(){
     this.router.navigate(['/vista-ordenes/vista-orden-boton']);
@@ -135,5 +132,4 @@ export class AddOrdenComponent implements OnInit {
       }
     )
   }
-
 }

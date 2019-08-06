@@ -12,15 +12,46 @@ import swal from 'sweetalert2';
 export class GastosComponent implements OnInit {
 
   gastos: Gasto[];
-  formGasto: FormGroup;
+  formGastos: FormGroup;
   formValid: boolean = true;
 
-  constructor(private gastoService: GastoService) { }
+  constructor(private gastoService: GastoService,
+private fb: FormBuilder) {
+    this.formGastos = this.fb.group({
+      nFactura: [ '', Validators.required], //Nº de Factura
+      descripcion: [ '', Validators.required],  //Concepto
+      importe: [ '', Validators.required],  //Importe
+      imagen: [''] //Imagen
+    });
+  }
 
   ngOnInit() {
     this.gastoService.getGastos().subscribe(
       gastos => this.gastos = gastos
     );
+
+    this.gastos = new Array<Gasto>();
+  }
+
+  /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
+
+
+  anadirGasto(){
+
+      var gasto: Gasto = new Gasto();
+      gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
+
+      gasto.iva = 21;
+      this.gastos.push(gasto);
+      /*alert(this.formGastos.value + this.gastos);*/
+
+  }
+
+  eliminarGasto(gasto: Gasto){
+    /*Cogemos el indice */
+    var i = this.gastos.indexOf (gasto);
+    /*Quitamos el gasto del array de gastos*/
+    this.gastos.splice(i, 1);
   }
 
   delete(gasto: Gasto): void {

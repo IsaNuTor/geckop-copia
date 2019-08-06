@@ -9,13 +9,13 @@
 
 
     <form [formGroup]="formOrden">
-      
+
       <div class="form-row mt-3">
 
         <div class="form-group col-md-6">
           <label class="texto-form">Proyecto</label>
           <select class="custom-select" formControlName="proyecto">
-            <option selected>Seleccione acrónimo del proyecto</option>
+            <option value="" selected>Seleccione acrónimo del proyecto</option>
             <option *ngFor="let proyecto of proyectos" value="{{ proyecto.acronimo }}">{{ proyecto.acronimo }}</option>
           </select>
         </div>
@@ -23,7 +23,7 @@
         <div class="form-group col-md-6">
           <label class="texto-form">Acreedor</label>
           <select class="custom-select" formControlName="acreedor">
-            <option selected>Seleccione acreedor</option>
+            <option value="" selected>Seleccione acreedor</option>
             <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
           </select>
         </div>
@@ -36,28 +36,29 @@
             <label class="texto-form">Concepto</label>
             <input type="text" class="form-control" formControlName="concepto" name="concepto" id="concepto" placeholder="Concepto" >
           </div>
-  
+
           <div class="form-group col-md-6">
             <label class="texto-form">Num. Contabilidad</label>
             <input type="text" class="form-control" formControlName="numContabilidad" name="numContabilidad" id="numContabilidad" placeholder="Num. Contabilidad" >
           </div>
-  
+
         </div>
 
       <!--------------------------------------------------GASTOS----------------------------------------------------------------->
-        <div class="card-body">
-          
+      <app-gastos></app-gastos>
+<!--        <div class="card-body">
+
           <form class="card mb-4"  [formGroup]="formGastos" >
             <h3 class="texto-form mt-3">Relación de gastos</h3>
             <!-- Entradas simples -->
-            <div class="form-group">
+<!--            <div class="form-group">
               <label for="descripcion">Partida de Gastos</label>
               <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion" name="descripcion" rows="5" placeholder="Descripción (Máx 150 caracteres)" maxlength="150"></textarea>
               <div class="alerta">
                 <small *ngIf="false">No puede estar vacio <br></small>
               </div>
             </div>
-        
+
             <div class="form-group">
               <div class="row">
                 <div class="col-md-6">
@@ -65,19 +66,19 @@
                   <input type="text" class="form-control" formControlName="importe" name="importe" id="importe" placeholder="Importe" >
                   <div class="alerta">
                     <small *ngIf="false">No puede estar vacio <br></small>
-                  </div>    
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="nFactura">Nº de Factura</label>
-                  <input type="text" class="form-control" formControlName="nFactura" name="nFactura" id="nFactura" placeholder="Nº de Factura"> 
+                  <input type="text" class="form-control" formControlName="nFactura" name="nFactura" id="nFactura" placeholder="Nº de Factura">
                   <div class="alerta">
                     <small *ngIf="false">No puede estar vacio <br></small>
-                  </div> 
-                </div>               
+                  </div>
+                </div>
               </div>
             </div>
-  
-        
+
+
             <div class="form-group">
               <label for="imagen">Adjuntar Imagen</label>
               <input type="file" class="form-control-file" id="imagen">
@@ -87,13 +88,8 @@
             </div>
           </form>
 
-
-
-
-          
-
       <!--TABLA GASTOS-->
-          <table class="table table-bordered table-striped text-center">
+          <!--<table class="table table-bordered table-striped text-center">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Nº Factura</th>
@@ -103,13 +99,14 @@
                 <th>Eliminar</th>
               </tr>
             </thead>
-
+--> <!--
             <tbody>
               <tr *ngFor="let gasto of gastos">
                 <td>{{ gasto.nFactura}}</td>
                 <td>{{ gasto.descripcion }}</td>
                 <td>{{ gasto.importe}}</td>
                 <td><!--Ver foto gasto-->
+<!--
                   <button type="button" class="btn btn-link" name="button">
                     <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor">
                   </button>
@@ -122,7 +119,7 @@
               </tr>
             </tbody>
           </table>
-        </div>
+        </div>-->
 
         <br>
         <div class="form-group">
@@ -130,7 +127,7 @@
           <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="Escribe la memoria explicativa" ></textarea>
           <div class="alerta">
             <small *ngIf="false">No puede estar vacio <br></small>
-          </div> 
+          </div>
         </div>
 
         <br>
@@ -139,7 +136,7 @@
           <textarea class="form-control" id="relacion" rows="3" formControlName="relacion" placeholder="Escribe la relación con el proyecto"></textarea>
           <div class="alerta">
             <small *ngIf="false">No puede estar vacio <br></small>
-          </div> 
+          </div>
         </div>
 
         <br>
@@ -155,8 +152,5 @@
       <br><br>
     </form>
 
- 
+
 </div>
-
-
-
