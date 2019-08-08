@@ -1,9 +1,11 @@
 
  <div>
     <!--<h3>Nombre completo del proyecto (acronimo) - Nº Contabilidad</h3>-->
-    <h3>Proyecto: {{proyecto.acronimo}} - {{proyecto.nContabilidad}}</h3>
-
-    <span>{{proyecto.fechaInicio}} - {{proyecto.fechaCierre}}</span>
+    <h3>{{proyecto.acronimo}} - {{proyecto.nContabilidad}}</h3>
+    <span>{{proyecto.fechaInicio}} - {{proyecto.fechaCierre}}</span> 
+    <button type="button" class="btn btn-link" name="button" (click)="verUsuarios(proyecto)" >
+      <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
+    </button>
   </div>
 <div class="row mt-4">
 
