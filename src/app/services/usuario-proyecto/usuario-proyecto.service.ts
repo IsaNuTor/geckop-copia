@@ -22,7 +22,10 @@ export class UsuarioProyectoService {
   }
 
   public getInvestigadoresProyecto(p: String): Observable<UsuarioProyecto[]>{
-    return this.http.post<UsuarioProyecto[]>(this.urlUsuarioProyecto, p, {headers: this.httpHeaders})
+    return this.http.post<UsuarioProyecto[]>(this.urlUsuariosProyecto, p, {headers: this.httpHeaders})
   }
 
+  public getNombreInvestigador(dni: String ):String{
+    return "Hola soy: " + dni;
+  }
 }

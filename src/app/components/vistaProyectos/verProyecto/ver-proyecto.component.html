@@ -70,17 +70,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Azahara Fernández Notario</td>
-                <td>Miembro del proyecto</td>
-              </tr>
-              <tr>
-                <td>Isabel Núñez de la Torre</td>
-                <td>Miembro del proyecto</td>
-              </tr>
-              <tr>
-                <td>Mercedes García Merayo</td>
-                <td>Miembro del proyecto</td>
+              <tr *ngFor="let investigador of investigadoresProyecto" >
+                <td>{{ getNombre(investigador.dni) }}</td>
+                <td>{{ investigador.rol }}</td>
               </tr>
             </tbody>
           </table>

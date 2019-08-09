@@ -16,7 +16,8 @@ export class VerProyectoComponent implements OnInit {
 
   proyecto: Proyecto = new Proyecto();
   ordenesPendientes: Orden;
-  investigadoresProyecto: UsuarioProyecto;
+  investigadoresProyecto: UsuarioProyecto[];
+  
 
   constructor(
     private proyectoService: ProyectoService,
@@ -28,7 +29,6 @@ export class VerProyectoComponent implements OnInit {
   ngOnInit() {
     this.cargarProyecto();
     this.cargarUsuariosProyecto();
-    alert(this.investigadoresProyecto);
   }
 
 
@@ -48,15 +48,29 @@ export class VerProyectoComponent implements OnInit {
   }
 
   cargarUsuariosProyecto(): void {
-  
-      this.usuariosProyectoService.getInvestigadoresProyecto(this.proyecto.acronimo).subscribe((listaUsuarios) => this.investigadoresProyecto);
-    
+
+    this.activatedRoute.params.subscribe(params => {
+        let acronimo = params['acronimo']
+
+        //this.proyecto = new Proyecto();
+        if(acronimo) {
+        //alert(acronimo);
+        /*this.proyectoService.getProyecto(acronimo).subscribe(
+            (proyecto) => this.proyecto = proyecto
+          )*/
+          this.usuariosProyectoService.getInvestigadoresProyecto(acronimo).subscribe( 
+            (listaInvestigadores) => this.investigadoresProyecto = listaInvestigadores);
+        }
+      }) 
   }
 
   verUsuarios(): void{
     this.cargarUsuariosProyecto();
-    alert(this.investigadoresProyecto);
+  }
 
+  getNombre(dni: String): String{
+   return  this.usuariosProyectoService.getNombreInvestigador(dni);
+    
   }
 
 }
