@@ -20,7 +20,7 @@ export class VerProyectoComponent implements OnInit {
   investigadoresProyecto: UsuarioProyecto[];
   nombresInvestigadores: String[];//Array<String>;
   usuarioAux: Usuario;
-
+  editarFechaActiva: Boolean = false;
   constructor(
     private proyectoService: ProyectoService,
     private usuarioService: UsuarioService,
@@ -92,5 +92,9 @@ export class VerProyectoComponent implements OnInit {
       
     }
    //alert(this.nombresInvestigadores);
+  }
+
+  editarFecha():void{
+    this.editarFechaActiva = !this.editarFechaActiva;
   }
 }

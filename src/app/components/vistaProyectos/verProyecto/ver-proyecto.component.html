@@ -2,10 +2,24 @@
  <div>
     <!--<h3>Nombre completo del proyecto (acronimo) - Nº Contabilidad</h3>-->
     <h3>{{proyecto.acronimo}} - {{proyecto.nContabilidad}}</h3>
-    <span>{{proyecto.fechaInicio}} - {{proyecto.fechaCierre}}</span> 
-    <button type="button" class="btn btn-link" name="button" (click)="verUsuarios(proyecto)" >
-      <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
-    </button>
+    <div class="form-row mt-0" >
+      <div class="col-2 mt-2">
+          <span>Inicio - {{proyecto.fechaInicio}} </span> 
+      </div>
+      <div class="col-2 mt-2 ml-0">
+        <span>Fin - {{proyecto.fechaCierre}}</span>
+        <input *ngIf="editarFechaActiva" type="date" class="form-control position-static" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">
+       
+      </div>
+      
+      <div class="col-1 mt-0">
+        <button type="button" class="btn btn-link" name="button" (click)="editarFecha()" >
+        <img src="assets/iconos/editDate.png" class="rounded" alt="Eliminar Proyecto">
+        </button>
+      </div>
+    </div>  
+
+    
   </div>
 <div class="row mt-4">
 
