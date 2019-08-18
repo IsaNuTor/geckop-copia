@@ -22,16 +22,9 @@ export class AddOrdenComponent implements OnInit {
   orden: Orden = new Orden();
   gastos: Gasto[];
 
-
-
   /*Cosas formulario*/
   formOrden: FormGroup;
   formGastos: FormGroup;
-
-
-
-
-
 
   constructor(private acreedorService: AcreedorService,
         private router: Router,

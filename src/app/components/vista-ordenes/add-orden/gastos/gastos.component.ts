@@ -21,7 +21,7 @@ private fb: FormBuilder) {
       nFactura: [ '', Validators.required], //Nº de Factura
       descripcion: [ '', Validators.required],  //Concepto
       importe: [ '', Validators.required],  //Importe
-      imagen: [''] //Imagen
+      imagen: ['', Validators.required] //Imagen
     });
   }
 
@@ -31,6 +31,8 @@ private fb: FormBuilder) {
     );
 
     this.gastos = new Array<Gasto>();
+
+    
   }
 
   /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
@@ -42,6 +44,8 @@ private fb: FormBuilder) {
       gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
 
       gasto.iva = 21;
+
+
       this.gastos.push(gasto);
       /*alert(this.formGastos.value + this.gastos);*/
 
