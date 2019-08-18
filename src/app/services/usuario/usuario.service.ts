@@ -20,7 +20,7 @@ export class UsuarioService {
   urlComprobarPass:string = 'http://localhost:8080/api/comprobarPass';
   urlSetPass:string = 'http://localhost:8080/api/setPass';
   urlSetUsuario:string = 'http://localhost:8080/api/setUsuario';
-
+  urlGetNombre:string = 'http://localhost:8080/api/getNombre';
 
 
 
@@ -71,6 +71,15 @@ export class UsuarioService {
   setUsuario(user: Usuario): Observable<Boolean>{
     return this.http.post<Boolean>(this.urlSetUsuario, user, {headers: this.httpHeaders});
    
+  }
+  public getNombreUsuario(dni: String ):Observable<Usuario>{
+    try {
+      return this.http.post<Usuario>(this.urlGetNombre, dni, {headers: this.httpHeaders});
+   
+    } catch (error) {
+      alert("Ha habido un error")
+    }
+    
   }
 
 }

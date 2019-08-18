@@ -5,7 +5,8 @@ import { UsuarioProyectoService } from 'src/app/services/usuario-proyecto/usuari
 import { Router, ActivatedRoute } from '@angular/router';
 import { Orden } from 'src/app/services/orden/orden';
 import { UsuarioProyecto } from 'src/app/services/usuario-proyecto/usuario-proyecto';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { Usuario } from 'src/app/services/usuario/usuario';
 
 @Component({
   selector: 'app-ver-proyecto',
@@ -17,10 +18,12 @@ export class VerProyectoComponent implements OnInit {
   proyecto: Proyecto = new Proyecto();
   ordenesPendientes: Orden;
   investigadoresProyecto: UsuarioProyecto[];
-  
+  nombresInvestigadores: String[];//Array<String>;
+  usuarioAux: Usuario;
 
   constructor(
     private proyectoService: ProyectoService,
+    private usuarioService: UsuarioService,
     private usuariosProyectoService: UsuarioProyectoService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -29,6 +32,7 @@ export class VerProyectoComponent implements OnInit {
   ngOnInit() {
     this.cargarProyecto();
     this.cargarUsuariosProyecto();
+    
   }
 
 
@@ -59,7 +63,11 @@ export class VerProyectoComponent implements OnInit {
             (proyecto) => this.proyecto = proyecto
           )*/
           this.usuariosProyectoService.getInvestigadoresProyecto(acronimo).subscribe( 
-            (listaInvestigadores) => this.investigadoresProyecto = listaInvestigadores);
+            (listaInvestigadores) =>{
+              this.investigadoresProyecto = listaInvestigadores;
+              this.cargarNombres();
+              
+            });
         }
       }) 
   }
@@ -68,9 +76,21 @@ export class VerProyectoComponent implements OnInit {
     this.cargarUsuariosProyecto();
   }
 
-  getNombre(dni: String): String{
-   return  this.usuariosProyectoService.getNombreInvestigador(dni);
+  getNombre(dni: String): void{
+      
+      this.usuarioService.getNombreUsuario(dni).subscribe( (result) => {
+        this.usuarioAux = result;
+        this.nombresInvestigadores.push(result.nombre + " " + result.apellido1 +" "+ result.apellido2);
+      });
     
   }
 
+  cargarNombres():void{  
+    this.nombresInvestigadores = new Array<String>();  
+    for (let user of this.investigadoresProyecto) {
+      this.getNombre(user.dni);
+      
+    }
+   //alert(this.nombresInvestigadores);
+  }
 }

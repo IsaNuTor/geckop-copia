@@ -70,13 +70,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let investigador of investigadoresProyecto" >
-                <td>{{ getNombre(investigador.dni) }}</td>
-                <td>{{ investigador.rol }}</td>
+              <tr *ngFor="let inv of nombresInvestigadores; index as i" >
+                <td>{{ inv }}</td>
+                <td>{{ investigadoresProyecto[i].rol }}</td>
               </tr>
+              
             </tbody>
           </table>
-
+          <button type="button" class="btn btn-link" name="button" (click)="cargarNombres()" >
+            <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
+          </button>
+      
       </div>
     </div>
   </div>
