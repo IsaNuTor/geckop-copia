@@ -33,6 +33,7 @@ import { VistaOrdenesComponent } from './components/vista-ordenes/vista-ordenes.
 import { GastosComponent } from './components/vista-ordenes/add-orden/gastos/gastos.component';
 import { FormGastosComponent } from './components/vista-ordenes/add-orden/gastos/form-gastos/form-gastos.component';
 import { VistaOrdenBotonComponent } from './components/vista-ordenes/vista-orden-boton/vista-orden-boton.component';
+import { VerOrdenComponent } from './components/vista-ordenes/ver-orden/ver-orden.component';
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
@@ -56,7 +57,8 @@ const routes: Routes = [
   {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
   {path: "add-orden/gastos/form-gastos/form-gastos.component", component:FormGastosComponent},
   {path: "vistaProyectos/verProyecto/:acronimo", component:VerProyectoComponent},
-  {path: "vista-ordenes/vista-orden-boton", component:VistaOrdenBotonComponent}
+  {path: "vista-ordenes/vista-orden-boton", component:VistaOrdenBotonComponent},
+  {path: "vistaOrdenes/verOrden/:id", component:VerOrdenComponent}
 ];
 
 // Backend
@@ -83,7 +85,8 @@ import { FooterComponent } from './components/footer/footer.component';
     GastosComponent,
     FormGastosComponent,
     VerProyectoComponent,
-    VistaOrdenBotonComponent
+    VistaOrdenBotonComponent,
+    VerOrdenComponent,
   ],
   imports: [
     BrowserModule,

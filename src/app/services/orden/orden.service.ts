@@ -18,4 +18,8 @@ export class OrdenService {
   crearOrden(orden: Orden) : Observable<Orden> {
     return this.http.post<Orden>(`${this.urlOrden}`, orden, {headers: this.httpHeaders});
   }
+
+  getOrdenes(): Observable<Orden[]> {
+       return this.http.get<Orden[]>(this.urlOrden);
+  }
 }
