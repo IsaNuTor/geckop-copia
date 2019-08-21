@@ -3,7 +3,7 @@ import { Orden } from './orden';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {URL_BACKEND} from '../../config/config';
-import {UsuarioProyecto} from '../usuario/usuario-proyecto';
+import {UsuarioProyecto} from '../usuario-proyecto/usuario-proyecto';
 
 @Injectable({
   providedIn: 'root'
