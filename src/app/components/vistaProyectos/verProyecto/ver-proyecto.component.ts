@@ -51,6 +51,7 @@ export class VerProyectoComponent implements OnInit {
     }
               
   ngOnInit() {
+    
     this.cargarProyecto();
     this.cargarUsuariosProyecto();
     
@@ -123,7 +124,7 @@ export class VerProyectoComponent implements OnInit {
     this.editarFechaActiva = !this.editarFechaActiva;
     this.fechaAntigua =  this.formFecha.value.fechaCierre;
     this.proyecto.fechaCierre = this.formFecha.value.fechaCierre;
-    this.proyectoService.insertarProyecto(this.proyecto).subscribe(
+    this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
         result => {
           if(result != null){
             const ToastrModule = swal.mixin({
