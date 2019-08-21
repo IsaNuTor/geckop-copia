@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Orden } from '../../services/orden/orden';
 import { OrdenService } from '../../services/orden/orden.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SesionService } from '../../services/sesion/sesion.service';
 import swal from 'sweetalert2';
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -13,12 +15,36 @@ export class VistaOrdenesComponent implements OnInit {
 
   ordenes: Orden[];
 
-  constructor(private ordenService: OrdenService) { }
+  // Usuario logueado
+  dniUsuarioLogin: string = "";
+
+  constructor(private ordenService: OrdenService,
+              private sesionService: SesionService,
+              private activatedRoute: ActivatedRoute,) {
+
+
+              }
 
   ngOnInit() {
-    this.ordenService.getOrdenes().subscribe(
+
+    // Carga todas las ordenes
+    /*this.ordenService.getOrdenes().subscribe(
       ordenes => this.ordenes = ordenes
-    );
+    );*/
+
+    // Proyectos de usuarios, cargamos el dni con el que esta login.
+    this.dniUsuarioLogin = this.sesionService.getDni();
+
+    this.cargarMisOrdenes();
+  }
+
+  /* CARGAR Mis ordenes */
+  cargarMisOrdenes(): void {
+
+    this.ordenService.getOrdenesNif(this.dniUsuarioLogin).subscribe(
+      (listaMisOrdenes) =>{
+        this.ordenes = listaMisOrdenes;
+      });
   }
 
   public borrarOrden(orden: Orden): void{

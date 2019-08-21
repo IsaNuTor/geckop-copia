@@ -30,7 +30,7 @@ export class AddOrdenComponent implements OnInit {
   formOrden: FormGroup;
   formGastos: FormGroup;
 
-  // Proyectos
+  // Usuario logueado
   dniUsuarioLogin: string = "";
 
   constructor(private acreedorService: AcreedorService,

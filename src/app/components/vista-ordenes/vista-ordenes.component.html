@@ -33,9 +33,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let orden of ordenes">
+        <!--<tr *ngFor="let orden of ordenes">
           <td>{{orden.estado}}</td>
-          <td>{{orden.numeracion}}</td>
+          <td>{{orden.numeracion}}</td>-->
+          <tr *ngFor="let orden of ordenes; index as i">
+            <td>{{orden.estado}}</td>
+            <td>{{orden.numeracion}}</td>
           <td>
             <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
               <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
