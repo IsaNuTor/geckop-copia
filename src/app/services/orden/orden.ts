@@ -1,4 +1,5 @@
 export class Orden {
+  id: number;
   acron_id: string;
   numeracion: number;
   acronimo: string;

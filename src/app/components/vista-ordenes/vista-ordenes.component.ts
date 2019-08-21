@@ -21,4 +21,35 @@ export class VistaOrdenesComponent implements OnInit {
     );
   }
 
+  public borrarOrden(orden: Orden): void{
+    swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Seguro que desea eliminar la orden ${orden.numeracion} del proyecto ${orden.acronimo}?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+      cancelButtonText: 'No, cancelar',
+      onClose: () => {
+            location.reload();
+          }
+    }).then((result) => {
+        if (result.value) {
+          this.ordenService.borrarOrden(orden).subscribe (
+            response => {
+              this.ordenes = this.ordenes.filter(ord => ord !== orden),
+              swal.fire(
+                'Orden eliminada',
+                `La orden la orden ${orden.numeracion} del proyecto ${orden.acronimo} ha sido eliminada con éxito`,
+                'success'
+              )
+            }
+          );
+        }
+    })
+  }
+
+
+
 }

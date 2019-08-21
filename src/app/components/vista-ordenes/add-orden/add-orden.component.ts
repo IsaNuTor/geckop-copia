@@ -9,6 +9,7 @@ import { Orden } from '../../../services/orden/orden';
 import { OrdenService } from '../../../services/orden/orden.service';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Gasto } from 'src/app/services/gasto/gasto';
+import { SesionService } from '../../../services/sesion/sesion.service';
 
 @Component({
   selector: 'app-add-orden',
@@ -22,15 +23,22 @@ export class AddOrdenComponent implements OnInit {
   orden: Orden = new Orden();
   gastos: Gasto[];
 
+  misProyectos: Proyecto[];
+
   /*Cosas formulario*/
   formOrden: FormGroup;
   formGastos: FormGroup;
+
+  // Proyectos
+  dniUsuarioLogin: string = "";
 
   constructor(private acreedorService: AcreedorService,
         private router: Router,
         private ordenService: OrdenService,
         private proyectoService: ProyectoService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private activatedRoute: ActivatedRoute,
+        private sesionService: SesionService
         ) {
 
           this.formOrden = this.fb.group({
@@ -63,6 +71,11 @@ export class AddOrdenComponent implements OnInit {
     );
 
     this.gastos = new Array<Gasto>();
+
+    // Proyectos de usuarios, cargamos el dni con el que esta login.
+    this.dniUsuarioLogin = this.sesionService.getDni();
+
+    this.cargarUsuariosProyecto();
   }
 
 
@@ -88,6 +101,19 @@ export class AddOrdenComponent implements OnInit {
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
+
+/* CARGAR PROYECTOS DEL USUARIO */
+cargarUsuariosProyecto(): void {
+
+  this.activatedRoute.params.subscribe(params => {
+    let dniUser = params['dniUsuarioLogin']
+
+        this.ordenService.getProyectosDni(dniUser).subscribe(
+          (listaInvestigadores) =>{
+            this.misProyectos = listaInvestigadores;
+          });
+      })
+}
 
   public cancelar(){
     this.router.navigate(['/vista-ordenes/vista-orden-boton']);

@@ -28,37 +28,23 @@
         <tr>
           <th scope="col">Estado</th>
           <th scope="col">Numeración</th>
-          <th scope="col">Button</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Borrar</th>
         </tr>
       </thead>
       <tbody>
-<!--
-        <tr *ngFor="let proyecto of proyectos" >
-         <td>{{ proyecto.fechaInicio }}</td>
-         <td>{{ proyecto.fechaCierre }}</td>
-         <td>{{ proyecto.nombre }}</td>
-         <td>{{ proyecto.acronimo }}</td>
-         <td>{{ proyecto.presupuesto }}</td>
-         <td>{{ proyecto.nContabilidad }}</td>
-         <td>
-           <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaProyectos/verProyecto/', proyecto.acronimo]" >
-             <img src="assets/iconos/editar.png" class="rounded" alt="Editar Proyecto">
-           </button>
-         </td>
-         <td>
-           <button type="button" class="btn btn-link" name="button" (click)="borrarProyecto(proyecto)" >
-             <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
-           </button>
-         </td>
-       </tr>
--->
         <tr *ngFor="let orden of ordenes">
           <td>{{orden.estado}}</td>
           <td>{{orden.numeracion}}</td>
           <td>
-            <!--<button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenesComponent/verOrden/', orden.id]" >
+            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
               <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
-            </button>-->
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-link" name="button" (click)="borrarOrden(orden)" >
+              <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden">
+            </button>
           </td>
         </tr>
       </tbody>
