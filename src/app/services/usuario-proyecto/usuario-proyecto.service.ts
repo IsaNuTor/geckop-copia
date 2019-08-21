@@ -13,6 +13,9 @@ export class UsuarioProyectoService {
   usuariosProyecto: UsuarioProyecto[] = new Array<UsuarioProyecto>();
   urlUsuarioProyecto:string = 'http://localhost:8080/api/usuarioproyecto';
   urlUsuariosProyecto:string = 'http://localhost:8080/api/buscarusuariosproyecto';
+
+
+  urlDniProyecto:string = 'http://localhost:8080/api/buscarproyectosdni';
   //urlUsuarioProyecto:string = URL_BACKEND + '/api/usuarioproyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
@@ -27,5 +30,10 @@ export class UsuarioProyectoService {
 
   public getNombreInvestigador(dni: String ):String{
     return "Hola soy: " + dni;
+  }
+
+  // Devuelve la lista con los proyectos del dni para orden
+  public getProyectosDni(p: String): Observable<UsuarioProyecto[]>{
+    return this.http.post<UsuarioProyecto[]>(this.urlDniProyecto, p, {headers: this.httpHeaders})
   }
 }

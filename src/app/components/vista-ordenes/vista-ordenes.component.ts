@@ -31,9 +31,9 @@ export class VistaOrdenesComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, eliminarlo',
       cancelButtonText: 'No, cancelar',
-      onClose: () => {
-            location.reload();
-          }
+      /*onClose: () => {
+           location.reload();
+      }*/
     }).then((result) => {
         if (result.value) {
           this.ordenService.borrarOrden(orden).subscribe (
