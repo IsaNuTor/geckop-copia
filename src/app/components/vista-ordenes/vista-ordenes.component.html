@@ -32,21 +32,34 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Aprobada</td>
-          <td>id1a</td>
-          <td>Botón</td>
-        </tr>
-        <tr>
-          <!--<th scope="row">2</th>-->
-          <td>Cancelada</td>
-          <td>id2c</td>
-          <td>Botón</td>
-        </tr>
-        <tr>
-          <td>Espera</td>
-          <td>id3e</td>
-          <td>Botón</td>
+<!--
+        <tr *ngFor="let proyecto of proyectos" >
+         <td>{{ proyecto.fechaInicio }}</td>
+         <td>{{ proyecto.fechaCierre }}</td>
+         <td>{{ proyecto.nombre }}</td>
+         <td>{{ proyecto.acronimo }}</td>
+         <td>{{ proyecto.presupuesto }}</td>
+         <td>{{ proyecto.nContabilidad }}</td>
+         <td>
+           <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaProyectos/verProyecto/', proyecto.acronimo]" >
+             <img src="assets/iconos/editar.png" class="rounded" alt="Editar Proyecto">
+           </button>
+         </td>
+         <td>
+           <button type="button" class="btn btn-link" name="button" (click)="borrarProyecto(proyecto)" >
+             <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
+           </button>
+         </td>
+       </tr>
+-->
+        <tr *ngFor="let orden of ordenes">
+          <td>{{orden.estado}}</td>
+          <td>{{orden.numeracion}}</td>
+          <td>
+            <!--<button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenesComponent/verOrden/', orden.id]" >
+              <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+            </button>-->
+          </td>
         </tr>
       </tbody>
     </table>
