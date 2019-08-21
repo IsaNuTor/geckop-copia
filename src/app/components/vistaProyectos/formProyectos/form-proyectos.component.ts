@@ -21,7 +21,7 @@ export class FormProyectosComponent implements OnInit {
   //inv: UsuarioProyecto =new UsuarioProyecto();
   proyecto: Proyecto = new Proyecto();
   formProyecto: FormGroup;
-  tituloProyectos:string = "Crear Nuevo Proyecto";
+  tituloProyectos:String = "Crear Nuevo Proyecto";
   formValid: boolean = true;
 
 

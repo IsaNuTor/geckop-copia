@@ -1,3 +1,6 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import swal from 'sweetalert2';
+
 import { Component, OnInit } from '@angular/core';
 import { Proyecto } from 'src/app/services/proyecto/proyecto';
 import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
@@ -8,6 +11,8 @@ import { UsuarioProyecto } from 'src/app/services/usuario-proyecto/usuario-proye
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Usuario } from 'src/app/services/usuario/usuario';
 
+
+
 @Component({
   selector: 'app-ver-proyecto',
   templateUrl: './ver-proyecto.component.html',
@@ -15,20 +20,36 @@ import { Usuario } from 'src/app/services/usuario/usuario';
 })
 export class VerProyectoComponent implements OnInit {
 
+
+  /*Vista */
   proyecto: Proyecto = new Proyecto();
   ordenesPendientes: Orden;
   investigadoresProyecto: UsuarioProyecto[];
   nombresInvestigadores: String[];//Array<String>;
   usuarioAux: Usuario;
   editarFechaActiva: Boolean = false;
+  /*formFecha */
+  formFecha: FormGroup;
+  fechaAntigua: Date;
+  /*Nuevos Usuarios */
+  usuarios: Usuario[];
+  editarUsuarios: Boolean = false;
+
+
+
   constructor(
     private proyectoService: ProyectoService,
     private usuarioService: UsuarioService,
     private usuariosProyectoService: UsuarioProyectoService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
-
+    private activatedRoute: ActivatedRoute,
+    public fb: FormBuilder
+  ) { 
+      this.formFecha = this.fb.group({
+        fechaCierre: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+      });
+    }
+              
   ngOnInit() {
     this.cargarProyecto();
     this.cargarUsuariosProyecto();
@@ -96,5 +117,66 @@ export class VerProyectoComponent implements OnInit {
 
   editarFecha():void{
     this.editarFechaActiva = !this.editarFechaActiva;
+  }
+
+  guardarFecha():void{
+    this.editarFechaActiva = !this.editarFechaActiva;
+    this.fechaAntigua =  this.formFecha.value.fechaCierre;
+    this.proyecto.fechaCierre = this.formFecha.value.fechaCierre;
+    this.proyectoService.insertarProyecto(this.proyecto).subscribe(
+        result => {
+          if(result != null){
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'success',
+              title: 'Guardado '+result.acronimo
+            })
+          }else{
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'error',
+              title: 'Error al cambiar la fecha'
+            })
+            this.proyecto.fechaCierre = this.fechaAntigua;
+
+          }
+            
+        }
+    );
+
+    
+  }
+
+  cargarNuevosUsuarios():void{
+    this.editarUsuarios = !this.editarUsuarios;
+    this.usuarioService.getUsuarios().subscribe(
+      usuarios => {
+         this.usuarios = usuarios;
+         for (let inv of this.investigadoresProyecto) {
+          for (let user of usuarios){
+            if(inv.dni == user.dni)
+              this.usuarios.splice(this.usuarios.indexOf(user), 1);
+              
+          }
+              
+        }
+      }
+    );
+  }
+
+  editarInvestigadores():void{
+    
   }
 }
