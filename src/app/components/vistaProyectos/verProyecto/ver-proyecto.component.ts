@@ -34,6 +34,7 @@ export class VerProyectoComponent implements OnInit {
   /*Nuevos Usuarios */
   usuarios: Usuario[];
   editarUsuarios: Boolean = false;
+  formInvestigador: FormGroup;
 
 
 
@@ -47,6 +48,9 @@ export class VerProyectoComponent implements OnInit {
   ) { 
       this.formFecha = this.fb.group({
         fechaCierre: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+      });
+      this.formInvestigador = this.fb.group({
+        rol: ['Miembro del proyecto', Validators.required]  //rol del select
       });
     }
               
@@ -121,10 +125,11 @@ export class VerProyectoComponent implements OnInit {
   }
 
   guardarFecha():void{
-    this.editarFechaActiva = !this.editarFechaActiva;
-    this.fechaAntigua =  this.formFecha.value.fechaCierre;
-    this.proyecto.fechaCierre = this.formFecha.value.fechaCierre;
-    this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
+    if(this.formFecha.valid){
+      this.editarFechaActiva = !this.editarFechaActiva;
+      this.fechaAntigua =  this.formFecha.value.fechaCierre;
+      this.proyecto.fechaCierre = this.formFecha.value.fechaCierre;
+      this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
         result => {
           if(result != null){
             const ToastrModule = swal.mixin({
@@ -152,10 +157,9 @@ export class VerProyectoComponent implements OnInit {
             })
             this.proyecto.fechaCierre = this.fechaAntigua;
 
-          }
-            
-        }
-    );
+          } 
+        });
+    }
 
     
   }
@@ -168,16 +172,27 @@ export class VerProyectoComponent implements OnInit {
          for (let inv of this.investigadoresProyecto) {
           for (let user of usuarios){
             if(inv.dni == user.dni)
-              this.usuarios.splice(this.usuarios.indexOf(user), 1);
-              
-          }
-              
+              this.usuarios.splice(this.usuarios.indexOf(user), 1);   
+          }   
         }
       }
     );
   }
 
-  editarInvestigadores():void{
+  anadirInvestigador(usuario:Usuario):void{
+  
+    if(this.formInvestigador.valid){
+      let inv  = new UsuarioProyecto();
+      inv.acronimo = this.proyecto.acronimo;
+      inv.dni = usuario.dni;
+      inv.rol = this.formInvestigador.value.rol;
+
+      this.usuariosProyectoService.insertarUsuariosProyecto(inv).subscribe();
+      this.investigadoresProyecto.push(inv);
+      this.nombresInvestigadores.push(usuario.nombre + " " + usuario.apellido1 +" "+ usuario.apellido2);
+      this.usuarios.splice(this.usuarios.indexOf(usuario), 1);  
+
+    }
     
   }
 }
