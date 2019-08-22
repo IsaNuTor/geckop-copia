@@ -168,8 +168,8 @@ export class VerProyectoComponent implements OnInit {
     this.editarUsuarios = !this.editarUsuarios;
     this.usuarioService.getUsuarios().subscribe(
       usuarios => {
-         this.usuarios = usuarios;
-         for (let inv of this.investigadoresProyecto) {
+        this.usuarios = usuarios;
+        for (let inv of this.investigadoresProyecto) {
           for (let user of usuarios){
             if(inv.dni == user.dni)
               this.usuarios.splice(this.usuarios.indexOf(user), 1);   

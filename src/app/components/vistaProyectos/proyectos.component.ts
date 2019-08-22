@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 /*Clases propias*/
 import { Proyecto } from '../../services/proyecto/proyecto';
 import { ProyectoService } from '../../services/proyecto/proyecto.service';
+import { SesionService } from '../../services/sesion/sesion.service';
 import swal from 'sweetalert2';
 import { Pipe, PipeTransform } from '@angular/core';
 @Component({
@@ -11,10 +12,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ProyectosComponent implements OnInit {
   proyectos: Proyecto[];
-  constructor( private proyectoService: ProyectoService) { }
+  constructor( 
+    private proyectoService: ProyectoService,
+    private sesionService: SesionService
+    ) { }
 
   ngOnInit() {
-    this.proyectoService.getProyectos().subscribe(
+    this.proyectoService.getProyectosUsuario(this.sesionService.getDni()).subscribe(
       proyectos => this.proyectos = proyectos
     );
   }
