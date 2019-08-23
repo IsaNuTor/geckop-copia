@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { Gasto } from '../../../../services/gasto/gasto';
 import { GastoService } from '../../../../services/gasto/gasto.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,11 +13,14 @@ import swal from 'sweetalert2';
 export class GastosComponent implements OnInit {
 
   gastos: Gasto[];
+  gasto: Gasto;
   formGastos: FormGroup;
   formValid: boolean = true;
+  fotoSeleccionada: File;
 
   constructor(private gastoService: GastoService,
-private fb: FormBuilder) {
+private fb: FormBuilder,
+private activatedRoute: ActivatedRoute,) {
     this.formGastos = this.fb.group({
       nFactura: [ '', Validators.required], //Nº de Factura
       descripcion: [ '', Validators.required],  //Concepto
@@ -31,8 +35,6 @@ private fb: FormBuilder) {
     );
 
     this.gastos = new Array<Gasto>();
-
-    
   }
 
   /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
@@ -45,10 +47,27 @@ private fb: FormBuilder) {
 
       gasto.iva = 21;
 
+      gasto.imagen = this.fotoSeleccionada;
+
+      //this.subirFoto();
+
+      alert(this.gasto.id);
 
       this.gastos.push(gasto);
       /*alert(this.formGastos.value + this.gastos);*/
+  }
 
+  seleccionarFoto(event) {
+    this.fotoSeleccionada = event.target.files[0];
+    console.log(this.fotoSeleccionada);
+  }
+
+  subirFoto() {
+    this.gastoService.subirImagen(this.fotoSeleccionada, this.gasto.id).subscribe(
+      gasto => {
+          this.gasto = gasto;
+          swal.fire('Exito', `La foto se ha subido correctamente: ${this.gasto.foto}`, 'success');
+      });
   }
 
   eliminarGasto(gasto: Gasto){

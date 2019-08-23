@@ -10,6 +10,7 @@ import {URL_BACKEND} from '../../config/config';
 export class GastoService {
 
   urlGasto:string = 'http://localhost:8080/api/gastos';
+  urlGastoImagen:string = 'http://localhost:8080/api/gastos/subirImagen';
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -30,5 +31,13 @@ export class GastoService {
 
   borrarGasto(id: number): Observable<Gasto> {
     return this.http.delete<Gasto>(`${this.urlGasto}/${id}`, {headers: this.httpHeaders});
+  }
+
+  // Subir imagen
+  subirImagen(archivo: File, id): Observable<Gasto> {
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+    return this.http.post<Gasto>(`${this.urlGastoImagen}`, formData);
   }
 }

@@ -4,6 +4,7 @@ export class Gasto {
   iva: number;
   id: number;
   nFactura: string;
-  foto: string;
   //imagen
+  rutaFoto: string;
+  imagen: File;
 }

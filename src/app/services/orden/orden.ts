@@ -1,3 +1,6 @@
+import { Gasto } from '../gasto/gasto';
+
+
 export class Orden {
   id: number;
   acron_id: string;
@@ -10,4 +13,5 @@ export class Orden {
   memoria: string;
   relacion: string;
   nif_acreedor: string
+  gastos: Array<Gasto> = [];
 }

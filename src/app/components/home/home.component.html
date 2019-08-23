@@ -3,3 +3,46 @@
 </div>
 
 <img src="../../../assets/marca.jpg" alt="imagen geckop">
+
+<div class="card-body text-secondary">
+    <h1 class="card-title text-center">Mis órdenes</h1>
+
+    <!--TABLA DE ÓRDENES-->
+    <div class="form-row">
+
+        <div class="col">
+            <select class="form-control form-control-sm">
+              <option selected>Seleccione Estado</option>
+              <option value="aceptadas">Aceptadas</option>
+              <option value="pendientes">Pendientes</option>
+              <option value="canceladas">Canceladas</option>
+              <option value="devueltas">Devueltas</option>
+            </select>
+        </div>
+    </div>
+
+    <p></p>
+    <table class="table" id="tablaOrdenes">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Estado</th>
+          <th scope="col">Numeración</th>
+          <th scope="col">Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--<tr *ngFor="let orden of ordenes">
+          <td>{{orden.estado}}</td>
+          <td>{{orden.numeracion}}</td>-->
+          <tr *ngFor="let orden of ordenes; index as i">
+            <td>{{orden.estado}}</td>
+            <td>{{orden.numeracion}}</td>
+          <td>
+            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
+              <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

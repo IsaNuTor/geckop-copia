@@ -72,7 +72,7 @@
 
               <div class="form-group">
                 <label for="imagen">Adjuntar Imagen</label>
-                <input type="file" class="form-control-file" id="imagen">
+                <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="imagen">
               </div>
               <div class="form-group">
                 <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="anadirGasto()">Añadir Gasto</button>

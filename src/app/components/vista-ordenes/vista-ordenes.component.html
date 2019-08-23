@@ -5,8 +5,12 @@
       <button class="btn btn-rounded btn btn-success" types="button" [routerLink] = "['/vista-ordenes/vista-orden-boton']">Nueva Orden</button>
     </div>
 
+    <div class="alert alert-info my-4" *ngIf="ordenes?.length == 0">
+      No tiene ordenes realizadas
+    </div>
+
     <!--TABLA DE ÓRDENES-->
-    <div class="form-row">
+    <div class="form-row" *ngIf="ordenes?.length > 0">
         <div class="col">
             <input type="text" class="form-control form-control-sm" id="numeracion" placeholder="Numeración">
         </div>
@@ -23,7 +27,7 @@
     </div>
 
     <p></p>
-    <table class="table" id="tablaOrdenes">
+    <table class="table" id="tablaOrdenes" *ngIf="ordenes?.length > 0">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Estado</th>
