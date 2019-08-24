@@ -13,19 +13,24 @@ import swal from 'sweetalert2';
 export class GastosComponent implements OnInit {
 
   gastos: Gasto[];
-  gasto: Gasto;
+  gasto: Gasto = new Gasto();
   formGastos: FormGroup;
   formValid: boolean = true;
   fotoSeleccionada: File;
+  crear: boolean = true;
+  nFacturaVacio:boolean = false;
+  descripcionVacio:boolean = false;
+  importeVacio:boolean = false;
+  idAux: number;
 
   constructor(private gastoService: GastoService,
-private fb: FormBuilder,
-private activatedRoute: ActivatedRoute,) {
+              private fb: FormBuilder,
+              private activatedRoute: ActivatedRoute,) {
     this.formGastos = this.fb.group({
       nFactura: [ '', Validators.required], //Nº de Factura
       descripcion: [ '', Validators.required],  //Concepto
       importe: [ '', Validators.required],  //Importe
-      imagen: ['', Validators.required] //Imagen
+      //imagen: ['', Validators.required] //Imagen
     });
   }
 
@@ -39,21 +44,71 @@ private activatedRoute: ActivatedRoute,) {
 
   /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
 
+  public crearGasto(): void {
+
+    if(this.formGastos.valid){
+      //si falta algun dato marcamos el fallo y NO creamos el nuevo gasto
+      if(this.formGastos.value.nFactura == ""){this.nFacturaVacio = true; this.crear = false;}
+      if(this.formGastos.value.descripcion == ""){this.descripcionVacio = true; this.crear = false;}
+      if(this.formGastos.value.importe == ""){this.importeVacio = true; this.crear = false;}
+      if(this.crear){
+        this.gasto = this.formGastos.value;
+        this.gastoService.crearGasto(this.gasto).subscribe(
+          gasto =>
+          {
+            if(gasto != null){
+
+              this.idAux = gasto.id;
+
+              const ToastrModule = swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 5000
+                    });
+
+                    ToastrModule.fire({
+                      type: 'success',
+                      title: 'Guardado gasto '+ gasto.nFactura,
+
+                    })
+
+                    alert(this.idAux);
+                    this.subirFoto(this.idAux);
+
+              }else{
+                swal.fire({
+                            type: 'error',
+                            title: 'Error!',
+                            text: 'El gasto no se ha podido crear',
+                            onClose: () => {
+                                  location.reload();
+                                }
+                          })
+              }
+        })
+      }
+    }else{
+      this.formValid = false;
+      swal.fire({
+                  type: 'error',
+                  title: 'Error!',
+                  text: 'Revisa los campos, uno de los campos no tiene el formato correcto',
+                  onClose: () => {
+                        location.reload();
+                      }
+                })
+    }
+  }
 
   anadirGasto(){
+      this.gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
 
-      var gasto: Gasto = new Gasto();
-      gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
+      this.gasto.iva = 21;
 
-      gasto.iva = 21;
+      this.crearGasto();
 
-      gasto.imagen = this.fotoSeleccionada;
-
-      //this.subirFoto();
-
-      alert(this.gasto.id);
-
-      this.gastos.push(gasto);
+      this.gastos.push(this.gasto);
       /*alert(this.formGastos.value + this.gastos);*/
   }
 
@@ -62,11 +117,11 @@ private activatedRoute: ActivatedRoute,) {
     console.log(this.fotoSeleccionada);
   }
 
-  subirFoto() {
-    this.gastoService.subirImagen(this.fotoSeleccionada, this.gasto.id).subscribe(
+  subirFoto(idAux: number) {
+    this.gastoService.subirImagen(this.fotoSeleccionada, idAux).subscribe(
       gasto => {
           this.gasto = gasto;
-          swal.fire('Exito', `La foto se ha subido correctamente: ${this.gasto.foto}`, 'success');
+          swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
       });
   }
 

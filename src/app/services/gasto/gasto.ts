@@ -1,10 +1,10 @@
 export class Gasto {
+  id: number;
+  id_orden: number;
+  nFactura: string;
   descripcion: string;
   importe: number;
   iva: number;
-  id: number;
-  nFactura: string;
   //imagen
-  rutaFoto: string;
-  imagen: File;
+  foto: string;
 }
