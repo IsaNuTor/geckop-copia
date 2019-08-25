@@ -12,6 +12,8 @@ import swal from 'sweetalert2';
 })
 export class GastosComponent implements OnInit {
 
+  titulo: string = "Ordenes";
+  rutaImagen: string = 'http://localhost:8080/api/imagenes/';
   gastos: Gasto[];
   gasto: Gasto = new Gasto();
   formGastos: FormGroup;
@@ -73,9 +75,9 @@ export class GastosComponent implements OnInit {
 
                     })
 
-                    alert(this.idAux);
+                    // IMAGEN DEL GASTO, FACTURA, TICKET
+                    //alert(this.idAux);
                     this.subirFoto(this.idAux);
-
               }else{
                 swal.fire({
                             type: 'error',
@@ -102,22 +104,36 @@ export class GastosComponent implements OnInit {
   }
 
   anadirGasto(){
-      this.gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
 
-      this.gasto.iva = 21;
+      // Comprobamos que ha seleccionado la imagenen
+      if(!this.fotoSeleccionada) {
+          swal.fire('Error', `Debe seleccionar una imagen`, 'error');
 
-      this.crearGasto();
+      } else {
+        this.gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
 
-      this.gastos.push(this.gasto);
-      /*alert(this.formGastos.value + this.gastos);*/
+        this.gasto.iva = 21;
+
+        this.crearGasto();
+
+        this.gastos.push(this.gasto);
+        /*alert(this.formGastos.value + this.gastos);*/
+      }
   }
 
   seleccionarFoto(event) {
     this.fotoSeleccionada = event.target.files[0];
     console.log(this.fotoSeleccionada);
+
+    // Validamos que sea una foto y no otro archivo.
+    if(this.fotoSeleccionada.type.indexOf('image') < 0) {
+      swal.fire('Error', `El archivo seleccionado debe ser del tipo imagen`, 'error');
+      this.fotoSeleccionada = null;
+    }
   }
 
   subirFoto(idAux: number) {
+
     this.gastoService.subirImagen(this.fotoSeleccionada, idAux).subscribe(
       gasto => {
           this.gasto = gasto;

@@ -57,15 +57,14 @@
         <td>{{ gasto.nFactura}}</td>
         <td class="maximoAncho">{{ gasto.descripcion }}</td>
         <td>{{ gasto.importe}}</td>
-        <td><!--Ver foto gasto-->
-
-          <button type="button" class="btn btn-link" name="button">
-            <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor">
+        <td class="fotoFila"><!--Ver foto gasto-->
+          <button *ngIf="gasto?.foto" type="button" class="btn btn-link" name="button">
+            <img src="{{rutaImagen}}{{gasto.foto}}" class="rounded" alt="{{gasto.foto}}" style="width: 10%; height:0.5%;">
           </button>
         </td>
         <td>
           <button type="button" class="btn btn-link" name="button" (click)='eliminarGasto(gasto)' >
-            <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar gasto">
+            <img class="img-thumbnail rounded" src="assets/iconos/papelera.png" class="rounded" alt="Eliminar gasto">
           </button>
         </td>
       </tr>
