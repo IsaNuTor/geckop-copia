@@ -4,14 +4,17 @@ import { Gasto } from '../gasto/gasto';
 export class Orden {
   id: number;
   acron_id: string;
-  numeracion: number;
+
   acronimo: string;
+  numeracion: number;
   estado: string;
-  nif_usuario: string;
-  fechaOrden: Date;
+  nif_user: string;
+
+  fechaOrden: string;
   num_contabilidad: string;
+  concepto: string;
   memoria: string;
   relacion: string;
-  nif_acreedor: string
-  gastos: Array<Gasto> = [];
+  nif_acreedor: string;
+  observaciones: string;
 }

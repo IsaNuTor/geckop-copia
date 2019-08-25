@@ -33,6 +33,16 @@ export class AddOrdenComponent implements OnInit {
   // Usuario logueado
   dniUsuarioLogin: string = "";
 
+  formValid: boolean = true;
+  crear: boolean = true;
+  proyectoVacio:boolean = false;
+  acreedorVacio:boolean = false;
+  conceptoVacio:boolean = false;
+  numContabilidadVacio:boolean = false;
+  memoriaVacio:boolean = false;
+  relacionVacio:boolean = false;
+  observacionesVacio:boolean = false;
+
   constructor(private acreedorService: AcreedorService,
         private router: Router,
         private ordenService: OrdenService,
@@ -44,20 +54,25 @@ export class AddOrdenComponent implements OnInit {
         ) {
 
           this.formOrden = this.fb.group({
-            proyecto: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-            acreedor: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+            acronimo: ['', [Validators.required, Validators.maxLength(10)]],
+            nif_acreedor: ['', [Validators.required, Validators.maxLength(10)]],
             concepto: ['', [Validators.required, Validators.maxLength(50)]],
-            numContabilidad: ['', [Validators.maxLength(50)]],
+            num_contabilidad: ['', [Validators.maxLength(50)]],
             memoria: ['', [Validators.required, Validators.maxLength(50)]],
             relacion: ['', [Validators.required, Validators.max(100000000)]],
             observaciones: ['', [Validators.required, Validators.max(100000000)]]
           });
-          this.formGastos = this.fb.group({
+          /*this.formGastos = this.fb.group({
             nFactura: [ '', Validators.required], //Nº de Factura
             descripcion: [ '', Validators.required],  //Concepto
             importe: [ '', Validators.required],  //Importe
             imagen: [''] //Imagen
-          });
+          });*/
+
+          //numeracion: number;
+          //estado: string;
+
+          //fechaOrden: Date;
 
         }
 
@@ -84,7 +99,7 @@ export class AddOrdenComponent implements OnInit {
   /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
 
 
-  anadirGasto(){
+/*  anadirGasto(){
 
       var gasto: Gasto = new Gasto();
       gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
@@ -93,14 +108,14 @@ export class AddOrdenComponent implements OnInit {
       this.gastos.push(gasto);
       /*alert(this.formGastos.value + this.gastos);*/
 
-  }
+/*  }
 
   eliminarGasto(gasto: Gasto){
     /*Cogemos el indice */
-    var i = this.gastos.indexOf (gasto);
+/*    var i = this.gastos.indexOf (gasto);
     /*Quitamos el gasto del array de gastos*/
-    this.gastos.splice(i, 1);
-  }
+/*    this.gastos.splice(i, 1);
+}*/
 
   /*--------------------------------------------------------------------------------------------------------------*/
 
@@ -120,16 +135,34 @@ cargarUsuariosProyecto(): void {
 
   public crearOrden(): void {
     //console.log(this.gasto);
-    this.ordenService.crearOrden(this.orden).subscribe(
-      orden =>
-      {
-        this.router.navigate(['vista-ordenes'])
-        if(orden != null){
-          const ToastrModule = swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 5000
+
+    if(this.formOrden.valid){
+
+      //si falta algun dato marcamos el fallo y NO creamos la nueva Orden
+      if(this.formOrden.value.proyecto == ""){this.proyectoVacio = true; this.crear = false;}
+      if(this.formOrden.value.acreedor == ""){this.acreedorVacio = true; this.crear = false;}
+      if(this.formOrden.value.concepto == ""){this.conceptoVacio = true; this.crear = false;}
+      if(this.formOrden.value.numContabilidad == ""){this.numContabilidadVacio = true; this.crear = false;}
+      if(this.formOrden.value.memoria == ""){this.memoriaVacio = true; this.crear = false;}
+      if(this.formOrden.value.relacion == ""){this.relacionVacio = true; this.crear = false;}
+      if(this.formOrden.value.observaciones == ""){this.observacionesVacio = true; this.crear = false;}
+
+      if(this.crear){
+        this.orden = this.formOrden.value;
+        // Los datos que no coge del formulario.
+        this.orden.nif_user = this.dniUsuarioLogin;
+        this.orden.estado = "pendiente";
+
+        this.ordenService.crearOrden(this.orden).subscribe(
+          orden =>
+          {
+            this.router.navigate(['vista-ordenes'])
+            if(orden != null){
+              const ToastrModule = swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 5000
                 });
 
                 ToastrModule.fire({
@@ -150,4 +183,6 @@ cargarUsuariosProyecto(): void {
       }
     )
   }
+}
+}
 }

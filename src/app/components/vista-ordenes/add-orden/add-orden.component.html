@@ -22,17 +22,15 @@
 
         <div class="form-group col-md-6">
           <label class="texto-form">Proyecto</label>
-          <select class="custom-select" formControlName="proyecto">
+          <select class="custom-select" formControlName="acronimo">
             <option value="" selected>Seleccione acrónimo del proyecto</option>
             <option *ngFor="let proyecto of misProyectos; index as i" value="{{ misProyectos[i].acronimo }}">{{ proyecto.acronimo }}</option>
           </select>
         </div>
 
-
-
         <div class="form-group col-md-6">
           <label class="texto-form">Acreedor</label>
-          <select class="custom-select" formControlName="acreedor">
+          <select class="custom-select" formControlName="nif_acreedor">
             <option value="" selected>Seleccione acreedor</option>
             <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
           </select>
@@ -49,7 +47,7 @@
 
           <div class="form-group col-md-6">
             <label class="texto-form">Num. Contabilidad</label>
-            <input type="text" class="form-control" formControlName="numContabilidad" name="numContabilidad" id="numContabilidad" placeholder="Num. Contabilidad" >
+            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" >
           </div>
 
         </div>

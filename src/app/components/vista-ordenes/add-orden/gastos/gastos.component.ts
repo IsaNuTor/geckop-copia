@@ -8,7 +8,7 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-gastos',
   templateUrl: './gastos.component.html',
-  styleUrls: ['./gastos.component.css']
+  styleUrls: ['./gastos.component.css'],
 })
 export class GastosComponent implements OnInit {
 
@@ -126,6 +126,7 @@ export class GastosComponent implements OnInit {
     console.log(this.fotoSeleccionada);
 
     // Validamos que sea una foto y no otro archivo.
+    // si no se encuentra una extensión de imagen, va a devolver la función menor que cero.
     if(this.fotoSeleccionada.type.indexOf('image') < 0) {
       swal.fire('Error', `El archivo seleccionado debe ser del tipo imagen`, 'error');
       this.fotoSeleccionada = null;

@@ -57,7 +57,14 @@
         <td>{{ gasto.nFactura}}</td>
         <td class="maximoAncho">{{ gasto.descripcion }}</td>
         <td>{{ gasto.importe}}</td>
-        <td class="fotoFila"><!--Ver foto gasto-->
+
+<!-- Button trigger modal ------------------------------------------------------------------------->
+
+<!--------------------------------------------------------Modal------------------------------------------------------------>
+
+  <!--------------------------------------Modal------------------------------------------------------------------------->
+  <!--Ver foto gasto-->
+        <td>
           <button *ngIf="gasto?.foto" type="button" class="btn btn-link" name="button">
             <img src="{{rutaImagen}}{{gasto.foto}}" class="rounded" alt="{{gasto.foto}}" style="width: 10%; height:0.5%;">
           </button>

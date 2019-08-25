@@ -34,6 +34,10 @@ import { GastosComponent } from './components/vista-ordenes/add-orden/gastos/gas
 import { FormGastosComponent } from './components/vista-ordenes/add-orden/gastos/form-gastos/form-gastos.component';
 import { VistaOrdenBotonComponent } from './components/vista-ordenes/vista-orden-boton/vista-orden-boton.component';
 import { VerOrdenComponent } from './components/vista-ordenes/ver-orden/ver-orden.component';
+
+// Gasto
+import { ModalImagenComponent } from './components/vista-ordenes/add-orden/gastos/modal-imagen/modal-imagen.component';
+
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormRegistroUsuariosComponent } from './components/form-registro-usuarios/form-registro-usuarios.component';
@@ -87,6 +91,7 @@ import { FooterComponent } from './components/footer/footer.component';
     VerProyectoComponent,
     VistaOrdenBotonComponent,
     VerOrdenComponent,
+    ModalImagenComponent,
   ],
   imports: [
     BrowserModule,
