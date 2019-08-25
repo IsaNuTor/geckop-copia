@@ -1,9 +1,9 @@
-<div class="card-body">
+<!--<div class="card-body">
 
   <form class="card mb-4"  [formGroup]="formGastos" >
     <h3 class="texto-form mt-3">Relación de gastos</h3>
     <!-- Entradas simples -->
-  <div class="form-group">
+<!--  <div class="form-group">
       <label for="descripcion">Partida de Gastos</label>
       <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion" name="descripcion" rows="5" placeholder="Descripción (Máx 150 caracteres)" maxlength="200"></textarea>
       <div class="alerta">
@@ -39,9 +39,9 @@
       <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="anadirGasto()">Añadir Gasto</button>
     </div>
   </form>
-
+-->
 <!--TABLA GASTOS-->
-  <table class="table table-bordered table-striped text-center">
+<!--  <table class="table table-bordered table-striped text-center">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Nº Factura</th>
@@ -57,14 +57,14 @@
         <td>{{ gasto.nFactura}}</td>
         <td class="maximoAncho">{{ gasto.descripcion }}</td>
         <td>{{ gasto.importe}}</td>
-
+-->
 <!-- Button trigger modal ------------------------------------------------------------------------->
 
 <!--------------------------------------------------------Modal------------------------------------------------------------>
 
   <!--------------------------------------Modal------------------------------------------------------------------------->
   <!--Ver foto gasto-->
-        <td>
+  <!--     <td>
           <button *ngIf="gasto?.foto" type="button" class="btn btn-link" name="button">
             <img src="{{rutaImagen}}{{gasto.foto}}" class="rounded" alt="{{gasto.foto}}" style="width: 10%; height:0.5%;">
           </button>
@@ -77,4 +77,4 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div>-->

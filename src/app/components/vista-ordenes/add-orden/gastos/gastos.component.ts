@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { Gasto } from '../../../../services/gasto/gasto';
 import { GastoService } from '../../../../services/gasto/gasto.service';
@@ -43,9 +43,9 @@ export class GastosComponent implements OnInit {
 
     this.gastos = new Array<Gasto>();
   }
-
+*/
   /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
-
+/*
   public crearGasto(): void {
 
     if(this.formGastos.valid){
@@ -118,7 +118,7 @@ export class GastosComponent implements OnInit {
 
         this.gastos.push(this.gasto);
         /*alert(this.formGastos.value + this.gastos);*/
-      }
+/*      }
   }
 
   seleccionarFoto(event) {
@@ -144,9 +144,9 @@ export class GastosComponent implements OnInit {
 
   eliminarGasto(gasto: Gasto){
     /*Cogemos el indice */
-    var i = this.gastos.indexOf (gasto);
+/*    var i = this.gastos.indexOf (gasto);
     /*Quitamos el gasto del array de gastos*/
-    this.gastos.splice(i, 1);
+/*    this.gastos.splice(i, 1);
   }
 
   delete(gasto: Gasto): void {
@@ -175,4 +175,4 @@ export class GastosComponent implements OnInit {
     })
   }
 
-}
+}*/
