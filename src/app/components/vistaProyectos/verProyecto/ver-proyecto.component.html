@@ -123,7 +123,7 @@
                   <th scope="col">Añadir</th>
                 </tr>
               </thead>
-              <tbody *ngFor="let usuario of usuarios; let i = index;">
+              <tbody *ngFor="let usuario of usuarios; let i = index; |slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"">
                   <tr>
                     <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
                     <td> 

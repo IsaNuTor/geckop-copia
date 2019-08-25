@@ -36,6 +36,7 @@ export class VerProyectoComponent implements OnInit {
   editarUsuarios: Boolean = false;
   formInvestigador: FormGroup;
 
+  
 
 
   constructor(

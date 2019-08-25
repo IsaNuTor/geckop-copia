@@ -2,47 +2,149 @@
 <div class="menu">
 </div>
 
-<img src="../../../assets/marca.jpg" alt="imagen geckop">
+<div class="container">
+  <div class="col-md-6">
+      <table>
 
-<div class="card-body text-secondary">
-    <h1 class="card-title text-center">Mis órdenes</h1>
+      </table>
+  </div>
 
-    <!--TABLA DE ÓRDENES-->
-    <div class="form-row">
 
-        <div class="col">
-            <select class="form-control form-control-sm">
-              <option selected>Seleccione Estado</option>
-              <option value="aceptadas">Aceptadas</option>
-              <option value="pendientes">Pendientes</option>
-              <option value="canceladas">Canceladas</option>
-              <option value="devueltas">Devueltas</option>
-            </select>
-        </div>
+  <!--Arriba IZQ -- Pendientes de revisar como ip-->
+  <div class="row">
+    <div class="col-md-6">
+      <h4 *ngIf="ordenes?.length > 0"> Revisar como IP</h4>
+      <table class="table" id="tablaOrdenes" *ngIf="ordenes?.length > 0">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Estado</th>
+            <th scope="col">Numeración</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of [1,2,3]; ">
+              <td>{{getOrdenPaginado(a).estado}}</td>
+              <td>{{getOrdenPaginado(a).numeracion}}</td>
+            <td>
+              <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[a].id]" >
+                <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" name="button" (click)="borrarOrden(orden)" >
+                <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden">
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <button type="button" class="btn btn-primary mr-2" (click) = siguiente()>Siguiente</button>
+            <button type="button" class="btn btn-primary" (click) = anterior()>Anterior</button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+
+
+
+    <!--Arriba DCHA -- Ultimas aceptadas-->
+    <div class="col-md-6">
+      <h4 *ngIf="ordenes?.length > 0"> Ultimas Aceptadas</h4>
+      <table class="table" id="tablaOrdenes" *ngIf="ordenes?.length > 0">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Estado</th>
+            <th scope="col">Numeración</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let orden of aceptadas; index as i">
+              <td>{{orden.estado}}</td>
+              <td>{{orden.numeracion}}</td>
+            <td>
+              <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
+                <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" name="button" (click)="borrarOrden(orden)" >
+                <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>  
+  </div>
+
+<!--Pendientes de Modificar-->
+  <div class="row">
+    <div class="col-md-6">
+      <h4 *ngIf="ordenes?.length > 0"> Revisar como Investigador</h4>
+      <table class="table" id="tablaOrdenes" *ngIf="ordenes?.length > 0">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Estado</th>
+            <th scope="col">Numeración</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let orden of pendientes; index as i">
+              <td>{{orden.estado}}</td>
+              <td>{{orden.numeracion}}</td>
+            <td>
+              <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
+                <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" name="button" (click)="borrarOrden(orden)" >
+                <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <p></p>
-    <table class="table" id="tablaOrdenes">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Estado</th>
-          <th scope="col">Numeración</th>
-          <th scope="col">Editar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!--<tr *ngFor="let orden of ordenes">
-          <td>{{orden.estado}}</td>
-          <td>{{orden.numeracion}}</td>-->
-          <tr *ngFor="let orden of ordenes; index as i">
+    
+    <div class="col-md-6">
+      <h4 *ngIf="ordenes?.length > 0"> Ultimas Rechazadas</h4>
+      <table class="table" id="tablaOrdenes" *ngIf="ordenes?.length > 0">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Estado</th>
+            <th scope="col">Numeración</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--<tr *ngFor="let orden of ordenes">
             <td>{{orden.estado}}</td>
-            <td>{{orden.numeracion}}</td>
-          <td>
-            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
-              <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <td>{{orden.numeracion}}</td>-->
+            <tr *ngFor="let orden of rechazadas; index as i">
+              <td>{{orden.estado}}</td>
+              <td>{{orden.numeracion}}</td>
+            <td>
+              <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
+                <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" name="button" (click)="borrarOrden(orden)" >
+                <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+</div>
