@@ -44,6 +44,10 @@ export class AddOrdenComponent implements OnInit {
   relacionVacio:boolean = false;
   observacionesVacio:boolean = false;
 
+  // Ver si el select tiene valor para que aparezca el panel de gastos.
+  verSeleccionada: string = '';
+  //opcionSeleccionada:string = '0';
+
   // GASTOS
   titulo: string = "Ordenes";
   rutaImagen: string = 'http://localhost:8080/api/imagenes/';
@@ -76,7 +80,7 @@ export class AddOrdenComponent implements OnInit {
             num_contabilidad: ['', [Validators.maxLength(50)]],
             memoria: ['', [Validators.required, Validators.maxLength(50)]],
             relacion: ['', [Validators.required, Validators.max(100000000)]],
-            observaciones: ['', [Validators.required, Validators.max(100000000)]]
+            observaciones: ['', [Validators.required, Validators.max(100000000)]],
           });
           this.formGastos = this.fb.group({
             nFactura: [ '', Validators.required], //Nº de Factura
@@ -93,6 +97,7 @@ export class AddOrdenComponent implements OnInit {
         }
 
   ngOnInit() {
+
     // Cargamos selector de acreedores.
     this.acreedorService.getAcreedores().subscribe(
       acreedores => this.acreedores = acreedores
@@ -114,6 +119,13 @@ export class AddOrdenComponent implements OnInit {
     );
 
     this.gastos = new Array<Gasto>();
+  }
+
+  // Para ocultar el panel de gastos si no hay un acronimo de proyecto seleccionado.
+  capturarValor() {
+    //this.opcionSeleccionada = this.formOrden.get('acronimo');
+    this.verSeleccionada = this.formOrden.get('acronimo').value;
+    //console.log(this.verSeleccionada);
   }
 
 
@@ -303,7 +315,8 @@ public crearOrden(): void {
         this.orden = this.formOrden.value;
         // Los datos que no coge del formulario.
         this.orden.nif_user = this.dniUsuarioLogin;
-        this.orden.estado = "pendiente";
+        this.orden.estado = "P"; // Pendiente
+        this.orden.fechaOrden = new Date();
 
         this.ordenService.crearOrden(this.orden).subscribe(
           orden =>

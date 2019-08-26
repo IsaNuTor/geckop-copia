@@ -10,7 +10,7 @@ export class Orden {
   estado: string;
   nif_user: string;
 
-  fechaOrden: string;
+  fechaOrden: Date;
   num_contabilidad: string;
   concepto: string;
   memoria: string;
