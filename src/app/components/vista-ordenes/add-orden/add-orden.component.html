@@ -125,8 +125,8 @@
         <!--------------------------------------Modal------------------------------------------------------------------------->
         <!--Ver foto gasto-->
               <td>
-                <button *ngIf="gasto?.foto" type="button" class="btn btn-link" name="button">
-                  <img src="{{rutaImagen}}{{gasto.foto}}" class="rounded" alt="{{gasto.foto}}" style="width: 10%; height:0.5%;">
+                <button type="button" class="btn btn-link" name="button" (click)='verFoto(gasto.foto)'>
+                  <img src="assets/iconos/lupa.png" class="rounded" alt="ver foto" style="width: 10%; height:0.5%;">
                 </button>
               </td>
               <td>
