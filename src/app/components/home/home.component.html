@@ -18,29 +18,31 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">Estado</th>
-            <th scope="col">Numeración</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Borrar</th>
+            <th scope="col">Concepto</th>
+            <th scope="col">Proyecto</th>
+            <th scope="col">Ver</th>
           </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let a of [1,2,3]; ">
-              <td>{{getOrdenPaginado(a).estado}}</td>
-              <td>{{getOrdenPaginado(a).numeracion}}</td>
-            <td>
-              <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[a].id]" >
-                <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-link" name="button" (click)="borrarOrden(orden)" >
-                <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden">
-              </button>
-            </td>
+        <tbody id="tablaOrdenes">
+            <tr *ngFor="let a of elementos;"> <!--and maxOrdenesOK(a))">--> 
+                <td >{{getOrdenPaginado(a, paginaActual).estado}}</td>
+                <td>{{getOrdenPaginado(a, paginaActual).concepto}}</td>
+                <td>{{getOrdenPaginado(a, paginaActual).acronimo}}</td>
+             
+                <td>
+                  <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', getOrdenPaginado(a, paginaActual).id]" >
+                    <img src="assets/iconos/lupa.png" class="rounded ml-0" alt="Editar Orden" maxwidth="10px">
+                  </button>
+                </td>
           </tr>
-          <tr>
-            <button type="button" class="btn btn-primary mr-2" (click) = siguiente()>Siguiente</button>
-            <button type="button" class="btn btn-primary" (click) = anterior()>Anterior</button>
+          <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
+            <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, ordenes.length)">
+                <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
+            </button>
+            
+            <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, ordenes.length)">
+                <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
+            </button>
           </tr>
         </tbody>
       </table>

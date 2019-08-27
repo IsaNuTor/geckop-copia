@@ -11,13 +11,20 @@ import { SesionService } from 'src/app/services/sesion/sesion.service';
 })
 export class HomeComponent implements OnInit {
 
+  /*Por cada tabla a mostrar */
   paginaActual: number = 0;
-  elementosPorPagina: number = 7;
+  elementos: Number[];
 
+
+  elementosPorPagina: number = 2;
+
+  
   ordenes: Orden[];
   aceptadas: Orden[];
   rechazadas: Orden[];
   pendientes: Orden[];
+
+  fecha:Date;
 
   constructor(private ordenService: OrdenService,
               private sesionService: SesionService,
@@ -25,7 +32,11 @@ export class HomeComponent implements OnInit {
             ) { }
 
   ngOnInit() {
+  
+   
    this.cargarOrdenesUsuario();
+
+   
   }
 
   cargarOrdenesUsuario(){
@@ -46,28 +57,59 @@ export class HomeComponent implements OnInit {
           }else if(orden.estado == "PM"){//Prndientes de modificacion
             this.pendientes.push(orden);
           }
-
         }
+
+        this.inicializarArrayNElementos( this.elementosPorPagina<this.ordenes.length ? this.elementosPorPagina : this.ordenes.length );
       }
     );
   }
 
 
-  getOrdenPaginado(a:number):Orden{
-   return this.ordenes [a+this.paginaActual*this.elementosPorPagina];
-  }
+  
 
-  siguiente():void{
+
+
+  /* Funciones necesarias para cualquier paginado */
+  siguiente(actual:number, longitud:number):number{
     //Comprobar maximo
-    this.paginaActual++;
+    longitud--;
+    let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
+    
+    if(actual < ultimaPagina)
+      actual++;
+    
+    if(actual == ultimaPagina)
+      this.inicializarArrayNElementos(((longitud)%this.elementosPorPagina))
+    
+    return actual;
+    
   }
-  anterior():void{
-    if(this.paginaActual >0)
-        this.paginaActual--;
+  anterior(actual: number, longitud:number):number{
+    let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina) - 1;
+    
+    if(actual == ultimaPagina)
+      this.inicializarArrayNElementos(this.elementosPorPagina)
+    
+    if(actual >0)
+        actual--;
+    
+    return actual;
   }
 
+  maxOrdenesOK(a:number, actual:number, longitud:number):boolean{
+    return a+actual*this.elementosPorPagina < longitud;
+  }
 
+  inicializarArrayNElementos(n:number):void{
+    this.elementos=new Array<Number>();
 
+    for(let i = 1; i<= n; i++)
+      this.elementos.push(i);
+  }
+
+  getOrdenPaginado(a:number, actual:number):Orden{
+    return this.ordenes [a+actual*this.elementosPorPagina];
+  }
 
 
 
