@@ -25,12 +25,12 @@
         </thead>
         <tbody id="tablaOrdenes">
             <tr *ngFor="let a of elementos;"> <!--and maxOrdenesOK(a))">--> 
-                <td >{{getOrdenPaginado(a, paginaActual).estado}}</td>
-                <td>{{getOrdenPaginado(a, paginaActual).concepto}}</td>
-                <td>{{getOrdenPaginado(a, paginaActual).acronimo}}</td>
+                <td >{{ordenes[getOrdenPagindoIndex(a, paginaActual)].estado}}</td>
+                <td>{{ordenes[getOrdenPagindoIndex(a, paginaActual)].concepto}}</td>
+                <td>{{ordenes[getOrdenPagindoIndex(a, paginaActual)].acronimo}}</td>
              
                 <td>
-                  <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', getOrdenPaginado(a, paginaActual).id]" >
+                  <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a, paginaActual)].id]" >
                     <img src="assets/iconos/lupa.png" class="rounded ml-0" alt="Editar Orden" maxwidth="10px">
                   </button>
                 </td>
