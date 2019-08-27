@@ -44,6 +44,12 @@ export class AddOrdenComponent implements OnInit {
   relacionVacio:boolean = false;
   observacionesVacio:boolean = false;
 
+  idAuxOrden: number;
+
+  // Ver si el select tiene valor para que aparezca el panel de gastos.
+  verSeleccionada: string = '';
+  //opcionSeleccionada:string = '0';
+
   // GASTOS
   titulo: string = "Ordenes";
   rutaImagen: string = 'http://localhost:8080/api/imagenes/';
@@ -76,7 +82,7 @@ export class AddOrdenComponent implements OnInit {
             num_contabilidad: ['', [Validators.maxLength(50)]],
             memoria: ['', [Validators.required, Validators.maxLength(50)]],
             relacion: ['', [Validators.required, Validators.max(100000000)]],
-            observaciones: ['', [Validators.required, Validators.max(100000000)]]
+            observaciones: ['', [Validators.required, Validators.max(100000000)]],
           });
           this.formGastos = this.fb.group({
             nFactura: [ '', Validators.required], //Nº de Factura
@@ -93,6 +99,7 @@ export class AddOrdenComponent implements OnInit {
         }
 
   ngOnInit() {
+
     // Cargamos selector de acreedores.
     this.acreedorService.getAcreedores().subscribe(
       acreedores => this.acreedores = acreedores
@@ -109,11 +116,19 @@ export class AddOrdenComponent implements OnInit {
     this.cargarUsuariosProyecto();
 
     // GASTOS
+    /*
     this.gastoService.getGastos().subscribe(
       gastos => this.gastos = gastos
-    );
+    );*/
 
     this.gastos = new Array<Gasto>();
+  }
+
+  // Para ocultar el panel de gastos si no hay un acronimo de proyecto seleccionado.
+  capturarValor() {
+    //this.opcionSeleccionada = this.formOrden.get('acronimo');
+    this.verSeleccionada = this.formOrden.get('acronimo').value;
+    //console.log(this.verSeleccionada);
   }
 
 
@@ -152,9 +167,14 @@ public crearGasto(): void {
       this.gastoService.crearGasto(this.gasto).subscribe(
         gasto =>
         {
+
           if(gasto != null){
 
             this.idAux = gasto.id;
+            this.subirFoto(this.idAux);
+            gasto.foto = this.idAux + "_" + this.fotoSeleccionada.name;
+            this.gastos.push(gasto);
+            console.log(this.gastos);
 
             const ToastrModule = swal.mixin({
                     toast: true,
@@ -163,15 +183,15 @@ public crearGasto(): void {
                     timer: 5000
                   });
 
-                  ToastrModule.fire({
+                  /*ToastrModule.fire({
                     type: 'success',
                     title: 'Guardado gasto '+ gasto.nFactura,
 
-                  })
+                  })*/
 
                   // IMAGEN DEL GASTO, FACTURA, TICKET
                   //alert(this.idAux);
-                  this.subirFoto(this.idAux);
+
             }else{
               swal.fire({
                           type: 'error',
@@ -182,6 +202,7 @@ public crearGasto(): void {
                               }
                         })
             }
+
       })
     }
   }else{
@@ -210,7 +231,7 @@ anadirGasto(){
 
       this.crearGasto();
 
-      this.gastos.push(this.gasto);
+      //this.gastos.push(this.gasto);
       /*alert(this.formGastos.value + this.gastos);*/
     }
 }
@@ -232,7 +253,7 @@ subirFoto(idAux: number) {
   this.gastoService.subirImagen(this.fotoSeleccionada, idAux).subscribe(
     gasto => {
         this.gasto = gasto;
-        swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
+        //swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
     });
 }
 
@@ -268,6 +289,41 @@ delete(gasto: Gasto): void {
     }
   })
 }
+
+// Inserta el dato id_orden en los gastos de la orden.
+cargarIdOrdenGasto(idAuxOrden: number): void {
+
+    for(let g of this.gastos) {
+      console.log(g);
+
+      g.id_orden = this.idAuxOrden;
+
+      this.gastoService.subirIdOrden(g).subscribe (
+        resultado => {
+          if(resultado){
+          const ToastrModule = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000
+          });
+
+          ToastrModule.fire({
+            type: 'success',
+            title: 'Guardado con exito',
+
+          })
+        }
+      });
+
+      /*this.gastoService.subirIdOrden(g).subscribe(
+        gasto => {
+            g = gasto;
+            //swal.fire('Exito', `id_orden en gasto insertado correctamente`, 'success');
+        });*/
+    }
+  }
+
   /*--------------------------------------------------------------------------------------------------------------*/
 
 /* CARGAR PROYECTOS DEL USUARIO */
@@ -288,6 +344,8 @@ cargarUsuariosProyecto(): void {
 public crearOrden(): void {
     //console.log(this.gasto);
 
+    console.log(this.gastos);
+
     if(this.formOrden.valid){
 
       //si falta algun dato marcamos el fallo y NO creamos la nueva Orden
@@ -303,7 +361,8 @@ public crearOrden(): void {
         this.orden = this.formOrden.value;
         // Los datos que no coge del formulario.
         this.orden.nif_user = this.dniUsuarioLogin;
-        this.orden.estado = "pendiente";
+        this.orden.estado = "P"; // Pendiente
+        this.orden.fechaOrden = new Date();
 
         this.ordenService.crearOrden(this.orden).subscribe(
           orden =>
@@ -322,6 +381,12 @@ public crearOrden(): void {
                   title: 'Éxito creada',
 
                 })
+
+                this.idAuxOrden = orden.id;
+                //alert(orden.id);
+                this.cargarIdOrdenGasto(this.idAuxOrden);
+                //alert("pasa por aqui");
+
           }else{
             swal.fire({
                         type: 'error',
@@ -336,5 +401,16 @@ public crearOrden(): void {
     )
   }
 }
+}
+
+verFoto(foto:String): void {
+
+  swal.fire({
+    imageUrl: this.rutaImagen + foto,
+    imageWidth: 500,
+    imageHeight: 500,
+    imageAlt: 'Custom image',
+    animation: false
+  })
 }
 }
