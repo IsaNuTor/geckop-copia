@@ -25,22 +25,22 @@
         </thead>
         <tbody id="tablaOrdenes">
             <tr *ngFor="let a of elementos;"> <!--and maxOrdenesOK(a))">--> 
-                <td >{{ordenes[getOrdenPagindoIndex(a, paginaActual)].estado}}</td>
-                <td>{{ordenes[getOrdenPagindoIndex(a, paginaActual)].concepto}}</td>
-                <td>{{ordenes[getOrdenPagindoIndex(a, paginaActual)].acronimo}}</td>
+                <td >{{listaIP[getOrdenPagindoIndex(a, paginaActual)].estado}}</td>
+                <td>{{listaIP[getOrdenPagindoIndex(a, paginaActual)].concepto}}</td>
+                <td>{{listaIP[getOrdenPagindoIndex(a, paginaActual)].acronimo}}</td>
              
                 <td>
-                  <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a, paginaActual)].id]" >
+                  <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(a, paginaActual)].id]" >
                     <img src="assets/iconos/lupa.png" class="rounded ml-0" alt="Editar Orden" maxwidth="10px">
                   </button>
                 </td>
           </tr>
           <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
-            <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, ordenes.length)">
+            <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, listaIP.length)">
                 <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
             </button>
             
-            <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, ordenes.length)">
+            <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, listaIP.length)">
                 <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
             </button>
           </tr>

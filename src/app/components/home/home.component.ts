@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   
    
    this.cargarOrdenesUsuario();
-   //this.cargarOrdenesIP();
+   this.cargarOrdenesIP();
 
    
   }
@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit {
   }
 
   cargarOrdenesIP(){
+    this.listaIP =  new Array<Orden>();
     this.ordenService.getOrdenesPendientesDeFirmaDeIP(this.sesionService.getDni()).subscribe(
       ordenes=> this.listaIP = ordenes      
     );
