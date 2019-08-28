@@ -238,15 +238,21 @@ anadirGasto(){
 }
 
 /* CARGAR la numeracion segun el acronimo del proyecto */
-cargarNumProyectoOrden(a: String): number {
+cargarNumProyectoOrden(): number {
+  if(this.formOrden.value.acronimo == ""){this.proyectoVacio = true; this.crear = false;}
 
-  this.ordenService.getNumAcronimo(a).subscribe(
-    (numMax) =>{
-      this.numeracionAux = numMax;
-    });
+  if(this.crear){
 
-    alert(this.numeracionAux);
-    return this.numeracionAux;
+    this.ordenService.getNumAcronimo(this.formOrden.value.acronimo).subscribe(
+      (numMax) =>{
+        this.numeracionAux = numMax;
+  
+        this.crearOrden();
+      });
+  
+      return this.numeracionAux;
+  }
+  
 }
 
 seleccionarFoto(event) {
@@ -362,7 +368,7 @@ public crearOrden(): void {
     if(this.formOrden.valid){
 
       //si falta algun dato marcamos el fallo y NO creamos la nueva Orden
-      if(this.formOrden.value.proyecto == ""){this.proyectoVacio = true; this.crear = false;}
+      if(this.formOrden.value.acronimo == ""){this.proyectoVacio = true; this.crear = false;}
       if(this.formOrden.value.acreedor == ""){this.acreedorVacio = true; this.crear = false;}
       if(this.formOrden.value.concepto == ""){this.conceptoVacio = true; this.crear = false;}
       if(this.formOrden.value.numContabilidad == ""){this.numContabilidadVacio = true; this.crear = false;}
@@ -376,10 +382,6 @@ public crearOrden(): void {
         this.orden.nif_user = this.dniUsuarioLogin;
         this.orden.estado = "P"; // Pendiente
         this.orden.fechaOrden = new Date();
-
-
-//this.cargarNumProyectoOrden('acr')
-        console.log(this.ordenService.getNumAcronimo('acr'));
         this.orden.numeracion = this.numeracionAux;
 
         this.ordenService.crearOrden(this.orden).subscribe(
@@ -425,8 +427,6 @@ verFoto(foto:String): void {
 
   swal.fire({
     imageUrl: this.rutaImagen + foto,
-    imageWidth: 500,
-    imageHeight: 500,
     imageAlt: 'Custom image',
     animation: false
   })
