@@ -108,8 +108,6 @@ export class HomeComponent implements OnInit {
 
   //Devuelve la siguiente pagina con el array de mostrado actulizado por si es pagina final y hay menos elementos que mostrar
   siguiente(actual:number, longitud:number, a:number):number{
-    //Comprobar maximo
-    
     let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
     
     if(longitud%this.elementosPorPagina == 0){
@@ -122,12 +120,6 @@ export class HomeComponent implements OnInit {
       if(actual == ultimaPagina)
         this.inicializarArrayNElementos(longitud%this.elementosPorPagina, a)
     }
-      
-  
-    
-
-
-    
     return actual;
     
   }

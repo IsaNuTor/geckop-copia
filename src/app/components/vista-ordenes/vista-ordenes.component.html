@@ -43,13 +43,13 @@
         <!--<tr *ngFor="let orden of ordenes">
           <td>{{orden.estado}}</td>
           <td>{{orden.numeracion}}</td>-->
-          <tr *ngFor="let orden of ordenes; index as i">
-            <td>{{orden.fechaOrden | date:'dd-MM-yyyy'}}</td>
-            <td>{{orden.estado}}</td>
-            <td>{{orden.concepto}}</td>
-            <td>{{orden.acronimo}}</td>
+          <tr *ngFor="let a of elementos[0]">
+            <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].fechaOrden | date:'dd-MM-yyyy'}}</td>
+            <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].estado}}</td>
+            <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].concepto}}</td>
+            <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].acronimo}}</td>
           <td>
-            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
+            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a,   paginaActual)].id]" >
               <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
             </button>
           </td>
@@ -58,6 +58,15 @@
               <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden">
             </button>
           </td>
+        </tr>
+        <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
+          <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, ordenes.length, 0)">
+              <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
+          </button>
+          
+          <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, ordenes.length, 0)">
+              <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
+          </button>
         </tr>
       </tbody>
     </table>

@@ -16,7 +16,7 @@
       </select>
     </div>
 
-    <table class="table table-bordered table-striped text-center">
+    <table class="table text-center">
       <thead class="thead-dark">
         <tr>
           <th>Fecha de Inicio</th>
@@ -31,23 +31,33 @@
       </thead>
 
       <tbody>
-         <tr *ngFor="let proyecto of proyectos" >
-          <td>{{ proyecto.fechaInicio }}</td>
-          <td>{{ proyecto.fechaCierre }}</td>
-          <td>{{ proyecto.nombre }}</td>
-          <td>{{ proyecto.acronimo }}</td>
-          <td>{{ proyecto.presupuesto }}</td>
-          <td>{{ proyecto.nContabilidad }}</td>
+         <tr *ngFor="let a of elementos[0]">
+          <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].fechaInicio }}</td>
+          <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].fechaCierre }}</td>
+          <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].nombre }}</td>
+          <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].acronimo }}</td>
+          <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].presupuesto }}</td>
+          <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].nContabilidad }}</td>
           <td>
-            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaProyectos/verProyecto/', proyecto.acronimo]" >
+            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaProyectos/verProyecto/', proyectos[getOrdenPagindoIndex(a,   paginaActual)].acronimo]" >
               <img src="assets/iconos/editar.png" class="rounded" alt="Editar Proyecto">
             </button>
           </td>
           <td>
-            <button type="button" class="btn btn-link" name="button" (click)="borrarProyecto(proyecto)" >
+            <button type="button" class="btn btn-link" name="button" (click)="borrarProyecto(proyectos[getOrdenPagindoIndex(a,   paginaActual)])" >
               <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
             </button>
           </td>
+        </tr>
+
+        <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
+          <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, proyectos.length, 0)">
+              <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
+          </button>
+          
+          <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, proyectos.length, 0)">
+              <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
+          </button>
         </tr>
       </tbody>
 
