@@ -63,6 +63,7 @@ export class AddOrdenComponent implements OnInit {
   descripcionVacio:boolean = false;
   importeVacio:boolean = false;
   idAux: number;
+  numeracionAux: number;
 
   constructor(private acreedorService: AcreedorService,
         private router: Router,
@@ -236,6 +237,18 @@ anadirGasto(){
     }
 }
 
+/* CARGAR la numeracion segun el acronimo del proyecto */
+cargarNumProyectoOrden(a: String): number {
+
+  this.ordenService.getNumAcronimo(a).subscribe(
+    (numMax) =>{
+      this.numeracionAux = numMax;
+    });
+
+    alert(this.numeracionAux);
+    return this.numeracionAux;
+}
+
 seleccionarFoto(event) {
   this.fotoSeleccionada = event.target.files[0];
   console.log(this.fotoSeleccionada);
@@ -363,6 +376,11 @@ public crearOrden(): void {
         this.orden.nif_user = this.dniUsuarioLogin;
         this.orden.estado = "P"; // Pendiente
         this.orden.fechaOrden = new Date();
+
+
+//this.cargarNumProyectoOrden('acr')
+        console.log(this.ordenService.getNumAcronimo('acr'));
+        this.orden.numeracion = this.numeracionAux;
 
         this.ordenService.crearOrden(this.orden).subscribe(
           orden =>

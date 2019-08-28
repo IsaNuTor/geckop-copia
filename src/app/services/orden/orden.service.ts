@@ -11,6 +11,7 @@ export class OrdenService {
   ordenes: Orden[] = new Array<Orden>();
   urlOrden:string = 'http://localhost:8080/api/ordenes';
   urlMisOrdenes:string = 'http://localhost:8080/api/buscarordenesnif';
+  urlNumAcronimo:string = 'http://localhost:8080/api/buscarnumacronimo';
   urlOrdenesIP:string = 'http://localhost:8080/api/ordenesdeip';
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -33,8 +34,13 @@ export class OrdenService {
   borrarOrden(orden: Orden): Observable<Orden> {
       return this.http.delete<Orden>(`${this.urlOrden}/${orden.id}`, {headers: this.httpHeaders});
     }
-  
+
   getOrdenesPendientesDeFirmaDeIP(ip: String): Observable<Orden[]>{
     return this.http.post<Orden[]>(this.urlOrdenesIP, ip, {headers: this.httpHeaders})
+  }
+
+  // Devuelve la numeracion segun el proyecto, para saber cuantas ordenes se han hecho de ese proyecto.
+  getNumAcronimo(a: String): Observable<number>{
+    return this.http.post<number>(this.urlNumAcronimo, a, {headers: this.httpHeaders})
   }
 }
