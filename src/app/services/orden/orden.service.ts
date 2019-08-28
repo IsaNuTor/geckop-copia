@@ -13,6 +13,7 @@ export class OrdenService {
   urlMisOrdenes:string = 'http://localhost:8080/api/buscarordenesnif';
   urlNumAcronimo:string = 'http://localhost:8080/api/buscarnumacronimo';
   urlOrdenesIP:string = 'http://localhost:8080/api/ordenesdeip';
+  urlGetOrdenId:string = 'http://localhost:8080/api/getordenid';
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -29,6 +30,10 @@ export class OrdenService {
   // Devuelve mis ordenes
   getOrdenesNif(n: String): Observable<Orden[]>{
     return this.http.post<Orden[]>(this.urlMisOrdenes, n, {headers: this.httpHeaders})
+  }
+
+  getOrdenID(id: number): Observable<Orden>{
+    return this.http.post<Orden>(this.urlGetOrdenId, id, {headers: this.httpHeaders})
   }
 
   borrarOrden(orden: Orden): Observable<Orden> {
