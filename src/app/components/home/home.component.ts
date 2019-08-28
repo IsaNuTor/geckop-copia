@@ -29,7 +29,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   
-   
+   this.elementos = new Array<number[]>(4);
+   this.elementos[0] = new Array<number>();
+   this.elementos[1] = new Array<number>();
+   this.elementos[2] = new Array<number>();
+   this.elementos[3] = new Array<number>();
+
    this.cargarOrdenesUsuario();
    this.cargarOrdenesIP();
 
@@ -56,7 +61,11 @@ export class HomeComponent implements OnInit {
           }
         }
 
-        this.inicializarArrayNElementos( this.elementosPorPagina<this.ordenes.length ? this.elementosPorPagina : this.ordenes.length );
+        this.inicializarArrayNElementos( this.elementosPorPagina<this.aceptadas.length ? this.elementosPorPagina : this.aceptadas.length, 1);
+        this.inicializarArrayNElementos( this.elementosPorPagina<this.rechazadas.length ? this.elementosPorPagina : this.rechazadas.length, 2);
+        this.inicializarArrayNElementos( this.elementosPorPagina<this.pendientes.length ? this.elementosPorPagina : this.pendientes.length, 3);
+    
+
       }
     );
   }
@@ -64,7 +73,10 @@ export class HomeComponent implements OnInit {
   cargarOrdenesIP(){
     this.listaIP =  new Array<Orden>();
     this.ordenService.getOrdenesPendientesDeFirmaDeIP(this.sesionService.getDni()).subscribe(
-      ordenes=> this.listaIP = ordenes      
+      ordenes=> {
+          this.listaIP = ordenes;
+          this.inicializarArrayNElementos( this.elementosPorPagina<this.listaIP.length ? this.elementosPorPagina : this.listaIP.length, 0);
+      }  
     );
   }
 
@@ -76,13 +88,26 @@ export class HomeComponent implements OnInit {
   /* ----------------Funciones necesarias para cualquier paginado--------------------- */
 
     /*Por cada tabla a mostrar */
-    paginaActual: number = 0; //mantiene un contador de la pagina en la que se encuentra
-    elementos: Number[]; //"contador" de elementos que se muestran por pagina
+    //mantiene un contador de la pagina en la que se encuentra
+    paginaActualIP: number = 0;  
+    paginaActualA: number = 0;  
+    paginaActualR: number = 0;  
+    paginaActualPM: number = 0;  
+
+    /*numero de elementos en la pagina actual de cada tabla */
+    elementos: number[][];  
+    /*
+      elementos[0][] -> listaIP
+      elementos[1][] -> aceptadas
+      elementos[2][] -> rechazadas
+      elementos[3][] -> pendientes
+    */
+
     elementosPorPagina: number = 2; //numero MAXIMO de elementos a mostrar por pagina
 
 
   //Devuelve la siguiente pagina con el array de mostrado actulizado por si es pagina final y hay menos elementos que mostrar
-  siguiente(actual:number, longitud:number):number{
+  siguiente(actual:number, longitud:number, a:number):number{
     //Comprobar maximo
     
     let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
@@ -91,17 +116,17 @@ export class HomeComponent implements OnInit {
       actual++;
     
     if(actual == ultimaPagina)
-      this.inicializarArrayNElementos(((longitud)%this.elementosPorPagina))
+      this.inicializarArrayNElementos(longitud%this.elementosPorPagina, a)
     
     return actual;
     
   }
   //Devuelve la anterior pagina con el array de mostrado actulizado por si es pagina final y hay menos elementos que mostrar
-  anterior(actual: number, longitud:number):number{
+  anterior(actual: number, longitud:number, a:number):number{
     let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
     
     if(actual == ultimaPagina)
-      this.inicializarArrayNElementos(this.elementosPorPagina)
+      this.inicializarArrayNElementos(this.elementosPorPagina<longitud ? this.elementosPorPagina:longitud , a)
     
     if(actual >0)
         actual--;
@@ -110,11 +135,11 @@ export class HomeComponent implements OnInit {
   }
 
   //Marca el array de mostrado con los elementos correspondientes
-  inicializarArrayNElementos(n:number):void{
-    this.elementos=new Array<Number>();
+  inicializarArrayNElementos(n:number, a:number):void{
+    this.elementos[a]=new Array<number>();
 
     for(let i = 0; i< n; i++)
-      this.elementos.push(i);
+      this.elementos[a].push(i); 
   }
 
   

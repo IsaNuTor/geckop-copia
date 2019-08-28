@@ -24,23 +24,23 @@
           </tr>
         </thead>
         <tbody id="tablaOrdenes">
-            <tr *ngFor="let a of elementos;"> <!--and maxOrdenesOK(a))">--> 
-                <td >{{listaIP[getOrdenPagindoIndex(a, paginaActual)].estado}}</td>
-                <td>{{listaIP[getOrdenPagindoIndex(a, paginaActual)].concepto}}</td>
-                <td>{{listaIP[getOrdenPagindoIndex(a, paginaActual)].acronimo}}</td>
+            <tr *ngFor="let i of elementos[0];"> <!--and maxOrdenesOK(a))">--> 
+                <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].estado}}</td>
+                <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].concepto}}</td>
+                <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].acronimo}}</td>
              
                 <td>
-                  <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(a, paginaActual)].id]" >
+                  <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(i, paginaActualIP)].id]" >
                     <img src="assets/iconos/lupa.png" class="rounded ml-0" alt="Editar Orden" maxwidth="10px">
                   </button>
                 </td>
           </tr>
           <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
-            <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, listaIP.length)">
+            <button type="button" class="btn btn-link mr-2" (click) ="paginaActualIP= anterior(paginaActualIP, listaIP.length, 0)">
                 <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
             </button>
             
-            <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, listaIP.length)">
+            <button type="button" class="btn btn-link" (click) = "paginaActualIP = siguiente(paginaActualIP, listaIP.length, 0)">
                 <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
             </button>
           </tr>
@@ -122,29 +122,25 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">Estado</th>
-            <th scope="col">Numeración</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Borrar</th>
+            <th scope="col">Concepto</th>
+            <th scope="col">Proyecto</th>
           </tr>
         </thead>
         <tbody>
-          <!--<tr *ngFor="let orden of ordenes">
-            <td>{{orden.estado}}</td>
-            <td>{{orden.numeracion}}</td>-->
-            <tr *ngFor="let orden of rechazadas; index as i">
-              <td>{{orden.estado}}</td>
-              <td>{{orden.numeracion}}</td>
-            <td>
-              <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', orden.id]" >
-                <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+            <tr *ngFor="let a of elementos[2]; index as i">
+              <td>{{rechazadas[getOrdenPagindoIndex(a, paginaActualR)].estado}}</td>
+              <td>{{rechazadas[getOrdenPagindoIndex(a, paginaActualR)].concepto}}</td>
+              <td>{{rechazadas[getOrdenPagindoIndex(a, paginaActualR)].acronimo}}</td>
+            </tr>
+            <tr>
+              <button type="button" class="btn btn-link mr-2" (click) ="paginaActualR= anterior(paginaActualR, rechazadas.length, 2)">
+                <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
               </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-link" name="button" (click)="borrarOrden(orden)" >
-                <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden">
+              
+              <button type="button" class="btn btn-link" (click) = "paginaActualR = siguiente(paginaActualR, rechazadas.length, 2)">
+                  <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
               </button>
-            </td>
-          </tr>
+            </tr>
         </tbody>
       </table>
     </div>
