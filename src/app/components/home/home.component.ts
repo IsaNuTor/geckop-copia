@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
             this.aceptadas.push(orden);
           }else if(orden.estado == "R"){//Rechazadas
             this.rechazadas.push(orden);
-          }else if(orden.estado == "PM"){//Pendientes de modificacion
+          }else if(orden.estado == "P"){//Pendientes de modificacion
             this.pendientes.push(orden);
           }
         }
@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
     paginaActualIP: number = 0;  
     paginaActualA: number = 0;  
     paginaActualR: number = 0;  
-    paginaActualPM: number = 0;  
+    paginaActualP: number = 0;  
 
     /*numero de elementos en la pagina actual de cada tabla */
     elementos: number[][];  
@@ -112,11 +112,21 @@ export class HomeComponent implements OnInit {
     
     let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
     
-    if(actual < ultimaPagina)
-      actual++;
+    if(longitud%this.elementosPorPagina == 0){
+      ultimaPagina--;
+      if(actual < ultimaPagina)
+        actual++;
+    }else{
+      if(actual < ultimaPagina)
+        actual++;
+      if(actual == ultimaPagina)
+        this.inicializarArrayNElementos(longitud%this.elementosPorPagina, a)
+    }
+      
+  
     
-    if(actual == ultimaPagina)
-      this.inicializarArrayNElementos(longitud%this.elementosPorPagina, a)
+
+
     
     return actual;
     
@@ -125,8 +135,11 @@ export class HomeComponent implements OnInit {
   anterior(actual: number, longitud:number, a:number):number{
     let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
     
+    if(longitud%this.elementosPorPagina ==0)
+      ultimaPagina--;
+
     if(actual == ultimaPagina)
-      this.inicializarArrayNElementos(this.elementosPorPagina<longitud ? this.elementosPorPagina:longitud , a)
+      this.inicializarArrayNElementos(this.elementosPorPagina < longitud ? this.elementosPorPagina : longitud , a)
     
     if(actual >0)
         actual--;
