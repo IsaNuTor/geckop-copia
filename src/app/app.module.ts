@@ -10,6 +10,8 @@ import { ProyectoService} from './services/proyecto/proyecto.service';
 import { UsuarioProyectoService} from './services/usuario-proyecto/usuario-proyecto.service';
 import { OrdenService} from './services/orden/orden.service';
 import { GastoService} from './services/gasto/gasto.service';
+import { GastoViajeService} from './services/gasto-viaje/gasto-viaje.service';
+
 // COMPONENTES
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -36,6 +38,8 @@ import { VerOrdenComponent } from './components/vista-ordenes/ver-orden/ver-orde
 
 // Gasto
 import { ModalImagenComponent } from './components/vista-ordenes/add-orden/gastos/modal-imagen/modal-imagen.component';
+// Gasto Viajes
+import { AddOrdenViajesComponent } from './components/vista-ordenes/add-orden-viajes/add-orden-viajes.component';
 
 // Login y registro
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -60,12 +64,14 @@ const routes: Routes = [
   {path: "acreedores/form-acreedores.component/:nif", component: FormAcreedoresComponent},
   {path: "vistaProyectos/verProyecto/:acronimo", component:VerProyectoComponent},
   {path: "vista-ordenes/vista-orden-boton", component:VistaOrdenBotonComponent},
-  {path: "vistaOrdenes/verOrden/:id", component:VerOrdenComponent}
+  {path: "vistaOrdenes/verOrden/:id", component:VerOrdenComponent},
+  {path: 'vista-ordenes/add-orden/add-orden-viajes.component', component: AddOrdenViajesComponent},
 ];
 
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -89,6 +95,7 @@ import { FooterComponent } from './components/footer/footer.component';
     VistaOrdenBotonComponent,
     VerOrdenComponent,
     ModalImagenComponent,
+    AddOrdenViajesComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +111,7 @@ import { FooterComponent } from './components/footer/footer.component';
     SesionService,
     UsuarioProyectoService,
     GastoService,
+    GastoViajeService,
     OrdenService
   ],
   bootstrap: [AppComponent]

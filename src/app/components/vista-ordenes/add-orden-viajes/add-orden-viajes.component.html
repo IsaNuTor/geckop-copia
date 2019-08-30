@@ -1,0 +1,243 @@
+<div class="card">
+    <!--TITULO-->
+    <div class="card bg-dark">
+      <div class="card-header text-white text-center">
+        ORDEN DE PAGO GASTOS VIAJES
+      </div>
+    </div>
+
+    <form [formGroup]="formOrden">
+
+      <div class="form-row mt-3">
+
+        <!--<div class="form-group col-md-6">
+          <label class="texto-form">Proyecto</label>
+          <select class="custom-select" formControlName="proyecto">
+            <option value="" selected>Seleccione acrónimo del proyecto</option>
+            <option *ngFor="let proyecto of proyectos" value="{{ proyecto.acronimo }}">{{ proyecto.acronimo }}</option>
+          </select>
+        </div>-->
+
+        <!--FECHA PRUEBA
+        <p>{{this.fechaOrden | date:'dd-MM-yyyy'}}</p>-->
+
+        <div class="form-group col-md-6">
+          <label class="texto-form">Proyecto</label>
+          <select class="custom-select" formControlName="acronimo" (change)="capturarValor()">
+            <option value="" selected>Seleccione acrónimo del proyecto</option>
+            <option *ngFor="let proyecto of misProyectos; index as i" value="{{ misProyectos[i].acronimo }}">{{ proyecto.acronimo }}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label class="texto-form">Acreedor</label>
+          <select class="custom-select" formControlName="nif_acreedor">
+            <option value="" selected>Seleccione acreedor</option>
+            <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+          <div class="form-group col-md-6">
+            <label class="texto-form">Concepto</label>
+            <input type="text" class="form-control" formControlName="concepto" name="concepto" id="concepto" placeholder="Concepto" >
+          </div>
+
+          <div class="form-group col-md-6">
+            <label class="texto-form">Num. Contabilidad</label>
+            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" >
+          </div>
+
+        </div>
+
+      <!--------------------------------------------------GASTOS----------------------------------------------------------------->
+      <!--<app-gastos></app-gastos>-->
+      <!--<p [hidden]="opcionSeleccionada=='0'">Has seleccionado la opcion {{misProyectos[i].acronimo}}</p>-->
+      <div class="card-body" [hidden]="!verSeleccionada">
+
+        <form class="card mb-4"  [formGroup]="formGastos" >
+          <h3 class="texto-form mt-3">Justificación de gastos</h3>
+          <!-- Entradas simples -->
+
+      <div class="card-body" [hidden]="!verSeleccionada">
+          <!--Avion-->
+        <div class="form-group">
+          <div class="row">
+
+              <div class="col-md-10">
+                <label class ="tx-secondary" for="avion"><b>Avion</b></label>
+                <input type="text" class="form-control" formControlName="avion" placeholder="(Máx 150 caracteres)" maxlength="200" id="avion" name="avion">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <label for="importeAvion">Importe</label>
+                <input type="number" class="form-control" formControlName="importeAvion" required min="0" value="0" step="any" name="importeAvion" id="importeAvion">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="imagen">Adjuntar Factura</label>
+            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoAvion">
+          </div>
+        </div>
+
+        <!--Coche-->
+        <!--<div class="form-group">
+          <div class="row">
+
+              <div class="col-md-3">
+                <label class ="tx-secondary" for="coche"><b>Coche</b></label>
+                <input type="text" class="form-control" formControlName="coche" placeholder="(Máx 150 caracteres)" maxlength="200" id="coche" name="coche">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="importeCoche">nKilometros</label>
+                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="importeCoche">precioKilometro</label>
+                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="importeCoche">Importe</label>
+                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <div class="form-group">
+              <label for="imagen">Adjuntar Factura</label>
+              <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
+            </div>
+        </div>
+-->
+        <!--Tren-->
+        <!--<div class="form-group">
+          <div class="row">
+
+              <div class="col-md-10">
+                <label class ="tx-secondary" for="coche"><b>Coche</b></label>
+                <input type="text" class="form-control" formControlName="coche" placeholder="(Máx 150 caracteres)" maxlength="200" id="coche" name="coche">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <label for="importeCoche">Importe</label>
+                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="imagen">Adjuntar Factura</label>
+              <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
+            </div>
+        </div>-->
+
+          <div class="form-group">
+            <label for="imagen">Adjuntar Imagen</label>
+            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="imagenAvion">
+          </div>
+
+        </div>
+
+
+        </form>
+
+      <!--TABLA GASTOS-->
+        <table class="table table-bordered table-striped text-center">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Nº Factura</th>
+              <th>Concepto</th>
+              <th>Importe</th>
+              <th>Imagen</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let gasto of gastos">
+              <td>{{ gasto.nFactura}}</td>
+              <td class="maximoAncho">{{ gasto.descripcion }}</td>
+              <td>{{ gasto.importe}}</td>
+
+        <!--Ver foto gasto-->
+              <td>
+                <button type="button" class="btn btn-link" name="button" (click)='verFoto(gasto.foto)'>
+                  <img src="assets/iconos/lupa.png" class="rounded" alt="ver foto" style="width: 10%; height:0.5%;">
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-link" name="button" (click)='eliminarGasto(gasto)' >
+                  <img class="img-thumbnail rounded" src="assets/iconos/papelera.png" class="rounded" alt="Eliminar gasto">
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+        <br>
+        <div class="form-group">
+          <label class="texto-form" for="memoria">Objeto del desplazamiento en relación con la ejecución del proyecto</label>
+          <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="Escribe la memoria explicativa" ></textarea>
+          <div class="alerta">
+            <small *ngIf="false">No puede estar vacio <br></small>
+          </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <label class="texto-form" for="relacion">Relación con el proyecto</label>
+          <textarea class="form-control" id="relacion" rows="3" formControlName="relacion" placeholder="Escribe la relación con el proyecto"></textarea>
+          <div class="alerta">
+            <small *ngIf="false">No puede estar vacio <br></small>
+          </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <label class="texto-form" for="observaciones">Observaciones a la hora de pagar al acreedor</label>
+          <textarea class="form-control" id="observaciones" rows="3" formControlName="observaciones" placeholder="Escribe las observaciones que creas correspondientes"></textarea>
+        </div>
+      <br>
+        <a href="#"><img src="../../../../../assets/iconos/pdf.png" alt="Descargar orden pdf" width="80px"></a>
+      <br><br>
+      <button class="btn btn-success" role="button" (click)="cargarNumProyectoOrden()">Crear Orden</button>
+      <button class="btn btn-danger" role="button" (click)="cancelar()">Cancelar</button>
+      <br><br>
+
+      <!--<div class="form-group">
+        <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="anadirGastoViaje()">Añadir Gasto</button>
+      </div>-->
+    </form>
+
+</div>
