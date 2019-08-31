@@ -11,7 +11,6 @@ export class GastoViaje {
   fotoAvion: string;
 
   // Coche
-  coche: string;
   nKilometros: number;
   precioKilometro: number;
   importeCoche: number;

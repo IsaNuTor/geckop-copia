@@ -56,17 +56,31 @@
       <!--------------------------------------------------GASTOS----------------------------------------------------------------->
       <!--<app-gastos></app-gastos>-->
       <!--<p [hidden]="opcionSeleccionada=='0'">Has seleccionado la opcion {{misProyectos[i].acronimo}}</p>-->
+    <div class="card-body" [hidden]="!verSeleccionada">
+
+      <form class="card mb-4"  [formGroup]="formGastos" >
+        <h3 class="texto-form mt-3">Justificación de gastos</h3>
+        <!-- Entradas simples -->
+
       <div class="card-body" [hidden]="!verSeleccionada">
 
-        <form class="card mb-4"  [formGroup]="formGastos" >
-          <h3 class="texto-form mt-3">Justificación de gastos</h3>
-          <!-- Entradas simples -->
-
-      <div class="card-body" [hidden]="!verSeleccionada">
-          <!--Avion-->
+        <!--Fechas-->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fechaIda"><b>Fecha ida</b></label>
+            <input type="date" class="form-control" formControlName="fechaIda" id="fechaIda" placeholder="Fecha ida" name="fechaIda">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="fechaVuelta"><b>Fecha vuelta</b></label>
+            <input type="date" class="form-control" formControlName="fechaVuelta" id="fechaVuelta" placeholder="Fecha vuelta" name="fechaVuelta">
+            <div class="alerta">
+              <small *ngIf="!formValid && gasto.fechaIda > gasto.fechaVuelta">Las fechas introducidas no son válidas <br></small>
+            </div>
+          </div>
+        </div>
+        <!--Avion-->
         <div class="form-group">
           <div class="row">
-
               <div class="col-md-10">
                 <label class ="tx-secondary" for="avion"><b>Avion</b></label>
                 <input type="text" class="form-control" formControlName="avion" placeholder="(Máx 150 caracteres)" maxlength="200" id="avion" name="avion">
@@ -89,36 +103,28 @@
             <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoAvion">
           </div>
         </div>
-
+        <br>
         <!--Coche-->
-        <!--<div class="form-group">
+        <div class="form-group">
+          <label class ="tx-secondary"><b>Coche</b></label>
           <div class="row">
-
-              <div class="col-md-3">
-                <label class ="tx-secondary" for="coche"><b>Coche</b></label>
-                <input type="text" class="form-control" formControlName="coche" placeholder="(Máx 150 caracteres)" maxlength="200" id="coche" name="coche">
+              <div class="col-md-4">
+                <label for="nKilometros">Nº de Kilometros</label>
+                <input type="number" class="form-control" formControlName="nKilometros" required min="0" value="0" step="any" name="nKilometros" id="nKilometros">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
               </div>
 
-              <div class="col-md-3">
-                <label for="importeCoche">nKilometros</label>
-                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
+              <div class="col-md-4">
+                <label for="preciokm">€/km</label>
+                <input type="number" class="form-control" placeholder="{{precioKilometro}}" name="preciokm" id="preciokm" disabled>
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
               </div>
 
-              <div class="col-md-3">
-                <label for="importeCoche">precioKilometro</label>
-                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
-              </div>
-
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <label for="importeCoche">Importe</label>
                 <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
                 <div class="alerta">
@@ -132,39 +138,92 @@
               <label for="imagen">Adjuntar Factura</label>
               <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
             </div>
-        </div>
--->
+         </div>
+        <br>
         <!--Tren-->
-        <!--<div class="form-group">
+        <div class="form-group">
           <div class="row">
-
               <div class="col-md-10">
-                <label class ="tx-secondary" for="coche"><b>Coche</b></label>
-                <input type="text" class="form-control" formControlName="coche" placeholder="(Máx 150 caracteres)" maxlength="200" id="coche" name="coche">
+                <label class ="tx-secondary" for="tren"><b>Tren</b></label>
+                <input type="text" class="form-control" formControlName="tren" placeholder="(Máx 150 caracteres)" maxlength="200" id="tren" name="tren">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
               </div>
 
               <div class="col-md-2">
-                <label for="importeCoche">Importe</label>
-                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
+                <label for="importeTren">Importe</label>
+                <input type="number" class="form-control" formControlName="importeTren" required min="0" value="0" step="any" name="importeTren" id="importeTren">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
               </div>
-            </div>
-            <br>
-            <div class="form-group">
-              <label for="imagen">Adjuntar Factura</label>
-              <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
-            </div>
-        </div>-->
-
+          </div>
+          <br>
           <div class="form-group">
+            <label for="imagen">Adjuntar Factura</label>
+            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoTren">
+          </div>
+        </div>
+        <br>
+        <!--Autobus-->
+        <div class="form-group">
+          <div class="row">
+              <div class="col-md-10">
+                <label class ="tx-secondary" for="autobus"><b>Autobus</b></label>
+                <input type="text" class="form-control" formControlName="autobus" placeholder="(Máx 150 caracteres)" maxlength="200" id="autobus" name="autobus">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <label for="importeAutobus">Importe</label>
+                <input type="number" class="form-control" formControlName="importeAutobus" required min="0" value="0" step="any" name="importeAutobus" id="importeAutobus">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="imagen">Adjuntar Factura</label>
+            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoAutobus">
+          </div>
+        </div>
+        <br>
+        <!--Taxi-->
+        <div class="form-group">
+          <div class="row">
+              <div class="col-md-10">
+                <label class ="tx-secondary" for="taxi"><b>Taxi</b></label>
+                <input type="text" class="form-control" formControlName="taxi" placeholder="(Máx 150 caracteres)" maxlength="200" id="taxi" name="taxi">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <label for="importeTaxi">Importe</label>
+                <input type="number" class="form-control" formControlName="importeTaxi" required min="0" value="0" step="any" name="importeTaxi" id="importeTaxi">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="imagen">Adjuntar Factura</label>
+            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoTaxi">
+          </div>
+        </div>
+        <br>
+
+
+  <!--        <div class="form-group">
             <label for="imagen">Adjuntar Imagen</label>
             <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="imagenAvion">
-          </div>
+          </div>-->
 
         </div>
 
