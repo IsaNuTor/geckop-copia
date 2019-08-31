@@ -114,6 +114,22 @@ export class AddOrdenViajesComponent implements OnInit {
             //Taxi
             taxi: [ '', [Validators.maxLength(150)]],  //Concepto
             importeTaxi: [ '', Validators.required],  //Importe
+
+            //Otros
+            otros: [ '', [Validators.maxLength(150)]],  //Concepto
+            importeOtros: [ '', Validators.required],  //Importe
+
+            // Hotel
+            importeHotel: [ '', Validators.required],  //Importe
+
+            // Manutencion
+            nDietas: [ '', Validators.required],  //nDietas
+            precioDietas: [ '', Validators.required],  //precio
+            importeDietas: [ '', Validators.required],  //Importe
+
+            // Otros gastos
+            importeOtrosGastos: [ '', Validators.required],  //Importe
+
           });
 
           //numeracion: number;

@@ -218,12 +218,113 @@
           </div>
         </div>
         <br>
+        <!--Otros-->
+        <div class="form-group">
+          <div class="row">
+              <div class="col-md-10">
+                <label class ="tx-secondary" for="otros"><b>Otros gastos</b></label>
+                <input type="text" class="form-control" formControlName="otros" placeholder="(Máx 150 caracteres)" maxlength="200" id="otros" name="otros">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
 
+              <div class="col-md-2">
+                <label for="importeOtros">Importe</label>
+                <input type="number" class="form-control" formControlName="importeOtros" required min="0" value="0" step="any" name="importeOtros" id="importeOtros">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="imagen">Adjuntar Factura</label>
+            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoOtros">
+          </div>
+        </div>
+        <br>
+        <!--Hotel-->
+        <div class="form-group">
+          <div class="row">
+              <div class="col-md-10">
+                <br><br>
+                <label class ="tx-secondary"><b>Factura de hotel</b></label>
+              </div>
 
-  <!--        <div class="form-group">
-            <label for="imagen">Adjuntar Imagen</label>
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="imagenAvion">
-          </div>-->
+              <div class="col-md-2">
+                <label for="importeHotel">Importe</label>
+                <input type="number" class="form-control" formControlName="importeHotel" required min="0" value="0" step="any" name="importeHotel" id="importeHotel">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="imagen">Adjuntar Factura</label>
+            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoHotel">
+          </div>
+        </div>
+        <br>
+        <!--Manutención-->
+        <div class="form-group">
+          <label class ="tx-secondary"><b>Manutención</b></label>
+          <div class="row">
+              <div class="col-md-3">
+                <label for="nDietas">Nº de dietas</label>
+                <input type="number" class="form-control" formControlName="nDietas" required min="0" value="0" step="any" name="nDietas" id="nDietas">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="precioDietas">cuantía por dieta(€/día) <a href="https://www.ucm.es/data/cont/docs/32-2018-07-11-20180711_cuadro_dietas.pdf" target="_blank">[Ver cuadro de dietas]</a></label>
+                <input type="number" class="form-control" formControlName="precioDietas" required min="0" value="0" step="any" name="precioDietas" id="precioDietas">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="importeDietas">Importe</label>
+                <input type="number" class="form-control" formControlName="importeDietas" required min="0" value="0" step="any" name="importeDietas" id="importeDietas">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="imagen">Adjuntar Factura</label>
+              <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
+            </div>
+         </div>
+        <br>
+        <!--Otros gastos-->
+        <div class="form-group">
+          <div class="row">
+              <div class="col-md-10">
+                <br><br>
+                <label class ="tx-secondary"><b>Inscripciones a congresos, seminarios, reuniones</b></label>
+              </div>
+
+              <div class="col-md-2">
+                <label for="importeOtrosGastos">Importe</label>
+                <input type="number" class="form-control" formControlName="importeOtrosGastos" required min="0" value="0" step="any" name="importeOtrosGastos" id="importeOtrosGastos">
+                <div class="alerta">
+                  <small *ngIf="false">No puede estar vacio <br></small>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="imagen">Adjuntar Factura</label>
+            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoOtrosGastos">
+          </div>
+        </div>
+        <br>
 
         </div>
 
@@ -276,7 +377,7 @@
         <br>
         <div class="form-group">
           <label class="texto-form" for="relacion">Relación con el proyecto</label>
-          <textarea class="form-control" id="relacion" rows="3" formControlName="relacion" placeholder="Escribe la relación con el proyecto"></textarea>
+          <textarea class="form-control" id="relacion" rows="3" formControlName="relacion" placeholder="Escribe la relación con el proyecto" disabled></textarea>
           <div class="alerta">
             <small *ngIf="false">No puede estar vacio <br></small>
           </div>

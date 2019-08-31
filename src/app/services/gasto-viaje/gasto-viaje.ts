@@ -37,7 +37,6 @@ export class GastoViaje {
   fotoOtros: string;
 
   // Hotel
-  nFacturaHotel: string;
   importeHotel: number;
   fotoHotel: string;
 
@@ -47,8 +46,8 @@ export class GastoViaje {
   importeDietas: number;
 
   // Otros gastos
-  otrosGastos: string;
   importeOtrosGastos: number;
+  fotoOtrosGastos: string;
 
   // Importe total
   importeTotal: number;
