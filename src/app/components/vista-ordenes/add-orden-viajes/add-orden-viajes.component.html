@@ -78,8 +78,18 @@
             </div>
           </div>
         </div>
+
+        <h3 class="texto-form mt-3">Elija los transportes que ha utilizado</h3>
+        <!--Checkbox avion-->
+        <div class="form-check">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck1" (change)="capturarValorCheck('avion')">
+          <label class="form-check-label ml-4" for="defaultCheck1">
+            Avión
+          </label>
+        </div>
+
         <!--Avion-->
-        <div class="form-group">
+        <div class="form-group" [hidden]="!checkAvion">
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="avion"><b>Avion</b></label>
@@ -102,10 +112,20 @@
             <label for="imagen">Adjuntar Factura</label>
             <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoAvion">
           </div>
+          <br>
         </div>
-        <br>
+
+
+        <!--Checkbox coche-->
+        <div class="form-check">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck2" (change)="capturarValorCheck('coche')">
+          <label class="form-check-label ml-4" for="defaultCheck2">
+            Coche
+          </label>
+        </div>
+
         <!--Coche-->
-        <div class="form-group">
+        <div class="form-group" [hidden]="!checkCoche">
           <label class ="tx-secondary"><b>Coche</b></label>
           <div class="row">
               <div class="col-md-4">
@@ -138,10 +158,20 @@
               <label for="imagen">Adjuntar Factura</label>
               <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
             </div>
+            <br>
          </div>
-        <br>
+
+
+        <!--Checkbox tren-->
+        <div class="form-check">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck3" (change)="capturarValorCheck('tren')">
+          <label class="form-check-label ml-4" for="defaultCheck3">
+            Tren
+          </label>
+        </div>
+
         <!--Tren-->
-        <div class="form-group">
+        <div class="form-group" [hidden]="!checkTren">
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="tren"><b>Tren</b></label>
@@ -164,10 +194,18 @@
             <label for="imagen">Adjuntar Factura</label>
             <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoTren">
           </div>
+          <br>
         </div>
-        <br>
+
+        <!--Checkbox autobus-->
+        <div class="form-check">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck4" (change)="capturarValorCheck('autobus')">
+          <label class="form-check-label ml-4" for="defaultCheck4">
+            Autobús
+          </label>
+        </div>
         <!--Autobus-->
-        <div class="form-group">
+        <div class="form-group" [hidden]="!checkAutobus">
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="autobus"><b>Autobus</b></label>
@@ -190,10 +228,19 @@
             <label for="imagen">Adjuntar Factura</label>
             <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoAutobus">
           </div>
+          <br>
         </div>
-        <br>
+
+        <!--Checkbox taxi-->
+        <div class="form-check">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck5" (change)="capturarValorCheck('taxi')">
+          <label class="form-check-label ml-4" for="defaultCheck5">
+            Taxi
+          </label>
+        </div>
+
         <!--Taxi-->
-        <div class="form-group">
+        <div class="form-group" [hidden]="!checkTaxi">
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="taxi"><b>Taxi</b></label>
@@ -216,10 +263,19 @@
             <label for="imagen">Adjuntar Factura</label>
             <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoTaxi">
           </div>
+          <br>
         </div>
-        <br>
+
+        <!--Checkbox otros-->
+        <div class="form-check">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck6" (change)="capturarValorCheck('otros')">
+          <label class="form-check-label ml-4" for="defaultCheck6">
+            Otros gastos
+          </label>
+        </div>
+
         <!--Otros-->
-        <div class="form-group">
+        <div class="form-group" [hidden]="!checkOtros">
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="otros"><b>Otros gastos</b></label>
@@ -300,8 +356,8 @@
               <label for="imagen">Adjuntar Factura</label>
               <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
             </div>
+            <br>
          </div>
-        <br>
         <!--Otros gastos-->
         <div class="form-group">
           <div class="row">
@@ -323,49 +379,14 @@
             <label for="imagen">Adjuntar Factura</label>
             <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoOtrosGastos">
           </div>
-        </div>
-        <br>
-
+          <br>
         </div>
 
-
+      </div>
         </form>
 
-      <!--TABLA GASTOS-->
-        <table class="table table-bordered table-striped text-center">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Nº Factura</th>
-              <th>Concepto</th>
-              <th>Importe</th>
-              <th>Imagen</th>
-              <th>Eliminar</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr *ngFor="let gasto of gastos">
-              <td>{{ gasto.nFactura}}</td>
-              <td class="maximoAncho">{{ gasto.descripcion }}</td>
-              <td>{{ gasto.importe}}</td>
-
-        <!--Ver foto gasto-->
-              <td>
-                <button type="button" class="btn btn-link" name="button" (click)='verFoto(gasto.foto)'>
-                  <img src="assets/iconos/lupa.png" class="rounded" alt="ver foto" style="width: 10%; height:0.5%;">
-                </button>
-              </td>
-              <td>
-                <button type="button" class="btn btn-link" name="button" (click)='eliminarGasto(gasto)' >
-                  <img class="img-thumbnail rounded" src="assets/iconos/papelera.png" class="rounded" alt="Eliminar gasto">
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
-        <br>
         <div class="form-group">
           <label class="texto-form" for="memoria">Objeto del desplazamiento en relación con la ejecución del proyecto</label>
           <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="Escribe la memoria explicativa" ></textarea>

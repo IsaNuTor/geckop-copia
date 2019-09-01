@@ -53,6 +53,12 @@ export class AddOrdenViajesComponent implements OnInit {
   // Ver si el select tiene valor para que aparezca el panel de gastos.
   verSeleccionada: string = '';
   //opcionSeleccionada:string = '0';
+  checkAvion: boolean = false;
+  checkCoche: boolean = false;
+  checkTren: boolean = false;
+  checkAutobus: boolean = false;
+  checkTaxi: boolean = false;
+  checkOtros: boolean = false;
 
   // GASTOS
   titulo: string = "Ordenes";
@@ -180,5 +186,45 @@ export class AddOrdenViajesComponent implements OnInit {
     //this.opcionSeleccionada = this.formOrden.get('acronimo');
     this.verSeleccionada = this.formOrden.get('acronimo').value;
     //console.log(this.verSeleccionada);
+  }
+
+  capturarValorCheck(valor:string) {
+    if(valor == 'avion') {
+      if(!this.checkAvion) {
+        this.checkAvion = true;
+      } else {
+        this.checkAvion = false;
+      }
+    } else if(valor == 'coche') {
+      if(!this.checkCoche) {
+        this.checkCoche = true;
+      } else {
+        this.checkCoche = false;
+      }
+    } else if(valor == 'tren') {
+      if(!this.checkTren) {
+        this.checkTren = true;
+      } else {
+        this.checkTren = false;
+      }
+    } else if(valor == 'autobus') {
+      if(!this.checkAutobus) {
+        this.checkAutobus = true;
+      } else {
+        this.checkAutobus = false;
+      }
+    } else if(valor == 'taxi') {
+      if(!this.checkTaxi) {
+        this.checkTaxi = true;
+      } else {
+        this.checkTaxi = false;
+      }
+    } else if(valor == 'otros') {
+      if(!this.checkOtros) {
+        this.checkOtros = true;
+      } else {
+        this.checkOtros = false;
+      }
+    }
   }
 }
