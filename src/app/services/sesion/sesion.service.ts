@@ -81,6 +81,10 @@ export class SesionService {
     public getCentro():string{
       return sessionStorage.getItem("centro");
     }
+
+    public getPassword():string{
+      return sessionStorage.getItem("password");
+    }
 /*
     public getUsuario():Usuario{
       this.user.nombre = this.getNombre();

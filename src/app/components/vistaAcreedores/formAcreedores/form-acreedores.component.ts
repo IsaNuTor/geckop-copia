@@ -169,6 +169,8 @@ export class FormAcreedoresComponent implements OnInit {
           title: 'No se ha modificado ningún dato. '
         })
       }
+    }else{
+      this.formValid = false;
     }
   }
 

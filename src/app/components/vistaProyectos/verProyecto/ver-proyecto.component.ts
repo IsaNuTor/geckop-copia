@@ -36,7 +36,7 @@ export class VerProyectoComponent implements OnInit {
   usuarios: Usuario[];
   editarUsuarios: Boolean = false;
   formInvestigador: FormGroup;
-
+  permitirEdicion: Boolean = false;
   
 
 
@@ -78,7 +78,10 @@ export class VerProyectoComponent implements OnInit {
       /*this.proyectoService.getProyecto(acronimo).subscribe(
           (proyecto) => this.proyecto = proyecto
         )*/
-        this.proyectoService.getProyecto(acronimo).subscribe((proyecto) => this.proyecto = proyecto);
+        this.proyectoService.getProyecto(acronimo).subscribe((proyecto) => {
+          this.proyecto = proyecto;
+          this.permitirEdicion = this.proyecto.ip1 == this.sesionService.getDni() || this.proyecto.ip2 == this.sesionService.getDni();
+        });
       }
     })
   }

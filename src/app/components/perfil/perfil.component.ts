@@ -166,5 +166,11 @@ export class PerfilComponent implements OnInit {
     
   }
 
+/*
+  probarEncriptamiento(){
+    this.user.password;
+    var encrypted = CryptoJS.AES(
+  }
+*/
 
 }

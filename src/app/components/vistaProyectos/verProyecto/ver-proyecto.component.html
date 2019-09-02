@@ -12,7 +12,7 @@
        
       </div>
       
-      <div class="col-1 mt-0">
+      <div *ngIf="permitirEdicion" class="col-1 mt-0">
         <button *ngIf="!editarFechaActiva" type="button" class="btn btn-link" name="button" (click)="editarFecha()" >
           <img src="assets/iconos/editDate.png" class="rounded" alt="Eliminar Proyecto">
         </button>
@@ -92,7 +92,7 @@
                 <td>{{ investigadoresProyecto[i].rol }}</td>
               </tr>
               <tr>
-                <td colspan="2">
+                <td *ngIf="permitirEdicion" colspan="2">
                   <button type="button" class="btn btn-link" name="button" (click)="cargarNuevosUsuarios()" >
                     <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador">
                   </button>
@@ -123,7 +123,7 @@
                   <th scope="col">Añadir</th>
                 </tr>
               </thead>
-              <tbody *ngFor="let usuario of usuarios; let i = index; |slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"">
+              <tbody *ngFor="let usuario of usuarios; let i = index;" >
                   <tr>
                     <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
                     <td> 
