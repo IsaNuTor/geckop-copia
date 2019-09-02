@@ -100,29 +100,32 @@ export class AddOrdenComponent implements OnInit {
         }
 
   ngOnInit() {
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else{
+      // Cargamos selector de acreedores.
+      this.acreedorService.getAcreedores().subscribe(
+        acreedores => this.acreedores = acreedores
+      );
 
-    // Cargamos selector de acreedores.
-    this.acreedorService.getAcreedores().subscribe(
-      acreedores => this.acreedores = acreedores
-    );
+      // Cargamos selector de proyectos.
+      this.proyectoService.getProyectos().subscribe(
+        proyectos => this.proyectos = proyectos
+      );
 
-    // Cargamos selector de proyectos.
-    this.proyectoService.getProyectos().subscribe(
-      proyectos => this.proyectos = proyectos
-    );
+      // Proyectos de usuarios, cargamos el dni con el que esta login.
+      this.dniUsuarioLogin = this.sesionService.getDni();
 
-    // Proyectos de usuarios, cargamos el dni con el que esta login.
-    this.dniUsuarioLogin = this.sesionService.getDni();
+      this.cargarUsuariosProyecto();
 
-    this.cargarUsuariosProyecto();
+      // GASTOS
+      /*
+      this.gastoService.getGastos().subscribe(
+        gastos => this.gastos = gastos
+      );*/
 
-    // GASTOS
-    /*
-    this.gastoService.getGastos().subscribe(
-      gastos => this.gastos = gastos
-    );*/
-
-    this.gastos = new Array<Gasto>();
+      this.gastos = new Array<Gasto>();
+    }
   }
 
   // Para ocultar el panel de gastos si no hay un acronimo de proyecto seleccionado.

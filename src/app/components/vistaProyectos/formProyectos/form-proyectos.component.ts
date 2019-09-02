@@ -64,18 +64,22 @@ export class FormProyectosComponent implements OnInit {
 
     
   ngOnInit() {
-    this.usuarioService.getUsuarios().subscribe(
-      usuarios =>{
-        this.usuarios = usuarios;
-         //quita el usuario logueado de la lista a mostrar
-        var user: Usuario =  this.usuarios.find(usuario => usuario.dni === this.sesionService.getDni() )
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else{
+      this.usuarioService.getUsuarios().subscribe(
+        usuarios =>{
+          this.usuarios = usuarios;
+          //quita el usuario logueado de la lista a mostrar
+          var user: Usuario =  this.usuarios.find(usuario => usuario.dni === this.sesionService.getDni() )
 
-        this.nombreIP1 = user.nombre;
-        this.usuarios.splice(this.usuarios.indexOf (user), 1);
-      }
+          this.nombreIP1 = user.nombre;
+          this.usuarios.splice(this.usuarios.indexOf (user), 1);
+        }
 
-    );
-    this.usuarios_anadidos = new Array<Usuario>();
+      );
+      this.usuarios_anadidos = new Array<Usuario>();
+    }
   }
 
   //Crea un subformulario para cada investigador que luego transformaremos en un array de investigadores

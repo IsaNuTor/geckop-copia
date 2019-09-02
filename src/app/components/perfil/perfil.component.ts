@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Subscriber } from 'rxjs';
 import { Usuario } from 'src/app/services/usuario/usuario';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -33,7 +34,9 @@ export class PerfilComponent implements OnInit {
 
   constructor(private sesionService: SesionService,
               private usuarioService: UsuarioService,
-              private fbPerfil: FormBuilder
+              private fbPerfil: FormBuilder,
+              private router: Router,
+              private activatedRoute: ActivatedRoute
     ) {
   
     this.formPerfil = this.fbPerfil.group({ 
@@ -49,9 +52,13 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rellenaUser();
-    this.ibanUsuario = this.sesionService.getIban();
-    this.nombreCompleto = this.sesionService.getNombreCompleto();
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else{
+      this.rellenaUser();
+      this.ibanUsuario = this.sesionService.getIban();
+      this.nombreCompleto = this.sesionService.getNombreCompleto();
+    }
   }
 
   rellenaUser(){

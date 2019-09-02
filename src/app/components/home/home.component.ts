@@ -24,19 +24,23 @@ export class HomeComponent implements OnInit {
 
   constructor(private ordenService: OrdenService,
               private sesionService: SesionService,
+              private router: Router,
               private activatedRoute: ActivatedRoute
             ) { }
 
   ngOnInit() {
-  
-   this.elementos = new Array<number[]>(4);
-   this.elementos[0] = new Array<number>();
-   this.elementos[1] = new Array<number>();
-   this.elementos[2] = new Array<number>();
-   this.elementos[3] = new Array<number>();
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else{
+      this.elementos = new Array<number[]>(4);
+      this.elementos[0] = new Array<number>();
+      this.elementos[1] = new Array<number>();
+      this.elementos[2] = new Array<number>();
+      this.elementos[3] = new Array<number>();
 
-   this.cargarOrdenesUsuario();
-   this.cargarOrdenesIP();
+      this.cargarOrdenesUsuario();
+      this.cargarOrdenesIP();
+    }
 
    
   }

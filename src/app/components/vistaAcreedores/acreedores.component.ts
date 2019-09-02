@@ -3,6 +3,7 @@ import { Acreedor } from '../../services/acreedor/acreedor';
 import { AcreedorService } from '../../services/acreedor/acreedor.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+import { SesionService } from 'src/app/services/sesion/sesion.service';
 
 @Component({
   selector: 'app-acreedores',
@@ -12,12 +13,22 @@ import swal from 'sweetalert2';
 export class AcreedoresComponent implements OnInit {
 
   acreedores: Acreedor[];
-  constructor(private acreedorService: AcreedorService) { }
+  constructor(
+    private acreedorService: AcreedorService,
+    private sesionService: SesionService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+    ) { }
 
   ngOnInit() {
-    this.acreedorService.getAcreedores().subscribe(
-      acreedores => this.acreedores = acreedores
-    );
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else{
+      this.acreedorService.getAcreedores().subscribe(
+        acreedores => this.acreedores = acreedores
+      );
+    }
+    
   }
 
   delete(acreedor: Acreedor): void {

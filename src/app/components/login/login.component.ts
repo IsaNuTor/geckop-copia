@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (this.sesionService.isLogin())
       this.router.navigate(['/perfil']);
+    
   }
 
   public login(): void{
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
             this.sesionService.guardarSesion(res);
             swal.fire({
                         type: 'success',
-                        title: 'Bienvenido '+ this.sesionService.getNombre(),
+                        title: 'Bienvenido/a '+ this.sesionService.getNombre(),
                         /*text: 'Te has logueado correctamente',*/
                         onClose: () => {
                               location.reload();

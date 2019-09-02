@@ -10,6 +10,7 @@ import { Orden } from 'src/app/services/orden/orden';
 import { UsuarioProyecto } from 'src/app/services/usuario-proyecto/usuario-proyecto';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Usuario } from 'src/app/services/usuario/usuario';
+import { SesionService } from 'src/app/services/sesion/sesion.service';
 
 
 
@@ -45,6 +46,7 @@ export class VerProyectoComponent implements OnInit {
     private usuariosProyectoService: UsuarioProyectoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private sesionService: SesionService,
     public fb: FormBuilder
   ) { 
       this.formFecha = this.fb.group({
@@ -56,9 +58,12 @@ export class VerProyectoComponent implements OnInit {
     }
               
   ngOnInit() {
-    
-    this.cargarProyecto();
-    this.cargarUsuariosProyecto();
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else{
+      this.cargarProyecto();
+      this.cargarUsuariosProyecto();
+    }
     
   }
 

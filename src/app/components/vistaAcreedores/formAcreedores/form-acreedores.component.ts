@@ -5,6 +5,7 @@ import { Acreedor } from '../../../services/acreedor/acreedor';
 import { AcreedorService } from '../../../services/acreedor/acreedor.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2'
+import { SesionService } from 'src/app/services/sesion/sesion.service';
 
 @Component({
   selector: 'app-form-acreedores',
@@ -27,6 +28,7 @@ export class FormAcreedoresComponent implements OnInit {
   constructor(private acreedorService: AcreedorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private sesionService: SesionService,
     public fb: FormBuilder
   ) {
       this.formAcreedores = this.fb.group({
@@ -37,7 +39,10 @@ export class FormAcreedoresComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.cargarAcreedor();
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else
+      this.cargarAcreedor();
   }
 
 

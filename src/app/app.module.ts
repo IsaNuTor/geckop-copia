@@ -27,7 +27,6 @@ import { FormAcreedoresComponent } from './components/vistaAcreedores/formAcreed
 import { ProyectosComponent } from './components/vistaProyectos/proyectos.component';
 import { FormProyectosComponent } from './components/vistaProyectos/formProyectos/form-proyectos.component';
 import { VerProyectoComponent } from './components/vistaProyectos/verProyecto/ver-proyecto.component';
-import { InfoProyectoComponent } from './components/info-proyecto/info-proyecto.component';
 
 // órdenes
 import { AddOrdenComponent } from './components/vista-ordenes/add-orden/add-orden.component';
@@ -85,7 +84,6 @@ import { FooterComponent } from './components/footer/footer.component';
     FormRegistroUsuariosComponent,
     LoginComponent,
     ProyectosComponent,
-    InfoProyectoComponent,
     FooterComponent,
     FormProyectosComponent,
     MenuVerticalComponent,

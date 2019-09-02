@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Orden } from 'src/app/services/orden/orden';
 import { OrdenService } from 'src/app/services/orden/orden.service';
-
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SesionService } from '../../../services/sesion/sesion.service';
 
 @Component({
   selector: 'app-ver-orden',
@@ -16,12 +16,16 @@ export class VerOrdenComponent implements OnInit {
 
   constructor(
     private ordenService: OrdenService,
+    private sesionService: SesionService,
     private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-
-    this.cargarOrden();
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else
+     this.cargarOrden();
 
   }
 

@@ -20,24 +20,22 @@ export class VistaOrdenesComponent implements OnInit {
 
   constructor(private ordenService: OrdenService,
               private sesionService: SesionService,
-              private activatedRoute: ActivatedRoute,) {
-
-
-              }
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit() {
-
-    // Carga todas las ordenes
-    /*this.ordenService.getOrdenes().subscribe(
-      ordenes => this.ordenes = ordenes
-    );*/
-
     // Proyectos de usuarios, cargamos el dni con el que esta login.
-    this.elementos = new Array<number[]>(1);
-    this.elementos[0] = new Array<number>();
-    this.dniUsuarioLogin = this.sesionService.getDni();
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else{
+      this.elementos = new Array<number[]>(1);
+      this.elementos[0] = new Array<number>();
+      this.dniUsuarioLogin = this.sesionService.getDni();
+  
+      this.cargarMisOrdenes();
 
-    this.cargarMisOrdenes();
+    }
+    
   }
 
   /* CARGAR Mis ordenes */

@@ -4,6 +4,7 @@ import { Usuario } from '../../services/usuario/usuario';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+import { SesionService } from 'src/app/services/sesion/sesion.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class FormRegistroUsuariosComponent implements OnInit{
   private formValid: boolean = true;
 
   constructor(private usuarioService: UsuarioService,
+          private sesionService: SesionService,
           public fb: FormBuilder,
           private router: Router,
   ){
@@ -36,7 +38,10 @@ export class FormRegistroUsuariosComponent implements OnInit{
   }
 
   ngOnInit() { 
-    this.formValid = true;
+    if (this.sesionService.isLogin())
+      this.router.navigate(['/perfil']);
+    else
+     this.formValid = true;
   }
 
   public registro(): void{

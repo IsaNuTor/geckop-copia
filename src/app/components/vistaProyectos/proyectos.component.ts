@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Proyecto } from '../../services/proyecto/proyecto';
 import { ProyectoService } from '../../services/proyecto/proyecto.service';
 import { SesionService } from '../../services/sesion/sesion.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-proyectos',
@@ -13,19 +14,24 @@ export class ProyectosComponent implements OnInit {
   proyectos: Proyecto[];
   constructor( 
     private proyectoService: ProyectoService,
-    private sesionService: SesionService
+    private sesionService: SesionService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
     ) { }
 
   ngOnInit() {
-
-    this.elementos = new Array<number[]>(1);
-    this.elementos[0] = new Array<number>();
-    this.proyectoService.getProyectosUsuario(this.sesionService.getDni()).subscribe(
-      proyectos =>{
-        this.proyectos = proyectos;
-        this.inicializarArrayNElementos( this.elementosPorPagina<this.proyectos.length ? this.elementosPorPagina : this.proyectos.length, 0);
-      } 
-    );
+    if (!this.sesionService.isLogin())
+      this.router.navigate(['/login']);
+    else{
+      this.elementos = new Array<number[]>(1);
+      this.elementos[0] = new Array<number>();
+      this.proyectoService.getProyectosUsuario(this.sesionService.getDni()).subscribe(
+        proyectos =>{
+          this.proyectos = proyectos;
+          this.inicializarArrayNElementos( this.elementosPorPagina<this.proyectos.length ? this.elementosPorPagina : this.proyectos.length, 0);
+        } 
+      );
+    }
   }
 
   public borrarProyecto(proyecto: Proyecto): void{
