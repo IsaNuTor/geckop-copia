@@ -4,6 +4,9 @@ import { Gasto } from '../gasto/gasto';
 export class Orden {
   id: number;
   acron_id: string;
+  tipo: string;
+  nif_IP: string;
+  iban: string;
 
   acronimo: string;
   numeracion: number;

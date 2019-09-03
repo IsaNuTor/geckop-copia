@@ -251,13 +251,13 @@ cargarNumProyectoOrden(): number {
     this.ordenService.getNumAcronimo(this.formOrden.value.acronimo).subscribe(
       (numMax) =>{
         this.numeracionAux = numMax;
-  
+
         this.crearOrden();
       });
-  
+
       return this.numeracionAux;
   }
-  
+
 }
 
 seleccionarFoto(event) {
@@ -388,7 +388,8 @@ public crearOrden(): void {
         this.orden.estado = "P"; // Pendiente
         this.orden.fechaOrden = new Date();
         this.orden.numeracion = this.numeracionAux;
-        
+        this.orden.tipo = "G";
+
         /*if(this.orden.tipo == 'V')
           this.orden.relacion = this.getRelacionProyecto();
         else
