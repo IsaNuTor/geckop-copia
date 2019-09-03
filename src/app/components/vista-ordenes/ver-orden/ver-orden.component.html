@@ -1,3 +1,151 @@
-<p>
-  {{orden.id}}
-</p>
+
+
+<div class = "row">
+  <!--Memoria Justificativa-->
+  <div class="col-md-6">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col" colspan="4">Orden de Pago <br> <small>Memoria Justificativa</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Num. Orden</th>
+          <td>{{orden.numeracion}}</td>
+          <th scope="row">Fecha</th>
+          <td>{{orden.fechaOrden}}</td>
+        </tr>
+        <tr>
+          <th scope="row" colspan="2">Referencia al Proyecto</th>
+          <th scope="row" colspan="2">Num. Contabilidad</th>
+        </tr>
+        <tr>
+          <td colspan="2">{{orden.acronimo}}</td>
+          <td colspan="2">{{orden.num_contabilidad}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
+<!--Acreedor-->
+  <div class="col-md-6">
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th  scope="col" colspan="3">Pagar A<br>  </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" colspan="1">Nombre y Apellidos</th>
+            <th scope="row" colspan="1">IBAN</th>
+            <th scope="row" colspan="1">Observaciones</th>
+          </tr>
+          <tr>
+              <td>{{acreedor.nombre}}</td>
+              <td>{{acreedor.iban}}</td>
+              <td>{{orden.observaciones}}</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+
+  <!--Datos del IP-->
+  <div class="col-md-12">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col" colspan="4">Datos del Investigador Principal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Nombre y Apellidos</th>
+          <td>{{ip.nombre}} {{ip.apellido1}}  {{ip.apellido2}}</td>
+          <th scope="row">NIF</th>
+          <td>{{ip.dni}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Departamento</th>
+          <td>{{ip.departamento}}</td>
+          <th scope="row">Telefono</th>
+          <td>{{ip.telefono}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Centro</th>
+          <td>{{ip.centro}}</td>
+          <th scope="row">Email</th>
+          <td>{{ip.email}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--Tabla de gastos generales. Habra que poner un ngif con el tipo-->
+
+  <div class="col-md-12">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col" colspan="3">Relación de gastos</th>
+        </tr>
+        <tr>
+            <th scope="col">Nº de factura</th>
+            <th scope="col">Proveedor, concepto y partida de gasto (máx. 150 caracteres)</th>
+            <th scope="col">Importe</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let gasto of gastosGenerales">
+        <tr>
+          <td>{{gasto.nFactura}}</td>
+          <td>{{gasto.descripcion}}</td>
+          <td>{{gasto.importe}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+  <div class="col-md-12">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">Memoria Explicativa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{orden.memoria}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-12">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">Relacion con el Proyecto</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr>
+          <td>{{orden.relacion}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>

@@ -12,6 +12,7 @@ export class GastoService {
   urlGasto:string = 'http://localhost:8080/api/gastos';
   urlGastoImagen:string = 'http://localhost:8080/api/gastos/subirImagen';
   urlGastoUpdate:string = 'http://localhost:8080/api/setGasto';
+  urlGastoByOrden:string = 'http://localhost:8080/api/gastos/byidorden';
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -46,4 +47,8 @@ export class GastoService {
   subirIdOrden(gasto: Gasto): Observable<Boolean> {
     return this.http.post<Boolean>(`${this.urlGastoUpdate}`, gasto, {headers: this.httpHeaders});
   }
+
+  findByIdOrden(id_o: number): Observable<Gasto[]>{
+    return this.http.post<Gasto[]>(this.urlGastoByOrden, id_o, {headers: this.httpHeaders});
+	}
 }
