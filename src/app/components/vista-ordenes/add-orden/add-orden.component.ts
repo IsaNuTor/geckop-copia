@@ -43,6 +43,7 @@ export class AddOrdenComponent implements OnInit {
   memoriaVacio:boolean = false;
   relacionVacio:boolean = false;
   observacionesVacio:boolean = false;
+  relacion:string="";
 
   idAuxOrden: number;
 
@@ -132,6 +133,7 @@ export class AddOrdenComponent implements OnInit {
   capturarValor() {
     //this.opcionSeleccionada = this.formOrden.get('acronimo');
     this.verSeleccionada = this.formOrden.get('acronimo').value;
+    this.relacion = this.getRelacionProyecto();
     //console.log(this.verSeleccionada);
   }
 
@@ -386,6 +388,12 @@ public crearOrden(): void {
         this.orden.estado = "P"; // Pendiente
         this.orden.fechaOrden = new Date();
         this.orden.numeracion = this.numeracionAux;
+        
+        /*if(this.orden.tipo == 'V')
+          this.orden.relacion = this.getRelacionProyecto();
+        else
+          this.orden.relacion = this.formOrden.value.relacion;
+        */
 
         this.ordenService.crearOrden(this.orden).subscribe(
           orden =>
@@ -434,4 +442,12 @@ verFoto(foto:String): void {
     animation: false
   })
 }
+
+  getRelacionProyecto(): string{
+    let relacion = "";
+    for(let r of this.misProyectos){
+    if(this.formOrden.value.acronimo == r.acronimo)
+      return r.rol;
+    }
+  }
 }
