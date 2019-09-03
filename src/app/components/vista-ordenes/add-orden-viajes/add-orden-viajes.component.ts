@@ -45,7 +45,6 @@ export class AddOrdenViajesComponent implements OnInit {
   conceptoVacio:boolean = false;
   numContabilidadVacio:boolean = false;
   memoriaVacio:boolean = false;
-  relacionVacio:boolean = false;
   observacionesVacio:boolean = false;
 
   idAuxOrden: number;
@@ -74,6 +73,7 @@ export class AddOrdenViajesComponent implements OnInit {
   importeVacio:boolean = false;
   idAux: number;
   numeracionAux: number;
+  relacion: string = "";
 
   precioKilometro = 0.19;
 
@@ -94,9 +94,9 @@ export class AddOrdenViajesComponent implements OnInit {
             concepto: ['', [Validators.required, Validators.maxLength(50)]],
             num_contabilidad: ['', [Validators.maxLength(50)]],
             memoria: ['', [Validators.required, Validators.maxLength(50)]],
-            relacion: ['', [Validators.required, Validators.max(100000000)]],
             observaciones: ['', [Validators.required, Validators.max(100000000)]],
           });
+
           this.formGastos = this.fb.group({
             fechaIda: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
             fechaVuelta: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
@@ -185,6 +185,7 @@ export class AddOrdenViajesComponent implements OnInit {
   capturarValor() {
     //this.opcionSeleccionada = this.formOrden.get('acronimo');
     this.verSeleccionada = this.formOrden.get('acronimo').value;
+    this.relacion = this.getRelacionProyecto();
     //console.log(this.verSeleccionada);
   }
 
@@ -227,4 +228,101 @@ export class AddOrdenViajesComponent implements OnInit {
       }
     }
   }
+
+// Crear orden
+public crearOrden(): void {
+    //console.log(this.gasto);
+
+    console.log(this.gastoViaje);
+
+    if(this.formOrden.valid){
+
+      //si falta algun dato marcamos el fallo y NO creamos la nueva Orden
+      if(this.formOrden.value.acronimo == ""){this.proyectoVacio = true; this.crear = false;}
+      if(this.formOrden.value.acreedor == ""){this.acreedorVacio = true; this.crear = false;}
+      if(this.formOrden.value.concepto == ""){this.conceptoVacio = true; this.crear = false;}
+      if(this.formOrden.value.numContabilidad == ""){this.numContabilidadVacio = true; this.crear = false;}
+      if(this.formOrden.value.memoria == ""){this.memoriaVacio = true; this.crear = false;}
+      if(this.formOrden.value.observaciones == ""){this.observacionesVacio = true; this.crear = false;}
+
+      if(this.crear){
+        this.orden = this.formOrden.value;
+        // Los datos que no coge del formulario.
+        this.orden.nif_user = this.dniUsuarioLogin;
+        this.orden.estado = "P"; // Pendiente
+        this.orden.fechaOrden = new Date();
+        this.orden.numeracion = this.numeracionAux;
+        this.orden.tipo = "V";
+        this.orden.relacion = this.relacion;
+
+        /*if(this.orden.tipo == 'V')
+          this.orden.relacion = this.getRelacionProyecto();
+        else
+          this.orden.relacion = this.formOrden.value.relacion;
+        */
+
+        this.ordenService.crearOrden(this.orden).subscribe(
+          orden =>
+          {
+            this.router.navigate(['vista-ordenes'])
+            if(orden != null){
+              const ToastrModule = swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 5000
+                });
+
+                ToastrModule.fire({
+                  type: 'success',
+                  title: 'Éxito creada',
+
+                })
+
+                this.idAuxOrden = orden.id;
+                //alert(orden.id);
+// GASTOOOO  //this.cargarIdOrdenGasto(this.idAuxOrden);
+                //alert("pasa por aqui");
+
+          }else{
+            swal.fire({
+                        type: 'error',
+                        title: 'Error!',
+                        text: 'La orden no se ha podido crear',
+                        onClose: () => {
+                              location.reload();
+                            }
+            })
+          }
+      }
+    )
+  }
+}
+}
+
+/* CARGAR la numeracion segun el acronimo del proyecto */
+cargarNumProyectoOrden(): number {
+  if(this.formOrden.value.acronimo == ""){this.proyectoVacio = true; this.crear = false;}
+
+  if(this.crear){
+
+    this.ordenService.getNumAcronimo(this.formOrden.value.acronimo).subscribe(
+      (numMax) =>{
+        this.numeracionAux = numMax;
+
+        this.crearOrden();
+      });
+
+      return this.numeracionAux;
+  }
+
+}
+
+getRelacionProyecto(): string{
+  let relacion = "";
+  for(let r of this.misProyectos){
+  if(this.formOrden.value.acronimo == r.acronimo)
+    return r.rol;
+  }
+}
 }
