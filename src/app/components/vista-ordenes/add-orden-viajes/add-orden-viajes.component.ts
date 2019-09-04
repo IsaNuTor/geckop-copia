@@ -108,7 +108,7 @@ export class AddOrdenViajesComponent implements OnInit {
   numeracionAux: number;
   relacion: string = "";
 
-  precioKilometro = 0.19;
+  precioKilometro: number = 0.19;
 
   constructor(private acreedorService: AcreedorService,
         private router: Router,
@@ -377,6 +377,7 @@ public crearGastoViajes(): void {
     if(this.formGastos.value.fechaVuelta == ""){this.fechaVueltaVacio = true; this.crearGastoForm = false;}
     if(this.crearGastoForm){
       this.gastoViaje = this.formGastos.value;
+      this.gastoViaje.precioKilometro = this.precioKilometro;
       this.gastoViaje.id_orden = this.idAuxOrden;
       this.rellenarFotos(this.idAuxOrden.toString());
 
@@ -401,7 +402,7 @@ public crearGastoViajes(): void {
 
                   ToastrModule.fire({
                     type: 'success',
-                    title: 'Guardado gasto ',
+                    title: 'Creada con éxito ',
 
                   })
 
@@ -487,14 +488,7 @@ rellenarFotos(id:string):void{
   }if(this.fotrosgastos!= ""){
     this.gastoViaje.fotoOtrosGastos = id+"_"+this.fotrosgastos;
   }
-  
-  
-  
-  
-  
- 
-  
- 
+
 }
 
   subirFoto(idAux: number) {
@@ -510,9 +504,36 @@ rellenarFotos(id:string):void{
   }
 
   // FUNCIONES CALCULOS
-  calculoImporteTotal(importe:number): void {
-    this.importeTotal = this.importeTotal + importe;
+  calculoImporteTotal(campo:string): void {
+
+    if((campo == 'avion') || (campo == 'coche') || (campo == 'tren') || (campo == 'autobus') || (campo == 'taxi') || (campo == 'otros') || (campo == 'hotel') || (campo == 'otrosgastos') || (campo == 'dieta')){
+      this.importeTotal =  Number(this.formGastos.get('importeAvion').value) +
+      Number(this.formGastos.get('importeCoche').value) + Number(this.formGastos.get('importeTren').value)
+      + Number(this.formGastos.get('importeAutobus').value) + Number(this.formGastos.get('importeTaxi').value)
+      + + Number(this.formGastos.get('importeOtros').value) + Number(this.formGastos.get('importeHotel').value)
+      + Number(this.formGastos.get('importeDietas').value) + Number(this.formGastos.get('importeOtrosGastos').value);
+    }
   }
 
- 
+  calculoImporteCoche(): void {
+    let importeCalculado: number;
+    let nkm: number = Number(this.formGastos.get('nKilometros').value);
+    importeCalculado = nkm * this.precioKilometro;
+    this.formGastos.controls['importeCoche'].setValue(importeCalculado);
+
+    this.calculoImporteTotal('coche');
+    //console.log(this.formGastos.get('importeCoche'))
+  }
+
+  calculoImporteDietas(): void {
+    let importeCalculadoDietas: number;
+    let numDietas: number = Number(this.formGastos.get('nDietas').value);
+    let precioDieta: number = Number(this.formGastos.get('precioDietas').value);
+    importeCalculadoDietas = numDietas * precioDieta;
+    this.formGastos.controls['importeDietas'].setValue(importeCalculadoDietas);
+
+    this.calculoImporteTotal('dieta');
+    //console.log(this.formGastos.get('importeCoche'))
+  }
+
 }

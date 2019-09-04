@@ -101,7 +101,7 @@
 
               <div class="col-md-2">
                 <label for="importeAvion">Importe</label>
-                <input type="number" class="form-control" formControlName="importeAvion" required min="0" value="0" step="any" name="importeAvion" id="importeAvion" (change)="calculoImporteTotal()">
+                <input type="number" class="form-control" formControlName="importeAvion" required min="0" value="0" step="any" name="importeAvion" id="importeAvion" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('avion')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -130,7 +130,7 @@
           <div class="row">
               <div class="col-md-4">
                 <label for="nKilometros">Nº de Kilometros</label>
-                <input type="number" class="form-control" formControlName="nKilometros" required min="0" value="0" step="any" name="nKilometros" id="nKilometros">
+                <input type="number" class="form-control" formControlName="nKilometros" required min="0" value="0" step="any" name="nKilometros" id="nKilometros" (change)="calculoImporteCoche()" onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -183,7 +183,7 @@
 
               <div class="col-md-2">
                 <label for="importeTren">Importe</label>
-                <input type="number" class="form-control" formControlName="importeTren" required min="0" value="0" step="any" name="importeTren" id="importeTren">
+                <input type="number" class="form-control" formControlName="importeTren" required min="0" value="0" step="any" name="importeTren" id="importeTren" (change)="calculoImporteTotal('tren')" onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -217,7 +217,7 @@
 
               <div class="col-md-2">
                 <label for="importeAutobus">Importe</label>
-                <input type="number" class="form-control" formControlName="importeAutobus" required min="0" value="0" step="any" name="importeAutobus" id="importeAutobus">
+                <input type="number" class="form-control" formControlName="importeAutobus" required min="0" value="0" step="any" name="importeAutobus" id="importeAutobus" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('autobus')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -252,7 +252,7 @@
 
               <div class="col-md-2">
                 <label for="importeTaxi">Importe</label>
-                <input type="number" class="form-control" formControlName="importeTaxi" required min="0" value="0" step="any" name="importeTaxi" id="importeTaxi">
+                <input type="number" class="form-control" formControlName="importeTaxi" required min="0" value="0" step="any" name="importeTaxi" id="importeTaxi" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('taxi')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -287,7 +287,7 @@
 
               <div class="col-md-2">
                 <label for="importeOtros">Importe</label>
-                <input type="number" class="form-control" formControlName="importeOtros" required min="0" value="0" step="any" name="importeOtros" id="importeOtros">
+                <input type="number" class="form-control" formControlName="importeOtros" required min="0" value="0" step="any" name="importeOtros" id="importeOtros" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('otros')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -310,7 +310,7 @@
 
               <div class="col-md-2">
                 <label for="importeHotel">Importe</label>
-                <input type="number" class="form-control" formControlName="importeHotel" required min="0" value="0" step="any" name="importeHotel" id="importeHotel">
+                <input type="number" class="form-control" formControlName="importeHotel" required min="0" value="0" step="any" name="importeHotel" id="importeHotel" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('hotel')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -329,7 +329,7 @@
           <div class="row">
               <div class="col-md-3">
                 <label for="nDietas">Nº de dietas</label>
-                <input type="number" class="form-control" formControlName="nDietas" required min="0" value="0" step="any" name="nDietas" id="nDietas">
+                <input type="number" class="form-control" formControlName="nDietas" required min="0" value="0" step="any" name="nDietas" id="nDietas" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteDietas()">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -337,7 +337,7 @@
 
               <div class="col-md-6">
                 <label for="precioDietas">cuantía por dieta(€/día) <a href="https://www.ucm.es/data/cont/docs/32-2018-07-11-20180711_cuadro_dietas.pdf" target="_blank">[Ver cuadro de dietas]</a></label>
-                <input type="number" class="form-control" formControlName="precioDietas" required min="0" value="0" step="any" name="precioDietas" id="precioDietas">
+                <input type="number" class="form-control" formControlName="precioDietas" required min="0" value="0" step="any" name="precioDietas" id="precioDietas" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteDietas()">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -352,7 +352,7 @@
               </div>
             </div>
             <br>
-            
+
          </div>
         <!--Otros gastos-->
         <div class="form-group">
@@ -364,7 +364,7 @@
 
               <div class="col-md-2">
                 <label for="importeOtrosGastos">Importe</label>
-                <input type="number" class="form-control" formControlName="importeOtrosGastos" required min="0" value="0" step="any" name="importeOtrosGastos" id="importeOtrosGastos">
+                <input type="number" class="form-control" formControlName="importeOtrosGastos" required min="0" value="0" step="any" name="importeOtrosGastos" id="importeOtrosGastos" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('otrosgastos')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -374,6 +374,22 @@
           <div class="form-group">
             <label for="imagen">Adjuntar Factura</label>
             <input (change)="seleccionarFoto($event, 'otrosgastos')" type="file" class="form-control-file" id="fotoOtrosGastos">
+          </div>
+          <br>
+        </div>
+
+        <!--Importe total-->
+        <div class="form-group">
+          <div class="row">
+              <div class="col-md-10">
+                <br><br>
+                <label class ="tx-secondary"><b>Importe total:</b></label>
+              </div>
+
+              <div class="col-md-2">
+                <label for="importeTotal">Importe €</label>
+                <input type="number" class="form-control" value="{{importeTotal}}" step="any" name="importeTotal" id="importeTotal">
+              </div>
           </div>
           <br>
         </div>
@@ -406,7 +422,7 @@
           <textarea class="form-control" id="observaciones" rows="3" formControlName="observaciones" placeholder="Escribe las observaciones que creas correspondientes"></textarea>
         </div>
       <br>
-        <a href="#"><img src="../../../../../assets/iconos/pdf.png" alt="Descargar orden pdf" width="80px"></a>
+        <!--<a href="#"><img src="../../../../../assets/iconos/pdf.png" alt="Descargar orden pdf" width="80px"></a>-->
       <br><br>
       <button class="btn btn-success" role="button" (click)="cargarNumProyectoOrden()">Crear Orden</button>
       <button class="btn btn-danger" role="button" (click)="cancelar()">Cancelar</button>
