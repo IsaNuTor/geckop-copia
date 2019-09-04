@@ -14,6 +14,8 @@ export class OrdenService {
   urlNumAcronimo:string = 'http://localhost:8080/api/buscarnumacronimo';
   urlOrdenesIP:string = 'http://localhost:8080/api/ordenesdeip';
   urlGetOrdenId:string = 'http://localhost:8080/api/getordenid';
+  urlSetOrden: string = 'http://localhost:8080/api/setorden';
+
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -47,5 +49,9 @@ export class OrdenService {
   // Devuelve la numeracion segun el proyecto, para saber cuantas ordenes se han hecho de ese proyecto.
   getNumAcronimo(a: String): Observable<number>{
     return this.http.post<number>(this.urlNumAcronimo, a, {headers: this.httpHeaders})
+  }
+
+  setOrden(o: Orden):Observable<Orden>{
+    return this.http.post<Orden>(this.urlSetOrden, o, {headers: this.httpHeaders})
   }
 }

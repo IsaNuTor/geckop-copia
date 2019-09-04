@@ -48,8 +48,8 @@ export class FormProyectosComponent implements OnInit {
         fechaCierre: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
         nombre: ['', [Validators.required, Validators.maxLength(50)]],
         acronimo: ['', [Validators.required, Validators.maxLength(50)]],
-        presupuesto: ['', [Validators.required, Validators.max(100000000)]],
-        nContabilidad: ['', [Validators.required, Validators.max(100000000)]],
+        presupuesto: ['', [Validators.required, Validators.max(10000000000000000)]],
+        nContabilidad: ['', [Validators.required, Validators.max(100000000000000000)]],
         ip1: ['', [Validators.maxLength(50)]],
         ip2: ['', [Validators.maxLength(50)]],
         investigadores: this.fb.array([''])
@@ -176,13 +176,16 @@ export class FormProyectosComponent implements OnInit {
                 var inv = new UsuarioProyecto();
                 inv.dni = this.proyecto.ip1,
                 inv.acronimo = this.proyecto.acronimo;
-                inv.rol = "Miembro del proyecto";
+                inv.rol = "Investigador Principal";
+                
 
                 this.usuarioProyectoService.insertarUsuariosProyecto(inv).subscribe();
 
                 while(this.investigadores.length > 0){
                       var aux = this.investigadores.pop();
                       aux.acronimo = this.proyecto.acronimo;
+                      if(aux.dni == this.proyecto.ip2)
+                        aux.rol = "Investigador Principal";
                       this.usuarioProyectoService.insertarUsuariosProyecto(aux).subscribe();
                   }
                   this.router.navigate(['/proyectos']);

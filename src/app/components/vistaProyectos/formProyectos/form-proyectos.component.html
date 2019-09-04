@@ -52,9 +52,9 @@
       <div class="form-group col-md-6">
         <label for="nContabilidad">   Nº de contabilidad</label>
         <input type="text" class="form-control" formControlName="nContabilidad" id="nContabilidad" placeholder="Número de contabilidad" name="nContabilidad" maxlength="16">
-        <!--<div class="alerta">
-          <small *ngIf="!formValid && formProyecto.get('nContabilidad').hasError('required')">No puede estar vacio <br></small>
-        </div>-->
+        <div class="alerta">
+          <small *ngIf="!formValid && formProyecto.get('nContabilidad').hasError('required')">No puede estar vacio o supera el limite de caracteres <br></small>
+        </div>-
       </div>
     </div>
 

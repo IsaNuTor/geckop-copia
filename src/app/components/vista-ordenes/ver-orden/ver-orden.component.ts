@@ -9,6 +9,7 @@ import { Gasto } from 'src/app/services/gasto/gasto';
 import { GastoService } from 'src/app/services/gasto/gasto.service';
 import { Acreedor } from 'src/app/services/acreedor/acreedor';
 import { AcreedorService } from 'src/app/services/acreedor/acreedor.service';
+import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
 
 @Component({
   selector: 'app-ver-orden',
@@ -19,8 +20,13 @@ export class VerOrdenComponent implements OnInit {
 
   orden : Orden= new Orden();
   ip: Usuario = new Usuario();
+  usuario: Usuario = new Usuario();
   acreedor: Acreedor = new Acreedor();
-  gastosGenerales: Gasto[] = new Array<Gasto>();;
+  gastosGenerales: Gasto[] = new Array<Gasto>();
+  firmada: boolean =  false; 
+  isG: boolean = false;
+  isV:boolean = false;
+  isIP:boolean = false;
 
 
   constructor(
@@ -29,6 +35,7 @@ export class VerOrdenComponent implements OnInit {
     private usuarioService: UsuarioService,
     private gastoService: GastoService,
     private acreedorService: AcreedorService,
+    private proyectoService: ProyectoService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
@@ -52,10 +59,16 @@ export class VerOrdenComponent implements OnInit {
       this.ordenService.getOrdenID(id).subscribe(
         (orden) =>{
            this.orden = orden;
-           this.cargarDatosIP(this.orden.nif_user);
+           this.firmada = this.orden.estado != 'P';
+           this.isG = this.orden.tipo == 'G';
+           this.isV = this.orden.tipo == 'V';
+
+           if(this.firmada)
+            this.cargarDatosIP(this.orden.nif_IP);
            /*Solo para pruebas */
            this.cargarGastosGenerales(1);
            this.cargarAcreedor('05464654K');
+           this.comprobarIP(this.orden.acronimo);
 
 
            /*Cambiar fuera de pruebas
@@ -74,6 +87,12 @@ export class VerOrdenComponent implements OnInit {
       (usuario) => this.ip = usuario
     )
   }
+  cargarDatosUsuario(dni: string): void{
+    this.usuarioService.getNombreUsuario(dni).subscribe(
+      (usuario) => this.usuario = usuario
+    )
+  }
+
 
   cargarGastosGenerales(idOrden: number): void{
     this.gastoService.findByIdOrden(idOrden).subscribe(
@@ -87,6 +106,33 @@ export class VerOrdenComponent implements OnInit {
     )
 
   }
+  aceptarOrden():void{
+    this.orden.estado = 'A';
+    this.orden.nif_IP = this.sesionService.getDni();
+    this.orden.iban = this.acreedor.iban;
+    
+    this.ordenService.setOrden(this.orden).subscribe(
+      (orden) => this.orden = orden
+     
+    );
+    location.reload();
+  }
+  rechazarOrden():void{
+    this.orden.estado = 'R';
+    this.orden.nif_IP = this.sesionService.getDni();
+    
+    this.ordenService.setOrden(this.orden).subscribe(
+      (orden) => this.orden = orden
+    );
+    location.reload();
 
+  }
+
+  comprobarIP(acronimo:string):void{
+    this.proyectoService.getProyecto(acronimo).subscribe(
+      (proyecto) => this.isIP = proyecto.ip1 == this.sesionService.getDni() || proyecto.ip2 == this.sesionService.getDni()
+    );
+
+  }
 
 }
