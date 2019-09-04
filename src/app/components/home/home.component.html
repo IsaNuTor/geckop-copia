@@ -31,7 +31,7 @@
              
                 <td>
                   <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(i, paginaActualIP)].id]" >
-                    <img src="assets/iconos/lupa.png" class="rounded ml-0" alt="Editar Orden" maxwidth="10px">
+                    <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px">
                   </button>
                 </td>
           </tr>
@@ -69,8 +69,8 @@
               <td>{{aceptadas[getOrdenPagindoIndex(a, paginaActualA)].concepto}}</td>
               <td>{{aceptadas[getOrdenPagindoIndex(a, paginaActualA)].acronimo}}</td>
             <td>
-              <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', aceptadas[getOrdenPagindoIndex(a, paginaActualA)].id]" >
-                <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+              <button type="button" class="btn btn-link " name="button" [routerLink]="['/vistaOrdenes/verOrden/', aceptadas[getOrdenPagindoIndex(a, paginaActualA)].id]" >
+                <img src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden">
               </button>
             </td>
           </tr>
@@ -108,7 +108,7 @@
               <td>{{pendientes[getOrdenPagindoIndex(a,   paginaActualP)].acronimo}}</td>
             <td>
               <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', pendientes[getOrdenPagindoIndex(a,  paginaActualP)].id]" >
-                <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden">
+                <img src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden">
               </button>
             </td>
           </tr>

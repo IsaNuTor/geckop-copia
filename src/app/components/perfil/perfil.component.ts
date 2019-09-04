@@ -6,6 +6,8 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Subscriber } from 'rxjs';
 import { Usuario } from 'src/app/services/usuario/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Acreedor } from 'src/app/services/acreedor/acreedor';
+import { AcreedorService } from 'src/app/services/acreedor/acreedor.service';
 
 @Component({
   selector: 'app-perfil',
@@ -20,6 +22,7 @@ export class PerfilComponent implements OnInit {
   formPerfil: FormGroup;
   ibanUsuario:string = "";
   nombreCompleto: string = "";
+  existeIban: boolean = false;
 
   emailValido:boolean=true;
   ibanValido:boolean=true;
@@ -34,6 +37,7 @@ export class PerfilComponent implements OnInit {
 
   constructor(private sesionService: SesionService,
               private usuarioService: UsuarioService,
+              private acreedorService: AcreedorService,
               private fbPerfil: FormBuilder,
               private router: Router,
               private activatedRoute: ActivatedRoute
@@ -56,7 +60,18 @@ export class PerfilComponent implements OnInit {
       this.router.navigate(['/login']);
     else{
       this.rellenaUser();
-      this.ibanUsuario = this.sesionService.getIban();
+      this.acreedorService.getAcreedor(this.sesionService.getDni()).subscribe(
+        (result) =>{
+          if(result != null){
+            this.existeIban = true;
+            this.ibanUsuario = result.iban;
+          }else{
+            this.ibanUsuario = "Aun no existe IBAN asignado al usuario";
+          }
+
+        } 
+      );
+      
       this.nombreCompleto = this.sesionService.getNombreCompleto();
     }
   }
@@ -136,8 +151,8 @@ export class PerfilComponent implements OnInit {
                 //set usuario
                 this.modificar = true;
                 this.user.password = this.formPerfil.value.passNueva;
-                this.modificarUsuario();
                 this.modificarIban();
+                this.modificarUsuario();
               }else{
                 this.passAntigua = false;
               }
@@ -162,8 +177,75 @@ export class PerfilComponent implements OnInit {
   }
 
   modificarIban(): void{
+    let a  = new Acreedor();
+    a.iban = this.formPerfil.value.iban;
+    a.nif = this.user.dni;
+    a.nombre = this.sesionService.getNombreCompleto();
 
-    
+    if(this.existeIban){
+     this.acreedorService.actualizarAcreedor(a).subscribe(
+        (ok) => {
+          if(ok){
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'success',
+              title: 'Guardado correctamente'
+
+            })
+          }else{
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'error',
+              title: 'Fallo al guardar los cambios'
+            })
+          }
+      });
+
+     this.ibanUsuario =  this.formPerfil.value.iban;
+     this.existeIban = true;
+    }else{
+      this.acreedorService.crearAcreedor(a).subscribe(
+        (ok) => {
+          if(ok != null){
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'success',
+              title: 'Guardado correctamente'
+
+            })
+          }else{
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'error',
+              title: 'Fallo al guardar los cambios'
+            })
+          }
+      });
+    }
   }
 
 /*

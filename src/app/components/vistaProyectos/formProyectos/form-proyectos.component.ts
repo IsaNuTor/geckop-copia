@@ -50,7 +50,6 @@ export class FormProyectosComponent implements OnInit {
         acronimo: ['', [Validators.required, Validators.maxLength(50)]],
         presupuesto: ['', [Validators.required, Validators.max(10000000000000000)]],
         nContabilidad: ['', [Validators.required, Validators.max(100000000000000000)]],
-        ip1: ['', [Validators.maxLength(50)]],
         ip2: ['', [Validators.maxLength(50)]],
         investigadores: this.fb.array([''])
       });
