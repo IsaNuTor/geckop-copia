@@ -67,7 +67,18 @@ export class AddOrdenViajesComponent implements OnInit {
   gastoViaje: GastoViaje;
   formGastos: FormGroup;
   formValid: boolean = true;
+
   fotos: File[];
+  favion:string = "";
+  fcoche:string = "";
+  ftren:string = "";
+  fautobus:string = "";
+  ftaxi:string = "";
+  fotros:string = "";
+  fhotel:string = "";
+  fmanutencion:string = "";
+  fotrosgastos:string = "";
+
   fotoSeleccionada: File;
   crearGastoForm: boolean = true;
 
@@ -188,7 +199,6 @@ export class AddOrdenViajesComponent implements OnInit {
       this.cargarUsuariosProyecto();
 
       this.fotos = new Array<File>();
-
       // GASTOS
       /*
       this.gastoService.getGastos().subscribe(
@@ -368,6 +378,8 @@ public crearGastoViajes(): void {
     if(this.crearGastoForm){
       this.gastoViaje = this.formGastos.value;
       this.gastoViaje.id_orden = this.idAuxOrden;
+      this.rellenarFotos(this.idAuxOrden.toString());
+
       this.gastoViajeService.crearGasto(this.gastoViaje).subscribe(
         gastoViaje =>
         {
@@ -375,10 +387,7 @@ public crearGastoViajes(): void {
           if(gastoViaje != null){
 
             this.idAux = gastoViaje.id;
-
-            if(this.gastoViaje.fotoAvion != null)
-              this.gastoViaje.fotoAvion=this.idAux + "_" + this.gastoViaje.fotoAvion;
-            this.subirFoto(this.idAux);
+            this.subirFoto(this.idAuxOrden);
             //gasto.foto = this.idAux + "_" + this.fotoSeleccionada.name;
             //this.gastos.push(gasto);
             //console.log(this.gastos);
@@ -436,7 +445,21 @@ seleccionarFoto(event, s:string) {
     this.fotoSeleccionada = null;
   } else {
     if(s=='avion') {
-      this.gastoViaje.fotoAvion = this.fotoSeleccionada.name;
+      this.favion= this.fotoSeleccionada.name;
+    }else  if(s=='coche') {
+      this.fcoche = this.fotoSeleccionada.name;
+    }else  if(s=='tren') {
+      this.ftren = this.fotoSeleccionada.name;
+    }else  if(s=='autobus') {
+      this.fautobus = this.fotoSeleccionada.name;
+    }else  if(s=='taxi') {
+      this.ftaxi = this.fotoSeleccionada.name;
+    }else  if(s=='otros') {
+      this.fotros = this.fotoSeleccionada.name;
+    }else  if(s=='hotel') {
+      this.fhotel = this.fotoSeleccionada.name;
+    }else  if(s=='otrosgastos') {
+      this.fotrosgastos = this.fotoSeleccionada.name;
     }
     this.fotos.push(this.fotoSeleccionada);
 
@@ -444,21 +467,52 @@ seleccionarFoto(event, s:string) {
 
 }
 
-subirFoto(idAux: number) {
-
-  for(let f of this.fotos) {
-    this.gastoViajeService.subirImagen(f, idAux).subscribe(
-      gastoViaje => {
-          if(gastoViaje)
-          alert("Todo correcto!");
-          //swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
-      });
+rellenarFotos(id:string):void{
+  if(this.favion != ""){
+    this.gastoViaje.fotoAvion = id+"_"+this.favion;
   }
+  if(this.fcoche != ""){
+    this.gastoViaje.fotoCoche = id+"_"+this.fcoche;
+  }
+  if(this.ftren != ""){
+    this.gastoViaje.fotoTren = id+"_"+this.ftren;
+  }if(this.fautobus!= ""){
+    this.gastoViaje.fotoAutobus = id+"_"+this.fautobus;
+  }if(this.ftaxi!= ""){
+    this.gastoViaje.fotoTaxi = id+"_"+this.ftaxi;
+  }if(this.fotros!= ""){
+    this.gastoViaje.fotoOtros = id+"_"+this.fotros;
+  }if(this.fhotel!= ""){
+    this.gastoViaje.fotoHotel = id+"_"+this.fhotel;
+  }if(this.fotrosgastos!= ""){
+    this.gastoViaje.fotoOtrosGastos = id+"_"+this.fotrosgastos;
+  }
+  
+  
+  
+  
+  
+ 
+  
+ 
 }
 
-// FUNCIONES CALCULOS
-public calculoImporteTotal(importe:number): void {
-  this.importeTotal = this.importeTotal + importe;
-}
+  subirFoto(idAux: number) {
 
+    for(let f of this.fotos) {
+      this.gastoViajeService.subirImagen(f, idAux).subscribe(
+        gastoViaje => {
+            if(gastoViaje)
+            alert("Todo correcto!");
+            //swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
+        });
+    }
+  }
+
+  // FUNCIONES CALCULOS
+  calculoImporteTotal(importe:number): void {
+    this.importeTotal = this.importeTotal + importe;
+  }
+
+ 
 }
