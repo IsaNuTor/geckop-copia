@@ -10,7 +10,6 @@
         <div class="registro-der">
 
             <h2>Registro</h2>
-           
             <input id="placeColor" formControlName="dni" type="text" placeholder="DNI" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" maxlength="10">
             <div class="alerta">
               <small *ngIf="!formValid && formRegistro.get('dni').hasError('required')"> DNI no puede estar vacio <br></small>
@@ -43,7 +42,7 @@
             <input id="placeColor" type="password" placeholder="Contraseña" formControlName="password" maxlength="10">
             <div class="alerta">
               <small *ngIf="!formValid && formRegistro.get('password').hasError('required')">Contraseña no puede estar vacio<br></small>
-              <small *ngIf="!formValid && formRegistro.get('password').hasError('minlength')">Mínimo de 5 caracteress<br></small>
+              <small *ngIf="!formValid && formRegistro.get('password').hasError('minlength')">Mínimo de 5 caracteres<br></small>
             </div>
 
             <!--No tiene mini porque  veces se referencian por la extensión dentro de la universidad-->
@@ -56,7 +55,10 @@
 
             <div id="checkTerm" class="mt-5">
               <label for="checkTerminos">
-                  <input type="checkbox" id="checkTerminos" value="checkTerminos" name="checkTerminos"> Al registrarse, aceptas nuestras <a href="#">Condiciones de uso</a> y <a href="#">Política de privacidad.</a>
+                  <input type="checkbox" id="checkTerminos" formControlName="tyc" value="checkTerminos" name="checkTerminos"> Al registrarse, aceptas nuestras <a href="#">Condiciones de uso</a> y <a href="#">Política de privacidad.</a>
+                  <div class="alerta">
+                    <small *ngIf="!formValid && formRegistro.get('tyc').hasError('required')">Tienes que aceptar los terminos y condiciones para poder registrate<br></small>
+                  </div>
               </label>
             </div>
 

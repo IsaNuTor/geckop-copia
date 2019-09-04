@@ -29,7 +29,8 @@ export class PerfilComponent implements OnInit {
   passIguales:boolean=true;
   passValida:boolean=true;
   passAntigua:boolean=true;
-  modificar = false;
+  modificar:boolean = false;
+  modifiban:boolean = false;
 
   pass: string = "";
   passNueva:string = "";
@@ -95,7 +96,7 @@ export class PerfilComponent implements OnInit {
     if(this.formPerfil.value.telefono != ""){ this.user.telefono = this.formPerfil.value.telefono; this.modificar = true};
     if(this.formPerfil.value.departamento != ""){ this.user.departamento = this.formPerfil.value.departamento; this.modificar = true}
     if(this.formPerfil.value.centro != "" ){ this.user.centro = this.formPerfil.value.centro; this.modificar = true}
-    if(this.formPerfil.value.passNueva != "" ){ this.user.password = this.formPerfil.value. passNueva;this.modificar = true}
+    if(this.formPerfil.value.passNueva != "" ){ this.user.password = this.formPerfil.value.passNueva;this.modificar = true}
 
     if(this.modificar){
       this.usuarioService.setUsuario(this.user).subscribe(
@@ -141,6 +142,8 @@ export class PerfilComponent implements OnInit {
   
    
    modificarDatos(): void{
+    if(this.formPerfil.value.iban != "" ){ this.ibanUsuario = this.formPerfil.value.iban; this.modifiban = true; ;this.modificar = true}
+
     if(this.formPerfil.valid){
       //Comprobamos pass
       if(this.formPerfil.value.passNueva != ""){
@@ -151,7 +154,8 @@ export class PerfilComponent implements OnInit {
                 //set usuario
                 this.modificar = true;
                 this.user.password = this.formPerfil.value.passNueva;
-                this.modificarIban();
+                if(this.modifiban)
+                  this.modificarIban();
                 this.modificarUsuario();
               }else{
                 this.passAntigua = false;
@@ -161,8 +165,7 @@ export class PerfilComponent implements OnInit {
           this.passIguales = false;
         }
       } else {
-        this.modificarUsuario()
-        this.modificarIban();
+        this.modificarUsuario();
       }
   
     }else{ //Booleanos de validacion
@@ -198,6 +201,8 @@ export class PerfilComponent implements OnInit {
               title: 'Guardado correctamente'
 
             })
+            this.existeIban = true;
+            this.formPerfil.value.iban = "";
           }else{
             const ToastrModule = swal.mixin({
               toast: true,
@@ -213,8 +218,7 @@ export class PerfilComponent implements OnInit {
           }
       });
 
-     this.ibanUsuario =  this.formPerfil.value.iban;
-     this.existeIban = true;
+    
     }else{
       this.acreedorService.crearAcreedor(a).subscribe(
         (ok) => {
@@ -231,6 +235,9 @@ export class PerfilComponent implements OnInit {
               title: 'Guardado correctamente'
 
             })
+            this.existeIban = true;
+            this.formPerfil.value.iban = "";
+           
           }else{
             const ToastrModule = swal.mixin({
               toast: true,

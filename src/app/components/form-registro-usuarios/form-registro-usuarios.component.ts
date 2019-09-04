@@ -33,7 +33,8 @@ export class FormRegistroUsuariosComponent implements OnInit{
       password: ['', [Validators.required, Validators.minLength(5)]],
       telefono:[''],
       departamento: [''],
-      centro:['']
+      centro:[''],
+      tyc:['', Validators.requiredTrue]
     });
   }
 

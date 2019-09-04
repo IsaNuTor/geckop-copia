@@ -11,6 +11,7 @@ import { UsuarioProyecto } from 'src/app/services/usuario-proyecto/usuario-proye
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Usuario } from 'src/app/services/usuario/usuario';
 import { SesionService } from 'src/app/services/sesion/sesion.service';
+import { OrdenService } from 'src/app/services/orden/orden.service';
 
 
 
@@ -24,7 +25,7 @@ export class VerProyectoComponent implements OnInit {
 
   /*Vista */
   proyecto: Proyecto = new Proyecto();
-  ordenesPendientes: Orden;
+  ordenes: Orden[];
   investigadoresProyecto: UsuarioProyecto[];
   nombresInvestigadores: String[];//Array<String>;
   usuarioAux: Usuario;
@@ -44,6 +45,7 @@ export class VerProyectoComponent implements OnInit {
     private proyectoService: ProyectoService,
     private usuarioService: UsuarioService,
     private usuariosProyectoService: UsuarioProyectoService,
+    private ordenService: OrdenService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private sesionService: SesionService,
@@ -61,8 +63,12 @@ export class VerProyectoComponent implements OnInit {
     if (!this.sesionService.isLogin())
       this.router.navigate(['/login']);
     else{
+      this.elementos = new Array<number[]>(1);
+      this.elementos[0] = new Array<number>();
+    
       this.cargarProyecto();
       this.cargarUsuariosProyecto();
+      this.cargarOrdenesProyecto();
     }
     
   }
@@ -107,6 +113,21 @@ export class VerProyectoComponent implements OnInit {
       }) 
   }
 
+  cargarOrdenesProyecto(): void{
+    this.activatedRoute.params.subscribe(params => {
+      let acronimo = params['acronimo']
+
+      if(acronimo) {
+        this.ordenService.getOrdenPorProyecto(acronimo).subscribe( 
+          (ordenes) =>{
+            this.ordenes = ordenes;
+            this.inicializarArrayNElementos( this.elementosPorPagina<this.ordenes.length ? this.elementosPorPagina : this.ordenes.length, 0);
+     
+          });
+      }
+    }) 
+  }
+
   verUsuarios(): void{
     this.cargarUsuariosProyecto();
   }
@@ -132,6 +153,7 @@ export class VerProyectoComponent implements OnInit {
   editarFecha():void{
     this.editarFechaActiva = !this.editarFechaActiva;
   }
+ 
 
   guardarFecha():void{
     if(this.formFecha.valid){
@@ -204,4 +226,56 @@ export class VerProyectoComponent implements OnInit {
     }
     
   }
+
+  elementosPorPagina: number = 5; //numero MAXIMO de elementos a mostrar por pagina
+  paginaActual: number = 0;  
+  elementos: number[][]; 
+
+  //Devuelve la siguiente pagina con el array de mostrado actulizado por si es pagina final y hay menos elementos que mostrar
+  siguiente(actual:number, longitud:number, a:number):number{
+    let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
+    
+    if(longitud%this.elementosPorPagina == 0){
+      ultimaPagina--;
+      if(actual < ultimaPagina)
+        actual++;
+    }else{
+      if(actual < ultimaPagina)
+        actual++;
+      if(actual == ultimaPagina)
+        this.inicializarArrayNElementos(longitud%this.elementosPorPagina, a)
+    }
+    return actual;
+    
+  }
+  //Devuelve la anterior pagina con el array de mostrado actulizado por si es pagina final y hay menos elementos que mostrar
+  anterior(actual: number, longitud:number, a:number):number{
+    let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
+    
+    if(longitud%this.elementosPorPagina ==0)
+      ultimaPagina--;
+
+    if(actual == ultimaPagina)
+      this.inicializarArrayNElementos(this.elementosPorPagina < longitud ? this.elementosPorPagina : longitud , a)
+    
+    if(actual >0)
+        actual--;
+    
+    return actual;
+  }
+
+  //Marca el array de mostrado con los elementos correspondientes
+  inicializarArrayNElementos(n:number, a:number):void{
+    this.elementos[a]=new Array<number>();
+
+    for(let i = 0; i< n; i++)
+      this.elementos[a].push(i); 
+  }
+
+  
+
+  getOrdenPagindoIndex(a:number, actual:number):number{
+    return a+actual*this.elementosPorPagina;
+  }
+
 }

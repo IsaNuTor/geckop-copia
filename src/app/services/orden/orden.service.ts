@@ -15,6 +15,7 @@ export class OrdenService {
   urlOrdenesIP:string = 'http://localhost:8080/api/ordenesdeip';
   urlGetOrdenId:string = 'http://localhost:8080/api/getordenid';
   urlSetOrden: string = 'http://localhost:8080/api/setorden';
+  urlgetOrdenPorProyecto:string = 'http://localhost:8080/api/getordenproyecto';
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -53,5 +54,8 @@ export class OrdenService {
 
   setOrden(o: Orden):Observable<Orden>{
     return this.http.post<Orden>(this.urlSetOrden, o, {headers: this.httpHeaders})
+  }
+  getOrdenPorProyecto(acronimo: string): Observable<Orden[]>{
+    return this.http.post<Orden[]>(this.urlgetOrdenPorProyecto, acronimo, {headers: this.httpHeaders})
   }
 }
