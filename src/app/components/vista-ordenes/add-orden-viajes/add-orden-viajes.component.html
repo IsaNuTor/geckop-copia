@@ -101,7 +101,7 @@
 
               <div class="col-md-2">
                 <label for="importeAvion">Importe</label>
-                <input type="number" class="form-control" formControlName="importeAvion" required min="0" value="0" step="any" name="importeAvion" id="importeAvion">
+                <input type="number" class="form-control" formControlName="importeAvion" required min="0" value="0" step="any" name="importeAvion" id="importeAvion" (change)="calculoImporteTotal()">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -110,7 +110,7 @@
           <br>
           <div class="form-group">
             <label for="imagen">Adjuntar Factura</label>
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoAvion">
+            <input (change)="seleccionarFoto($event, 'avion')" type="file" class="form-control-file" id="fotoAvion">
           </div>
           <br>
         </div>
@@ -156,7 +156,7 @@
             <br>
             <div class="form-group">
               <label for="imagen">Adjuntar Factura</label>
-              <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
+              <input (change)="seleccionarFoto($event, 'coche')" type="file" class="form-control-file" id="fotoCoche">
             </div>
             <br>
          </div>
@@ -192,7 +192,7 @@
           <br>
           <div class="form-group">
             <label for="imagen">Adjuntar Factura</label>
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoTren">
+            <input (change)="seleccionarFoto($event, 'tren')" type="file" class="form-control-file" id="fotoTren">
           </div>
           <br>
         </div>
@@ -226,7 +226,7 @@
           <br>
           <div class="form-group">
             <label for="imagen">Adjuntar Factura</label>
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoAutobus">
+            <input (change)="seleccionarFoto($event, 'autobus')" type="file" class="form-control-file" id="fotoAutobus">
           </div>
           <br>
         </div>
@@ -261,7 +261,7 @@
           <br>
           <div class="form-group">
             <label for="imagen">Adjuntar Factura</label>
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoTaxi">
+            <input (change)="seleccionarFoto($event, 'taxi')" type="file" class="form-control-file" id="fotoTaxi">
           </div>
           <br>
         </div>
@@ -296,7 +296,7 @@
           <br>
           <div class="form-group">
             <label for="imagen">Adjuntar Factura</label>
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoOtros">
+            <input (change)="seleccionarFoto($event, 'otros')" type="file" class="form-control-file" id="fotoOtros">
           </div>
         </div>
         <br>
@@ -319,7 +319,7 @@
           <br>
           <div class="form-group">
             <label for="imagen">Adjuntar Factura</label>
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoHotel">
+            <input (change)="seleccionarFoto($event, 'hotel')" type="file" class="form-control-file" id="fotoHotel">
           </div>
         </div>
         <br>
@@ -354,7 +354,7 @@
             <br>
             <div class="form-group">
               <label for="imagen">Adjuntar Factura</label>
-              <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoCoche">
+              <input (change)="seleccionarFoto($event, 'manutencion')" type="file" class="form-control-file" id="fotoCoche">
             </div>
             <br>
          </div>
@@ -377,7 +377,7 @@
           <br>
           <div class="form-group">
             <label for="imagen">Adjuntar Factura</label>
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control-file" id="fotoOtrosGastos">
+            <input (change)="seleccionarFoto($event, 'otrosgastos')" type="file" class="form-control-file" id="fotoOtrosGastos">
           </div>
           <br>
         </div>

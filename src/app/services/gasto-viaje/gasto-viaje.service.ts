@@ -10,6 +10,11 @@ import {URL_BACKEND} from '../../config/config';
 export class GastoViajeService {
 
   urlGastoViaje:string = 'http://localhost:8080/api/gastosViaje';
+  urlGastoViajeUpdate:string = 'http://localhost:8080/api/gastosViaje/update';
+  urlGastoImagen:string = 'http://localhost:8080/api/gastosViaje/subirImagen';
+
+
+
 
   //urlGastoViaje:string = URL_BACKEND + '/api/gastosViaje';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -27,6 +32,18 @@ export class GastoViajeService {
   // Devuelve gasto mediante el id del gasto
   getGasto(id:number): Observable<GastoViaje> {
     return this.http.get<GastoViaje>(`${this.urlGastoViaje}/${id}`);
+  }
+
+  subirIdOrden(gastoViaje: GastoViaje): Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.urlGastoViajeUpdate}`, gastoViaje, {headers: this.httpHeaders});
+  }
+
+  // Subir imagen
+  subirImagen(archivo: File, id): Observable<GastoViaje> {
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+    return this.http.post<GastoViaje>(`${this.urlGastoImagen}`, formData);
   }
 
 }

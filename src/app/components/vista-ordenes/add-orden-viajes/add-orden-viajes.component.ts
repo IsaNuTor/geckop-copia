@@ -48,6 +48,7 @@ export class AddOrdenViajesComponent implements OnInit {
   observacionesVacio:boolean = false;
 
   idAuxOrden: number;
+  idAux: number;
 
   // Ver si el select tiene valor para que aparezca el panel de gastos.
   verSeleccionada: string = '';
@@ -66,6 +67,7 @@ export class AddOrdenViajesComponent implements OnInit {
   gastoViaje: GastoViaje;
   formGastos: FormGroup;
   formValid: boolean = true;
+  fotos: File[];
   fotoSeleccionada: File;
   crearGastoForm: boolean = true;
 
@@ -89,7 +91,9 @@ export class AddOrdenViajesComponent implements OnInit {
   importeDietasVacio:boolean = false;
   importeOtrosGastosVacio:boolean = false;
 
-  idAux: number;
+  // Importe total
+  importeTotal: number = 0;
+
   numeracionAux: number;
   relacion: string = "";
 
@@ -120,39 +124,39 @@ export class AddOrdenViajesComponent implements OnInit {
             fechaVuelta: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
 
             avion: [ '', [Validators.maxLength(150)]],  //Concepto
-            importeAvion: [''],  //Importe
+            importeAvion: ['0'],  //Importe
 
             // Coche
-            nKilometros: [''],  //nKilometros
+            nKilometros: ['0'],  //nKilometros
             // Preciokilometro es un atributo de la clase, siempre es el mismo.
-            importeCoche: [''],  //Importe
+            importeCoche: ['0'],  //Importe
 
             //tren
             tren: [ '', [Validators.maxLength(150)]],  //Concepto
-            importeTren: [''],  //Importe
+            importeTren: ['0'],  //Importe
 
             //Autobus
             autobus: [ '', [Validators.maxLength(150)]],  //Concepto
-            importeAutobus: [''],  //Importe
+            importeAutobus: ['0'],  //Importe
 
             //Taxi
             taxi: [ '', [Validators.maxLength(150)]],  //Concepto
-            importeTaxi: [''],  //Importe
+            importeTaxi: ['0'],  //Importe
 
             //Otros
             otros: [ '', [Validators.maxLength(150)]],  //Concepto
-            importeOtros: [''],  //Importe
+            importeOtros: ['0'],  //Importe
 
             // Hotel
-            importeHotel: [''],  //Importe
+            importeHotel: ['0'],  //Importe
 
             // Manutencion
-            nDietas: [''],  //nDietas
-            precioDietas: [''],  //precio
-            importeDietas: [''],  //Importe
+            nDietas: ['0'],  //nDietas
+            precioDietas: ['0'],  //precio
+            importeDietas: ['0'],  //Importe
 
             // Otros gastos
-            importeOtrosGastos: [''],  //Importe
+            importeOtrosGastos: ['0'],  //Importe
 
           });
 
@@ -182,6 +186,8 @@ export class AddOrdenViajesComponent implements OnInit {
       this.dniUsuarioLogin = this.sesionService.getDni();
 
       this.cargarUsuariosProyecto();
+
+      this.fotos = new Array<File>();
 
       // GASTOS
       /*
@@ -283,14 +289,18 @@ public crearOrden(): void {
           this.orden.relacion = this.formOrden.value.relacion;
         */
 
-        // GASTOS VIAJES
-        this.crearGastoViajes();
-
         this.ordenService.crearOrden(this.orden).subscribe(
           orden =>
           {
             this.router.navigate(['vista-ordenes'])
             if(orden != null){
+
+              this.idAuxOrden = orden.id;
+              // GASTOS VIAJES
+              this.crearGastoViajes();
+              //alert(orden.id);
+              //alert("pasa por aqui");
+
               const ToastrModule = swal.mixin({
                       toast: true,
                       position: 'top-end',
@@ -304,10 +314,7 @@ public crearOrden(): void {
 
                 })
 
-                this.idAuxOrden = orden.id;
-                //alert(orden.id);
-// GASTOOOO  //this.cargarIdOrdenGasto(this.idAuxOrden);
-                //alert("pasa por aqui");
+
 
           }else{
             swal.fire({
@@ -352,23 +359,26 @@ getRelacionProyecto(): string{
 }
 
 // GASTOS
-
 public crearGastoViajes(): void {
 
-  //if(this.formGastos.valid){
+  if(this.formGastos.valid){
     //si falta algun dato marcamos el fallo y NO creamos el nuevo gasto
     if(this.formGastos.value.fechaIda == ""){this.fechaIdaVacio = true; this.crearGastoForm = false;}
     if(this.formGastos.value.fechaVuelta == ""){this.fechaVueltaVacio = true; this.crearGastoForm = false;}
     if(this.crearGastoForm){
       this.gastoViaje = this.formGastos.value;
+      this.gastoViaje.id_orden = this.idAuxOrden;
       this.gastoViajeService.crearGasto(this.gastoViaje).subscribe(
         gastoViaje =>
         {
 
           if(gastoViaje != null){
 
-            //this.idAux = gasto.id;
-            //this.subirFoto(this.idAux);
+            this.idAux = gastoViaje.id;
+
+            if(this.gastoViaje.fotoAvion != null)
+              this.gastoViaje.fotoAvion=this.idAux + "_" + this.gastoViaje.fotoAvion;
+            this.subirFoto(this.idAux);
             //gasto.foto = this.idAux + "_" + this.fotoSeleccionada.name;
             //this.gastos.push(gasto);
             //console.log(this.gastos);
@@ -380,11 +390,11 @@ public crearGastoViajes(): void {
                     timer: 5000
                   });
 
-                  /*ToastrModule.fire({
+                  ToastrModule.fire({
                     type: 'success',
-                    title: 'Guardado gasto '+ gasto.nFactura,
+                    title: 'Guardado gasto ',
 
-                  })*/
+                  })
 
                   // IMAGEN DEL GASTO, FACTURA, TICKET
                   //alert(this.idAux);
@@ -402,7 +412,7 @@ public crearGastoViajes(): void {
 
       })
     }
-  //}else{
+  }else{
     this.formValid = false;
     swal.fire({
                 type: 'error',
@@ -412,11 +422,10 @@ public crearGastoViajes(): void {
                       location.reload();
                     }
               })
-  //}
+  }
 }
 
-
-/*seleccionarFoto(event) {
+seleccionarFoto(event, s:string) {
   this.fotoSeleccionada = event.target.files[0];
   console.log(this.fotoSeleccionada);
 
@@ -425,6 +434,31 @@ public crearGastoViajes(): void {
   if(this.fotoSeleccionada.type.indexOf('image') < 0) {
     swal.fire('Error', `El archivo seleccionado debe ser del tipo imagen`, 'error');
     this.fotoSeleccionada = null;
+  } else {
+    if(s=='avion') {
+      this.gastoViaje.fotoAvion = this.fotoSeleccionada.name;
+    }
+    this.fotos.push(this.fotoSeleccionada);
+
   }
-}*/
+
+}
+
+subirFoto(idAux: number) {
+
+  for(let f of this.fotos) {
+    this.gastoViajeService.subirImagen(f, idAux).subscribe(
+      gastoViaje => {
+          if(gastoViaje)
+          alert("Todo correcto!");
+          //swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
+      });
+  }
+}
+
+// FUNCIONES CALCULOS
+public calculoImporteTotal(importe:number): void {
+  this.importeTotal = this.importeTotal + importe;
+}
+
 }
