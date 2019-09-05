@@ -13,19 +13,20 @@
             <th>Nºcontabilidad</th>
           </tr>
         </thead>
-  
+
         <tbody>
            <tr>
             <td>{{ proyecto.fechaInicio }}</td>
             <td>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {{proyecto.fechaCierre}}
                 <button *ngIf="!editarFechaActiva" type="button" class="btn btn-link" name="button" (click)="editarFecha()" >
                     <img src="assets/iconos/editDate.png" class=" icon" alt="Editar Proyecto">
                   </button>
             </td>
-           
+
             <td *ngIf="permitirEdicion">
-                <input *ngIf="editarFechaActiva" type="date" class="form-control" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">              
+                <input *ngIf="editarFechaActiva" type="date" class="form-control" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">
                   <button *ngIf="editarFechaActiva" type="submit" class="btn btn-link" name="button" (click)="guardarFecha()" >
                     <img src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha">
                   </button>
@@ -43,7 +44,7 @@
 
     </div>
 
-    
+
   </form>
 <div class="row mt-4">
 
@@ -53,7 +54,7 @@
     <div class="row">
       <div class="col-md-12">
         <h5 *ngIf="ordenes?.length > 0"> Ordenes Pendientes</h5>
-        <table class="table" id="tablaOrdenes" *ngIf="ordenes?.length > 0">
+        <table class="table text-center" id="tablaOrdenes" *ngIf="ordenes?.length > 0">
           <thead class="thead-dark">
             <tr>
               <th scope="col">Fecha</th>
@@ -63,11 +64,11 @@
             </tr>
           </thead>
           <tbody id="tablaOrdenes">
-              <tr *ngFor="let i of elementos[0];"> <!--and maxOrdenesOK(a))">--> 
+              <tr *ngFor="let i of elementos[0];"> <!--and maxOrdenesOK(a))">-->
                 <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].fechaOrden}}</td>
                   <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].estado}}</td>
                   <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].concepto}}</td>
-              
+
                   <td>
                     <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(i, paginaActual)].id]" >
                       <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px">
@@ -78,7 +79,7 @@
               <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, ordenes.length, 0)">
                   <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
               </button>
-              
+
               <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, ordenes.length, 0)">
                   <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
               </button>
@@ -125,14 +126,14 @@
                   </button>
                 </td>
               </tr>
-              
+
             </tbody>
           </table>
-      
+
       </div>
     </div>
   </div>
-  
+
   <div class="col-md-6">
     <!--Para mantener la tabala de añadir investigadores a la derecha-->
   </div>
@@ -153,8 +154,8 @@
               <tbody *ngFor="let usuario of usuarios; let i = index;" >
                   <tr>
                     <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
-                    <td> 
-                      <select formControlName="rol" class="form-control" id="rol"  name="rol"> 
+                    <td>
+                      <select formControlName="rol" class="form-control" id="rol"  name="rol">
                           <option (onload)="selected" value="Miembro del proyecto" selected >Miembro del proyecto </option>
                           <option  value="Miembro del equipo de trabajo">Miembro del equipo de trabajo </option>
                           <option  value="Profesor Invitado">Profesor Invitado</option>
@@ -165,14 +166,14 @@
                           <img src="assets/iconos/mas.png" class="rounded" alt="Quitar Investigador">
                         </button>
                     </td>
-                    
+
                   </tr>
-                  
-                
+
+
               </tbody>
             </table>
           </form>
-        
+
       </div>
     </div>
   </div>

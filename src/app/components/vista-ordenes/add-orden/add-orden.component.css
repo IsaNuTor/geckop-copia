@@ -42,3 +42,17 @@ select:hover{
   color: red;
 }
 
+.bordeDiv {
+  /*border: 5px solid red;*/
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+}
+
+.bordeTransporte {
+  background-color: #e1ede3;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+}
