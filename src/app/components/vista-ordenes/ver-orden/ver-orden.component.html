@@ -91,12 +91,13 @@
     <table class="table table-bordered text-center">
       <thead>
         <tr class="table-secondary">
-          <th scope="col" colspan="3">Relación de gastos</th>
+          <th scope="col" colspan="4">Relación de gastos</th>
         </tr>
         <tr>
             <th scope="col">Nº de factura</th>
             <th scope="col">Proveedor, concepto y partida de gasto (máx. 150 caracteres)</th>
             <th scope="col">Importe</th>
+            <th scope="col">Imagen Factura</th>
         </tr>
       </thead>
       <tbody *ngFor="let gasto of gastosGenerales">
@@ -104,6 +105,11 @@
           <td>{{gasto.nFactura}}</td>
           <td>{{gasto.descripcion}}</td>
           <td>{{gasto.importe}}</td>
+          <td>
+            <button type="button" class="btn btn-link" name="button" (click)='verFoto(gasto.foto)'>
+              <img src="assets/iconos/lupa.png" class="rounded icon" alt="ver foto">
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -134,9 +140,9 @@
             <th scope="col">Itinerario:</th>
           <td>itinerario</td><!--Cambiar por gastoViaje-->
           <th scope="col">Fecha ida:</th>
-          <td>01/02/2003</td> <!--Cambiar por gastoViaje-->
+          <td>{{gastoViaje.fechaIda}}</td> <!--Cambiar por gastoViaje-->
           <th scope="col">Fecha vuelta:</th>
-          <td>05/04/2003</td> <!--Cambiar por gastoViaje-->
+          <td>{{gastoViaje.fechaVuelta}}</td> <!--Cambiar por gastoViaje-->
         </tr>
       </tbody>
     </table>
@@ -154,48 +160,52 @@
         <tbody>
           <tr>
             <th class="text-center" rowspan="6">Transporte</th>
-            <th colspan="4">Avion</th>
-            <td class="text-center">ImporteAvion</td>                
+            <th colspan="1">Avion</th>
+            <td colspan="3">{{gastoViaje.avion}}</td>
+            <td class="text-center">{{gastoViaje.importeAvion}}</td>                
           </tr>
           <tr>
-            <th colspan="2">Coche</th>
-            <th>Numero de KM</th>
-            <td>222KM</td> 
-            <td class="text-center">ImporteCoche</td>                
+            <th >Coche</th>
+            <th class="text-right" colspan="2">Numero de KM</th>
+            <td>{{gastoViaje.nkilometros}}</td> 
+            <td class="text-center">{{gastoViaje.importeCoche}}</td>                
           </tr>
           <tr>
-            <th colspan="4">Tren</th>
-            <td class="text-center">ImporteTren</td>                
+            <th colspan="1">Tren</th>
+            <td colspan="3">{{gastoViaje.tren}}</td>
+            <td class="text-center">{{gastoViaje.importeTren}}</td>                
           </tr>
           <tr>
-            <th colspan="4">Autobus</th>
-            <td class="text-center">ImporteAutobus</td>                
+            <th colspan="1">Autobus</th>
+            <td colspan="3">{{gastoViaje.autobus}}</td>
+            <td class="text-center">{{gastoViaje.importeAutobus}}</td>                
           </tr>
           <tr>
-            <th colspan="4">Taxi</th>
-            <td class="text-center">ImporteTaxi</td>                
+            <th colspan="1">Taxi</th>
+            <td colspan="3">{{gastoViaje.taxi}}</td>
+            <td class="text-center">{{gastoViaje.importeTaxi}}</td>                
           </tr>
           <tr>
-            <th colspan="3">Otros</th>
-            <td>ConceptoOtros</td>  
-            <td class="text-center">ImporteTaxi</td>               
+            <th colspan="1">Otros</th>
+            <td colspan="3">{{gastoViaje.otros}}</td>  
+            <td class="text-center">{{gastoViaje.importeOtros}}</td>               
           </tr>
           <tr>
             <th class="text-center">Alojamiento</th>
             <th colspan="4">Factura Hotel</th>
-            <td class="text-center">ImporteHotel</td>                
+            <td class="text-center">{{gastoViaje.importeHotel}}</td>                
           </tr>
           <tr>
             <th class="text-center">Manutencion</th>
             <th>Nº de Dietas</th>
-            <td>ndietas</td>       
-            <th>Cuantia por Dieta</th>
-            <td>cuadro de dietas</td>        
-            <td class="text-center">Total Dietas</td>        
+            <td>{{gastoViaje.nDietas}}</td>       
+            <th class="text-right">Precio de dieta (€/Dia)</th>
+            <td>{{gastoViaje.precioDieta}}</td>        
+            <td class="text-center">{{gastoViaje.importeDietas}}</td>        
           </tr>
           <tr class="table-secondary">
             <th class="text-right" colspan="5">TOTAL GASTOS:</th>
-            <td class="text-center">total</td>
+            <td class="text-center">{{gastoViaje.importeTotal}}</td>
           </tr>
         </tbody>
       </table>

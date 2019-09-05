@@ -12,11 +12,13 @@ export class GastoViajeService {
   urlGastoViaje:string = 'http://localhost:8080/api/gastosViaje';
   urlGastoViajeUpdate:string = 'http://localhost:8080/api/gastosViaje/update';
   urlGastoImagen:string = 'http://localhost:8080/api/gastosViaje/subirImagen';
-
-
-
+  urlGastoByOrden:string = 'http://localhost:8080/api/gastosViaje/byidorden';
 
   //urlGastoViaje:string = URL_BACKEND + '/api/gastosViaje';
+  //urlGastoViajeUpdate:string = URL_BACKEND + '/gastosViaje/update';
+  //urlGastoImagen:string = URL_BACKEND + '/api/gastosViaje/subirImagen';
+  //urlGastoByOrden:string = URL_BACKEND + '/api/gastos/byidorden';
+
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) { }
@@ -45,5 +47,9 @@ export class GastoViajeService {
     formData.append("id", id);
     return this.http.post<GastoViaje>(`${this.urlGastoImagen}`, formData);
   }
+
+  findByIdOrden(id_o: number): Observable<GastoViaje>{
+    return this.http.post<GastoViaje>(this.urlGastoByOrden, id_o, {headers: this.httpHeaders});
+	}
 
 }
