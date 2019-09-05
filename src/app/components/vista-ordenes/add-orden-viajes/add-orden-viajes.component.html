@@ -129,8 +129,8 @@
           <label class ="tx-secondary"><b>Coche</b></label>
           <div class="row">
               <div class="col-md-4">
-                <label for="nKilometros">Nº de Kilometros</label>
-                <input type="number" class="form-control" formControlName="nKilometros" required min="0" value="0" step="any" name="nKilometros" id="nKilometros" (change)="calculoImporteCoche()" onFocus="if (this.value==0) this.value='';">
+                <label for="nkilometros">Nº de Kilometros</label>
+                <input type="number" class="form-control" formControlName="nkilometros" required min="0" value="0" step="any" name="nkilometros" id="nkilometros" (change)="calculoImporteCoche()" onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -146,7 +146,7 @@
 
               <div class="col-md-4">
                 <label for="importeCoche">Importe</label>
-                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche">
+                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche" disabled onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -336,8 +336,8 @@
               </div>
 
               <div class="col-md-6">
-                <label for="precioDietas">cuantía por dieta(€/día) <a href="https://www.ucm.es/data/cont/docs/32-2018-07-11-20180711_cuadro_dietas.pdf" target="_blank">[Ver cuadro de dietas]</a></label>
-                <input type="number" class="form-control" formControlName="precioDietas" required min="0" value="0" step="any" name="precioDietas" id="precioDietas" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteDietas()">
+                <label for="precioDieta">cuantía por dieta(€/día) <a href="https://www.ucm.es/data/cont/docs/32-2018-07-11-20180711_cuadro_dietas.pdf" target="_blank">[Ver cuadro de dietas]</a></label>
+                <input type="number" class="form-control" formControlName="precioDieta" required min="0" value="0" step="any" name="precioDieta" id="precioDieta" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteDietas()">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -345,7 +345,7 @@
 
               <div class="col-md-3">
                 <label for="importeDietas">Importe</label>
-                <input type="number" class="form-control" formControlName="importeDietas" required min="0" value="0" step="any" name="importeDietas" id="importeDietas">
+                <input type="number" class="form-control" formControlName="importeDietas" required min="0" value="0" step="any" name="importeDietas" id="importeDietas" disabled>
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -388,7 +388,7 @@
 
               <div class="col-md-2">
                 <label for="importeTotal">Importe €</label>
-                <input type="number" class="form-control" value="{{importeTotal}}" step="any" name="importeTotal" id="importeTotal">
+                <input type="number" class="form-control" value="{{importeTotal}}" step="any" name="importeTotal" id="importeTotal" disabled>
               </div>
           </div>
           <br>

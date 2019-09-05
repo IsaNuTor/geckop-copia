@@ -138,7 +138,7 @@ export class AddOrdenViajesComponent implements OnInit {
             importeAvion: ['0'],  //Importe
 
             // Coche
-            nKilometros: ['0'],  //nKilometros
+            nkilometros: ['0'],  //nKilometros
             // Preciokilometro es un atributo de la clase, siempre es el mismo.
             importeCoche: ['0'],  //Importe
 
@@ -163,12 +163,11 @@ export class AddOrdenViajesComponent implements OnInit {
 
             // Manutencion
             nDietas: ['0'],  //nDietas
-            precioDietas: ['0'],  //precio
+            precioDieta: ['0'],  //precio
             importeDietas: ['0'],  //Importe
 
             // Otros gastos
             importeOtrosGastos: ['0'],  //Importe
-
           });
 
           //numeracion: number;
@@ -378,6 +377,7 @@ public crearGastoViajes(): void {
     if(this.crearGastoForm){
       this.gastoViaje = this.formGastos.value;
       this.gastoViaje.precioKilometro = this.precioKilometro;
+      this.gastoViaje.importeTotal = this.importeTotal;
       this.gastoViaje.id_orden = this.idAuxOrden;
       this.rellenarFotos(this.idAuxOrden.toString());
 
@@ -517,7 +517,7 @@ rellenarFotos(id:string):void{
 
   calculoImporteCoche(): void {
     let importeCalculado: number;
-    let nkm: number = Number(this.formGastos.get('nKilometros').value);
+    let nkm: number = Number(this.formGastos.get('nkilometros').value);
     importeCalculado = nkm * this.precioKilometro;
     this.formGastos.controls['importeCoche'].setValue(importeCalculado);
 
@@ -528,7 +528,7 @@ rellenarFotos(id:string):void{
   calculoImporteDietas(): void {
     let importeCalculadoDietas: number;
     let numDietas: number = Number(this.formGastos.get('nDietas').value);
-    let precioDieta: number = Number(this.formGastos.get('precioDietas').value);
+    let precioDieta: number = Number(this.formGastos.get('precioDieta').value);
     importeCalculadoDietas = numDietas * precioDieta;
     this.formGastos.controls['importeDietas'].setValue(importeCalculadoDietas);
 

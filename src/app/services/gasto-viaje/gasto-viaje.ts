@@ -11,7 +11,7 @@ export class GastoViaje {
   fotoAvion: string;
 
   // Coche
-  nKilometros: number;
+  nkilometros: number;
   precioKilometro: number;
   importeCoche: number;
   fotoCoche: string;
@@ -42,7 +42,7 @@ export class GastoViaje {
 
   // Manutencion
   nDietas: number;
-  precioDietas: number;
+  precioDieta: number;
   importeDietas: number;
 
   // Otros gastos
