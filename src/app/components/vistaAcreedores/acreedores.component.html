@@ -23,9 +23,7 @@
           <td>{{ acreedores[getOrdenPagindoIndex(a,   paginaActual)].nif }}</td>
           <td>{{ acreedores[getOrdenPagindoIndex(a,   paginaActual)].iban }}</td>
           <td>
-            <button type="button" class="btn btn-link" name="button" [routerLink]="['/acreedores/form-acreedores.component', acreedores[getOrdenPagindoIndex(a,   paginaActual)].nif]">
-              <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor">
-            </button>
+            <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor" [routerLink]="['/acreedores/form-acreedores.component', acreedores[getOrdenPagindoIndex(a,   paginaActual)].nif]">
           </td>
           
         </tr>

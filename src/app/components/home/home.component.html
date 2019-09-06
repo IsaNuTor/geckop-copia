@@ -1,63 +1,73 @@
+<ul class="nav nav-tabs">
+  <li *ngIf="listaIP?.length > 0" class="nav-item">
+    <a id="firmar" class="nav-link" (click)="activarIp()" >Pendientes de Firma <span class="notificacion">{{listaIP.length}} </span></a>
+  </li>
 
-<div class="menu">
-</div>
+  
+  <li  class="nav-item dropdown"  (click)="despleIn()"  ><!---->
+    <a id="usuario" class="nav-link active dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >Mis Ordenes</a>
+    <div id="desplegable" class="dropdown-menu " (mouseleave)=despleOut()>
+      <a id="aceptadas" class="dropdown-item" *ngIf="aceptadas?.length > 0" (click)="activarAceptadas()">Aceptadas</a>
+      <a id="rechazadas" class="dropdown-item" *ngIf="rechazadas?.length > 0" (click)="activarRechazadas()">Rechazadas</a>
+      <a id="pendientes" class="dropdown-item active" *ngIf="pendientes?.length > 0" (click)="activarPendientes()">Pendientes </a>
+      <a id="pm" class="dropdown-item" *ngIf="pendientesM?.length > 0" (click)="activarPM()">Pendientes de Revision <span class="notificacion">{{pendientesM.length}} </span></a>
+    </div>
+  </li>
+</ul>
 
-<div class="container">
-  <div class="col-md-6">
-      <table>
-
-      </table>
-  </div>
-
+<br>
 
   <!--Arriba IZQ -- Pendientes de revisar como ip-->
-  <div class="row">
-    <div class="col-md-6">
-      <h4 *ngIf="listaIP?.length > 0"> Revisar como IP</h4>
-      <table class="table text-center" id="tablaOrdenes" *ngIf="listaIP?.length > 0">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Estado</th>
-            <th scope="col">Concepto</th>
-            <th scope="col">Proyecto</th>
-            <th scope="col">Ver</th>
-          </tr>
-        </thead>
-        <tbody id="tablaOrdenes">
-            <tr *ngFor="let i of elementos[0];"> <!--and maxOrdenesOK(a))">-->
-                <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].estado}}</td>
-                <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].concepto}}</td>
-                <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].acronimo}}</td>
 
-                <td>
-                  <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(i, paginaActualIP)].id]" >
-                    <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px">
-                  </button>
-                </td>
-          </tr>
-          <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
-            <button type="button" class="btn btn-link mr-2" (click) ="paginaActualIP= anterior(paginaActualIP, listaIP.length, 0)">
-                <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
-            </button>
+  <div class="content"  *ngIf="listaIP?.length > 0 && verIp">
+    <h4 *ngIf="listaIP?.length > 0"> Firmar</h4>
+    <table class="table text-center" id="tablaOrdenes" *ngIf="listaIP?.length > 0 && verIp">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Investigador</th>
+          <th scope="col">Concepto</th>
+          <th scope="col">Proyecto</th>
+          <th scope="col">Ver</th>
+        </tr>
+      </thead>
+      <tbody id="tablaOrdenes">
+          <tr *ngFor="let i of elementos[0];"> <!--and maxOrdenesOK(a))">-->
+              <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].fechaOrden}}</td>
+              <td>{{nombres[getOrdenPagindoIndex(i, paginaActualIP)].nombre + 
+                    " " + nombres[getOrdenPagindoIndex(i, paginaActualIP)].apellido1 + 
+                    " " + nombres[getOrdenPagindoIndex(i, paginaActualIP)].apellido2}}  
+              </td>
+              <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].concepto}}</td>
+              <td>{{listaIP[getOrdenPagindoIndex(i, paginaActualIP)].acronimo}}</td>
 
-            <button type="button" class="btn btn-link" (click) = "paginaActualIP = siguiente(paginaActualIP, listaIP.length, 0)">
-                <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
-            </button>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              <td>
+                  <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(i, paginaActualIP)].id]">
+              </td>
+        </tr>
+        <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
+          <button type="button" class="btn btn-link mr-2" (click) ="paginaActualIP= anterior(paginaActualIP, listaIP.length, 0)">
+              <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
+          </button>
+
+          <button type="button" class="btn btn-link" (click) = "paginaActualIP = siguiente(paginaActualIP, listaIP.length, 0)">
+              <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
+          </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
 
 
     <!--Arriba DCHA -- Ultimas aceptadas-->
-    <div class="col-md-6">
-      <h4 *ngIf="aceptadas?.length > 0"> Ultimas Aceptadas</h4>
-      <table class="table text-center" id="tablaOrdenes" *ngIf="aceptadas?.length > 0">
+    <div class="content" *ngIf="aceptadas?.length > 0 && verAceptadas">
+      <h4 *ngIf="aceptadas?.length > 0"> Aceptadas</h4>
+      <table class="table text-center" id="tablaOrdenes" *ngIf="aceptadas?.length > 0 && verAceptadas">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Estado</th>
+            <th scope="col">Fecha</th>
             <th scope="col">Concepto</th>
             <th scope="col">Proyecto</th>
             <th scope="col">Ver</th>
@@ -65,14 +75,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let a of elementos[1]; index as i">
-              <td>{{aceptadas[getOrdenPagindoIndex(a, paginaActualA)].estado}}</td>
+              <td>{{aceptadas[getOrdenPagindoIndex(a, paginaActualA)].fechaOrden}}</td>
               <td>{{aceptadas[getOrdenPagindoIndex(a, paginaActualA)].concepto}}</td>
               <td>{{aceptadas[getOrdenPagindoIndex(a, paginaActualA)].acronimo}}</td>
-            <td>
-              <button type="button" class="btn btn-link " name="button" [routerLink]="['/vistaOrdenes/verOrden/', aceptadas[getOrdenPagindoIndex(a, paginaActualA)].id]" >
-                <img src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden">
-              </button>
-            </td>
+              <td>
+                  <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(i, paginaActualIP)].id]">
+              </td>
           </tr>
           <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
             <button type="button" class="btn btn-link mr-2" (click) ="paginaActualA= anterior(paginaActualA, aceptadas.length, 1)">
@@ -86,16 +94,15 @@
         </tbody>
       </table>
     </div>
-  </div>
+  
 
 <!--Pendientes de Modificar-->
-  <div class="row">
-    <div class="col-md-6">
-      <h4 *ngIf="pendientes?.length > 0"> Revisar como Investigador</h4>
+    <div class="content"  *ngIf="pendientes?.length > 0 && verPendientes">
+      <h4 *ngIf="pendientes?.length > 0"> Pendientes</h4>
       <table class="table text-center" id="tablaOrdenes" *ngIf="pendientes?.length > 0">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Estado</th>
+            <th scope="col">Fecha</th>
             <th scope="col">Concepto</th>
             <th scope="col">Proyecto</th>
             <th scope="col">Ver</th>
@@ -103,14 +110,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let a of elementos[3]; index as i">
-              <td>{{pendientes[getOrdenPagindoIndex(a,   paginaActualP)].estado}}</td>
+              <td>{{pendientes[getOrdenPagindoIndex(a,   paginaActualP)].fechaOrden}}</td>
               <td>{{pendientes[getOrdenPagindoIndex(a,   paginaActualP)].concepto}}</td>
               <td>{{pendientes[getOrdenPagindoIndex(a,   paginaActualP)].acronimo}}</td>
-            <td>
-              <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', pendientes[getOrdenPagindoIndex(a,  paginaActualP)].id]" >
-                <img src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden">
-              </button>
-            </td>
+              <td>
+                  <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(i, paginaActualIP)].id]">
+              </td>
           </tr>
           <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
             <button type="button" class="btn btn-link mr-2" (click) ="paginaActualP= anterior(  paginaActualP, pendientes.length, 3)">
@@ -125,20 +130,53 @@
       </table>
     </div>
 
+    <div class="content"  *ngIf="pendientesM?.length > 0 && verPM">
+      <h4 *ngIf="pendientesM?.length > 0"> Pendientes de Revisión</h4>
+      <table class="table text-center" id="tablaOrdenes" *ngIf="pendientesM?.length > 0">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Concepto</th>
+            <th scope="col">Proyecto</th>
+            <th scope="col">Ver</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of elementos[4]; index as i">
+              <td>{{pendientesM[getOrdenPagindoIndex(a,   paginaActualPM)].fechaOrden}}</td>
+              <td>{{pendientesM[getOrdenPagindoIndex(a,   paginaActualPM)].concepto}}</td>
+              <td>{{pendientesM[getOrdenPagindoIndex(a,   paginaActualPM)].acronimo}}</td>
+              <td>
+                  <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px" [routerLink]="['/vistaOrdenes/verOrden/', listaIP[getOrdenPagindoIndex(i, paginaActualIP)].id]">
+              </td>
+          </tr>
+          <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
+            <button type="button" class="btn btn-link mr-2" (click) ="paginaActualPM= anterior(  paginaActualPM, pendientesM.length, 4)">
+                <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
+            </button>
 
-    <div class="col-md-6">
+            <button type="button" class="btn btn-link" (click) = "  paginaActualPM = siguiente(  paginaActualPM, pendientesM.length, 4)">
+                <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
+            </button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="content" *ngIf="rechazadas?.length > 0 && verRechazadas">
       <h4 *ngIf="rechazadas?.length > 0"> Ultimas Rechazadas</h4>
       <table class="table text-center" id="tablaOrdenes" *ngIf="rechazadas?.length > 0">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Estado</th>
+            <th scope="col">Fecha</th>
             <th scope="col">Concepto</th>
             <th scope="col">Proyecto</th>
           </tr>
         </thead>
         <tbody>
             <tr *ngFor="let a of elementos[2]; index as i">
-              <td>{{rechazadas[getOrdenPagindoIndex(a, paginaActualR)].estado}}</td>
+              <td>{{rechazadas[getOrdenPagindoIndex(a, paginaActualR)].fechaOrden}}</td>
               <td>{{rechazadas[getOrdenPagindoIndex(a, paginaActualR)].concepto}}</td>
               <td>{{rechazadas[getOrdenPagindoIndex(a, paginaActualR)].acronimo}}</td>
             </tr>
@@ -154,5 +192,5 @@
         </tbody>
       </table>
     </div>
-  </div>
-</div>
+    
+ 

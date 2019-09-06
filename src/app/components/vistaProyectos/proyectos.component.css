@@ -1,4 +1,7 @@
-.tabla{
-    width: 1000px;
-    height: 1000px;
-}
+
+.table td, .table th {
+    padding: .5rem;
+    padding-right: 1.2rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }

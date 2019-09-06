@@ -171,9 +171,10 @@ export class VerOrdenComponent implements OnInit {
         animation: false
       })
     }
-    
-    
-    
+  }
+
+  generarPDF(){
+    this.ordenService.generarPDF(0).subscribe();
   }
 
 }

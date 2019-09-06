@@ -39,14 +39,10 @@
           <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].presupuesto }}</td>
           <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].nContabilidad }}</td>
           <td>
-            <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaProyectos/verProyecto/', proyectos[getOrdenPagindoIndex(a,   paginaActual)].acronimo]" >
-              <img src="assets/iconos/editar.png" class="rounded" alt="Editar Proyecto">
-            </button>
+            <img src="assets/iconos/editar.png" class="rounded" alt="Editar Proyecto" [routerLink]="['/vistaProyectos/verProyecto/', proyectos[getOrdenPagindoIndex(a,   paginaActual)].acronimo]">
           </td>
           <td>
-            <button type="button" class="btn btn-link" name="button" (click)="borrarProyecto(proyectos[getOrdenPagindoIndex(a,   paginaActual)])" >
-              <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto">
-            </button>
+            <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto"  (click)="borrarProyecto(proyectos[getOrdenPagindoIndex(a,   paginaActual)])">
           </td>
         </tr>
 

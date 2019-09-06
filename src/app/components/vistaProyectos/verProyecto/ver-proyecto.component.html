@@ -18,21 +18,14 @@
            <tr>
             <td>{{ proyecto.fechaInicio }}</td>
             <td>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {{proyecto.fechaCierre}}
-                <button *ngIf="!editarFechaActiva" type="button" class="btn btn-link" name="button" (click)="editarFecha()" >
-                    <img src="assets/iconos/editDate.png" class=" icon" alt="Editar Proyecto">
-                  </button>
+              {{proyecto.fechaCierre}}
+              <img *ngIf="!editarFechaActiva" src="assets/iconos/editDate.png" class="ml-2 icon" alt="Editar Proyecto" (click)="editarFecha()">    
             </td>
 
             <td *ngIf="permitirEdicion">
-                <input *ngIf="editarFechaActiva" type="date" class="form-control" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">
-                  <button *ngIf="editarFechaActiva" type="submit" class="btn btn-link" name="button" (click)="guardarFecha()" >
-                    <img src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha">
-                  </button>
-                  <button *ngIf="editarFechaActiva" type="submit" class="btn btn-link" name="button" (click)="editarFecha()" >
-                      <img src="assets/iconos/menos.png" class="rounded icon" alt="Cancelar">
-                    </button>
+                <input *ngIf="editarFechaActiva" type="date" class="form-control form-control-sm" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">                
+                    <img  *ngIf="editarFechaActiva" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarFecha()">
+                    <img  *ngIf="editarFechaActiva" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarFecha()">
             </td>
             <td>{{ proyecto.nombre }}</td>
             <td>{{ proyecto.presupuesto }}</td>
@@ -70,9 +63,7 @@
                   <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].concepto}}</td>
 
                   <td>
-                    <button type="button" class="btn btn-link" name="button" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(i, paginaActual)].id]" >
-                      <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px">
-                    </button>
+                      <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(i, paginaActual)].id]">
                   </td>
             </tr>
             <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
@@ -121,9 +112,7 @@
               </tr>
               <tr>
                 <td *ngIf="permitirEdicion" colspan="2">
-                  <button type="button" class="btn btn-link" name="button" (click)="cargarNuevosUsuarios()" >
-                    <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador">
-                  </button>
+                  <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador" (click)="cargarNuevosUsuarios()">
                 </td>
               </tr>
 
@@ -143,7 +132,7 @@
     <div class="row">
       <div class="col-lg-12 ml-2">
           <form [formGroup]="formInvestigador" class="col-sm p-0" >
-            <table  *ngIf="editarUsuarios" class="table table-bordered table-striped text-center">
+            <table  *ngIf="editarUsuarios && usuarios.length > 0" class="table table-bordered table-striped text-center">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">Nombre</th>
@@ -162,9 +151,7 @@
                       </select>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-link" name="button" (click)="anadirInvestigador(usuario)">
-                          <img src="assets/iconos/mas.png" class="rounded" alt="Quitar Investigador">
-                        </button>
+                        <img src="assets/iconos/mas.png" class="rounded" alt="Quitar Investigador" (click)="anadirInvestigador(usuario)">
                     </td>
 
                   </tr>

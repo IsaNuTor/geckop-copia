@@ -16,6 +16,7 @@ export class OrdenService {
   urlGetOrdenId:string = 'http://localhost:8080/api/getordenid';
   urlSetOrden: string = 'http://localhost:8080/api/setorden';
   urlgetOrdenPorProyecto:string = 'http://localhost:8080/api/getordenproyecto';
+  urlGenerarPDF:  string= 'http://localhost:8080/api/generarPDF';
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -58,4 +59,11 @@ export class OrdenService {
   getOrdenPorProyecto(acronimo: string): Observable<Orden[]>{
     return this.http.post<Orden[]>(this.urlgetOrdenPorProyecto, acronimo, {headers: this.httpHeaders})
   }
+
+  generarPDF(n: Number):Observable<Number>{
+    return this.http.post<Number>(this.urlGenerarPDF, n, {headers: this.httpHeaders}); 
+  }
+
+
+  
 }

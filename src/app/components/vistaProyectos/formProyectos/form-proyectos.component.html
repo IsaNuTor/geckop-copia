@@ -94,10 +94,8 @@
               <tbody  *ngFor="let usuario of usuarios">
                 <tr>
                   <td>{{ usuario.nombre }} {{ usuario.apellido1 }} {{ usuario.apellido2 }}</td>
-
-                  <td><button type="button" class="btn btn-link" name="button"  (click)="anadirInvestigador(usuario)"> <!--[disabled]="formProyecto.invalid"-->
-                        <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador">
-                      </button>
+                  <td>
+                    <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador" (click)="anadirInvestigador(usuario)">
                   </td>
                 </tr>
               </tbody>
@@ -128,9 +126,7 @@
                       </select>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-link" name="button"  (click)="quitarInvestigador(investigador)">
-                          <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador">
-                        </button>
+                          <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador"  (click)="quitarInvestigador(investigador)">
                     </td>
                     
                   </tr>
