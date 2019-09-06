@@ -54,7 +54,7 @@ export class AddOrdenComponent implements OnInit {
   // GASTOS
   titulo: string = "Ordenes";
   rutaImagen: string = 'http://localhost:8080/api/imagenes/';
-  
+
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   /*Ojo cambiar ruta para el backend */
   gastos: Gasto[];
@@ -112,7 +112,7 @@ export class AddOrdenComponent implements OnInit {
         acreedores => this.acreedores = acreedores
       );
 
-      // Cargamos selector de proyectos.
+      // Cargamos todos los proyectos.
       this.proyectoService.getProyectos().subscribe(
         proyectos => this.proyectos = proyectos
       );

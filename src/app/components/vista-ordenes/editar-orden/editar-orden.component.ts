@@ -13,7 +13,10 @@ import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
 import { GastoViajeService } from 'src/app/services/gasto-viaje/gasto-viaje.service';
 import { GastoViaje } from 'src/app/services/gasto-viaje/gasto-viaje';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import {UsuarioProyecto} from 'src/app/services/usuario-proyecto/usuario-proyecto';
+import {UsuarioProyectoService} from 'src/app/services/usuario-proyecto/usuario-proyecto.service';
 import swal from 'sweetalert2';
+
 
 
 @Component({
@@ -22,16 +25,28 @@ import swal from 'sweetalert2';
   styleUrls: ['./editar-orden.component.css']
 })
 export class EditarOrdenComponent implements OnInit {
+  acreedores: Acreedor[];
   orden : Orden= new Orden();
   gastosGenerales: Gasto[] = new Array<Gasto>();
+  misProyectos: UsuarioProyecto[];
   gastoViaje: GastoViaje = new GastoViaje();
   formGastos: FormGroup;
   formGastosV: FormGroup;
   formOrden: FormGroup;
 
+  checkMP: boolean = false;
+  checkME: boolean = false;
+  checkPI: boolean = false;
+
   isG: boolean = false;
   isV:boolean = false;
   isIP:boolean = false;
+
+  // Usuario logueado
+  dniUsuarioLogin: string = "";
+
+  nombreAcreedor: string = "";
+
   /*Ojo cambiar ruta para el backend */
   rutaImagen: string = 'http://localhost:8080/api/imagenes/';
   rutaImagen2: string = 'http://localhost:8080/api/imagenesViaje/';
@@ -45,6 +60,7 @@ export class EditarOrdenComponent implements OnInit {
     private gastoViajeService: GastoViajeService,
     private acreedorService: AcreedorService,
     private proyectoService: ProyectoService,
+    private usuarioProyectoService: UsuarioProyectoService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
@@ -110,8 +126,16 @@ export class EditarOrdenComponent implements OnInit {
   ngOnInit() {
     if (!this.sesionService.isLogin())
       this.router.navigate(['/login']);
-    else
-     this.cargarOrden();
+    else {
+      this.cargarOrden();
+
+      // Proyectos de usuarios, cargamos el dni con el que esta login.
+      this.dniUsuarioLogin = this.sesionService.getDni();
+
+
+
+      this.cargarUsuariosProyecto();
+    }
   }
 
   cargarOrden(): void {
@@ -125,12 +149,54 @@ export class EditarOrdenComponent implements OnInit {
            this.orden = orden;
            this.isG = this.orden.tipo == 'G';
            this.isV = this.orden.tipo == 'V';
+           this.cargarAcreedores();
           }
         );
       }
     })
 
     console.log(this.orden);
+  }
+
+  /* CARGAR PROYECTOS DEL USUARIO */
+  cargarUsuariosProyecto(): void {
+
+    this.usuarioProyectoService.getProyectosDni(this.dniUsuarioLogin).subscribe(
+      (listaInvestigadores) =>{
+        this.misProyectos = listaInvestigadores;
+      });
+  }
+
+  cargarRelacionCheck(rol: String): void {
+    if(rol == "Miembro del proyecto") {
+
+      this.checkMP = true;
+      this.checkME = false;
+      this.checkPI = false;
+
+    } else if(rol == "Miembro del equipo de trabajo") {
+
+      this.checkME = true;
+      this.checkMP = false;
+      this.checkPI = false;
+    } else if(rol == "Profesor invitado") {
+
+      this.checkPI = true;
+      this.checkME = false;
+      this.checkMP = false;
+    }
+
+    //console.log(this.formOrden.get('checkMP').value);
+  }
+
+  getRelacionProyecto(): string{
+    let relacion = "";
+    for(let r of this.misProyectos){
+    if(this.formOrden.value.acronimo == r.acronimo){
+      this.cargarRelacionCheck(r.rol);
+      return r.rol;
+    }
+    }
   }
 
   cargarGastosGenerales(idOrden: number): void{
@@ -140,8 +206,24 @@ export class EditarOrdenComponent implements OnInit {
   }
 
   cargarGastoViajes(idOrden: number):void{
+
     this.gastoViajeService.findByIdOrden(idOrden).subscribe(
       (gasto) => this.gastoViaje = gasto
+    );
+  }
+
+  cargarAcreedores(): void {
+    this.acreedorService.getAcreedoresOrden(this.sesionService.getDni()).subscribe(
+      acreedores => {
+        this.acreedores = acreedores;
+        for(let a of acreedores) {
+          if(a.nif == this.orden.nif_acreedor) {
+             this.nombreAcreedor = this.sesionService.getNombre();
+             this.acreedores.splice(this.acreedores.indexOf(a),1);
+          }
+
+        }
+      }
     );
   }
 

@@ -24,15 +24,15 @@
         <div class="form-group col-md-6">
           <label class="texto-form">Proyecto</label>
           <select class="custom-select" formControlName="acronimo" (change)="capturarValor()">
-            <option value="" selected>Seleccione acrónimo del proyecto</option>
-            <option *ngFor="let proyecto of misProyectos; index as i" value="{{ misProyectos[i].acronimo }}">{{ proyecto.acronimo }}</option>
+            <option value="" selected>{{orden.acronimo}}</option>
+            <option *ngFor="let proyecto of misProyectos" value="{{ misProyectos.acronimo }}">{{ proyecto.acronimo }}</option>
           </select>
         </div>
 
         <div class="form-group col-md-6">
           <label class="texto-form">Acreedor</label>
           <select class="custom-select" formControlName="nif_acreedor">
-            <option value="" selected>{{orden.acronimo}}</option>
+            <option value="" selected>{{nombreAcreedor}} -- {{orden.nif_acreedor}}</option>
             <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
           </select>
         </div>
@@ -43,15 +43,15 @@
 
           <div class="form-group col-md-6">
             <label class="texto-form">Concepto</label>
-            <input type="text" class="form-control" formControlName="concepto" name="concepto" id="concepto" placeholder="Concepto" >
+            <input type="text" class="form-control" formControlName="concepto" name="concepto" id="concepto" placeholder="{{orden.concepto}}" >
           </div>
 
           <div class="form-group col-md-6">
             <label class="texto-form">Num. Contabilidad</label>
-            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" >
+            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="{{orden.num_contabilidad}}" >
           </div>
-
         </div>
+
       <div class="row">
         <div class="form-group form-inline espacioIzq">
           <div>
