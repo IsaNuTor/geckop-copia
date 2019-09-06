@@ -5,7 +5,7 @@
 
   
   <li  class="nav-item dropdown"  (click)="despleIn()"  ><!---->
-    <a id="usuario" class="nav-link active dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >Mis Ordenes  <span class="notificacion">{{pendientesM.length}} </span> </a>
+    <a id="usuario" class="nav-link active dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >Mis Ordenes  <span *ngIf="pendientesM?.length > 0" class="notificacion" >{{pendientesM.length}} </span> </a>
     <div id="desplegable" class="dropdown-menu " (mouseleave)=despleOut()>
       <a id="aceptadas" class="dropdown-item" *ngIf="aceptadas?.length > 0" (click)="activarAceptadas()">Aceptadas</a>
       <a id="rechazadas" class="dropdown-item" *ngIf="rechazadas?.length > 0" (click)="activarRechazadas()">Rechazadas</a>
@@ -147,7 +147,7 @@
               <td>{{pendientesM[getOrdenPagindoIndex(a,   paginaActualPM)].concepto}}</td>
               <td>{{pendientesM[getOrdenPagindoIndex(a,   paginaActualPM)].acronimo}}</td>
               <td>
-                  <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px" [routerLink]="['/vistaOrdenes/verOrden/', pendientesM[getOrdenPagindoIndex(i, paginaActualM)].id]">
+                  <img src="assets/iconos/lupa.png" class="rounded ml-0 icon" alt="Editar Orden" maxwidth="10px" [routerLink]="['/vistaOrdenes/verOrden/', pendientesM[getOrdenPagindoIndex(i, paginaActualPM)].id]">
               </td>
           </tr>
           <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
