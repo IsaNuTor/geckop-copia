@@ -6,18 +6,18 @@ import { of } from 'rxjs';
 
 /*Clases Propias*/
 import {Proyecto} from './proyecto'
-import {URL_BACKEND} from '../../config/config';
+import {URL} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProyectoService {
 
-  urlProyecto:string = 'http://localhost:8080/api/proyecto';
-  urlActualizarProyecto:string = 'http://localhost:8080/api/actualizarProyecto';
-  urlProyectoVista:string = 'http://localhost:8080/api/vistaProyectos/verProyecto';
-  urlProyectosUsuario:string = 'http://localhost:8080/api/proyectosUsuario';
-  urlBorrarProyecto:string = 'http://localhost:8080/api/borrarProyecto';
+  urlProyecto:string = URL + '/proyecto';
+  urlActualizarProyecto:string = URL + '/actualizarProyecto';
+  urlProyectoVista:string = URL + '/vistaProyectos/verProyecto';
+  urlProyectosUsuario:string = URL +'/proyectosUsuario';
+  urlBorrarProyecto:string = URL +'/borrarProyecto';
   //urlProyecto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }

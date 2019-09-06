@@ -188,7 +188,7 @@ export class AddOrdenViajesComponent implements OnInit {
       this.router.navigate(['/login']);
     else{
       // Cargamos selector de acreedores.
-      this.acreedorService.getAcreedores().subscribe(
+      this.acreedorService.getAcreedoresOrden(this.sesionService.getDni()).subscribe(
         acreedores => this.acreedores = acreedores
       );
 

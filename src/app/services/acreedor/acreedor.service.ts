@@ -3,16 +3,17 @@ import { Acreedor } from './acreedor';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {URL_BACKEND} from '../../config/config';
+import {URL} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AcreedorService {
 
-  urlEndPoint:string = 'http://localhost:8080/api/acreedores';
-  urlSetAcreedor:string = 'http://localhost:8080/api/setAcreedor';
-  urlCrearAcreedor:string = 'http://localhost:8080/api/crearAcreedor';
+  urlEndPoint:string = URL + '/acreedores';
+  urlSetAcreedor:string = URL + '/setAcreedor';
+  urlCrearAcreedor:string = URL + '/crearAcreedor';
+  urlAcreedoresOrden:string = URL + '/acreedoresOrden'
 
   //urlEndPoint:string = URL_BACKEND + '/api/acreedores';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -38,5 +39,8 @@ export class AcreedorService {
 
   borrarAcreedor(nif: String): Observable<Acreedor> {
     return this.http.delete<Acreedor>(`${this.urlEndPoint}/${nif}`, {headers: this.httpHeaders});
+  }
+  getAcreedoresOrden(dni: string):Observable<Acreedor[]>{
+    return this.http.post<Acreedor[]>(this.urlAcreedoresOrden, dni, {headers: this.httpHeaders});
   }
 }

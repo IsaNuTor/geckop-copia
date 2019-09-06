@@ -3,7 +3,7 @@ import { Usuario } from './usuario';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {URL_BACKEND} from '../../config/config';
+import {URL} from '../../config/config';
 import { variable } from '@angular/compiler/src/output/output_ast';
 
 
@@ -14,13 +14,13 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 
 export class UsuarioService {
 
-  urlLogin:string = 'http://localhost:8080/api/login';
-  urlRegistro:string = 'http://localhost:8080/api/registro';
-  urlEndPoint:string = 'http://localhost:8080/api/usuario';
-  urlComprobarPass:string = 'http://localhost:8080/api/comprobarPass';
-  urlSetPass:string = 'http://localhost:8080/api/setPass';
-  urlSetUsuario:string = 'http://localhost:8080/api/setUsuario';
-  urlGetNombre:string = 'http://localhost:8080/api/getNombre';
+  urlLogin:string = URL + '/login';
+  urlRegistro:string = URL +'/registro';
+  urlEndPoint:string = URL + '/usuario';
+  urlComprobarPass:string = URL + '/comprobarPass';
+  urlSetPass:string = URL + '/setPass';
+  urlSetUsuario:string = URL + '/setUsuario';
+  urlGetNombre:string = URL + '/getNombre';
 
 
 

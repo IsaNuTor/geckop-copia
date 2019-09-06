@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Orden } from './orden';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {URL} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,14 @@ import { Observable } from 'rxjs';
 export class OrdenService {
 
   ordenes: Orden[] = new Array<Orden>();
-  urlOrden:string = 'http://localhost:8080/api/ordenes';
-  urlMisOrdenes:string = 'http://localhost:8080/api/buscarordenesnif';
-  urlNumAcronimo:string = 'http://localhost:8080/api/buscarnumacronimo';
-  urlOrdenesIP:string = 'http://localhost:8080/api/ordenesdeip';
-  urlGetOrdenId:string = 'http://localhost:8080/api/getordenid';
-  urlSetOrden: string = 'http://localhost:8080/api/setorden';
-  urlgetOrdenPorProyecto:string = 'http://localhost:8080/api/getordenproyecto';
-  urlGenerarPDF:  string= 'http://localhost:8080/api/generarPDF';
+  urlOrden:string = URL + '/ordenes';
+  urlMisOrdenes:string = URL + '/buscarordenesnif';
+  urlNumAcronimo:string = URL + '/buscarnumacronimo';
+  urlOrdenesIP:string = URL + '/ordenesdeip';
+  urlGetOrdenId:string = URL +'/getordenid';
+  urlSetOrden: string = URL + '/setorden';
+  urlgetOrdenPorProyecto:string = URL +'/getordenproyecto';
+  urlGenerarPDF:  string= URL +'/generarPDF';
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
