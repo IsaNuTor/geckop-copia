@@ -94,13 +94,13 @@
       <!--------------------------------------------------GASTOS----------------------------------------------------------------->
       <!--<app-gastos></app-gastos>-->
       <!--<p [hidden]="opcionSeleccionada=='0'">Has seleccionado la opcion {{misProyectos[i].acronimo}}</p>-->
-    <div class="card-body" [hidden]="!verSeleccionada">
+    <div class="card-body">
 
       <form class="card mb-4"  [formGroup]="formGastosV" >
         <h3 class="texto-form mt-3">Justificación de gastos</h3>
         <!-- Entradas simples -->
 
-      <div class="card-body" [hidden]="!verSeleccionada">
+      <div class="card-body">
 
         <!--Fechas-->
         <div class="form-row form-inline bordeDiv">
@@ -122,8 +122,10 @@
         <h3 class="texto-form mt-3">Elija los transportes que ha utilizado</h3>
         <!--Checkbox avion-->
         <div class="form-check">
-          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck1" (change)="capturarValorCheck('avion')">
-          <label class="form-check-label ml-4" for="defaultCheck1">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkAvion" (change)="capturarValorCheck('avion')">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkAvion" (change)="capturarValorCheck('avion')" checked *ngIf="checkAvion">
+
+          <label class="form-check-label ml-4" for="checkAvion">
             Avión
           </label>
         </div>
@@ -133,7 +135,7 @@
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="avion"><b>Avion</b></label>
-                <input type="text" class="form-control" formControlName="avion" placeholder="(Máx 150 caracteres)" maxlength="200" id="avion" name="avion">
+                <input type="text" class="form-control" formControlName="avion" placeholder="{{gastoViaje.avion}}" maxlength="200" id="avion" name="avion">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -141,7 +143,7 @@
 
               <div class="col-md-2">
                 <label for="importeAvion">Importe</label>
-                <input type="number" class="form-control" formControlName="importeAvion" required min="0" value="0" step="any" name="importeAvion" id="importeAvion" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('avion')">
+                <input type="number" class="form-control" formControlName="importeAvion" required min="0" value="{{gastoViaje.importeAvion}}" step="any" name="importeAvion" id="importeAvion" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('avion')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -158,8 +160,9 @@
 
         <!--Checkbox coche-->
         <div class="form-check">
-          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck2" (change)="capturarValorCheck('coche')">
-          <label class="form-check-label ml-4" for="defaultCheck2">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkCoche" (change)="capturarValorCheck('coche')">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkCoche" (change)="capturarValorCheck('coche')" checked *ngIf="checkCoche">
+          <label class="form-check-label ml-4" for="checkCoche">
             Coche
           </label>
         </div>
@@ -170,7 +173,7 @@
           <div class="row">
               <div class="col-md-4">
                 <label for="nkilometros">Nº de Kilometros</label>
-                <input type="number" class="form-control" formControlName="nkilometros" required min="0" value="0" step="any" name="nkilometros" id="nkilometros" (change)="calculoImporteCoche()" onFocus="if (this.value==0) this.value='';">
+                <input type="number" class="form-control" formControlName="nkilometros" required min="0" value="{{gastoViaje.nKilometros}}" step="any" name="nkilometros" id="nkilometros" (change)="calculoImporteCoche()" onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -186,7 +189,7 @@
 
               <div class="col-md-4">
                 <label for="importeCoche">Importe</label>
-                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche" disabled onFocus="if (this.value==0) this.value='';">
+                <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="{{gastoViaje.importeCoche}}" step="any" name="importeCoche" id="importeCoche" disabled onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -204,8 +207,9 @@
 
         <!--Checkbox tren-->
         <div class="form-check">
-          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck3" (change)="capturarValorCheck('tren')">
-          <label class="form-check-label ml-4" for="defaultCheck3">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkTren" (change)="capturarValorCheck('tren')">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkTren" (change)="capturarValorCheck('tren')" checked *ngIf="checkTren">
+          <label class="form-check-label ml-4" for="checkTren">
             Tren
           </label>
         </div>
@@ -215,7 +219,7 @@
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="tren"><b>Tren</b></label>
-                <input type="text" class="form-control" formControlName="tren" placeholder="(Máx 150 caracteres)" maxlength="200" id="tren" name="tren">
+                <input type="text" class="form-control" formControlName="tren" placeholder="{{gastoViaje.tren}}" maxlength="200" id="tren" name="tren">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -223,7 +227,7 @@
 
               <div class="col-md-2">
                 <label for="importeTren">Importe</label>
-                <input type="number" class="form-control" formControlName="importeTren" required min="0" value="0" step="any" name="importeTren" id="importeTren" (change)="calculoImporteTotal('tren')" onFocus="if (this.value==0) this.value='';">
+                <input type="number" class="form-control" formControlName="importeTren" required min="0" value="{{gastoViaje.importeTren}}" step="any" name="importeTren" id="importeTren" (change)="calculoImporteTotal('tren')" onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -239,8 +243,9 @@
 
         <!--Checkbox autobus-->
         <div class="form-check">
-          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck4" (change)="capturarValorCheck('autobus')">
-          <label class="form-check-label ml-4" for="defaultCheck4">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkAutobus" (change)="capturarValorCheck('autobus')">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkAutobus" (change)="capturarValorCheck('autobus')" checked *ngIf="checkAutobus">
+          <label class="form-check-label ml-4" for="checkAutobus">
             Autobús
           </label>
         </div>
@@ -249,7 +254,7 @@
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="autobus"><b>Autobus</b></label>
-                <input type="text" class="form-control" formControlName="autobus" placeholder="(Máx 150 caracteres)" maxlength="200" id="autobus" name="autobus">
+                <input type="text" class="form-control" formControlName="autobus" placeholder="{{gastoViaje.autobus}}" maxlength="200" id="autobus" name="autobus">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -257,7 +262,7 @@
 
               <div class="col-md-2">
                 <label for="importeAutobus">Importe</label>
-                <input type="number" class="form-control" formControlName="importeAutobus" required min="0" value="0" step="any" name="importeAutobus" id="importeAutobus" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('autobus')">
+                <input type="number" class="form-control" formControlName="importeAutobus" required min="0" value="{{gastoViaje.importeAutobus}}" step="any" name="importeAutobus" id="importeAutobus" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('autobus')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -273,8 +278,10 @@
 
         <!--Checkbox taxi-->
         <div class="form-check">
-          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck5" (change)="capturarValorCheck('taxi')">
-          <label class="form-check-label ml-4" for="defaultCheck5">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkTaxi" (change)="capturarValorCheck('taxi')">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkTaxi" (change)="capturarValorCheck('taxi')" checked *ngIf="checkTaxi">
+
+          <label class="form-check-label ml-4" for="checkTaxi">
             Taxi
           </label>
         </div>
@@ -284,7 +291,7 @@
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="taxi"><b>Taxi</b></label>
-                <input type="text" class="form-control" formControlName="taxi" placeholder="(Máx 150 caracteres)" maxlength="200" id="taxi" name="taxi">
+                <input type="text" class="form-control" formControlName="taxi" placeholder="{{gastoViaje.taxi}}" maxlength="200" id="taxi" name="taxi">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -292,7 +299,7 @@
 
               <div class="col-md-2">
                 <label for="importeTaxi">Importe</label>
-                <input type="number" class="form-control" formControlName="importeTaxi" required min="0" value="0" step="any" name="importeTaxi" id="importeTaxi" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('taxi')">
+                <input type="number" class="form-control" formControlName="importeTaxi" required min="0" value="{{gastoViaje.importeTaxi}}" step="any" name="importeTaxi" id="importeTaxi" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('taxi')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -308,8 +315,9 @@
 
         <!--Checkbox otros-->
         <div class="form-check">
-          <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck6" (change)="capturarValorCheck('otros')">
-          <label class="form-check-label ml-4" for="defaultCheck6">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkOtros" (change)="capturarValorCheck('otros')">
+          <input class="form-check-input ml-1" type="checkbox" value="" id="checkOtros" (change)="capturarValorCheck('otros')" checked *ngIf="checkOtros">
+          <label class="form-check-label ml-4" for="checkOtros">
             Otros gastos
           </label>
         </div>
@@ -319,7 +327,7 @@
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="otros"><b>Otros</b></label>
-                <input type="text" class="form-control" formControlName="otros" placeholder="(Máx 150 caracteres)" maxlength="200" id="otros" name="otros">
+                <input type="text" class="form-control" formControlName="otros" placeholder="{{gastoViaje.otros}}" maxlength="200" id="otros" name="otros">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -327,7 +335,7 @@
 
               <div class="col-md-2">
                 <label for="importeOtros">Importe</label>
-                <input type="number" class="form-control" formControlName="importeOtros" required min="0" value="0" step="any" name="importeOtros" id="importeOtros" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('otros')">
+                <input type="number" class="form-control" formControlName="importeOtros" required min="0" value="{{gastoViaje.importeOtros}}" step="any" name="importeOtros" id="importeOtros" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('otros')">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
@@ -340,7 +348,6 @@
           </div>
         </div>
         <br>
-
     </div>
         <!--Hotel-->
         <div class="form-group bordeDiv">
@@ -443,7 +450,7 @@
 
         <div class="form-group">
           <label class="texto-form" for="memoria">Objeto del desplazamiento en relación con la ejecución del proyecto</label>
-          <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="Escribe la memoria explicativa" ></textarea>
+          <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="{{orden.memoria}}" ></textarea>
           <div class="alerta">
             <small *ngIf="false">No puede estar vacio <br></small>
           </div>
@@ -461,7 +468,7 @@
         <br>
         <div class="form-group">
           <label class="texto-form" for="observaciones">Observaciones a la hora de pagar al acreedor</label>
-          <textarea class="form-control" id="observaciones" rows="3" formControlName="observaciones" placeholder="Escribe las observaciones que creas correspondientes"></textarea>
+          <textarea class="form-control" id="observaciones" rows="3" formControlName="observaciones" placeholder="{{orden.observaciones}}"></textarea>
         </div>
       <br>
         <!--<a href="#"><img src="../../../../../assets/iconos/pdf.png" alt="Descargar orden pdf" width="80px"></a>-->

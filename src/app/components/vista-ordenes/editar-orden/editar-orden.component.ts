@@ -17,6 +17,8 @@ import {UsuarioProyecto} from 'src/app/services/usuario-proyecto/usuario-proyect
 import {UsuarioProyectoService} from 'src/app/services/usuario-proyecto/usuario-proyecto.service';
 import swal from 'sweetalert2';
 
+import {URL} from '../../../config/config';
+
 
 
 @Component({
@@ -42,14 +44,25 @@ export class EditarOrdenComponent implements OnInit {
   isV:boolean = false;
   isIP:boolean = false;
 
+  //opcionSeleccionada:string = '0';
+  checkAvion: boolean = false;
+  checkCoche: boolean = false;
+  checkTren: boolean = false;
+  checkAutobus: boolean = false;
+  checkTaxi: boolean = false;
+  checkOtros: boolean = false;
+
   // Usuario logueado
   dniUsuarioLogin: string = "";
 
   nombreAcreedor: string = "";
 
+  // Ver si el select tiene valor para que aparezca el panel de gastos.
+  relacion: string = "";
+
   /*Ojo cambiar ruta para el backend */
-  rutaImagen: string = 'http://localhost:8080/api/imagenes/';
-  rutaImagen2: string = 'http://localhost:8080/api/imagenesViaje/';
+  rutaImagen: string = URL + 'imagenes/';
+  rutaImagen2: string = URL + 'imagenesViaje/';
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   //rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
 
@@ -131,10 +144,57 @@ export class EditarOrdenComponent implements OnInit {
 
       // Proyectos de usuarios, cargamos el dni con el que esta login.
       this.dniUsuarioLogin = this.sesionService.getDni();
-
-
-
       this.cargarUsuariosProyecto();
+    }
+  }
+
+  transportesUtilizadosFuncion(importeAvion:number, importeCoche:number,
+    importeTren:number, importeAutobus:number, importeTaxi:number, importeOtros:number) {
+      if(importeAvion != 0) this.checkAvion = true;
+      if(importeCoche != 0) this.checkAvion = true;
+      if(importeTren != 0) this.checkAvion = true;
+      if(importeAutobus != 0) this.checkAvion = true;
+      if(importeTaxi != 0) this.checkAvion = true;
+      if(importeOtros != 0) this.checkAvion = true;
+  }
+
+  capturarValorCheck(valor:string) {
+    if(valor == 'avion') {
+      if(!this.checkAvion) {
+        this.checkAvion = true;
+      } else {
+        this.checkAvion = false;
+      }
+    } else if(valor == 'coche') {
+      if(!this.checkCoche) {
+        this.checkCoche = true;
+      } else {
+        this.checkCoche = false;
+      }
+    } else if(valor == 'tren') {
+      if(!this.checkTren) {
+        this.checkTren = true;
+      } else {
+        this.checkTren = false;
+      }
+    } else if(valor == 'autobus') {
+      if(!this.checkAutobus) {
+        this.checkAutobus = true;
+      } else {
+        this.checkAutobus = false;
+      }
+    } else if(valor == 'taxi') {
+      if(!this.checkTaxi) {
+        this.checkTaxi = true;
+      } else {
+        this.checkTaxi = false;
+      }
+    } else if(valor == 'otros') {
+      if(!this.checkOtros) {
+        this.checkOtros = true;
+      } else {
+        this.checkOtros = false;
+      }
     }
   }
 
@@ -150,6 +210,7 @@ export class EditarOrdenComponent implements OnInit {
            this.isG = this.orden.tipo == 'G';
            this.isV = this.orden.tipo == 'V';
            this.cargarAcreedores();
+           this.cargarGastoViajes(orden.id);
           }
         );
       }
@@ -168,7 +229,7 @@ export class EditarOrdenComponent implements OnInit {
   }
 
   cargarRelacionCheck(rol: String): void {
-    if(rol == "Miembro del proyecto") {
+    if((rol == "Miembro del proyecto") || (rol == "Investigador Principal")) {
 
       this.checkMP = true;
       this.checkME = false;
@@ -208,7 +269,11 @@ export class EditarOrdenComponent implements OnInit {
   cargarGastoViajes(idOrden: number):void{
 
     this.gastoViajeService.findByIdOrden(idOrden).subscribe(
-      (gasto) => this.gastoViaje = gasto
+      (gasto) => {
+        this.gastoViaje = gasto;
+        this.transportesUtilizadosFuncion(gasto.importeAvion, gasto.importeAutobus,
+          gasto.importeTren, gasto.importeTaxi, gasto.importeOtros, gasto.importeCoche);
+      }
     );
   }
 

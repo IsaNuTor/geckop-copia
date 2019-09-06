@@ -544,7 +544,7 @@ rellenarFotos(id:string):void{
   }
 
   cargarRelacionCheck(rol: String): void {
-    if(rol == "Miembro del proyecto") {
+    if((rol == "Miembro del proyecto") || (rol == "Investigador Principal")) {
 
       this.checkMP = true;
       this.checkME = false;
