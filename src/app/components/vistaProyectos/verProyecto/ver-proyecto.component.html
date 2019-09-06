@@ -45,15 +45,11 @@
            </tr>
         </tbody>
       </table>
-
-
     </div>
 
 
-  </form>
-<div class="row mt-4">
-
-
+</form>
+  <div class="row mt-4">
   <!-- PARTE IZQUIERDA -->
   <div class="col-md-6">
     <div class="row">
@@ -184,4 +180,7 @@
     </div>
   </div>
 
+
+  
+  <button *ngIf="permitirEdicion" class="btn btn-danger ml-6" role="button" (click)="borrarProyecto()">Borrar Proyecto</button>
 </div>

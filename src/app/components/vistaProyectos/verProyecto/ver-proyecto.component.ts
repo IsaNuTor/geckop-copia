@@ -366,4 +366,91 @@ export class VerProyectoComponent implements OnInit {
     noEditar():void{
       this.editarUsuarios = !this.editarUsuarios;
     }
+
+
+    borrarProyecto(): void{
+     if(this.ordenes.length == 0)
+        this.proyectoService.borrarProyecto(this.proyecto).subscribe(
+          (result) => {
+            if(result ){
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+              });
+  
+              ToastrModule.fire({
+                type: 'success',
+                title: 'Eliminado Correctamente' 
+              })
+              this.eliminarInvestigadores();
+              this.router.navigate(['/proyectos']);
+            }else{
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+              });
+  
+              ToastrModule.fire({
+                type: 'error',
+                title: 'Error al Eliminar el proyecto'
+              })
+              
+  
+            } 
+          }
+        )
+        else{
+          const ToastrModule = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000
+          });
+
+          ToastrModule.fire({
+            type: 'error',
+            title: 'El proyecto tiene ordenes emitidas y no se puede eliminar.'
+          })
+          
+
+        } 
+      }
+
+
+
+      eliminarProyecto(): void{
+
+        swal.fire({
+          title: '¿Estás seguro?',
+          text: `¿Seguro que desea eliminar al proyecto ${this.proyecto.acronimo}?`,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, eliminarlo',
+          cancelButtonText: 'No, cancelar',
+         }).then((result) => {
+          this.borrarProyecto();
+          });
+
+      }
+
+
+      eliminarInvestigadores(): void{
+        console.log(this.investigadoresProyecto);
+        let investigadores = new Array<UsuarioProyecto>();
+        
+        for(let inv of this.investigadoresProyecto){
+          investigadores.push(inv);
+        }
+
+        for(let inv of investigadores){
+          this.eliminarInvestigador(inv);
+        }
+      }
+
 }

@@ -17,6 +17,7 @@ export class ProyectoService {
   urlActualizarProyecto:string = 'http://localhost:8080/api/actualizarProyecto';
   urlProyectoVista:string = 'http://localhost:8080/api/vistaProyectos/verProyecto';
   urlProyectosUsuario:string = 'http://localhost:8080/api/proyectosUsuario';
+  urlBorrarProyecto:string = 'http://localhost:8080/api/borrarProyecto';
   //urlProyecto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
@@ -36,8 +37,8 @@ export class ProyectoService {
        return this.http.get<Proyecto>(`${this.urlProyectoVista}/${acronimo}`);
   }
 
-  borrarProyecto(proyecto: Proyecto): Observable<Proyecto> {
-      return this.http.delete<Proyecto>(`${this.urlProyecto}/${proyecto.acronimo}`, {headers: this.httpHeaders});
+  borrarProyecto(proyecto: Proyecto): Observable<Boolean> {
+      return this.http.post<Boolean>(this.urlBorrarProyecto, proyecto, {headers: this.httpHeaders});
     }
   
   getProyectosUsuario(dni:String): Observable<Proyecto[]> {
