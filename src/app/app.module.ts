@@ -65,11 +65,13 @@ const routes: Routes = [
   {path: "vista-ordenes/vista-orden-boton", component:VistaOrdenBotonComponent},
   {path: "vistaOrdenes/verOrden/:id", component:VerOrdenComponent},
   {path: 'vista-ordenes/add-orden/add-orden-viajes.component', component: AddOrdenViajesComponent},
+  {path: 'factura', component: FacturaComponent},
 ];
 
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
+import { FacturaComponent } from './components/factura/factura.component';
 
 
 @NgModule({
@@ -94,6 +96,7 @@ import { FooterComponent } from './components/footer/footer.component';
     VerOrdenComponent,
     ModalImagenComponent,
     AddOrdenViajesComponent,
+    FacturaComponent,
   ],
   imports: [
     BrowserModule,
