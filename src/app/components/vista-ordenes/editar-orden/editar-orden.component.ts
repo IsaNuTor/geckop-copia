@@ -12,22 +12,23 @@ import { AcreedorService } from 'src/app/services/acreedor/acreedor.service';
 import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
 import { GastoViajeService } from 'src/app/services/gasto-viaje/gasto-viaje.service';
 import { GastoViaje } from 'src/app/services/gasto-viaje/gasto-viaje';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
 
-@Component({
-  selector: 'app-ver-orden',
-  templateUrl: './ver-orden.component.html',
-  styleUrls: ['./ver-orden.component.css']
-})
-export class VerOrdenComponent implements OnInit {
 
+@Component({
+  selector: 'app-editar-orden',
+  templateUrl: './editar-orden.component.html',
+  styleUrls: ['./editar-orden.component.css']
+})
+export class EditarOrdenComponent implements OnInit {
   orden : Orden= new Orden();
-  ip: Usuario = new Usuario();
-  usuario: Usuario = new Usuario();
-  acreedor: Acreedor = new Acreedor();
   gastosGenerales: Gasto[] = new Array<Gasto>();
   gastoViaje: GastoViaje = new GastoViaje();
-  firmada: boolean =  false;
+  formGastos: FormGroup;
+  formGastosV: FormGroup;
+  formOrden: FormGroup;
+
   isG: boolean = false;
   isV:boolean = false;
   isIP:boolean = false;
@@ -37,28 +38,81 @@ export class VerOrdenComponent implements OnInit {
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   //rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
 
-
-  constructor(
-    private ordenService: OrdenService,
+  constructor(  private ordenService: OrdenService,
     private sesionService: SesionService,
     private usuarioService: UsuarioService,
     private gastoService: GastoService,
     private gastoViajeService: GastoViajeService,
     private acreedorService: AcreedorService,
     private proyectoService: ProyectoService,
+    private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router) {
+
+      this.formOrden = this.fb.group({
+        acronimo: ['', [Validators.required, Validators.maxLength(10)]],
+        nif_acreedor: ['', [Validators.required, Validators.maxLength(10)]],
+        concepto: ['', [Validators.required, Validators.maxLength(50)]],
+        num_contabilidad: ['', [Validators.maxLength(50)]],
+        memoria: ['', [Validators.required, Validators.maxLength(50)]],
+        relacion: ['', [Validators.required, Validators.max(100000000)]],
+        observaciones: ['', [Validators.required, Validators.max(100000000)]],
+      });
+      this.formGastos = this.fb.group({
+        nFactura: [ '', Validators.required], //Nº de Factura
+        descripcion: [ '', Validators.required],  //Concepto
+        importe: [ '', Validators.required],  //Importe
+        //imagen: ['', Validators.required] //Imagen
+      });
+
+      this.formGastosV = this.fb.group({
+        fechaIda: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+        fechaVuelta: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+
+        avion: [ '', [Validators.maxLength(150)]],  //Concepto
+        importeAvion: ['0'],  //Importe
+
+        // Coche
+        nkilometros: ['0'],  //nKilometros
+        // Preciokilometro es un atributo de la clase, siempre es el mismo.
+        importeCoche: ['0'],  //Importe
+
+        //tren
+        tren: [ '', [Validators.maxLength(150)]],  //Concepto
+        importeTren: ['0'],  //Importe
+
+        //Autobus
+        autobus: [ '', [Validators.maxLength(150)]],  //Concepto
+        importeAutobus: ['0'],  //Importe
+
+        //Taxi
+        taxi: [ '', [Validators.maxLength(150)]],  //Concepto
+        importeTaxi: ['0'],  //Importe
+
+        //Otros
+        otros: [ '', [Validators.maxLength(150)]],  //Concepto
+        importeOtros: ['0'],  //Importe
+
+        // Hotel
+        importeHotel: ['0'],  //Importe
+
+        // Manutencion
+        nDietas: ['0'],  //nDietas
+        precioDieta: ['0'],  //precio
+        importeDietas: ['0'],  //Importe
+
+        // Otros gastos
+        importeOtrosGastos: ['0'],  //Importe
+
+      });
+     }
 
   ngOnInit() {
     if (!this.sesionService.isLogin())
       this.router.navigate(['/login']);
     else
      this.cargarOrden();
-
   }
-
-
 
   cargarOrden(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -69,41 +123,14 @@ export class VerOrdenComponent implements OnInit {
       this.ordenService.getOrdenID(id).subscribe(
         (orden) =>{
            this.orden = orden;
-           this.firmada = this.orden.estado != 'P';
            this.isG = this.orden.tipo == 'G';
            this.isV = this.orden.tipo == 'V';
-
-           if(this.firmada)
-            this.cargarDatosIP(this.orden.nif_IP);
-           /*Solo para pruebas */
-           this.cargarGastosGenerales(1);
-           this.cargarGastoViajes(15)
-           this.cargarAcreedor('05464654K');
-           this.comprobarIP(this.orden.acronimo);
-
-
-
-           /*Cambiar fuera de pruebas
-           this.cargarGastosGenerales(this.orden.id);
-           this.cargarGastoViajes(this.orden.id)
-           this.cargarAcreedor(this.orden.nif_acreedor);
-            */
           }
         );
       }
     })
 
-
-  }
-  cargarDatosIP(dni: string): void{
-    this.usuarioService.getNombreUsuario(dni).subscribe(
-      (usuario) => this.ip = usuario
-    )
-  }
-  cargarDatosUsuario(dni: string): void{
-    this.usuarioService.getNombreUsuario(dni).subscribe(
-      (usuario) => this.usuario = usuario
-    )
+    console.log(this.orden);
   }
 
   cargarGastosGenerales(idOrden: number): void{
@@ -116,42 +143,6 @@ export class VerOrdenComponent implements OnInit {
     this.gastoViajeService.findByIdOrden(idOrden).subscribe(
       (gasto) => this.gastoViaje = gasto
     );
-  }
-
-  cargarAcreedor(nif: string):void{
-    this.acreedorService.getAcreedor(nif).subscribe(
-      (acreedor) => this.acreedor = acreedor
-    )
-  }
-
-
-  aceptarOrden():void{
-    this.orden.estado = 'A';
-    this.orden.nif_IP = this.sesionService.getDni();
-    this.orden.iban = this.acreedor.iban;
-
-    this.ordenService.setOrden(this.orden).subscribe(
-      (orden) => this.orden = orden
-
-    );
-    location.reload();
-  }
-  rechazarOrden():void{
-    this.orden.estado = 'R';
-    this.orden.nif_IP = this.sesionService.getDni();
-
-    this.ordenService.setOrden(this.orden).subscribe(
-      (orden) => this.orden = orden
-    );
-    location.reload();
-
-  }
-
-  comprobarIP(acronimo:string):void{
-    this.proyectoService.getProyecto(acronimo).subscribe(
-      (proyecto) => this.isIP = proyecto.ip1 == this.sesionService.getDni() || proyecto.ip2 == this.sesionService.getDni()
-    );
-
   }
 
   verFoto(foto:String): void {
@@ -172,9 +163,4 @@ export class VerOrdenComponent implements OnInit {
       })
     }
   }
-
-  generarPDF(){
-    this.ordenService.generarPDF(0).subscribe();
-  }
-
 }

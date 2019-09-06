@@ -102,6 +102,10 @@ export class AddOrdenViajesComponent implements OnInit {
   importeDietasVacio:boolean = false;
   importeOtrosGastosVacio:boolean = false;
 
+  checkMP: boolean = false;
+  checkME: boolean = false;
+  checkPI: boolean = false;
+
   // Importe total
   importeTotal: number = 0;
 
@@ -168,6 +172,7 @@ export class AddOrdenViajesComponent implements OnInit {
 
             // Otros gastos
             importeOtrosGastos: ['0'],  //Importe
+
           });
 
           //numeracion: number;
@@ -362,8 +367,10 @@ cargarNumProyectoOrden(): number {
 getRelacionProyecto(): string{
   let relacion = "";
   for(let r of this.misProyectos){
-  if(this.formOrden.value.acronimo == r.acronimo)
+  if(this.formOrden.value.acronimo == r.acronimo){
+    this.cargarRelacionCheck(r.rol);
     return r.rol;
+  }
   }
 }
 
@@ -534,6 +541,28 @@ rellenarFotos(id:string):void{
 
     this.calculoImporteTotal('dieta');
     //console.log(this.formGastos.get('importeCoche'))
+  }
+
+  cargarRelacionCheck(rol: String): void {
+    if(rol == "Miembro del proyecto") {
+
+      this.checkMP = true;
+      this.checkME = false;
+      this.checkPI = false;
+
+    } else if(rol == "Miembro del equipo de trabajo") {
+
+      this.checkME = true;
+      this.checkMP = false;
+      this.checkPI = false;
+    } else if(rol == "Profesor invitado") {
+
+      this.checkPI = true;
+      this.checkME = false;
+      this.checkMP = false;
+    }
+
+    //console.log(this.formOrden.get('checkMP').value);
   }
 
 }

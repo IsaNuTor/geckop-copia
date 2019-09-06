@@ -1,6 +1,6 @@
 <div class="card">
     <!--TITULO-->
-    <div class="card bg-dark">
+    <div class="card bg-dark" *ngIf="isG">
       <div class="card-header text-white text-center">
         ORDEN DE PAGO GASTOS VIAJES
       </div>
@@ -32,7 +32,7 @@
         <div class="form-group col-md-6">
           <label class="texto-form">Acreedor</label>
           <select class="custom-select" formControlName="nif_acreedor">
-            <option value="" selected>Seleccione acreedor</option>
+            <option value="" selected>{{orden.acronimo}}</option>
             <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
           </select>
         </div>
@@ -96,7 +96,7 @@
       <!--<p [hidden]="opcionSeleccionada=='0'">Has seleccionado la opcion {{misProyectos[i].acronimo}}</p>-->
     <div class="card-body" [hidden]="!verSeleccionada">
 
-      <form class="card mb-4"  [formGroup]="formGastos" >
+      <form class="card mb-4"  [formGroup]="formGastosV" >
         <h3 class="texto-form mt-3">Justificación de gastos</h3>
         <!-- Entradas simples -->
 
@@ -113,7 +113,7 @@
             <label for="fechaVuelta"><b>Fecha vuelta:&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
             <input type="date" class="form-control" formControlName="fechaVuelta" id="fechaVuelta" placeholder="Fecha vuelta" name="fechaVuelta">
             <div class="alerta">
-              <small *ngIf="!formValid && gasto.fechaIda > gasto.fechaVuelta">Las fechas introducidas no son válidas <br></small>
+              <small *ngIf="!formValid && gastoViaje.fechaIda > gastoViaje.fechaVuelta">Las fechas introducidas no son válidas <br></small>
             </div>
           </div>
         </div>

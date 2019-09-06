@@ -1,0 +1,58 @@
+.btn-danger, .btn-success{
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.form-control:focus{
+  border-color: #228B22;
+  border-width: 2px;
+  box-shadow: none;
+}
+
+.texto-form {
+  width: 100%;
+  font-family: sans-serif;
+  color: #424242;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.form-group {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.custom-select:focus{
+  border-color: #228B22;
+  border-width: 2px;
+  box-shadow: none;
+  outline: none;
+}
+
+.custom-select option{
+    background-color: #ffffff;
+}
+
+select:hover{
+  outline: none;
+}
+
+.alerta{
+  color: red;
+}
+
+.bordeDiv {
+  /*border: 5px solid red;*/
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+}
+
+.bordeTransporte {
+  background-color: #e1ede3;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+}

@@ -35,6 +35,8 @@ import { VistaOrdenesComponent } from './components/vista-ordenes/vista-ordenes.
 import { VistaOrdenBotonComponent } from './components/vista-ordenes/vista-orden-boton/vista-orden-boton.component';
 import { VerOrdenComponent } from './components/vista-ordenes/ver-orden/ver-orden.component';
 
+import { EditarOrdenComponent } from './components/vista-ordenes/editar-orden/editar-orden.component';
+
 // Gasto
 import { ModalImagenComponent } from './components/vista-ordenes/add-orden/gastos/modal-imagen/modal-imagen.component';
 // Gasto Viajes
@@ -66,13 +68,13 @@ const routes: Routes = [
   {path: "vistaOrdenes/verOrden/:id", component:VerOrdenComponent},
   {path: 'vista-ordenes/add-orden/add-orden-viajes.component', component: AddOrdenViajesComponent},
   {path: 'factura', component: FacturaComponent},
+  {path: 'editarOrden/:id', component: EditarOrdenComponent},
 ];
 
 // Backend
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
 import { FacturaComponent } from './components/factura/factura.component';
-
 
 @NgModule({
   declarations: [
@@ -97,6 +99,7 @@ import { FacturaComponent } from './components/factura/factura.component';
     ModalImagenComponent,
     AddOrdenViajesComponent,
     FacturaComponent,
+    EditarOrdenComponent,
   ],
   imports: [
     BrowserModule,
