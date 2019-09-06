@@ -5,7 +5,7 @@
 
   
   <li  class="nav-item dropdown"  (click)="despleIn()"  ><!---->
-    <a id="usuario" class="nav-link active dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >Mis Ordenes</a>
+    <a id="usuario" class="nav-link active dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >Mis Ordenes  <span class="notificacion">{{pendientesM.length}} </span> </a>
     <div id="desplegable" class="dropdown-menu " (mouseleave)=despleOut()>
       <a id="aceptadas" class="dropdown-item" *ngIf="aceptadas?.length > 0" (click)="activarAceptadas()">Aceptadas</a>
       <a id="rechazadas" class="dropdown-item" *ngIf="rechazadas?.length > 0" (click)="activarRechazadas()">Rechazadas</a>

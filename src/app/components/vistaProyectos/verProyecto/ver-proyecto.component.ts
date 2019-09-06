@@ -30,9 +30,11 @@ export class VerProyectoComponent implements OnInit {
   nombresInvestigadores: String[];//Array<String>;
   usuarioAux: Usuario;
   editarFechaActiva: Boolean = false;
-  /*formFecha */
-  formFecha: FormGroup;
+  editarNCActiva: Boolean = false;
+  /*form */
+  form: FormGroup;
   fechaAntigua: Date;
+  NCAntigua: number;
   /*Nuevos Usuarios */
   usuarios: Usuario[];
   editarUsuarios: Boolean = false;
@@ -51,8 +53,9 @@ export class VerProyectoComponent implements OnInit {
     private sesionService: SesionService,
     public fb: FormBuilder
   ) { 
-      this.formFecha = this.fb.group({
-        fechaCierre: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+      this.form = this.fb.group({
+        fechaCierre: ['', [Validators.minLength(10), Validators.maxLength(10)]],
+        nContabilidad: [[Validators.minLength(1), Validators.maxLength(20)]]
       });
       this.formInvestigador = this.fb.group({
         rol: ['Miembro del proyecto', Validators.required]  //rol del select
@@ -153,13 +156,16 @@ export class VerProyectoComponent implements OnInit {
   editarFecha():void{
     this.editarFechaActiva = !this.editarFechaActiva;
   }
+  editarNC():void{
+    this.editarNCActiva = !this.editarNCActiva;
+  }
  
 
   guardarFecha():void{
-    if(this.formFecha.valid){
+    if(this.form.valid){
       this.editarFechaActiva = !this.editarFechaActiva;
-      this.fechaAntigua =  this.formFecha.value.fechaCierre;
-      this.proyecto.fechaCierre = this.formFecha.value.fechaCierre;
+      this.fechaAntigua =  this.form.value.fechaCierre;
+      this.proyecto.fechaCierre = this.form.value.fechaCierre;
       this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
         result => {
           if(result != null){
@@ -187,6 +193,45 @@ export class VerProyectoComponent implements OnInit {
               title: 'Error al cambiar la fecha'
             })
             this.proyecto.fechaCierre = this.fechaAntigua;
+
+          } 
+        });
+    }
+
+    
+  }
+  guardarNC():void{
+    if(this.form.valid){
+      this.editarNCActiva = !this.editarNCActiva;
+      this.NCAntigua =  this.form.value.nContabilidad;
+      this.proyecto.nContabilidad = this.form.value.nContabilidad
+      this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
+        result => {
+          if(result != null){
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'success',
+              title: 'Guardado '+result.acronimo
+            })
+          }else{
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'error',
+              title: 'Error al cambiar el Nº de Contabilidad'
+            })
+            this.proyecto.nContabilidad = this.NCAntigua;
 
           } 
         });

@@ -1,5 +1,5 @@
 
- <form [formGroup]="formFecha">
+ <form [formGroup]="form">
     <!--<h3>Nombre completo del proyecto (acronimo) - Nº Contabilidad</h3>-->
     <h3>{{proyecto.acronimo}}</h3>
     <div>
@@ -7,7 +7,7 @@
         <thead class="thead-dark">
           <tr>
             <th>Fecha de Inicio</th>
-            <th colspan="2">Fecha de Cierre</th>
+            <th>Fecha de Cierre</th>
             <th>Nombre</th>
             <th>Presupuesto</th>
             <th>Nºcontabilidad</th>
@@ -21,15 +21,26 @@
               {{proyecto.fechaCierre}}
               <img *ngIf="!editarFechaActiva" src="assets/iconos/editDate.png" class="ml-2 icon" alt="Editar Proyecto" (click)="editarFecha()">    
             </td>
-
-            <td *ngIf="permitirEdicion">
+            <td>{{ proyecto.nombre }}</td>
+            <td>{{ proyecto.presupuesto }}</td>
+            <td>
+                {{ proyecto.nContabilidad }}
+                <img *ngIf="!editarNCactivo" src="assets/iconos/editar2.png" class="ml-4 icon" alt="Editar Proyecto" (click)="editarNC()">    
+            </td>
+           </tr>
+           <tr>
+             <td></td>
+             <td *ngIf="permitirEdicion">
                 <input *ngIf="editarFechaActiva" type="date" class="form-control form-control-sm" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">                
                     <img  *ngIf="editarFechaActiva" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarFecha()">
                     <img  *ngIf="editarFechaActiva" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarFecha()">
             </td>
-            <td>{{ proyecto.nombre }}</td>
-            <td>{{ proyecto.presupuesto }}</td>
-            <td>{{ proyecto.nContabilidad }}</td>
+            <td colspan="2"></td>
+            <td *ngIf="permitirEdicion">
+                <input *ngIf="editarNCactivo" type="date" class="form-control form-control-sm" formControlName="nContabilidad" id="nContabilidad" placeholder="Nº de Contabilidad" name="nContabilidad">                
+                <img  *ngIf="editarNCactivo" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarNC()">
+                <img  *ngIf="editarNCactivo" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarNC()">
+            </td>
            </tr>
         </tbody>
       </table>
