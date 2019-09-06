@@ -19,27 +19,28 @@
             <td>{{ proyecto.fechaInicio }}</td>
             <td>
               {{proyecto.fechaCierre}}
-              <img *ngIf="!editarFechaActiva" src="assets/iconos/editDate.png" class="ml-2 icon" alt="Editar Proyecto" (click)="editarFecha()">    
+              <img *ngIf="!editarFechaActiva && permitirEdicion" src="assets/iconos/editDate.png" class="ml-2 icon" alt="Editar Proyecto" (click)="editarFecha()">    
             </td>
             <td>{{ proyecto.nombre }}</td>
             <td>{{ proyecto.presupuesto }}</td>
             <td>
                 {{ proyecto.nContabilidad }}
-                <img *ngIf="!editarNCactivo" src="assets/iconos/editar2.png" class="ml-4 icon" alt="Editar Proyecto" (click)="editarNC()">    
+                <img *ngIf="!editarNCActiva && permitirEdicion" src="assets/iconos/editar2.png" class="ml-4 icon" alt="Editar Proyecto" (click)="editarNC()">    
             </td>
            </tr>
+
            <tr>
              <td></td>
-             <td *ngIf="permitirEdicion">
-                <input *ngIf="editarFechaActiva" type="date" class="form-control form-control-sm" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">                
-                    <img  *ngIf="editarFechaActiva" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarFecha()">
-                    <img  *ngIf="editarFechaActiva" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarFecha()">
+             <td >
+                <input *ngIf="editarFechaActiva && permitirEdicion" type="date" class="form-control form-control-sm" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">                
+                    <img  *ngIf="editarFechaActiva && permitirEdicion" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarFecha()">
+                    <img  *ngIf="editarFechaActiva && permitirEdicion" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarFecha()">
             </td>
             <td colspan="2"></td>
-            <td *ngIf="permitirEdicion">
-                <input *ngIf="editarNCactivo" type="date" class="form-control form-control-sm" formControlName="nContabilidad" id="nContabilidad" placeholder="Nº de Contabilidad" name="nContabilidad">                
-                <img  *ngIf="editarNCactivo" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarNC()">
-                <img  *ngIf="editarNCactivo" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarNC()">
+            <td >
+                <input *ngIf="editarNCActiva && permitirEdicion" type="text" class="form-control form-control-sm" formControlName="nContabilidad" id="nContabilidad" placeholder="Nº de Contabilidad" name="nContabilidad">                
+                <img  *ngIf="editarNCActiva && permitirEdicion" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarNC()">
+                <img  *ngIf="editarNCActiva && permitirEdicion" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarNC()">
             </td>
            </tr>
         </tbody>
@@ -114,16 +115,23 @@
               <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Rol</th>
+                <th scope="col" *ngIf="permitirEdicion">Eliminar</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let inv of nombresInvestigadores; index as i" >
                 <td>{{ inv }}</td>
                 <td>{{ investigadoresProyecto[i].rol }}</td>
+                <td *ngIf="permitirEdicion">
+                    <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador" (click)="eliminarInvestigador(investigadoresProyecto[i])">
+                </td>
               </tr>
               <tr>
-                <td *ngIf="permitirEdicion" colspan="2">
+                <td *ngIf="!editarUsuarios && permitirEdicion" colspan="3">
                   <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador" (click)="cargarNuevosUsuarios()">
+                </td>
+                <td *ngIf="editarUsuarios && permitirEdicion" colspan="3">
+                  <img src="assets/iconos/menos.png" class="rounded" alt="Añadir Investigador" (click)="!noEditar()">
                 </td>
               </tr>
 

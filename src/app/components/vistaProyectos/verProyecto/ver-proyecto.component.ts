@@ -55,7 +55,7 @@ export class VerProyectoComponent implements OnInit {
   ) { 
       this.form = this.fb.group({
         fechaCierre: ['', [Validators.minLength(10), Validators.maxLength(10)]],
-        nContabilidad: [[Validators.minLength(1), Validators.maxLength(20)]]
+        nContabilidad:['', [Validators.minLength(1), Validators.maxLength(20)]]
       });
       this.formInvestigador = this.fb.group({
         rol: ['Miembro del proyecto', Validators.required]  //rol del select
@@ -323,4 +323,47 @@ export class VerProyectoComponent implements OnInit {
     return a+actual*this.elementosPorPagina;
   }
 
+  eliminarInvestigador(usuario:UsuarioProyecto):void{
+    let i = this.investigadoresProyecto.indexOf(usuario);
+    this.investigadoresProyecto.splice(i, 1);
+    this.nombresInvestigadores.splice(i, 1);
+
+      this.usuariosProyectoService.eliminarUsuariosProyecto(usuario).subscribe(
+        result => {
+          if(result){
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'success',
+              title: 'Eliminado Correctamente' 
+            })
+            
+          }else{
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'error',
+              title: 'Error al Eliminar el Usuario'
+            })
+            location.reload();
+            
+
+          } 
+        }
+      );
+    }
+
+    noEditar():void{
+      this.editarUsuarios = !this.editarUsuarios;
+    }
 }

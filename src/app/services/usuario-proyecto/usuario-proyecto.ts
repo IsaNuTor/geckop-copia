@@ -1,4 +1,7 @@
+
+
 export class UsuarioProyecto {
+  id: number;
   dni: string;
   acronimo: string;
   rol: string;

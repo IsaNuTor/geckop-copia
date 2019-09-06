@@ -13,8 +13,7 @@ export class UsuarioProyectoService {
   usuariosProyecto: UsuarioProyecto[] = new Array<UsuarioProyecto>();
   urlUsuarioProyecto:string = 'http://localhost:8080/api/usuarioproyecto';
   urlUsuariosProyecto:string = 'http://localhost:8080/api/buscarusuariosproyecto';
-
-
+  urlBorrarUsuarioProyecto:string = 'http://localhost:8080/api/borrarusuarioproyecto';
   urlDniProyecto:string = 'http://localhost:8080/api/buscarproyectosdni';
   //urlUsuarioProyecto:string = URL_BACKEND + '/api/usuarioproyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -22,6 +21,9 @@ export class UsuarioProyectoService {
 
   public insertarUsuariosProyecto(inv: UsuarioProyecto): Observable<UsuarioProyecto>{
     return  this.http.post<UsuarioProyecto>(this.urlUsuarioProyecto, inv, {headers: this.httpHeaders});
+  }
+  public eliminarUsuariosProyecto(inv: UsuarioProyecto): Observable<UsuarioProyecto>{
+    return  this.http.post<UsuarioProyecto>(this.urlBorrarUsuarioProyecto, inv, {headers: this.httpHeaders});
   }
 
   public getInvestigadoresProyecto(p: String): Observable<UsuarioProyecto[]>{
