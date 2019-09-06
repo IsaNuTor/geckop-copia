@@ -2,8 +2,21 @@
     color: red;
   }
   
-  .icon{
-    width: 60%;
-    min-width: 16px;
-    max-width: 24px;
+.btn-warning {
+  color: white;
+  background-color: #ffc107;
+  border-color: #ffc107;
+
+}
+
+
+.textarea{
+  margin-left: 30px;
+  border-color: #ffc107;
+  
+}
+.icon{
+  width: 60%;
+  min-width: 16px;
+  max-width: 24px;
 }

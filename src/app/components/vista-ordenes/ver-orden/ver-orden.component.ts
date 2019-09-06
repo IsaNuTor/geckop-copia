@@ -12,6 +12,7 @@ import { AcreedorService } from 'src/app/services/acreedor/acreedor.service';
 import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
 import { GastoViajeService } from 'src/app/services/gasto-viaje/gasto-viaje.service';
 import { GastoViaje } from 'src/app/services/gasto-viaje/gasto-viaje';
+import {URL} from '../../../config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -28,12 +29,16 @@ export class VerOrdenComponent implements OnInit {
   gastosGenerales: Gasto[] = new Array<Gasto>();
   gastoViaje: GastoViaje = new GastoViaje();
   firmada: boolean =  false;
+  modificacion: boolean = false;
+  observacionesIP: string = "";
   isG: boolean = false;
   isV:boolean = false;
   isIP:boolean = false;
   /*Ojo cambiar ruta para el backend */
-  rutaImagen: string = 'http://localhost:8080/api/imagenes/';
-  rutaImagen2: string = 'http://localhost:8080/api/imagenesViaje/';
+  rutaImagen: string = URL + '/imagenes/';
+  rutaImagen2: string = URL + '/imagenesViaje/';
+  numeracionAux: number;
+  
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   //rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
 
@@ -55,6 +60,7 @@ export class VerOrdenComponent implements OnInit {
       this.router.navigate(['/login']);
     else
      this.cargarOrden();
+     
 
   }
 
@@ -175,6 +181,33 @@ export class VerOrdenComponent implements OnInit {
 
   generarPDF(){
     this.ordenService.generarPDF(0).subscribe();
+  }
+
+  /* CARGAR la numeracion segun el acronimo del proyecto */
+  firmarOrden(): void {
+    this.ordenService.getNumAcronimo(this.orden.acronimo).subscribe(
+      (numMax) =>{
+        this.aceptarOrden();
+        this.numeracionAux = numMax;
+      });
+  }
+
+  pedirModificacionOrden():void{
+    this.modificacion = !this.modificacion;
+  }
+  enviarModificacion():void{
+    this.orden.estado = 'PM';
+    this.orden.observaciones_IP = this.observacionesIP;
+    this.ordenService.setOrden(this.orden).subscribe(
+      (orden) => this.orden = orden
+
+    );
+    location.reload();
+
+  }
+
+  public cancelar(){
+    this.router.navigate(['/vista-ordenes']);
   }
 
 }

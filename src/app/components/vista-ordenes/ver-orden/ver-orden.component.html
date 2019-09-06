@@ -138,7 +138,7 @@
           </tr>
         <tr>
             <th scope="col">Itinerario:</th>
-          <td>itinerario</td><!--Cambiar por gastoViaje-->
+          <td>{{gastoViaje.itinerario}}</td><!--Cambiar por gastoViaje-->
           <th scope="col">Fecha ida:</th>
           <td>{{gastoViaje.fechaIda}}</td> <!--Cambiar por gastoViaje-->
           <th scope="col">Fecha vuelta:</th>
@@ -242,10 +242,46 @@
     </table>
   </div>
 
+
+  <div class="col-md-12" *ngIf="orden.estado == 'PM' ">
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col">Modificaciones Pendientes</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr>
+            <td class="text-danger">{{orden.observaciones_IP}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+ 
+  <div class="col-md-12">
+      <div class="col-md-6">
+          <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-success m-2" types="button" (click)="firmarOrden()">Aceptar Orden</button>
+          <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-danger m-2" types="button" (click)="rechazarOrden()">Rechazar Orden</button>
+            
+          <button *ngIf="!firmada && isIP && !modificacion" class="btn btn-rounded btn btn-warning m-2" types="button" (click)="pedirModificacionOrden()">Pedir Modificación</button>
+          <button *ngIf="!firmada && isIP && modificacion" class="btn btn-rounded btn btn-outline-warning mt-2 m-2" types="button" (click)="enviarModificacion()">Enviar</button>
+         
+          
+      </div>
+    
+      <div class="col-md-3">
+          <textarea *ngIf="!firmada && isIP && modificacion" class="form-control textarea m-2" id="memoria" rows="3" [(ngModel)]="observacionesIP" placeholder="Escribe las modificaciones necesarias"  ></textarea> 
+      </div>
+      <div class="col-md-2"> 
+        <button  class="btn btn-rounded btn btn-outline-danger mt-2 m-2" types="button" (click)="cancelar()">Volver a Ordenes</button>
+         
+      </div>
+          
+  </div>  
   
-  <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-success mr-3 ml-3" types="button" (click)="aceptarOrden()">Aceptar Orden</button>
-  <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-danger m-0" types="button" (click)="rechazarOrden()">Rechazar Orden</button>
- <!-- <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="pedirModificacionOrden()">Modificar Orden</button>-->
-  <button (click)="generarPDF()"> GENERAR PDF</button>  
+  
+  <!-- <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="pedirModificacionOrden()">Modificar Orden</button>-->
+  <!--<button (click)="generarPDF()"> GENERAR PDF</button>  -->
 
 </div>

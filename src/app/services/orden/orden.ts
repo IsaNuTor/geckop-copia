@@ -20,4 +20,5 @@ export class Orden {
   relacion: string;
   nif_acreedor: string;
   observaciones: string;
+  observaciones_IP: string;
 }
