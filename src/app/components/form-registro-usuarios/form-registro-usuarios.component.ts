@@ -15,9 +15,9 @@ import { SesionService } from 'src/app/services/sesion/sesion.service';
 export class FormRegistroUsuariosComponent implements OnInit{
 
 
-  private usuario: Usuario = new Usuario();
+  usuario: Usuario = new Usuario();
   formRegistro: FormGroup;
-  private formValid: boolean = true;
+  formValid: boolean = true;
 
   constructor(private usuarioService: UsuarioService,
           private sesionService: SesionService,
@@ -38,7 +38,7 @@ export class FormRegistroUsuariosComponent implements OnInit{
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     if (this.sesionService.isLogin())
       this.router.navigate(['/perfil']);
     else
@@ -52,7 +52,7 @@ export class FormRegistroUsuariosComponent implements OnInit{
     if(this.formValid){
       this.usuario = this.formRegistro.value;
       this.usuarioService.registro(this.usuario).subscribe(
-          res => { 
+          res => {
             if(res != null){
               const ToastrModule = swal.mixin({
                 toast: true,
@@ -78,7 +78,7 @@ export class FormRegistroUsuariosComponent implements OnInit{
               })
 
             }
-            
+
           });
     }
 

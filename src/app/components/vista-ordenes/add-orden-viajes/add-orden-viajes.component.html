@@ -113,7 +113,7 @@
             <label for="fechaVuelta"><b>Fecha vuelta:&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
             <input type="date" class="form-control" formControlName="fechaVuelta" id="fechaVuelta" placeholder="Fecha vuelta" name="fechaVuelta">
             <div class="alerta">
-              <small *ngIf="!formValid && gasto.fechaIda > gasto.fechaVuelta">Las fechas introducidas no son válidas <br></small>
+              <small *ngIf="!formValid && gastoViaje.fechaIda > gastoViaje.fechaVuelta">Las fechas introducidas no son válidas <br></small>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 <div>
- 
+
 
     <div class="row align-items-center">
 
@@ -14,24 +14,24 @@
           <form [formGroup]="formPerfil">
           <div class="row align-items-center mb-2">
             <div class="col-sm-1">
-              <img class="icon" src="assets/iconos/email.png" alt="Email">              
+              <img class="icon" src="assets/iconos/email.png" alt="Email">
             </div>
             <div class="col-sm-5">
               {{user.email}}
             </div>
             <div class="col-sm-5">
-                <input class="form-control" formControlName="email" type="text" placeholder="Nuevo Email" maxlength="50"> 
+                <input class="form-control" formControlName="email" type="text" placeholder="Nuevo Email" maxlength="50">
                 <div class="alerta">
                   <small *ngIf="!emailValido && formPerfil.get('email').hasError('email')">Formato invalido <br></small>
                 </div>
             </div>
 
           </div>
-          
+
           <div class="row align-items-center mb-2">
 
             <div class="col-sm-1">
-              <img class="icon" src="assets/iconos/iban.png"  alt="Iban">              
+              <img class="icon" src="assets/iconos/iban.png"  alt="Iban">
             </div>
             <div class="col-sm-5">
               {{ibanUsuario}}
@@ -39,12 +39,12 @@
             <div class="col-sm-5">
                 <input class="form-control" type="text" formControlName="iban" placeholder="Nuevo Iban" maxlength="34">
             </div>
-            
+
           </div>
 
           <div class="row align-items-center mb-2">
               <div class="col-sm-1">
-                <img class="icon" src="assets/iconos/telefono.png"  alt="telefono">              
+                <img class="icon" src="assets/iconos/telefono.png"  alt="telefono">
               </div>
               <div class="col-sm-5">
                 {{user.telefono}}
@@ -56,7 +56,7 @@
 
           <div class="row align-items-center mb-2">
               <div class="col-sm-1">
-                <img class="icon" src="assets/iconos/departamento.png"  alt="departamento">              
+                <img class="icon" src="assets/iconos/departamento.png"  alt="departamento">
               </div>
               <div class="col-sm-5">
                 {{user.departamento}}
@@ -68,7 +68,7 @@
 
           <div class="row align-items-center mb-2">
               <div class="col-sm-1">
-                <img class="icon" src="assets/iconos/centro.png"  alt="centro">              
+                <img class="icon" src="assets/iconos/centro.png"  alt="centro">
               </div>
               <div class="col-sm-5">
                 {{user.centro}}
@@ -78,8 +78,8 @@
               </div>
           </div>
 
-   
-          
+
+
           <div class="row align-items-top mb-2">
             <div class="col-sm-1 mt-2">
               <img class="icon" src="assets/iconos/pass.png"  alt="Contraseña">
@@ -108,23 +108,23 @@
                   <input class="form-control" type="password" formControlName="passNueva2" placeholder="Repite Contraseña" maxlength="10">
                   <div class="alerta">
                     <small *ngIf="!passValida && formPerfil.get('passNueva2').hasError('minlength')">Mínimo de 5 caracteress<br></small>
-                    <small *ngIf="!passValida && !passIguales && !vacias">Las contraseñas no coinciden <br></small>
+                    <small *ngIf="!passValida && !passIguales">Las contraseñas no coinciden <br></small>
                   </div>
                 </div>
               </div>
 
             </div>
 
-          
+
           </div>
 
           <div class="row">
               <button class="btn btn-success" (click)="modificarDatos()" role="button" >Guardar</button>
           </div>
           </form>
-          
+
         </div>
-       
+
       </div>
 
 

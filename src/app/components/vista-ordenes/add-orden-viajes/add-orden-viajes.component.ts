@@ -565,4 +565,8 @@ rellenarFotos(id:string):void{
     //console.log(this.formOrden.get('checkMP').value);
   }
 
+  public cancelar(){
+    this.router.navigate(['/vista-ordenes/vista-orden-boton']);
+  }
+
 }

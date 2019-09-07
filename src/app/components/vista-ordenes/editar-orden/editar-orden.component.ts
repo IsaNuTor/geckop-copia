@@ -310,4 +310,5 @@ export class EditarOrdenComponent implements OnInit {
       })
     }
   }
+  seleccionarFoto(event, s:string) {}
 }
