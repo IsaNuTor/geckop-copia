@@ -101,6 +101,7 @@ export class AddOrdenViajesComponent implements OnInit {
   precioDietasVacio:boolean = false;
   importeDietasVacio:boolean = false;
   importeOtrosGastosVacio:boolean = false;
+  itinerarioVacio:boolean = false;
 
   checkMP: boolean = false;
   checkME: boolean = false;
@@ -137,6 +138,7 @@ export class AddOrdenViajesComponent implements OnInit {
           this.formGastos = this.fb.group({
             fechaIda: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
             fechaVuelta: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+            itinerario: ['', [Validators.required]],
 
             avion: [ '', [Validators.maxLength(150)]],  //Concepto
             importeAvion: ['0'],  //Importe
@@ -173,6 +175,10 @@ export class AddOrdenViajesComponent implements OnInit {
             // Otros gastos
             importeOtrosGastos: ['0'],  //Importe
 
+            otrosAgencia: ['', [Validators.maxLength(50)]],
+            checkAgenciaAvion: [''],
+            checkAgenciaTren: [''],
+            checkAgenciaAlojamiento: [''],
           });
 
           //numeracion: number;
@@ -381,6 +387,7 @@ public crearGastoViajes(): void {
     //si falta algun dato marcamos el fallo y NO creamos el nuevo gasto
     if(this.formGastos.value.fechaIda == ""){this.fechaIdaVacio = true; this.crearGastoForm = false;}
     if(this.formGastos.value.fechaVuelta == ""){this.fechaVueltaVacio = true; this.crearGastoForm = false;}
+    if(this.formGastos.value.itinerario == ""){this.itinerarioVacio = true; this.crearGastoForm = false;}
     if(this.crearGastoForm){
       this.gastoViaje = this.formGastos.value;
       this.gastoViaje.precioKilometro = this.precioKilometro;

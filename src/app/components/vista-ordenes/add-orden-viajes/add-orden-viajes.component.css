@@ -62,5 +62,14 @@ select:hover{
 }
 
 .espacioIzq{
+  padding-left: 30%;
+}
+
+.espacioIzq2{
   padding-left: 15%;
+}
+
+.itinerario {
+  margin-left: 30%;
+  margin-top: 15px;
 }

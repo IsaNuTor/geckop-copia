@@ -53,7 +53,7 @@
 
         </div>
       <div class="row">
-        <div class="form-group form-inline espacioIzq">
+        <div class="form-group form-inline espacioIzq2">
           <div>
               <label class="texto-form" for="relacion">Relación con el proyecto:&nbsp;&nbsp;</label>
           </div>
@@ -102,21 +102,30 @@
 
       <div class="card-body" [hidden]="!verSeleccionada">
 
-        <!--Fechas-->
+        <!--Fechas e itinerario-->
         <div class="form-row form-inline bordeDiv">
-          <div class="form-group col-md-6 fechaDer">
-            <label for="fechaIda"><b>Fecha ida:&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+          <div class="form-group fechaDer">
+            <label for="fechaIda"><b>Fecha ida:&nbsp;&nbsp;</b></label>
             <input type="date" class="form-control" formControlName="fechaIda" id="fechaIda" placeholder="Fecha ida" name="fechaIda">
           </div>
 
-          <div class="form-group col-md-6">
-            <label for="fechaVuelta"><b>Fecha vuelta:&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+          <div class="form-group">
+            <label for="fechaVuelta"><b>Fecha vuelta:&nbsp;&nbsp;</b></label>
             <input type="date" class="form-control" formControlName="fechaVuelta" id="fechaVuelta" placeholder="Fecha vuelta" name="fechaVuelta">
             <div class="alerta">
               <small *ngIf="!formValid && gastoViaje.fechaIda > gastoViaje.fechaVuelta">Las fechas introducidas no son válidas <br></small>
             </div>
           </div>
+
+          <div class="form-group itinerario">
+            <label class ="tx-secondary mr-2" for="itinerario"><b>Itinerario:</b></label>
+            <input type="text" class="form-control" formControlName="itinerario" placeholder="(Máx 150 caracteres)" maxlength="150" id="itinerario" name="itinerario">
+            <div class="alerta">
+              <small *ngIf="false">No puede estar vacio <br></small>
+            </div>
+          </div>
         </div>
+
         <br>
   <div>
         <h3 class="texto-form mt-3">Elija los transportes que ha utilizado</h3>
@@ -437,9 +446,56 @@
         </div>
 
       </div>
-        </form>
 
-      </div>
+
+
+
+      <div class="row">
+
+        <label class="texto-form text-center" for="relacion">Si ha utilizado los servicios de la agencia de viajes concertada, indique para qué tipo de gasto</label>
+
+        <div class="form-group form-inline espacioIzq">
+
+          <div class="form-check">
+            <input class="form-check-input ml-1" formControlName="checkAgenciaAvion" type="checkbox" value="" id="checkAgenciaAvion">
+            <label class="form-check-label mr-3" for="checkAgenciaAvion">
+              Avion
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input ml-1" formControlName="checkAgenciaTren" type="checkbox" value="" id="checkAgenciaTren">
+            <label class="form-check-label mr-3" for="checkAgenciaTren">
+              Tren
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input ml-1" formControlName="checkAgenciaAlojamiento" type="checkbox" value="" id="checkAgenciaAlojamiento">
+            <label class="form-check-label mr-3" for="checkAgenciaAlojamiento">
+              Alojamiento
+            </label>
+          </div>
+
+          <div>
+            <span class ="tx-secondary mr-2"><b>Otros:</b></span>
+            <input type="text" class="form-control" formControlName="otrosAgencia" placeholder="(Máx 50 caracteres)" maxlength="50" id="otrosAgencia">
+          </div>
+
+        </div>
+
+        <!--<div class="form-group">
+          <label class="texto-form" for="relacion">Relación con el proyecto</label>
+          <textarea class="form-control" id="relacion" rows="3" placeholder="{{relacion}}" disabled></textarea>
+          <div class="alerta">
+            <small *ngIf="false">No puede estar vacio <br></small>
+          </div>
+        </div>-->
+  </div>
+</form>
+
+</div>
+
 
         <div class="form-group">
           <label class="texto-form" for="memoria">Objeto del desplazamiento en relación con la ejecución del proyecto</label>

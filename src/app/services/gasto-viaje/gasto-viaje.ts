@@ -51,4 +51,13 @@ export class GastoViaje {
 
   // Importe total
   importeTotal: number;
+
+  // Itinerario
+  itinerario: string;
+
+	// Check transportes
+  checkAgenciaAvion: boolean;
+  checkAgenciaTren: boolean;
+  checkAgenciaAlojamiento: boolean;
+	otrosAgencia: string;
 }
