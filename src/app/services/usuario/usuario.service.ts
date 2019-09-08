@@ -15,7 +15,7 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 export class UsuarioService {
 
   urlLogin:string = URL + '/login';
-  urlRegistro:string = URL +'/registro';
+  urlRegistro:string =URL + '/registro';
   urlEndPoint:string = URL + '/usuario';
   urlComprobarPass:string = URL + '/comprobarPass';
   urlSetPass:string = URL + '/setPass';

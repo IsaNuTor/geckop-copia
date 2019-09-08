@@ -61,10 +61,10 @@ export class OrdenService {
     return this.http.post<Orden[]>(this.urlgetOrdenPorProyecto, acronimo, {headers: this.httpHeaders})
   }
 
-  generarPDF(n: Number):Observable<Number>{
-    return this.http.post<Number>(this.urlGenerarPDF, n, {headers: this.httpHeaders}); 
+  generarPDF(o: Orden):Observable<Number>{
+    return this.http.post<Number>(this.urlGenerarPDF, o, {headers: this.httpHeaders}); 
   }
 
 
   
-}
+} 

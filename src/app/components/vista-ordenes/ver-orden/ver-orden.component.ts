@@ -180,7 +180,7 @@ export class VerOrdenComponent implements OnInit {
   }
 
   generarPDF(){
-    this.ordenService.generarPDF(0).subscribe();
+    this.ordenService.generarPDF(this.orden).subscribe();
   }
 
   /* CARGAR la numeracion segun el acronimo del proyecto */
