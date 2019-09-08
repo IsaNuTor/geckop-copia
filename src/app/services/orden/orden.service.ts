@@ -3,6 +3,9 @@ import { Orden } from './orden';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {URL} from '../../config/config';
+import { Usuario } from '../usuario/usuario';
+import { Gasto } from '../gasto/gasto';
+import { GastoViaje } from '../gasto-viaje/gasto-viaje';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +21,10 @@ export class OrdenService {
   urlSetOrden: string = URL + '/setorden';
   urlgetOrdenPorProyecto:string = URL +'/getordenproyecto';
   urlGenerarPDF:  string= URL +'/generarPDF';
+  urlRellenarIPPDF:  string= URL +'/rellenarIPPDF';
+  urlRellenarIPPDFV:  string= URL +'/rellenarIPPDFV';
+  urlRellenarGastoPDF:  string= URL +'/rellenarGastosPDF';
+  urlRellenarGastoPDFV:  string= URL +'/rellenarGastoPDFV';
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -63,6 +70,21 @@ export class OrdenService {
 
   generarPDF(o: Orden):Observable<Number>{
     return this.http.post<Number>(this.urlGenerarPDF, o, {headers: this.httpHeaders}); 
+  }
+  rellenarDatosIP(ip: Usuario):Observable<Number>{
+    return this.http.post<Number>(this.urlRellenarIPPDF, ip, {headers: this.httpHeaders}); 
+  }
+
+  rellenarDatosIPV(ip: Usuario):Observable<Number>{
+    return this.http.post<Number>(this.urlRellenarIPPDFV, ip, {headers: this.httpHeaders}); 
+  }
+
+  rellenarGastosPDF(gastos: Gasto[]):Observable<Number>{
+    return this.http.post<Number>(this.urlRellenarGastoPDF, gastos, {headers: this.httpHeaders}); 
+  }
+
+  rellenarGastosPDFV(gastos: GastoViaje):Observable<Number>{
+    return this.http.post<Number>(this.urlRellenarGastoPDFV, gastos, {headers: this.httpHeaders}); 
   }
 
 

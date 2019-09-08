@@ -83,7 +83,7 @@ export class VerOrdenComponent implements OnInit {
             this.cargarDatosIP(this.orden.nif_IP);
            /*Solo para pruebas */
            this.cargarGastosGenerales(1);
-           this.cargarGastoViajes(15)
+           this.cargarGastoViajes(16);
            this.cargarAcreedor('05464654K');
            this.comprobarIP(this.orden.acronimo);
 
@@ -180,7 +180,29 @@ export class VerOrdenComponent implements OnInit {
   }
 
   generarPDF(){
-    this.ordenService.generarPDF(this.orden).subscribe();
+    if(this.orden.tipo == 'G'){
+      this.ordenService.generarPDF(this.orden).subscribe(
+        (result) =>{
+          this.ordenService.rellenarDatosIP(this.ip).subscribe(
+            (result) => {
+              this.ordenService.rellenarGastosPDF(this.gastosGenerales).subscribe();
+            }
+          );
+        }
+      );
+    }else{
+      this.ordenService.generarPDF(this.orden).subscribe(
+        (result) =>{
+          this.ordenService.rellenarDatosIPV(this.ip).subscribe(
+            (result) => {
+              this.ordenService.rellenarGastosPDFV(this.gastoViaje).subscribe();
+            }
+          );
+        }
+      );
+    }
+    
+    
   }
 
   /* CARGAR la numeracion segun el acronimo del proyecto */
