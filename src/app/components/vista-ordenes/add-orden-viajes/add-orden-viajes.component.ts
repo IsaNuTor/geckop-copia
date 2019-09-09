@@ -84,24 +84,8 @@ export class AddOrdenViajesComponent implements OnInit {
 
   fechaIdaVacio:boolean = false;
   fechaVueltaVacio:boolean = false;
-  avionVacio:boolean = false;
-  importeAvionVacio:boolean = false;
-  nKilometrosVacio:boolean = false;
-  importeCocheVacio:boolean = false;
-  trenVacio:boolean = false;
-  importeTrenVacio:boolean = false;
-  autobusVacio:boolean = false;
-  importeAutobusVacio:boolean = false;
-  taxiVacio:boolean = false;
-  importeTaxiVacio:boolean = false;
-  otrosVacio:boolean = false;
-  importeOtrosVacio:boolean = false;
-  importeHotelVacio:boolean = false;
-  nDietasVacio:boolean = false;
-  precioDietasVacio:boolean = false;
-  importeDietasVacio:boolean = false;
-  importeOtrosGastosVacio:boolean = false;
   itinerarioVacio:boolean = false;
+  ibanRegistrado:boolean = true;
 
   checkMP: boolean = false;
   checkME: boolean = false;
@@ -127,7 +111,7 @@ export class AddOrdenViajesComponent implements OnInit {
         ) {
 
           this.formOrden = this.fb.group({
-            acronimo: ['', [Validators.required, Validators.maxLength(10)]],
+            acronimo: ['', [Validators.maxLength(10)]],
             nif_acreedor: ['', [Validators.required, Validators.maxLength(10)]],
             concepto: ['', [Validators.required, Validators.maxLength(50)]],
             num_contabilidad: ['', [Validators.maxLength(50)]],
@@ -195,7 +179,17 @@ export class AddOrdenViajesComponent implements OnInit {
     else{
       // Cargamos selector de acreedores.
       this.acreedorService.getAcreedoresOrden(this.sesionService.getDni()).subscribe(
-        acreedores => this.acreedores = acreedores
+        acreedores =>{ 
+          this.acreedores = acreedores;
+          this.acreedorService.getAcreedor(this.sesionService.getDni()).subscribe(
+            (result) => {
+              if(result != null)
+                this.orden.nif_acreedor = result.nif;
+              else
+                this.ibanRegistrado = false;
+            }
+          );
+        }
       );
 
       // Cargamos selector de proyectos.

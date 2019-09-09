@@ -68,6 +68,7 @@ export class AddOrdenComponent implements OnInit {
   importeVacio:boolean = false;
   idAux: number;
   numeracionAux: number;
+  ibanRegistrado: boolean = true;
 
   constructor(private acreedorService: AcreedorService,
         private router: Router,
@@ -84,22 +85,17 @@ export class AddOrdenComponent implements OnInit {
             acronimo: ['', [Validators.required, Validators.maxLength(10)]],
             nif_acreedor: ['', [Validators.required, Validators.maxLength(10)]],
             concepto: ['', [Validators.required, Validators.maxLength(50)]],
-            num_contabilidad: ['', [Validators.maxLength(50)]],
-            memoria: ['', [Validators.required, Validators.maxLength(50)]],
-            relacion: ['', [Validators.required, Validators.max(100000000)]],
-            observaciones: ['', [Validators.required, Validators.max(100000000)]],
+            num_contabilidad: ['', [Validators.maxLength(12)]],
+            memoria: ['', [Validators.required, Validators.maxLength(150)]],
+            relacion: ['', [Validators.required,  Validators.maxLength(150)]],
+            observaciones: ['', [Validators.required, Validators.maxLength(150)]],
           });
           this.formGastos = this.fb.group({
-            nFactura: [ '', Validators.required], //Nº de Factura
-            descripcion: [ '', Validators.required],  //Concepto
-            importe: [ '', Validators.required],  //Importe
+            nFactura: [ '', [Validators.required, Validators.maxLength(12)]], //Nº de Factura
+            descripcion: [ '', [Validators.required, Validators.maxLength(150)]],  //Concepto
+            importe: [ '', [Validators.required, Validators.maxLength(12)]]  //Importe
             //imagen: ['', Validators.required] //Imagen
           });
-
-          //numeracion: number;
-          //estado: string;
-
-          //fechaOrden: Date;
 
         }
 
@@ -109,7 +105,17 @@ export class AddOrdenComponent implements OnInit {
     else{
       // Cargamos selector de acreedores.
       this.acreedorService.getAcreedoresOrden(this.sesionService.getDni()).subscribe(
-        acreedores => this.acreedores = acreedores
+        acreedores => {
+          this.acreedores = acreedores;
+          this.acreedorService.getAcreedor(this.sesionService.getDni()).subscribe(
+            (result) => {
+              if(result != null)
+                this.orden.nif_acreedor = result.nif;
+              else
+                this.ibanRegistrado = false;
+            }
+          );
+        }
       );
 
       // Cargamos todos los proyectos.
@@ -140,27 +146,6 @@ export class AddOrdenComponent implements OnInit {
     //console.log(this.verSeleccionada);
   }
 
-
-  /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
-
-
-/*  anadirGasto(){
-
-      var gasto: Gasto = new Gasto();
-      gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
-
-      gasto.iva = 21;
-      this.gastos.push(gasto);
-      /*alert(this.formGastos.value + this.gastos);*/
-
-/*  }
-
-  eliminarGasto(gasto: Gasto){
-    /*Cogemos el indice */
-/*    var i = this.gastos.indexOf (gasto);
-    /*Quitamos el gasto del array de gastos*/
-/*    this.gastos.splice(i, 1);
-}*/
 
 /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
 
@@ -216,14 +201,14 @@ public crearGasto(): void {
     }
   }else{
     this.formValid = false;
-    swal.fire({
+   /* swal.fire({
                 type: 'error',
                 title: 'Error!',
                 text: 'Revisa los campos, uno de los campos no tiene el formato correcto',
                 onClose: () => {
                       location.reload();
                     }
-              })
+              })*/
   }
 }
 
@@ -363,12 +348,12 @@ cargarUsuariosProyecto(): void {
 
 }
 
-  public cancelar(){
+cancelar(){
     this.router.navigate(['/vista-ordenes/vista-orden-boton']);
-  }
+}
 
 // Crear orden
-public crearOrden(): void {
+crearOrden(): void {
     //console.log(this.gasto);
 
     console.log(this.gastos);
@@ -392,12 +377,6 @@ public crearOrden(): void {
         this.orden.fechaOrden = new Date();
         this.orden.numeracion = this.numeracionAux;
         this.orden.tipo = "G";
-
-        /*if(this.orden.tipo == 'V')
-          this.orden.relacion = this.getRelacionProyecto();
-        else
-          this.orden.relacion = this.formOrden.value.relacion;
-        */
 
         this.ordenService.crearOrden(this.orden).subscribe(
           orden =>

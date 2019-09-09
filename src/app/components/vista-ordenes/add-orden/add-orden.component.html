@@ -11,16 +11,8 @@
 
       <div class="form-row mt-3">
 
-        <!--<div class="form-group col-md-6">
-          <label class="texto-form">Proyecto</label>
-          <select class="custom-select" formControlName="proyecto">
-            <option value="" selected>Seleccione acrónimo del proyecto</option>
-            <option *ngFor="let proyecto of proyectos" value="{{ proyecto.acronimo }}">{{ proyecto.acronimo }}</option>
-          </select>
-        </div>-->
-
-        <!--FECHA PRUEBA
-        <p>{{this.fechaOrden | date:'dd-MM-yyyy'}}</p>-->
+     
+        <!--FECHA PRUEBAS-->
 
         <div class="form-group col-md-6">
           <label class="texto-form">Proyecto</label>
@@ -28,6 +20,7 @@
             <option value="" selected>Seleccione acrónimo del proyecto</option>
             <option *ngFor="let proyecto of misProyectos; index as i" value="{{ misProyectos[i].acronimo }}">{{ proyecto.acronimo }}</option>
           </select>
+          <small *ngIf="!crear &&formOrden.get('acronimo').hasError('required')" class="alerta">No puede estar vacio. Seleccione un proyecto</small>
         </div>
 
         <div class="form-group col-md-6">
@@ -36,6 +29,8 @@
             <option value="" selected>Seleccione acreedor</option>
             <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
           </select>
+          <small *ngIf="!ibanRegistrado" class="alerta">No estás registrado como acreedor. Registraté si quieres ser el acreedor de la orden </small> 
+        
         </div>
 
       </div>
@@ -44,12 +39,14 @@
 
           <div class="form-group col-md-6">
             <label class="texto-form">Concepto</label>
-            <input type="text" class="form-control" formControlName="concepto" name="concepto" id="concepto" placeholder="Concepto" >
+            <input type="text" class="form-control" formControlName="concepto" name="concepto" id="concepto" placeholder="Concepto" maxlength="50"   >
+            <small *ngIf="!crear &&formOrden.get('concepto').hasError('required')" class="alerta">No puede estar vacio. </small>       
           </div>
 
           <div class="form-group col-md-6">
             <label class="texto-form">Num. Contabilidad</label>
-            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" >
+            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" maxlength="12" >
+            <small *ngIf="!crear &&formOrden.get('num_contabilidad').hasError('required')" class="alerta">No puede estar vacio. </small>       
           </div>
 
         </div>
@@ -59,35 +56,26 @@
       <!--<p [hidden]="opcionSeleccionada=='0'">Has seleccionado la opcion {{misProyectos[i].acronimo}}</p>-->
       <div class="card-body" [hidden]="!verSeleccionada">
 
-        <form class="card mb-4 bordeTransporte"  [formGroup]="formGastos" >
+        <form *ngIf="gastos?.length != 5 " class="card mb-4 bordeTransporte"  [formGroup]="formGastos" >
           <h3 class="texto-form mt-3">Relación de gastos</h3>
           <!-- Entradas simples -->
         <div class="form-group">
-            <label for="descripcion">Partida de Gastos</label>
-            <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion" name="descripcion" rows="5" placeholder="Descripción (Máx 150 caracteres)" maxlength="200"></textarea>
-            <div class="alerta">
-              <small *ngIf="false">No puede estar vacio <br></small>
-            </div>
-          </div>
+          <label for="descripcion">Partida de Gastos</label>
+          <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion" name="descripcion" rows="5" placeholder="Descripción (Máx 150 caracteres)" maxlength="150"></textarea>
+        </div>
 
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-6">
-                <label class ="tx-secondary" for="importe">Importe</label>
-                <input type="text" class="form-control" formControlName="importe" name="importe" id="importe" placeholder="Importe" >
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label for="nFactura">Nº de Factura</label>
-                <input type="text" class="form-control" formControlName="nFactura" name="nFactura" id="nFactura" placeholder="Nº de Factura">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
-              </div>
-            </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label class ="tx-secondary" for="importe">Importe</label>
+            <input type="text" class="form-control" formControlName="importe" name="importe" id="importe" placeholder="Importe" maxlength="12">
           </div>
+          <div class="col-md-6">
+            <label for="nFactura">Nº de Factura</label>
+            <input type="text" class="form-control" formControlName="nFactura" name="nFactura" id="nFactura" placeholder="Nº de Factura" maxlength="12">
+           </div>
+        </div>
+      </div>
 
 
           <div class="form-group">
@@ -117,125 +105,38 @@
               <td class="maximoAncho">{{ g.descripcion }}</td>
               <td>{{ g.importe}}</td>
 
-      <!-- Button trigger modal ------------------------------------------------------------------------->
-
-      <!--------------------------------------------------------Modal------------------------------------------------------------>
-
-        <!--------------------------------------Modal------------------------------------------------------------------------->
-        <!--Ver foto gasto-->
+         <!--Ver foto gasto-->
               <td>
-                <button type="button" class="btn btn-link" name="button" (click)='verFoto(gasto.foto)'>
-                  <img src="assets/iconos/lupa.png" class="rounded" alt="ver foto" style="width: 10%; height:0.5%;">
-                </button>
+                  <img src="assets/iconos/lupa.png" class="rounded icon" alt="ver foto" (click)='verFoto(gasto.foto)'>
               </td>
               <td>
-                <button type="button" class="btn btn-link" name="button" (click)='eliminarGasto(gasto)' >
-                  <img class="img-thumbnail rounded" src="assets/iconos/papelera.png" class="rounded" alt="Eliminar gasto">
-                </button>
+                <img class="rounded icon" src="assets/iconos/papelera.png" class="rounded icon" alt="Eliminar gasto" (click)='eliminarGasto(gasto)'>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-<!--        <div class="card-body">
+      <br>
+      <div class="form-group">
+        <label class="texto-form" for="memoria">Memoria explicativa de los gastos</label>
+        <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="Escribe la memoria explicativa"  maxlength="150" ></textarea>
+        <small *ngIf="!crear &&formOrden.get('memoria').hasError('required')" class="alerta">No puede estar vacio. </small>    
+      </div>
 
-          <form class="card mb-4"  [formGroup]="formGastos" >
-            <h3 class="texto-form mt-3">Relación de gastos</h3>
-            <!-- Entradas simples -->
-<!--            <div class="form-group">
-              <label for="descripcion">Partida de Gastos</label>
-              <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion" name="descripcion" rows="5" placeholder="Descripción (Máx 150 caracteres)" maxlength="150"></textarea>
-              <div class="alerta">
-                <small *ngIf="false">No puede estar vacio <br></small>
-              </div>
-            </div>
+      <br>
+      <div class="form-group">
+        <label class="texto-form" for="relacion">Relación con el proyecto</label>
+        <textarea class="form-control" id="relacion" rows="3" formControlName="relacion" placeholder="Escribe la relación con el proyecto"  maxlength="150"></textarea>
+        <small *ngIf="!crear &&formOrden.get('relacion').hasError('required')" class="alerta">No puede estar vacio. </small> 
+      </div>
 
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-6">
-                  <label class ="tx-secondary" for="importe">Importe</label>
-                  <input type="text" class="form-control" formControlName="importe" name="importe" id="importe" placeholder="Importe" >
-                  <div class="alerta">
-                    <small *ngIf="false">No puede estar vacio <br></small>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <label for="nFactura">Nº de Factura</label>
-                  <input type="text" class="form-control" formControlName="nFactura" name="nFactura" id="nFactura" placeholder="Nº de Factura">
-                  <div class="alerta">
-                    <small *ngIf="false">No puede estar vacio <br></small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label for="imagen">Adjuntar Imagen</label>
-              <input type="file" class="form-control-file" id="imagen">
-            </div>
-            <div class="form-group">
-              <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="anadirGasto()">Añadir Gasto</button>
-            </div>
-          </form>
-
-      <!--TABLA GASTOS-->
-          <!--<table class="table table-bordered table-striped text-center">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Nº Factura</th>
-                <th>Concepto</th>
-                <th>Importe</th>
-                <th>Imagen</th>
-                <th>Eliminar</th>
-              </tr>
-            </thead>
---> <!--
-            <tbody>
-              <tr *ngFor="let gasto of gastos">
-                <td>{{ gasto.nFactura}}</td>
-                <td>{{ gasto.descripcion }}</td>
-                <td>{{ gasto.importe}}</td>
-                <td><!--Ver foto gasto-->
-<!--
-                  <button type="button" class="btn btn-link" name="button">
-                    <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor">
-                  </button>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-link" name="button" (click)='eliminarGasto(gasto)' >
-                    <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar gasto">
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>-->
-
-        <br>
-        <div class="form-group">
-          <label class="texto-form" for="memoria">Memoria explicativa de los gastos</label>
-          <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="Escribe la memoria explicativa" ></textarea>
-          <div class="alerta">
-            <small *ngIf="false">No puede estar vacio <br></small>
-          </div>
-        </div>
-
-        <br>
-        <div class="form-group">
-          <label class="texto-form" for="relacion">Relación con el proyecto</label>
-          <textarea class="form-control" id="relacion" rows="3" formControlName="relacion" placeholder="Escribe la relación con el proyecto"></textarea>
-          <div class="alerta">
-            <small *ngIf="false">No puede estar vacio <br></small>
-          </div>
-        </div>
-
-        <br>
-        <div class="form-group">
-          <label class="texto-form" for="observaciones">Observaciones a la hora de pagar al acreedor</label>
-          <textarea class="form-control" id="observaciones" rows="3" formControlName="observaciones" placeholder="Escribe las observaciones que creas correspondientes"></textarea>
-        </div>
+      <br>
+      <div class="form-group">
+        <label class="texto-form" for="observaciones">Observaciones a la hora de pagar al acreedor</label>
+        <textarea class="form-control" id="observaciones" rows="3" formControlName="observaciones" placeholder="Escribe las observaciones que creas correspondientes"  maxlength="150"></textarea>
+        <small *ngIf="!crear &&formOrden.get('observaciones').hasError('required')" class="alerta">No puede estar vacio. </small> 
+      </div>
       <br>
       <!-- <a href="#"><img src="../../../../../assets/iconos/pdf.png" alt="Descargar orden pdf" width="80px"></a>-->
       <br><br>

@@ -82,18 +82,21 @@ export class VerOrdenComponent implements OnInit {
            if(this.firmada)
             this.cargarDatosIP(this.orden.nif_IP);
            /*Solo para pruebas */
-           this.cargarGastosGenerales(1);
+         /*  this.cargarGastosGenerales(1);
            this.cargarGastoViajes(16);
            this.cargarAcreedor('05464654K');
-           this.comprobarIP(this.orden.acronimo);
+            this.comprobarIP(this.orden.acronimo);
+            */
+          
 
 
 
-           /*Cambiar fuera de pruebas
+           /*Cambiar fuera de pruebas*/
            this.cargarGastosGenerales(this.orden.id);
            this.cargarGastoViajes(this.orden.id)
            this.cargarAcreedor(this.orden.nif_acreedor);
-            */
+           this.comprobarIP(this.orden.acronimo);
+            
           }
         );
       }
