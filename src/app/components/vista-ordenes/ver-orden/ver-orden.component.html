@@ -106,9 +106,8 @@
           <td>{{gasto.descripcion}}</td>
           <td>{{gasto.importe}}</td>
           <td>
-            <button type="button" class="btn btn-link" name="button" (click)='verFoto(gasto.foto)'>
-              <img src="assets/iconos/lupa.png" class="rounded icon" alt="ver foto">
-            </button>
+            <img src="assets/iconos/lupa.png" class="rounded icon" alt="ver foto"  (click)='verFoto(gasto.foto)'>
+            
           </td>
         </tr>
       </tbody>
@@ -160,8 +159,7 @@
         <tbody>
           <tr>
             <th class="text-center" rowspan="6">Transporte</th>
-            <th colspan="1">Avion</th>
-            <td colspan="3">{{gastoViaje.avion}}</td>
+            <th colspan="4">Avion</th>
             <td class="text-center">{{gastoViaje.importeAvion}}</td>                
           </tr>
           <tr>
@@ -171,23 +169,19 @@
             <td class="text-center">{{gastoViaje.importeCoche}}</td>                
           </tr>
           <tr>
-            <th colspan="1">Tren</th>
-            <td colspan="3">{{gastoViaje.tren}}</td>
+            <th colspan="4">Tren</th>
             <td class="text-center">{{gastoViaje.importeTren}}</td>                
           </tr>
           <tr>
-            <th colspan="1">Autobus</th>
-            <td colspan="3">{{gastoViaje.autobus}}</td>
+            <th colspan="4">Autobus</th>
             <td class="text-center">{{gastoViaje.importeAutobus}}</td>                
           </tr>
           <tr>
-            <th colspan="1">Taxi</th>
-            <td colspan="3">{{gastoViaje.taxi}}</td>
+            <th colspan="4">Taxi</th>
             <td class="text-center">{{gastoViaje.importeTaxi}}</td>                
           </tr>
           <tr>
-            <th colspan="1">Otros</th>
-            <td colspan="3">{{gastoViaje.otros}}</td>  
+            <th colspan="4">Otros</th>  
             <td class="text-center">{{gastoViaje.importeOtros}}</td>               
           </tr>
           <tr>
@@ -282,6 +276,10 @@
   
   
   <!-- <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="pedirModificacionOrden()">Modificar Orden</button>-->
-  <button (click)="generarPDF()"> GENERAR PDF</button> 
+  <button (click)="generarPDF()"> GENERAR PDF</button>
+  <button *ngIf="orden.estado == 'A'" class="ml-2" (click)="verPDF()"> Ver PDF</button> 
+  
+  <button class="ml-2" (click)="probarRutas()"> Probar Rutas PDF</button> 
+ 
 
 </div>

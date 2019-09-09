@@ -13,6 +13,7 @@ import { GastoViaje } from '../gasto-viaje/gasto-viaje';
 export class OrdenService {
 
   ordenes: Orden[] = new Array<Orden>();
+
   urlOrden:string = URL_BACKEND + '/api/ordenes';
   urlMisOrdenes:string = URL_BACKEND + '/api/buscarordenesnif';
   urlNumAcronimo:string = URL_BACKEND + '/api/buscarnumacronimo';
@@ -25,6 +26,21 @@ export class OrdenService {
   urlRellenarIPPDFV:  string= URL_BACKEND +'/api/rellenarIPPDFV';
   urlRellenarGastoPDF:  string= URL_BACKEND +'/api/rellenarGastosPDF';
   urlRellenarGastoPDFV:  string= URL_BACKEND +'/api/rellenarGastoPDFV';
+
+/* urlOrden:string = URL + '/ordenes';
+  urlMisOrdenes:string = URL + '/buscarordenesnif';
+  urlNumAcronimo:string = URL + '/buscarnumacronimo';
+  urlOrdenesIP:string = URL + '/ordenesdeip';
+  urlGetOrdenId:string = URL +'/getordenid';
+  urlSetOrden: string = URL + '/setorden';
+  urlgetOrdenPorProyecto:string = URL +'/getordenproyecto';
+  urlGenerarPDF:  string= URL +'/generarPDF';
+  urlRellenarIPPDF:  string= URL +'/rellenarIPPDF';
+  urlRellenarIPPDFV:  string= URL +'/rellenarIPPDFV';
+  urlRellenarGastoPDF:  string= URL +'/rellenarGastosPDF';
+  urlRellenarGastoPDFV:  string= URL +'/rellenarGastoPDFV';
+  urlProbar: string = URL + '/probarRuta';
+*/
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -87,6 +103,9 @@ export class OrdenService {
     return this.http.post<Number>(this.urlRellenarGastoPDFV, gastos, {headers: this.httpHeaders});
   }
 
+  probarRutas():Observable<Number> {
+    return this.http.post<Number>(this.urlProbar,{headers: this.httpHeaders});
+  }
+  
+} 
 
-
-}

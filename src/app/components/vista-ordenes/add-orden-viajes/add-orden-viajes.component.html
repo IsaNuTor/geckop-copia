@@ -9,24 +9,13 @@
     <form [formGroup]="formOrden">
 
       <div class="form-row mt-3">
-
-        <!--<div class="form-group col-md-6">
-          <label class="texto-form">Proyecto</label>
-          <select class="custom-select" formControlName="proyecto">
-            <option value="" selected>Seleccione acrónimo del proyecto</option>
-            <option *ngFor="let proyecto of proyectos" value="{{ proyecto.acronimo }}">{{ proyecto.acronimo }}</option>
-          </select>
-        </div>-->
-
-        <!--FECHA PRUEBA
-        <p>{{this.fechaOrden | date:'dd-MM-yyyy'}}</p>-->
-
         <div class="form-group col-md-6">
           <label class="texto-form">Proyecto</label>
           <select class="custom-select" formControlName="acronimo" (change)="capturarValor()">
             <option value="" selected>Seleccione acrónimo del proyecto</option>
             <option *ngFor="let proyecto of misProyectos; index as i" value="{{ misProyectos[i].acronimo }}">{{ proyecto.acronimo }}</option>
           </select>
+          <small *ngIf="!crear &&formOrden.get('acronimo').hasError('required')" class="alerta">No puede estar vacio. </small> 
         </div>
 
         <div class="form-group col-md-6">
@@ -35,6 +24,8 @@
             <option value="" selected>Seleccione acreedor</option>
             <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
           </select>
+          <small *ngIf="!crear &&formOrden.get('nif_acreedor').hasError('required')" class="alerta">No puede estar vacio. </small> 
+          <small *ngIf="!ibanRegistrado" class="alerta">No estás registrado como acreedor. Registraté si quieres ser el acreedor de la orden </small> 
         </div>
 
       </div>
@@ -44,11 +35,13 @@
           <div class="form-group col-md-6">
             <label class="texto-form">Concepto</label>
             <input type="text" class="form-control" formControlName="concepto" name="concepto" id="concepto" placeholder="Concepto" >
+            <small *ngIf="!crear &&formOrden.get('concepto').hasError('required')" class="alerta">No puede estar vacio. </small> 
           </div>
 
           <div class="form-group col-md-6">
             <label class="texto-form">Num. Contabilidad</label>
             <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" >
+            <small *ngIf="!crear &&formOrden.get('num_contabilidad').hasError('required')" class="alerta">No puede estar vacio. </small> 
           </div>
 
         </div>
@@ -112,17 +105,12 @@
           <div class="form-group">
             <label for="fechaVuelta"><b>Fecha vuelta:&nbsp;&nbsp;</b></label>
             <input type="date" class="form-control" formControlName="fechaVuelta" id="fechaVuelta" placeholder="Fecha vuelta" name="fechaVuelta">
-            <div class="alerta">
-              <small *ngIf="!formValid && gastoViaje.fechaIda > gastoViaje.fechaVuelta">Las fechas introducidas no son válidas <br></small>
-            </div>
+            <small class="alerta" *ngIf="!formValid && gastoViaje.fechaIda > gastoViaje.fechaVuelta">Las fechas introducidas no son válidas <br></small>
           </div>
 
           <div class="form-group itinerario">
             <label class ="tx-secondary mr-2" for="itinerario"><b>Itinerario:</b></label>
             <input type="text" class="form-control" formControlName="itinerario" placeholder="(Máx 150 caracteres)" maxlength="150" id="itinerario" name="itinerario">
-            <div class="alerta">
-              <small *ngIf="false">No puede estar vacio <br></small>
-            </div>
           </div>
         </div>
 

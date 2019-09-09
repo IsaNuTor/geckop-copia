@@ -12,7 +12,7 @@ import { AcreedorService } from 'src/app/services/acreedor/acreedor.service';
 import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
 import { GastoViajeService } from 'src/app/services/gasto-viaje/gasto-viaje.service';
 import { GastoViaje } from 'src/app/services/gasto-viaje/gasto-viaje';
-import {URL_BACKEND} from '../../../config/config';
+import {URL} from '../../../config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -35,10 +35,10 @@ export class VerOrdenComponent implements OnInit {
   isV:boolean = false;
   isIP:boolean = false;
   /*Ojo cambiar ruta para el backend */
-  rutaImagen: string = URL_BACKEND + '/api/imagenes/';
-  rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
+  rutaImagen: string = 'http://localhost:8080/api/imagenes/';
+  rutaImagen2: string = URL + '/imagenesViaje/';
   numeracionAux: number;
-
+  
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   //rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
 
@@ -60,7 +60,7 @@ export class VerOrdenComponent implements OnInit {
       this.router.navigate(['/login']);
     else
      this.cargarOrden();
-
+     
 
   }
 
@@ -82,18 +82,21 @@ export class VerOrdenComponent implements OnInit {
            if(this.firmada)
             this.cargarDatosIP(this.orden.nif_IP);
            /*Solo para pruebas */
-           this.cargarGastosGenerales(1);
+         /*  this.cargarGastosGenerales(1);
            this.cargarGastoViajes(16);
            this.cargarAcreedor('05464654K');
-           this.comprobarIP(this.orden.acronimo);
+            this.comprobarIP(this.orden.acronimo);
+            */
+          
 
 
 
-           /*Cambiar fuera de pruebas
+           /*Cambiar fuera de pruebas*/
            this.cargarGastosGenerales(this.orden.id);
            this.cargarGastoViajes(this.orden.id)
            this.cargarAcreedor(this.orden.nif_acreedor);
-            */
+           this.comprobarIP(this.orden.acronimo);
+            
           }
         );
       }
@@ -162,6 +165,7 @@ export class VerOrdenComponent implements OnInit {
 
   verFoto(foto:String): void {
 
+
     swal.fire({
       imageUrl: this.rutaImagen + foto,
       imageAlt: 'Custom image',
@@ -181,36 +185,36 @@ export class VerOrdenComponent implements OnInit {
 
   generarPDF(){
     if(this.orden.tipo == 'G'){
-      this.ordenService.generarPDF(this.orden).subscribe(
+      this.ordenService.rellenarDatosIP(this.ip).subscribe(
         (result) =>{
-          this.ordenService.rellenarDatosIP(this.ip).subscribe(
+          this.ordenService.rellenarGastosPDF(this.gastosGenerales).subscribe(
             (result) => {
-              this.ordenService.rellenarGastosPDF(this.gastosGenerales).subscribe();
+              this.ordenService.generarPDF(this.orden).subscribe();
             }
           );
         }
       );
     }else{
-      this.ordenService.generarPDF(this.orden).subscribe(
-        (result) =>{
-          this.ordenService.rellenarDatosIPV(this.ip).subscribe(
-            (result) => {
-              this.ordenService.rellenarGastosPDFV(this.gastoViaje).subscribe();
-            }
+      this.ordenService.rellenarDatosIPV(this.ip).subscribe(
+        (result) => {
+            this.ordenService.rellenarGastosPDFV(this.gastoViaje).subscribe(
+              (result) => { 
+                this.ordenService.generarPDF(this.orden).subscribe();
+              }
           );
         }
       );
     }
-
-
+    
+    
   }
 
   /* CARGAR la numeracion segun el acronimo del proyecto */
   firmarOrden(): void {
     this.ordenService.getNumAcronimo(this.orden.acronimo).subscribe(
       (numMax) =>{
+        this.orden.numeracion = numMax;
         this.aceptarOrden();
-        this.numeracionAux = numMax;
       });
   }
 
@@ -227,6 +231,16 @@ export class VerOrdenComponent implements OnInit {
     location.reload();
 
   }
+
+  verPDF():void{
+    window.open(URL+"/pdfs/"+ this.orden.id+".pdf");
+  }
+
+  probarRutas():void{
+    this.ordenService.probarRutas().subscribe();
+  }
+
+ 
 
   public cancelar(){
     this.router.navigate(['/vista-ordenes']);

@@ -25,13 +25,12 @@
           <th>Acrónimo</th>
           <th>Presupuesto</th>
           <th>Nºcontabilidad</th>
-          <th>Editar/Ver</th>
-          <th>Borrar</th>
+          <th>Ver</th>
         </tr>
       </thead>
 
       <tbody>
-         <tr *ngFor="let a of elementos[0]">
+        <tr *ngFor="let a of elementos[0]">
           <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].fechaInicio }}</td>
           <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].fechaCierre }}</td>
           <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].nombre }}</td>
@@ -39,22 +38,18 @@
           <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].presupuesto }}</td>
           <td>{{ proyectos[getOrdenPagindoIndex(a,   paginaActual)].nContabilidad }}</td>
           <td>
-            <img src="assets/iconos/editar.png" class="rounded" alt="Editar Proyecto" [routerLink]="['/vistaProyectos/verProyecto/', proyectos[getOrdenPagindoIndex(a,   paginaActual)].acronimo]">
-          </td>
-          <td>
-            <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Proyecto"  (click)="borrarProyecto(proyectos[getOrdenPagindoIndex(a,   paginaActual)])">
+            <img src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Proyecto" [routerLink]="['/vistaProyectos/verProyecto/', proyectos[getOrdenPagindoIndex(a,   paginaActual)].acronimo]">
           </td>
         </tr>
 
         <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
           <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, proyectos.length, 0)">
-              <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
+              <img src="assets/iconos/anterior.png" class="rounded icon" alt="Anterior">
           </button>
           
           <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, proyectos.length, 0)">
-              <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
+              <img src="assets/iconos/siguiente.png" class="rounded icon" alt="Siguiente">
           </button>
-          
         </tr>
       </tbody>
 

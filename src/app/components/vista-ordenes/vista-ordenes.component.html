@@ -9,23 +9,6 @@
       No tiene ordenes realizadas
     </div>
 
-    <!--TABLA DE ÓRDENES-->
-    <!--<div class="form-row" *ngIf="ordenes?.length > 0">
-        <div class="col">
-            <input type="text" class="form-control form-control-sm" id="numeracion" placeholder="Numeración">
-        </div>
-
-        <div class="col">
-            <select class="form-control form-control-sm">
-              <option selected>Seleccione Estado</option>
-              <option value="aceptadas">Aceptadas</option>
-              <option value="pendientes">Pendientes</option>
-              <option value="canceladas">Canceladas</option>
-              <option value="devueltas">Devueltas</option>
-            </select>
-        </div>
-    </div>-->
-
     <p></p>
     <table class="table text-center" id="tablaOrdenes" *ngIf="ordenes?.length > 0">
       <thead class="thead-dark">
@@ -35,21 +18,25 @@
           <th scope="col">Estado</th>
           <th scope="col">Concepto</th>
           <th scope="col">Proyecto</th>
-          <th scope="col">Editar</th>
+          <th scope="col">Ver</th>
           <th scope="col">Borrar</th>
         </tr>
       </thead>
       <tbody>
-        <!--<tr *ngFor="let orden of ordenes">
-          <td>{{orden.estado}}</td>
-          <td>{{orden.numeracion}}</td>-->
           <tr *ngFor="let a of elementos[0]">
             <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].fechaOrden | date:'dd-MM-yyyy'}}</td>
-            <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].estado}}</td>
+            <td>
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'A'"  src="assets/iconos/aceptar.png" class="rounded" alt="Aceptada">
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'R'"  src="assets/iconos/rechazar.png" class="rounded" alt="Rechazada">
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'P'"  src="assets/iconos/pendiente.png" class="rounded" alt="Pendiente">
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'PM'" src="assets/iconos/revisar.png" class="rounded" alt="Revisar">
+            </td>
             <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].concepto}}</td>
             <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].acronimo}}</td>
             <td>
-              <img src="assets/iconos/editar.png" class="rounded" alt="Editar Orden" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a,   paginaActual)].id]" >
+              <img src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a,   paginaActual)].id]" >
+              <!--Revisar enlace a editar orden-->
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a, paginaActual)].estado =='PM'" src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a,   paginaActual)].id]" >
             </td>
             <td>
                 <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden" (click)="borrarOrden(ordenes[getOrdenPagindoIndex(a,   paginaActual)])">
@@ -57,11 +44,11 @@
         </tr>
         <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
           <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, ordenes.length, 0)">
-              <img src="assets/iconos/anterior.png" class="rounded" alt="Anterior">
+              <img src="assets/iconos/anterior.png" class="rounded´icon" alt="Anterior">
           </button>
 
           <button type="button" class="btn btn-link" (click) = "paginaActual = siguiente(paginaActual, ordenes.length, 0)">
-              <img src="assets/iconos/siguiente.png" class="rounded" alt="Siguiente">
+              <img src="assets/iconos/siguiente.png" class="rounded icon" alt="Siguiente">
           </button>
         </tr>
       </tbody>
