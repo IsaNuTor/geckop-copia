@@ -19,4 +19,11 @@
   width: 60%;
   min-width: 16px;
   max-width: 24px;
+  padding-top: 0px;
+}
+.table td, .table th {
+  padding: .5rem;
+  padding-right: 1.2rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
 }

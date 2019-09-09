@@ -10,7 +10,7 @@
       <thead class="thead-dark">
         <tr>
           <th>Nombre</th>
-          <th>Nif</th>
+          <th>NIF</th>
           <th>Iban</th>
           <th>Editar</th>
           
@@ -19,9 +19,9 @@
 
       <tbody>
         <tr *ngFor="let a of elementos[0]">
-          <td>{{ acreedores[getOrdenPagindoIndex(a,   paginaActual)].nombre }}</td>
-          <td>{{ acreedores[getOrdenPagindoIndex(a,   paginaActual)].nif }}</td>
-          <td>{{ acreedores[getOrdenPagindoIndex(a,   paginaActual)].iban }}</td>
+          <td>{{ acreedores[getOrdenPagindoIndex(a, paginaActual)].nombre }}</td>
+          <td>{{ acreedores[getOrdenPagindoIndex(a, paginaActual)].nif }}</td>
+          <td>{{ acreedores[getOrdenPagindoIndex(a, paginaActual)].iban }}</td>
           <td>
             <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor" [routerLink]="['/acreedores/form-acreedores.component', acreedores[getOrdenPagindoIndex(a,   paginaActual)].nif]">
           </td>

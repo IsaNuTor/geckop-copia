@@ -25,7 +25,7 @@
             <td>{{ proyecto.presupuesto }}</td>
             <td>
                 {{ proyecto.nContabilidad }}
-                <img *ngIf="!editarNCActiva && permitirEdicion" src="assets/iconos/editar2.png" class="ml-4 icon" alt="Editar Proyecto" (click)="editarNC()">    
+                <img *ngIf="!editarNCActiva && permitirEdicion" src="assets/iconos/editar2.png" class="ml-4 icon2" alt="Editar Proyecto" (click)="editarNC()">    
             </td>
            </tr>
 
@@ -67,7 +67,12 @@
           <tbody id="tablaOrdenes">
               <tr *ngFor="let i of elementos[0];"> <!--and maxOrdenesOK(a))">-->
                 <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].fechaOrden}}</td>
-                  <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].estado}}</td>
+                  <td>
+                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'A'"  src="assets/iconos/aceptar.png" class="rounded" alt="Aceptada">
+                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'R'"  src="assets/iconos/rechazar.png" class="rounded" alt="Rechazada">
+                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'P'"  src="assets/iconos/pendiente.png" class="rounded" alt="Pendiente">
+                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'PM'" src="assets/iconos/revisar.png" class="rounded" alt="Revisar">
+                    </td>
                   <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].concepto}}</td>
 
                   <td>

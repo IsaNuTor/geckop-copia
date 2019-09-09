@@ -25,6 +25,7 @@ export class OrdenService {
   urlRellenarIPPDFV:  string= URL +'/rellenarIPPDFV';
   urlRellenarGastoPDF:  string= URL +'/rellenarGastosPDF';
   urlRellenarGastoPDFV:  string= URL +'/rellenarGastoPDFV';
+  urlProbar: string = URL + '/probarRuta';
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -87,6 +88,8 @@ export class OrdenService {
     return this.http.post<Number>(this.urlRellenarGastoPDFV, gastos, {headers: this.httpHeaders}); 
   }
 
-
+  probarRutas():Observable<Number> {
+    return this.http.post<Number>(this.urlProbar,{headers: this.httpHeaders});
+  }
   
 } 

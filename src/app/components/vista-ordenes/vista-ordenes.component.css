@@ -4,3 +4,9 @@
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }
+.icon{
+  width: 60%;
+  min-width: 16px;
+  max-width: 24px;
+  padding-top: 0px;
+}
