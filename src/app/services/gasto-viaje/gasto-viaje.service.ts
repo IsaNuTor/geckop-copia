@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { GastoViaje } from './gasto-viaje';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {URL} from '../../config/config';
+import {URL_BACKEND} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GastoViajeService {
 
-  urlGastoViaje:string = URL +'/gastosViaje';
-  urlGastoViajeUpdate:string = URL + '/gastosViaje/update';
-  urlGastoImagen:string = URL + '/gastosViaje/subirImagen';
-  urlGastoByOrden:string = URL + '/gastosViaje/byidorden';
+  urlGastoViaje:string = URL_BACKEND +'/api/gastosViaje';
+  urlGastoViajeUpdate:string = URL_BACKEND + '/api/gastosViaje/update';
+  urlGastoImagen:string = URL_BACKEND + '/api/gastosViaje/subirImagen';
+  urlGastoByOrden:string = URL_BACKEND + '/api/gastosViaje/byidorden';
 
   //urlGastoViaje:string = URL_BACKEND + '/api/gastosViaje';
   //urlGastoViajeUpdate:string = URL_BACKEND + '/gastosViaje/update';

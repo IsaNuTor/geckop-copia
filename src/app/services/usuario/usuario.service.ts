@@ -3,7 +3,7 @@ import { Usuario } from './usuario';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {URL} from '../../config/config';
+import {URL_BACKEND} from '../../config/config';
 import { variable } from '@angular/compiler/src/output/output_ast';
 
 
@@ -14,13 +14,13 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 
 export class UsuarioService {
 
-  urlLogin:string = URL + '/login';
-  urlRegistro:string =URL + '/registro';
-  urlEndPoint:string = URL + '/usuario';
-  urlComprobarPass:string = URL + '/comprobarPass';
-  urlSetPass:string = URL + '/setPass';
-  urlSetUsuario:string = URL + '/setUsuario';
-  urlGetNombre:string = URL + '/getNombre';
+  urlLogin:string = URL_BACKEND + '/api/login';
+  urlRegistro:string = URL_BACKEND + '/api/registro';
+  urlEndPoint:string = URL_BACKEND + '/api/usuario';
+  urlComprobarPass:string = URL_BACKEND + '/api/comprobarPass';
+  urlSetPass:string = URL_BACKEND + '/api/setPass';
+  urlSetUsuario:string = URL_BACKEND + '/api/setUsuario';
+  urlGetNombre:string = URL_BACKEND + '/api/getNombre';
 
 
 
@@ -47,7 +47,7 @@ export class UsuarioService {
   }
 
   // Nos devuelve los usuariso.
-  getUsuarios(): Observable<Usuario[]> { 
+  getUsuarios(): Observable<Usuario[]> {
      return this.http.get<Usuario[]>(this.urlEndPoint);
   }
 /*
@@ -70,16 +70,16 @@ export class UsuarioService {
 
   setUsuario(user: Usuario): Observable<Boolean>{
     return this.http.post<Boolean>(this.urlSetUsuario, user, {headers: this.httpHeaders});
-   
+
   }
   public getNombreUsuario(dni: String ):Observable<Usuario>{
     try {
       return this.http.post<Usuario>(this.urlGetNombre, dni, {headers: this.httpHeaders});
-   
+
     } catch (error) {
       alert("Ha habido un error")
     }
-    
+
   }
 
 }

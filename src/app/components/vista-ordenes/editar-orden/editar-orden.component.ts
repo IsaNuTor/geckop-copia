@@ -17,7 +17,7 @@ import {UsuarioProyecto} from 'src/app/services/usuario-proyecto/usuario-proyect
 import {UsuarioProyectoService} from 'src/app/services/usuario-proyecto/usuario-proyecto.service';
 import swal from 'sweetalert2';
 
-import {URL} from '../../../config/config';
+import {URL_BACKEND} from '../../../config/config';
 
 
 
@@ -61,8 +61,8 @@ export class EditarOrdenComponent implements OnInit {
   relacion: string = "";
 
   /*Ojo cambiar ruta para el backend */
-  rutaImagen: string = URL + 'imagenes/';
-  rutaImagen2: string = URL + 'imagenesViaje/';
+  rutaImagen: string = URL_BACKEND + '/api/imagenes/';
+  rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   //rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
 

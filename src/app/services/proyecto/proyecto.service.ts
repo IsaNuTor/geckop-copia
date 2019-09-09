@@ -6,18 +6,18 @@ import { of } from 'rxjs';
 
 /*Clases Propias*/
 import {Proyecto} from './proyecto'
-import {URL} from '../../config/config';
+import {URL_BACKEND} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProyectoService {
 
-  urlProyecto:string = URL + '/proyecto';
-  urlActualizarProyecto:string = URL + '/actualizarProyecto';
-  urlProyectoVista:string = URL + '/vistaProyectos/verProyecto';
-  urlProyectosUsuario:string = URL +'/proyectosUsuario';
-  urlBorrarProyecto:string = URL +'/borrarProyecto';
+  urlProyecto:string = URL_BACKEND + '/api/proyecto';
+  urlActualizarProyecto:string = URL_BACKEND + '/api/actualizarProyecto';
+  urlProyectoVista:string = URL_BACKEND + '/api/vistaProyectos/verProyecto';
+  urlProyectosUsuario:string = URL_BACKEND +'/api/proyectosUsuario';
+  urlBorrarProyecto:string = URL_BACKEND +'/api/borrarProyecto';
   //urlProyecto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
@@ -40,7 +40,7 @@ export class ProyectoService {
   borrarProyecto(proyecto: Proyecto): Observable<Boolean> {
       return this.http.post<Boolean>(this.urlBorrarProyecto, proyecto, {headers: this.httpHeaders});
     }
-  
+
   getProyectosUsuario(dni:String): Observable<Proyecto[]> {
       return this.http.post<Proyecto[]>(this.urlProyectosUsuario, dni, {headers: this.httpHeaders});
    }

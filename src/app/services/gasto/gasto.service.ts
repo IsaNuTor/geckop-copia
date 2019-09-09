@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Gasto } from './gasto';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {URL} from '../../config/config';
+import {URL_BACKEND} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GastoService {
 
-  urlGasto:string = URL + '/gastos';
-  urlGastoImagen:string = URL + '/gastos/subirImagen';
-  urlGastoUpdate:string = URL +'/setGasto';
-  urlGastoByOrden:string = URL + '/gastos/byidorden';
+  urlGasto:string = URL_BACKEND + '/api/gastos';
+  urlGastoImagen:string = URL_BACKEND + '/api/gastos/subirImagen';
+  urlGastoUpdate:string = URL_BACKEND +'/api/setGasto';
+  urlGastoByOrden:string = URL_BACKEND + '/api/gastos/byidorden';
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});

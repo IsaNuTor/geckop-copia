@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 /*Clases Propias*/
 import {UsuarioProyecto} from './usuario-proyecto';
-import {URL} from '../../config/config';
+import {URL_BACKEND} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,10 @@ import {URL} from '../../config/config';
 
 export class UsuarioProyectoService {
   usuariosProyecto: UsuarioProyecto[] = new Array<UsuarioProyecto>();
-  urlUsuarioProyecto:string = URL + '/usuarioproyecto';
-  urlUsuariosProyecto:string = URL + '/buscarusuariosproyecto';
-  urlBorrarUsuarioProyecto:string = URL + '/borrarusuarioproyecto';
-  urlDniProyecto:string = URL +'/buscarproyectosdni';
+  urlUsuarioProyecto:string = URL_BACKEND + '/api/usuarioproyecto';
+  urlUsuariosProyecto:string = URL_BACKEND + '/api/buscarusuariosproyecto';
+  urlBorrarUsuarioProyecto:string = URL_BACKEND + '/api/borrarusuarioproyecto';
+  urlDniProyecto:string = URL_BACKEND +'/api/buscarproyectosdni';
   //urlUsuarioProyecto:string = URL_BACKEND + '/api/usuarioproyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }

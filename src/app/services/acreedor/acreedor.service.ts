@@ -3,17 +3,17 @@ import { Acreedor } from './acreedor';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {URL} from '../../config/config';
+import {URL_BACKEND} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AcreedorService {
 
-  urlEndPoint:string = URL + '/acreedores';
-  urlSetAcreedor:string = URL + '/setAcreedor';
-  urlCrearAcreedor:string = URL + '/crearAcreedor';
-  urlAcreedoresOrden:string = URL + '/acreedoresOrden'
+  urlEndPoint:string = URL_BACKEND + '/api/acreedores';
+  urlSetAcreedor:string = URL_BACKEND + '/api/setAcreedor';
+  urlCrearAcreedor:string = URL_BACKEND + '/api/crearAcreedor';
+  urlAcreedoresOrden:string = URL_BACKEND + '/api/acreedoresOrden';
 
   //urlEndPoint:string = URL_BACKEND + '/api/acreedores';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});

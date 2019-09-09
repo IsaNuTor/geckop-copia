@@ -12,7 +12,7 @@ import { AcreedorService } from 'src/app/services/acreedor/acreedor.service';
 import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
 import { GastoViajeService } from 'src/app/services/gasto-viaje/gasto-viaje.service';
 import { GastoViaje } from 'src/app/services/gasto-viaje/gasto-viaje';
-import {URL} from '../../../config/config';
+import {URL_BACKEND} from '../../../config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -35,10 +35,10 @@ export class VerOrdenComponent implements OnInit {
   isV:boolean = false;
   isIP:boolean = false;
   /*Ojo cambiar ruta para el backend */
-  rutaImagen: string = URL + '/imagenes/';
-  rutaImagen2: string = URL + '/imagenesViaje/';
+  rutaImagen: string = URL_BACKEND + '/api/imagenes/';
+  rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
   numeracionAux: number;
-  
+
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   //rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
 
@@ -60,7 +60,7 @@ export class VerOrdenComponent implements OnInit {
       this.router.navigate(['/login']);
     else
      this.cargarOrden();
-     
+
 
   }
 
@@ -201,8 +201,8 @@ export class VerOrdenComponent implements OnInit {
         }
       );
     }
-    
-    
+
+
   }
 
   /* CARGAR la numeracion segun el acronimo del proyecto */

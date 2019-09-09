@@ -21,20 +21,20 @@ export class AcreedoresComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    if (!this.sesionService.isLogin())
+    //if (!this.sesionService.isLogin())
       this.router.navigate(['/login']);
-    else{
+    //else{
       this.elementos = new Array<number[]>(1);
       this.elementos[0] = new Array<number>();
       this.acreedorService.getAcreedores().subscribe(
         acreedores => {
           this.acreedores = acreedores;
           this.inicializarArrayNElementos( this.elementosPorPagina<this.acreedores.length ? this.elementosPorPagina : this.acreedores.length, 0);
-          
+
         }
       );
-    }
-    
+    //}
+
   }
 
   delete(acreedor: Acreedor): void {
@@ -66,14 +66,14 @@ export class AcreedoresComponent implements OnInit {
   /*PAGINACION */
 
   elementosPorPagina: number = 5; //numero MAXIMO de elementos a mostrar por pagina
-  paginaActual: number = 0;  
-  elementos: number[][]; 
+  paginaActual: number = 0;
+  elementos: number[][];
   ultima: number = 0;
 
   //Devuelve la siguiente pagina con el array de mostrado actulizado por si es pagina final y hay menos elementos que mostrar
   siguiente(actual:number, longitud:number, a:number):number{
     let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
-    
+
     if(longitud%this.elementosPorPagina == 0){
       ultimaPagina--;
       if(actual < ultimaPagina)
@@ -85,21 +85,21 @@ export class AcreedoresComponent implements OnInit {
         this.inicializarArrayNElementos(longitud%this.elementosPorPagina, a)
     }
     return actual;
-    
+
   }
   //Devuelve la anterior pagina con el array de mostrado actulizado por si es pagina final y hay menos elementos que mostrar
   anterior(actual: number, longitud:number, a:number):number{
     let ultimaPagina = Math.trunc(longitud/this.elementosPorPagina);
-    
+
     if(longitud%this.elementosPorPagina ==0)
       ultimaPagina--;
 
     if(actual == ultimaPagina)
       this.inicializarArrayNElementos(this.elementosPorPagina < longitud ? this.elementosPorPagina : longitud , a)
-    
+
     if(actual >0)
         actual--;
-    
+
     return actual;
   }
 
@@ -108,10 +108,10 @@ export class AcreedoresComponent implements OnInit {
     this.elementos[a]=new Array<number>();
 
     for(let i = 0; i< n; i++)
-      this.elementos[a].push(i); 
+      this.elementos[a].push(i);
   }
 
-  
+
 
   getOrdenPagindoIndex(a:number, actual:number):number{
     return a+actual*this.elementosPorPagina;

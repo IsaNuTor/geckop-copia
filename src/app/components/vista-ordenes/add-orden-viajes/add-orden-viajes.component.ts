@@ -11,7 +11,7 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { SesionService } from '../../../services/sesion/sesion.service';
 import {UsuarioProyecto} from 'src/app/services/usuario-proyecto/usuario-proyecto';
 import {UsuarioProyectoService} from 'src/app/services/usuario-proyecto/usuario-proyecto.service';
-import {URL} from '../../../config/config';
+import {URL_BACKEND} from '../../../config/config';
 // GASTO
 import { Gasto } from 'src/app/services/gasto/gasto';
 import { GastoService } from 'src/app/services/gasto/gasto.service';
@@ -62,7 +62,7 @@ export class AddOrdenViajesComponent implements OnInit {
 
   // GASTOS
   titulo: string = "Ordenes";
-  rutaImagen: string = URL + '/imagenes/';
+  rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   gastos: Gasto[];
   gastoViaje: GastoViaje;
   formGastos: FormGroup;

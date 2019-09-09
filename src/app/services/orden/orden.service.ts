@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Orden } from './orden';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {URL} from '../../config/config';
+import {URL_BACKEND} from '../../config/config';
 import { Usuario } from '../usuario/usuario';
 import { Gasto } from '../gasto/gasto';
 import { GastoViaje } from '../gasto-viaje/gasto-viaje';
@@ -13,18 +13,18 @@ import { GastoViaje } from '../gasto-viaje/gasto-viaje';
 export class OrdenService {
 
   ordenes: Orden[] = new Array<Orden>();
-  urlOrden:string = URL + '/ordenes';
-  urlMisOrdenes:string = URL + '/buscarordenesnif';
-  urlNumAcronimo:string = URL + '/buscarnumacronimo';
-  urlOrdenesIP:string = URL + '/ordenesdeip';
-  urlGetOrdenId:string = URL +'/getordenid';
-  urlSetOrden: string = URL + '/setorden';
-  urlgetOrdenPorProyecto:string = URL +'/getordenproyecto';
-  urlGenerarPDF:  string= URL +'/generarPDF';
-  urlRellenarIPPDF:  string= URL +'/rellenarIPPDF';
-  urlRellenarIPPDFV:  string= URL +'/rellenarIPPDFV';
-  urlRellenarGastoPDF:  string= URL +'/rellenarGastosPDF';
-  urlRellenarGastoPDFV:  string= URL +'/rellenarGastoPDFV';
+  urlOrden:string = URL_BACKEND + '/api/ordenes';
+  urlMisOrdenes:string = URL_BACKEND + '/api/buscarordenesnif';
+  urlNumAcronimo:string = URL_BACKEND + '/api/buscarnumacronimo';
+  urlOrdenesIP:string = URL_BACKEND + '/api/ordenesdeip';
+  urlGetOrdenId:string = URL_BACKEND +'/api/getordenid';
+  urlSetOrden: string = URL_BACKEND + '/api/setorden';
+  urlgetOrdenPorProyecto:string = URL_BACKEND +'/api/getordenproyecto';
+  urlGenerarPDF:  string= URL_BACKEND +'/api/generarPDF';
+  urlRellenarIPPDF:  string= URL_BACKEND +'/api/rellenarIPPDF';
+  urlRellenarIPPDFV:  string= URL_BACKEND +'/api/rellenarIPPDFV';
+  urlRellenarGastoPDF:  string= URL_BACKEND +'/api/rellenarGastosPDF';
+  urlRellenarGastoPDFV:  string= URL_BACKEND +'/api/rellenarGastoPDFV';
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -69,24 +69,24 @@ export class OrdenService {
   }
 
   generarPDF(o: Orden):Observable<Number>{
-    return this.http.post<Number>(this.urlGenerarPDF, o, {headers: this.httpHeaders}); 
+    return this.http.post<Number>(this.urlGenerarPDF, o, {headers: this.httpHeaders});
   }
   rellenarDatosIP(ip: Usuario):Observable<Number>{
-    return this.http.post<Number>(this.urlRellenarIPPDF, ip, {headers: this.httpHeaders}); 
+    return this.http.post<Number>(this.urlRellenarIPPDF, ip, {headers: this.httpHeaders});
   }
 
   rellenarDatosIPV(ip: Usuario):Observable<Number>{
-    return this.http.post<Number>(this.urlRellenarIPPDFV, ip, {headers: this.httpHeaders}); 
+    return this.http.post<Number>(this.urlRellenarIPPDFV, ip, {headers: this.httpHeaders});
   }
 
   rellenarGastosPDF(gastos: Gasto[]):Observable<Number>{
-    return this.http.post<Number>(this.urlRellenarGastoPDF, gastos, {headers: this.httpHeaders}); 
+    return this.http.post<Number>(this.urlRellenarGastoPDF, gastos, {headers: this.httpHeaders});
   }
 
   rellenarGastosPDFV(gastos: GastoViaje):Observable<Number>{
-    return this.http.post<Number>(this.urlRellenarGastoPDFV, gastos, {headers: this.httpHeaders}); 
+    return this.http.post<Number>(this.urlRellenarGastoPDFV, gastos, {headers: this.httpHeaders});
   }
 
 
-  
-} 
+
+}
