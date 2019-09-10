@@ -26,10 +26,10 @@
           <tr *ngFor="let a of elementos[0]">
             <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].fechaOrden | date:'dd-MM-yyyy'}}</td>
             <td>
-              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'A'"  src="assets/iconos/aceptar.png" class="rounded" alt="Aceptada">
-              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'R'"  src="assets/iconos/rechazar.png" class="rounded" alt="Rechazada">
-              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'P'"  src="assets/iconos/pendiente.png" class="rounded" alt="Pendiente">
-              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'PM'" src="assets/iconos/revisar.png" class="rounded" alt="Revisar">
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'A'"  src="assets/iconos/aceptar.png" class="rounded" alt="Aceptada" title="Aceptada">
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'R'"  src="assets/iconos/rechazar.png" class="rounded" alt="Rechazada" title="Rechazada">
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'P'"  src="assets/iconos/pendiente.png" class="rounded" alt="Pendiente" title="Pendiente">
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a,paginaActual)].estado == 'PM'" src="assets/iconos/revisar.png" class="rounded" alt="Revisar" title="Revisar">
             </td>
             <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].concepto}}</td>
             <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].acronimo}}</td>

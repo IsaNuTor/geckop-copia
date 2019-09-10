@@ -21,9 +21,9 @@ export class AcreedoresComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    //if (!this.sesionService.isLogin())
+    if (!this.sesionService.isLogin())
       this.router.navigate(['/login']);
-    //else{
+    else{
       this.elementos = new Array<number[]>(1);
       this.elementos[0] = new Array<number>();
       this.acreedorService.getAcreedores().subscribe(
@@ -33,7 +33,7 @@ export class AcreedoresComponent implements OnInit {
 
         }
       );
-    //}
+    }
 
   }
 
