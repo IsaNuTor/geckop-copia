@@ -68,10 +68,10 @@
               <tr *ngFor="let i of elementos[0];"> <!--and maxOrdenesOK(a))">-->
                 <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].fechaOrden}}</td>
                   <td>
-                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'A'"  src="assets/iconos/aceptar.png" class="rounded" alt="Aceptada">
-                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'R'"  src="assets/iconos/rechazar.png" class="rounded" alt="Rechazada">
-                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'P'"  src="assets/iconos/pendiente.png" class="rounded" alt="Pendiente">
-                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'PM'" src="assets/iconos/revisar.png" class="rounded" alt="Revisar">
+                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'A'"  src="assets/iconos/aceptar.png" class="rounded" alt="Aceptada"  title="Aceptada">
+                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'R'"  src="assets/iconos/rechazar.png" class="rounded" alt="Rechazada" title="Rechazada">
+                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'P'"  src="assets/iconos/pendiente.png" class="rounded" alt="Pendiente" title="Pendiente">
+                      <img *ngIf="ordenes[getOrdenPagindoIndex(i,paginaActual)].estado == 'PM'" src="assets/iconos/revisar.png" class="rounded" alt="Revisar" title="Revisar">
                     </td>
                   <td>{{ordenes[getOrdenPagindoIndex(i, paginaActual)].concepto}}</td>
 
