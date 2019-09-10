@@ -30,7 +30,7 @@ export class EditarOrdenComponent implements OnInit {
   acreedores: Acreedor[];
   orden : Orden= new Orden();
   gastosGenerales: Gasto[] = new Array<Gasto>();
-  misProyectos: UsuarioProyecto[];
+  misProyectos: UsuarioProyecto[] = new Array<UsuarioProyecto>();
   gastoViaje: GastoViaje = new GastoViaje();
   formGastos: FormGroup;
   formGastosV: FormGroup;
@@ -44,6 +44,8 @@ export class EditarOrdenComponent implements OnInit {
   isV:boolean = false;
   isIP:boolean = false;
 
+  // Ver si el select tiene valor para que aparezca el panel de gastos.
+  verSeleccionada: string = '';
   //opcionSeleccionada:string = '0';
   checkAvion: boolean = false;
   checkCoche: boolean = false;
@@ -97,6 +99,7 @@ export class EditarOrdenComponent implements OnInit {
       this.formGastosV = this.fb.group({
         fechaIda: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
         fechaVuelta: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+        itinerario: ['', [Validators.required]],
 
         avion: [ '', [Validators.maxLength(150)]],  //Concepto
         importeAvion: ['0'],  //Importe
@@ -133,6 +136,11 @@ export class EditarOrdenComponent implements OnInit {
         // Otros gastos
         importeOtrosGastos: ['0'],  //Importe
 
+        otrosAgencia: ['', [Validators.maxLength(50)]],
+        checkAgenciaAvion: [''],
+        checkAgenciaTren: [''],
+        checkAgenciaAlojamiento: [''],
+
       });
      }
 
@@ -141,10 +149,6 @@ export class EditarOrdenComponent implements OnInit {
       this.router.navigate(['/login']);
     else {
       this.cargarOrden();
-
-      // Proyectos de usuarios, cargamos el dni con el que esta login.
-      this.dniUsuarioLogin = this.sesionService.getDni();
-      this.cargarUsuariosProyecto();
     }
   }
 
@@ -207,10 +211,16 @@ export class EditarOrdenComponent implements OnInit {
       this.ordenService.getOrdenID(id).subscribe(
         (orden) =>{
            this.orden = orden;
+           // Proyectos de usuarios, cargamos el dni con el que esta login.
+           this.dniUsuarioLogin = this.sesionService.getDni();
            this.isG = this.orden.tipo == 'G';
            this.isV = this.orden.tipo == 'V';
            this.cargarAcreedores();
-           this.cargarGastoViajes(orden.id);
+           if(this.isG)
+            this.cargarGastosGenerales(orden.id);
+           else
+            this.cargarGastoViajes(orden.id);
+           this.cargarUsuariosProyecto();
           }
         );
       }
@@ -225,6 +235,7 @@ export class EditarOrdenComponent implements OnInit {
     this.usuarioProyectoService.getProyectosDni(this.dniUsuarioLogin).subscribe(
       (listaInvestigadores) =>{
         this.misProyectos = listaInvestigadores;
+        this.cargarRelacionProyecto();
       });
   }
 
@@ -254,6 +265,17 @@ export class EditarOrdenComponent implements OnInit {
     let relacion = "";
     for(let r of this.misProyectos){
     if(this.formOrden.value.acronimo == r.acronimo){
+      this.cargarRelacionCheck(r.rol);
+      return r.rol;
+    }
+    }
+  }
+
+  // Carga la relación antes de editar.
+  cargarRelacionProyecto(): string{
+    let relacion = "";
+    for(let r of this.misProyectos){
+    if(this.orden.acronimo == r.acronimo){
       this.cargarRelacionCheck(r.rol);
       return r.rol;
     }

@@ -42,6 +42,10 @@ select:hover{
   color: red;
 }
 
+.fechaDer {
+  padding-left: 15%;
+}
+
 .bordeDiv {
   /*border: 5px solid red;*/
   background-color: #f1f1f1;
@@ -55,4 +59,24 @@ select:hover{
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ced4da;
+}
+
+.espacioIzq{
+  padding-left: 30%;
+}
+
+.espacioIzq2{
+  padding-left: 15%;
+}
+
+.itinerario {
+  margin-left: 30%;
+  margin-top: 15px;
+}
+
+.icon{
+  width: 60%;
+  min-width: 16px;
+  max-width: 24px;
+  padding-top: 0px;
 }
