@@ -26,6 +26,7 @@ export class OrdenService {
   urlRellenarIPPDFV:  string= URL_BACKEND +'/api/rellenarIPPDFV';
   urlRellenarGastoPDF:  string= URL_BACKEND +'/api/rellenarGastosPDF';
   urlRellenarGastoPDFV:  string= URL_BACKEND +'/api/rellenarGastoPDFV';
+  urlProbar: string = URL_BACKEND + '/api/mostrarPDF';
 
 /* urlOrden:string = URL + '/ordenes';
   urlMisOrdenes:string = URL + '/buscarordenesnif';
@@ -44,7 +45,7 @@ export class OrdenService {
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-
+  httpHeaders2 = new HttpHeaders({'Content-Type': 'application/pdf', 'Accept': 'application/pdf', 'responseType': 'pdf',});
   constructor(private http: HttpClient) { }
 
   crearOrden(orden: Orden) : Observable<Orden> {
@@ -106,5 +107,12 @@ export class OrdenService {
   /*probarRutas():Observable<Number> {
     return this.http.post<Number>(this.urlProbar,{headers: this.httpHeaders});
   }*/
+  mostrarPDF(id: number):any{
+    let headers = new HttpHeaders({'Content-Type': 'application/pdf', 'Accept': 'application/pdf'});
+    //headers = headers.append('Authorization', 'Bearer ');
 
+    return this.http.get<any>(`${this.urlProbar}/${id}`, {headers: headers, responseType: 'blob' as 'json'});
+  }
+
+  
 }
