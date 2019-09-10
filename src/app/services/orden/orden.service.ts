@@ -103,9 +103,8 @@ export class OrdenService {
     return this.http.post<Number>(this.urlRellenarGastoPDFV, gastos, {headers: this.httpHeaders});
   }
 
-  probarRutas():Observable<Number> {
+  /*probarRutas():Observable<Number> {
     return this.http.post<Number>(this.urlProbar,{headers: this.httpHeaders});
-  }
-  
-} 
+  }*/
 
+}

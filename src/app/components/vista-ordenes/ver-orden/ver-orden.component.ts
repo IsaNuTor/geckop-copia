@@ -12,7 +12,7 @@ import { AcreedorService } from 'src/app/services/acreedor/acreedor.service';
 import { ProyectoService } from 'src/app/services/proyecto/proyecto.service';
 import { GastoViajeService } from 'src/app/services/gasto-viaje/gasto-viaje.service';
 import { GastoViaje } from 'src/app/services/gasto-viaje/gasto-viaje';
-import {URL} from '../../../config/config';
+import {URL_BACKEND} from '../../../config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -36,9 +36,9 @@ export class VerOrdenComponent implements OnInit {
   isIP:boolean = false;
   /*Ojo cambiar ruta para el backend */
   rutaImagen: string = 'http://localhost:8080/api/imagenes/';
-  rutaImagen2: string = URL + '/imagenesViaje/';
+  rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
   numeracionAux: number;
-  
+
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
   //rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
 
@@ -60,7 +60,7 @@ export class VerOrdenComponent implements OnInit {
       this.router.navigate(['/login']);
     else
      this.cargarOrden();
-     
+
 
   }
 
@@ -87,7 +87,7 @@ export class VerOrdenComponent implements OnInit {
            this.cargarAcreedor('05464654K');
             this.comprobarIP(this.orden.acronimo);
             */
-          
+
 
 
 
@@ -96,7 +96,7 @@ export class VerOrdenComponent implements OnInit {
            this.cargarGastoViajes(this.orden.id)
            this.cargarAcreedor(this.orden.nif_acreedor);
            this.comprobarIP(this.orden.acronimo);
-            
+
           }
         );
       }
@@ -198,15 +198,15 @@ export class VerOrdenComponent implements OnInit {
       this.ordenService.rellenarDatosIPV(this.ip).subscribe(
         (result) => {
             this.ordenService.rellenarGastosPDFV(this.gastoViaje).subscribe(
-              (result) => { 
+              (result) => {
                 this.ordenService.generarPDF(this.orden).subscribe();
               }
           );
         }
       );
     }
-    
-    
+
+
   }
 
   /* CARGAR la numeracion segun el acronimo del proyecto */
@@ -236,11 +236,11 @@ export class VerOrdenComponent implements OnInit {
     window.open(URL+"/pdfs/"+ this.orden.id+".pdf");
   }
 
-  probarRutas():void{
+  /*probarRutas():void{
     this.ordenService.probarRutas().subscribe();
-  }
+  }*/
 
- 
+
 
   public cancelar(){
     this.router.navigate(['/vista-ordenes']);

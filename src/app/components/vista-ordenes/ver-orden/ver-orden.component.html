@@ -26,7 +26,7 @@
         </tr>
       </tbody>
     </table>
-  </div>  
+  </div>
 <!--Acreedor-->
   <div class="col-md-6">
       <table class="table table-bordered text-center">
@@ -47,7 +47,7 @@
               <td>{{orden.observaciones}}</td>
           </tr>
 
-         
+
         </tbody>
       </table>
     </div>
@@ -83,7 +83,7 @@
       </tbody>
     </table>
   </div>
-  
+
 
   <!--Tabla de gastos generales. Habra que poner un ngif con el tipo-->
 
@@ -107,7 +107,7 @@
           <td>{{gasto.importe}}</td>
           <td>
             <img src="assets/iconos/lupa.png" class="rounded icon" alt="ver foto"  (click)='verFoto(gasto.foto)'>
-            
+
           </td>
         </tr>
       </tbody>
@@ -129,11 +129,11 @@
           </tr>
           <tr>
               <th scope="col" colspan="2">Relación con el Proyecto</th>
-              <td colspan="4">{{orden.relacion}} </td> 
+              <td colspan="4">{{orden.relacion}} </td>
           </tr>
           <tr>
               <th scope="col" colspan="2">Objeto del desplazamiento en relación con la ejecución del proyecto</th>
-              <td colspan="4">{{orden.memoria}} </td> 
+              <td colspan="4">{{orden.memoria}} </td>
           </tr>
         <tr>
             <th scope="col">Itinerario:</th>
@@ -155,47 +155,47 @@
             <th class="text-center" scope="col">Importe</th>
           </tr>
         </thead>
-  
+
         <tbody>
           <tr>
             <th class="text-center" rowspan="6">Transporte</th>
             <th colspan="4">Avion</th>
-            <td class="text-center">{{gastoViaje.importeAvion}}</td>                
+            <td class="text-center">{{gastoViaje.importeAvion}}</td>
           </tr>
           <tr>
             <th >Coche</th>
             <th class="text-right" colspan="2">Numero de KM</th>
-            <td>{{gastoViaje.nkilometros}}</td> 
-            <td class="text-center">{{gastoViaje.importeCoche}}</td>                
+            <td>{{gastoViaje.nkilometros}}</td>
+            <td class="text-center">{{gastoViaje.importeCoche}}</td>
           </tr>
           <tr>
             <th colspan="4">Tren</th>
-            <td class="text-center">{{gastoViaje.importeTren}}</td>                
+            <td class="text-center">{{gastoViaje.importeTren}}</td>
           </tr>
           <tr>
             <th colspan="4">Autobus</th>
-            <td class="text-center">{{gastoViaje.importeAutobus}}</td>                
+            <td class="text-center">{{gastoViaje.importeAutobus}}</td>
           </tr>
           <tr>
             <th colspan="4">Taxi</th>
-            <td class="text-center">{{gastoViaje.importeTaxi}}</td>                
+            <td class="text-center">{{gastoViaje.importeTaxi}}</td>
           </tr>
           <tr>
-            <th colspan="4">Otros</th>  
-            <td class="text-center">{{gastoViaje.importeOtros}}</td>               
+            <th colspan="4">Otros</th>
+            <td class="text-center">{{gastoViaje.importeOtros}}</td>
           </tr>
           <tr>
             <th class="text-center">Alojamiento</th>
             <th colspan="4">Factura Hotel</th>
-            <td class="text-center">{{gastoViaje.importeHotel}}</td>                
+            <td class="text-center">{{gastoViaje.importeHotel}}</td>
           </tr>
           <tr>
             <th class="text-center">Manutencion</th>
             <th>Nº de Dietas</th>
-            <td>{{gastoViaje.nDietas}}</td>       
+            <td>{{gastoViaje.nDietas}}</td>
             <th class="text-right">Precio de dieta (€/Dia)</th>
-            <td>{{gastoViaje.precioDieta}}</td>        
-            <td class="text-center">{{gastoViaje.importeDietas}}</td>        
+            <td>{{gastoViaje.precioDieta}}</td>
+            <td class="text-center">{{gastoViaje.importeDietas}}</td>
           </tr>
           <tr class="table-secondary">
             <th class="text-right" colspan="5">TOTAL GASTOS:</th>
@@ -204,7 +204,7 @@
         </tbody>
       </table>
     </div>
-  
+
 
   <div *ngIf="isG" class="col-md-12">
     <table class="table table-bordered text-center">
@@ -252,34 +252,34 @@
       </table>
     </div>
 
- 
+
   <div class="col-md-12">
       <div class="col-md-6">
           <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-success m-2" types="button" (click)="firmarOrden()">Aceptar Orden</button>
           <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-danger m-2" types="button" (click)="rechazarOrden()">Rechazar Orden</button>
-            
+
           <button *ngIf="!firmada && isIP && !modificacion" class="btn btn-rounded btn btn-warning m-2" types="button" (click)="pedirModificacionOrden()">Pedir Modificación</button>
           <button *ngIf="!firmada && isIP && modificacion" class="btn btn-rounded btn btn-outline-warning mt-2 m-2" types="button" (click)="enviarModificacion()">Enviar</button>
-         
-          
+
+
       </div>
-    
+
       <div class="col-md-3">
-          <textarea *ngIf="!firmada && isIP && modificacion" class="form-control textarea m-2" id="memoria" rows="3" [(ngModel)]="observacionesIP" placeholder="Escribe las modificaciones necesarias"  ></textarea> 
+          <textarea *ngIf="!firmada && isIP && modificacion" class="form-control textarea m-2" id="memoria" rows="3" [(ngModel)]="observacionesIP" placeholder="Escribe las modificaciones necesarias"  ></textarea>
       </div>
-      <div class="col-md-2"> 
+      <div class="col-md-2">
         <button  class="btn btn-rounded btn btn-outline-danger mt-2 m-2" types="button" (click)="cancelar()">Volver a Ordenes</button>
-         
+
       </div>
-          
-  </div>  
-  
-  
+
+  </div>
+
+
   <!-- <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="pedirModificacionOrden()">Modificar Orden</button>-->
   <button (click)="generarPDF()"> GENERAR PDF</button>
-  <button *ngIf="orden.estado == 'A'" class="ml-2" (click)="verPDF()"> Ver PDF</button> 
-  
-  <button class="ml-2" (click)="probarRutas()"> Probar Rutas PDF</button> 
- 
+  <button *ngIf="orden.estado == 'A'" class="ml-2" (click)="verPDF()"> Ver PDF</button>
+
+  <!--<button class="ml-2" (click)="probarRutas()"> Probar Rutas PDF</button> -->
+
 
 </div>
