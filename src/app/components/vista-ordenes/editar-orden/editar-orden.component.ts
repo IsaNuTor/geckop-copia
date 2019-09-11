@@ -35,6 +35,19 @@ export class EditarOrdenComponent implements OnInit {
   formGastos: FormGroup;
   formGastosV: FormGroup;
   formOrden: FormGroup;
+  idAux: number;
+  formValid: boolean = true;
+
+  //GASTOS
+  crearGastoForm: boolean = true;
+  nFacturaVacio:boolean = false;
+  descripcionVacio:boolean = false;
+  importeVacio:boolean = false;
+  fotoSeleccionada: File;
+  gasto: Gasto = new Gasto();
+
+  // EDITAR ORDEN
+  actualizar: boolean = false;
 
   checkMP: boolean = false;
   checkME: boolean = false;
@@ -81,13 +94,13 @@ export class EditarOrdenComponent implements OnInit {
     private router: Router) {
 
       this.formOrden = this.fb.group({
-        acronimo: ['', [Validators.required, Validators.maxLength(10)]],
-        nif_acreedor: ['', [Validators.required, Validators.maxLength(10)]],
-        concepto: ['', [Validators.required, Validators.maxLength(50)]],
+        acronimo: ['', [Validators.maxLength(10)]],
+        nif_acreedor: ['', [Validators.maxLength(10)]],
+        concepto: ['', [Validators.maxLength(50)]],
         num_contabilidad: ['', [Validators.maxLength(50)]],
-        memoria: ['', [Validators.required, Validators.maxLength(50)]],
-        relacion: ['', [Validators.required, Validators.max(100000000)]],
-        observaciones: ['', [Validators.required, Validators.max(100000000)]],
+        memoria: ['', [Validators.maxLength(50)]],
+        relacion: ['', [Validators.max(100000000)]],
+        observaciones: ['', [Validators.max(100000000)]],
       });
       this.formGastos = this.fb.group({
         nFactura: [ '', Validators.required], //Nº de Factura
@@ -261,9 +274,18 @@ export class EditarOrdenComponent implements OnInit {
     //console.log(this.formOrden.get('checkMP').value);
   }
 
+  // Para ocultar el panel de gastos si no hay un acronimo de proyecto seleccionado.
+  capturarValor() {
+    //this.opcionSeleccionada = this.formOrden.get('acronimo');
+    this.verSeleccionada = this.formOrden.get('acronimo').value;
+    this.relacion = this.getRelacionProyecto();
+    //console.log(this.verSeleccionada);
+  }
+
   getRelacionProyecto(): string{
     let relacion = "";
     for(let r of this.misProyectos){
+    this.misProyectos.splice(this.misProyectos.indexOf(r),1);
     if(this.formOrden.value.acronimo == r.acronimo){
       this.cargarRelacionCheck(r.rol);
       return r.rol;
@@ -305,10 +327,9 @@ export class EditarOrdenComponent implements OnInit {
         this.acreedores = acreedores;
         for(let a of acreedores) {
           if(a.nif == this.orden.nif_acreedor) {
-             this.nombreAcreedor = this.sesionService.getNombre();
+             this.nombreAcreedor = a.nombre;
              this.acreedores.splice(this.acreedores.indexOf(a),1);
           }
-
         }
       }
     );
@@ -332,25 +353,43 @@ export class EditarOrdenComponent implements OnInit {
       })
     }
   }
-  seleccionarFoto(event, s:string) {}
 
-  /*editarOrden(): void {
+  // EDITAR ORDEN GASTOS GENERALES
+  editarOrden(): void {
     if(this.isG) {
       if(this.formOrden.valid){
-        this.formOrden.value.cooncepto = this.orden.concepto;
 
-        if(this.formAcreedores.value.nombre != ""){
-            this.actualizar = true;
-            this.acreedor.nombre = this.formAcreedores.value.nombre;
-        }else{ this.formAcreedores.value.nombre = this.acreedor.nombre  }
-
-        if(this.formAcreedores.value.iban != ""){
+        if(this.formOrden.value.acronimo != "" && this.formOrden.controls['acronimo'].status == 'VALID') {
           this.actualizar = true;
-          this.acreedor.iban = this.formAcreedores.value.iban;
-        }else{ this.formAcreedores.value.iban = this.acreedor.iban  }
+          this.orden.acronimo = this.formOrden.value.acronimo;
+        }
+        if(this.formOrden.value.nif_acreedor != "" && this.formOrden.controls['nif_acreedor'].status == 'VALID') {
+          this.actualizar = true;
+          this.orden.nif_acreedor = this.formOrden.value.nif_acreedor;
+        }
+        if(this.formOrden.value.concepto != "" && this.formOrden.controls['concepto'].status == 'VALID') {
+          this.actualizar = true;
+          this.orden.concepto = this.formOrden.value.concepto;
+        }
+        if(this.formOrden.value.num_contabilidad != "" && this.formOrden.controls['num_contabilidad'].status == 'VALID') {
+          this.actualizar = true;
+          this.orden.num_contabilidad = this.formOrden.value.num_contabilidad;
+        }
+        if(this.formOrden.value.memoria != "" && this.formOrden.controls['memoria'].status == 'VALID') {
+          this.actualizar = true;
+          this.orden.memoria = this.formOrden.value.memoria;
+        }
+        if(this.formOrden.value.relacion != "" && this.formOrden.controls['relacion'].status == 'VALID') {
+          this.actualizar = true;
+          this.orden.relacion = this.formOrden.value.relacion;
+        }
+        if(this.formOrden.value.observaciones != "" && this.formOrden.controls['observaciones'].status == 'VALID') {
+          this.actualizar = true;
+          this.orden.observaciones = this.formOrden.value.observaciones;
+        }
 
         if(this.actualizar){
-          this.acreedorService.actualizarAcreedor(this.acreedor).subscribe(
+          this.ordenService.setOrden(this.orden).subscribe(
             resultado => {
               if(resultado){
               const ToastrModule = swal.mixin({
@@ -366,7 +405,7 @@ export class EditarOrdenComponent implements OnInit {
 
               })
 
-              this.router.navigate(['/acreedores'])
+            this.router.navigate(['vista-ordenes'])
             }else{
               const ToastrModule = swal.mixin({
                   toast: true,
@@ -377,7 +416,7 @@ export class EditarOrdenComponent implements OnInit {
               swal.fire({
                   type: 'error',
                   title: 'Error!',
-                  text: 'El acreedor no se ha podido editar',
+                  text: 'La orden no se ha podido editar',
                   onClose: () => {
                         location.reload();
                       }
@@ -395,13 +434,150 @@ export class EditarOrdenComponent implements OnInit {
 
           Toast.fire({
             type: 'error',
-            title: 'No se ha modificado ningún dato. '
+            title: 'No se ha modificado ningún dato de la orden.'
           })
         }
       }else{
         this.formValid = false;
       }
+    } // isG
+  }
 
+// GASTOS
+public crearGasto(): void {
+
+  if(this.formGastos.valid){
+    //si falta algun dato marcamos el fallo y NO creamos el nuevo gasto
+    if(this.formGastos.value.nFactura == ""){this.nFacturaVacio = true; this.crearGastoForm = false;}
+    if(this.formGastos.value.descripcion == ""){this.descripcionVacio = true; this.crearGastoForm = false;}
+    if(this.formGastos.value.importe == ""){this.importeVacio = true; this.crearGastoForm = false;}
+    if(this.crearGastoForm){
+      this.gasto = this.formGastos.value;
+      this.gastoService.crearGasto(this.gasto).subscribe(
+        gasto =>
+        {
+
+          if(gasto != null){
+
+            this.idAux = gasto.id;
+            this.subirFoto(this.idAux);
+            gasto.foto = this.idAux + "_" + this.fotoSeleccionada.name;
+            this.gastosGenerales.push(gasto);
+            console.log(this.gastosGenerales);
+
+            const ToastrModule = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000
+                  });
+
+                  /*ToastrModule.fire({
+                    type: 'success',
+                    title: 'Guardado gasto '+ gasto.nFactura,
+
+                  })*/
+
+                  // IMAGEN DEL GASTO, FACTURA, TICKET
+                  //alert(this.idAux);
+
+            }else{
+              swal.fire({
+                          type: 'error',
+                          title: 'Error!',
+                          text: 'El gasto no se ha podido crear',
+                          onClose: () => {
+                                location.reload();
+                              }
+                        })
+            }
+
+      })
     }
-  }*/
+  }else{
+    this.formValid = false;
+   /* swal.fire({
+                type: 'error',
+                title: 'Error!',
+                text: 'Revisa los campos, uno de los campos no tiene el formato correcto',
+                onClose: () => {
+                      location.reload();
+                    }
+              })*/
+  }
+}
+
+  anadirGasto(){
+
+      // Comprobamos que ha seleccionado la imagenen
+      if(!this.fotoSeleccionada) {
+          swal.fire('Error', `Debe seleccionar una imagen`, 'error');
+
+      } else {
+        this.gasto = this.formGastos.value; //Coge los datos del formulario de gasto y los mete en un gasto auxiliar
+
+        this.gasto.iva = 21;
+
+        this.gasto.id_orden = this.orden.id;
+
+        this.crearGasto();
+
+        //this.gastos.push(this.gasto);
+        /*alert(this.formGastos.value + this.gastos);*/
+      }
+  }
+
+  delete(gasto: Gasto): void {
+    swal.fire({
+    title: '¿Estás seguro?',
+    text: `¿Seguro que desea eliminar el gasto ?`,
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminarlo',
+    cancelButtonText: 'No, cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.gastoService.borrarGasto(gasto.id).subscribe (
+
+          response => {
+            this.gastosGenerales = this.gastosGenerales.filter(gast => gast !== gasto),
+            swal.fire(
+              'Gasto eliminado',
+              `El gasto ha sido eliminado con éxito`,
+              'success'
+            )
+          }
+        );
+
+        /*Cogemos el indice */
+        var i = this.gastosGenerales.indexOf (gasto);
+        /*Quitamos el gasto del array de gastos*/
+        this.gastosGenerales.splice(i, 1);
+      }
+    })
+  }
+
+  seleccionarFoto(event) {
+    this.fotoSeleccionada = event.target.files[0];
+    console.log(this.fotoSeleccionada);
+
+    // Validamos que sea una foto y no otro archivo.
+    // si no se encuentra una extensión de imagen, va a devolver la función menor que cero.
+    if(this.fotoSeleccionada.type.indexOf('image') < 0) {
+      swal.fire('Error', `El archivo seleccionado debe ser del tipo imagen`, 'error');
+      this.fotoSeleccionada = null;
+    }
+  }
+
+  subirFoto(idAux: number) {
+
+    this.gastoService.subirImagen(this.fotoSeleccionada, idAux).subscribe(
+      gasto => {
+          this.gasto = gasto;
+          //swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
+      });
+  }
+
 }
