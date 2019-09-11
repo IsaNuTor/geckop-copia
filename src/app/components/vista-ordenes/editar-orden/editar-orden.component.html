@@ -25,7 +25,7 @@
           <label class="texto-form">Proyecto</label>
           <select class="custom-select" formControlName="acronimo" (change)="capturarValor()">
             <option value="" selected>{{orden.acronimo}}</option>
-            <option *ngFor="let proyecto of misProyectos" value="{{ misProyectos.acronimo }}">{{ proyecto.acronimo }}</option>
+            <option *ngFor="let proyecto of misProyectos" value="{{ proyecto.acronimo }}">{{ proyecto.acronimo }}</option>
           </select>
         </div>
 
@@ -107,10 +107,10 @@
 
          <!--Ver foto gasto-->
               <td>
-                  <img src="assets/iconos/lupa.png" class="rounded icon" alt="ver foto" (click)='verFoto(gasto.foto)'>
+                  <img src="assets/iconos/lupa.png" class="rounded icon" alt="ver foto" (click)='verFoto(g.foto)'>
               </td>
               <td>
-                <img class="rounded icon" src="assets/iconos/papelera.png" class="rounded icon" alt="Eliminar gasto" (click)='eliminarGasto(gasto)'>
+                <img class="rounded icon" src="assets/iconos/papelera.png" class="rounded icon" alt="Eliminar gasto" (click)='delete(g)'>
               </td>
             </tr>
           </tbody>
@@ -557,7 +557,15 @@
 
       </div>
 
-        <div class="form-group">
+      <div class="form-group" *ngIf="isG">
+        <label class="texto-form" for="memoria">Memoria explicativa de los gastos</label>
+        <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="{{orden.memoria}}"  maxlength="150" ></textarea>
+        <small *ngIf="!crear &&formOrden.get('memoria').hasError('required')" class="alerta">No puede estar vacio. </small>
+      </div>
+
+      <br>
+
+        <div class="form-group" *ngIf="isV">
           <label class="texto-form" for="memoria">Objeto del desplazamiento en relación con la ejecución del proyecto</label>
           <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="{{orden.memoria}}" ></textarea>
           <div class="alerta">
@@ -566,23 +574,23 @@
         </div>
 
         <br>
-        <!--<div class="form-group">
+        <div class="form-group" *ngIf="isG">
           <label class="texto-form" for="relacion">Relación con el proyecto</label>
-          <textarea class="form-control" id="relacion" rows="3" placeholder="{{relacion}}" disabled></textarea>
+          <textarea class="form-control" id="relacion" rows="3" placeholder="{{orden.relacion}}"></textarea>
           <div class="alerta">
             <small *ngIf="false">No puede estar vacio <br></small>
           </div>
-        </div>-->
+        </div>
 
         <br>
-        <div class="form-group">
+        <div class="form-group" *ngIf="isV">
           <label class="texto-form" for="observaciones">Observaciones a la hora de pagar al acreedor</label>
           <textarea class="form-control" id="observaciones" rows="3" formControlName="observaciones" placeholder="{{orden.observaciones}}"></textarea>
         </div>
       <br>
         <!--<a href="#"><img src="../../../../../assets/iconos/pdf.png" alt="Descargar orden pdf" width="80px"></a>-->
       <br><br>
-      <button class="btn btn-success" role="button" (click)="cargarNumProyectoOrden()">Crear Orden</button>
+      <button class="btn btn-success" role="button" (click)="editarOrden()">Guardar</button>
       <button class="btn btn-danger" role="button" (click)="cancelar()">Cancelar</button>
       <br><br>
 
