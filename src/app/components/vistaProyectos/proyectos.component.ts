@@ -92,4 +92,95 @@ export class ProyectosComponent implements OnInit {
     return a+actual*this.elementosPorPagina;
   }
 
+  
+  orderByFechaI():void{
+    this.proyectos.sort(
+      function (a, b) {
+        if (a.fechaInicio> b.fechaInicio) {
+          return 1;
+        }
+        if (a.fechaInicio < b.fechaInicio) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+  
+  orderByFechaC():void{
+    this.proyectos.sort(
+      function (a, b) {
+        if (a.fechaCierre > b.fechaCierre) {
+          return 1;
+        }
+        if (a.fechaCierre < b.fechaCierre) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+  
+  orderByNombre():void{
+    this.proyectos.sort(
+      function (a, b) {
+        if (a.nombre > b.nombre) {
+          return 1;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+
+  orderByProyecto():void{
+    this.proyectos.sort(
+      function (a, b) {
+        if (a.acronimo > b.acronimo) {
+          return 1;
+        }
+        if (a.acronimo < b.acronimo) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+
+  orderByPresupuesto():void{
+    this.proyectos.sort(
+      function (a, b) {
+        if (a.presupuesto > b.presupuesto) {
+          return 1;
+        }
+        if (a.presupuesto < b.presupuesto) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+
+  orderByNumConta():void{
+    this.proyectos.sort(
+      function (a, b) {
+        if (a.nContabilidad > b.nContabilidad) {
+          return 1;
+        }
+        if (a.nContabilidad < b.nContabilidad) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+
 }

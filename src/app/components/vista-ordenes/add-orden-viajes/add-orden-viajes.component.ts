@@ -159,10 +159,10 @@ export class AddOrdenViajesComponent implements OnInit {
             // Otros gastos
             importeOtrosGastos: ['0'],  //Importe
 
-            otrosAgencia: ['', [Validators.maxLength(50)]],
-            checkAgenciaAvion: [''],
-            checkAgenciaTren: [''],
-            checkAgenciaAlojamiento: [''],
+            otrosAgencia: [false, [Validators.maxLength(50)]],
+            checkAgenciaAvion: [false],
+            checkAgenciaTren: [false],
+            checkAgenciaAlojamiento: [false],
           });
 
           //numeracion: number;

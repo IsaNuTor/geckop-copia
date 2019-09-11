@@ -36,7 +36,7 @@ export class VerOrdenComponent implements OnInit {
   isIP:boolean = false;
   /*Ojo cambiar ruta para el backend */
   rutaImagen: string = 'http://localhost:8080/api/imagenes/';
-  rutaImagen2: string = URL_BACKEND + '/api/imagenesViaje/';
+  rutaImagen2: string = URL_BACKEND + '/api/imagenesViajes/';
   numeracionAux: number;
 
   //rutaImagen: string = URL_BACKEND + '/api/imagenes/';
@@ -81,17 +81,17 @@ export class VerOrdenComponent implements OnInit {
             if(this.firmada)
              this.cargarDatosIP(this.orden.nif_IP);
             /*Solo para pruebas */
-            this.cargarGastosGenerales(1);
+           /* this.cargarGastosGenerales(1);
             this.cargarGastoViajes(16);
             this.cargarAcreedor('05464654K');
            this.comprobarIP(this.orden.acronimo);
-             
+             */
             /*Cambiar fuera de pruebas*/
-          /*  this.cargarGastosGenerales(this.orden.id);
+          this.cargarGastosGenerales(this.orden.id);
             this.cargarGastoViajes(this.orden.id)
             this.cargarAcreedor(this.orden.nif_acreedor);
             this.comprobarIP(this.orden.acronimo);
-          */ 
+          
            
 
           }
@@ -103,7 +103,7 @@ export class VerOrdenComponent implements OnInit {
     if(this.orden.estado == 'PM' && this.orden.nif_user == this.sesionService.getDni())
       return true;
     if(this.orden.estado != 'PM' && (this.orden.nif_user == this.sesionService.getDni()  || this.isIP))  
-    
+      return true;
     return false;
   }
 
@@ -181,7 +181,7 @@ export class VerOrdenComponent implements OnInit {
 
   verFotoViaje(foto:String): void {
     let ruta =  this.rutaImagen2 + foto;
-    if(foto == '' || foto == null){
+    if(foto != '' || foto != null){
       swal.fire({
         imageUrl: ruta,
         imageAlt: 'Custom image',
@@ -196,8 +196,10 @@ export class VerOrdenComponent implements OnInit {
         (result) =>{
           this.ordenService.rellenarGastosPDF(this.gastosGenerales).subscribe(
             (result) => {
-              this.ordenService.generarPDF(this.orden).subscribe();
-              this.mostrarPDF();
+              this.ordenService.generarPDF(this.orden).subscribe(
+                (res)=>{this.mostrarPDF();
+                }
+              );
             }
           );
         }
@@ -207,8 +209,11 @@ export class VerOrdenComponent implements OnInit {
         (result) => {
             this.ordenService.rellenarGastosPDFV(this.gastoViaje).subscribe(
               (result) => {
-                this.ordenService.generarPDF(this.orden).subscribe();
-                this.mostrarPDF();
+                this.ordenService.generarPDF(this.orden).subscribe(
+                  (res)=>{this.mostrarPDF();
+                  }
+                );
+               
               }
           );
         }

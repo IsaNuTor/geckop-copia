@@ -125,7 +125,7 @@ export class VerProyectoComponent implements OnInit {
           (ordenes) =>{
             this.ordenes = ordenes;
             this.inicializarArrayNElementos( this.elementosPorPagina<this.ordenes.length ? this.elementosPorPagina : this.ordenes.length, 0);
-     
+            this.orderByFecha() 
           });
       }
     }) 
@@ -451,6 +451,21 @@ export class VerProyectoComponent implements OnInit {
         for(let inv of investigadores){
           this.eliminarInvestigador(inv);
         }
+      }
+
+      orderByFecha():void{
+        this.ordenes.sort(
+          function (a, b) {
+            if (a.fechaOrden > b.fechaOrden) {
+              return 1;
+            }
+            if (a.fechaOrden < b.fechaOrden) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          }
+        );
       }
 
 }

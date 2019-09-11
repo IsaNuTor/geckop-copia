@@ -133,4 +133,61 @@ export class VistaOrdenesComponent implements OnInit {
   }
 
 
+  orderByFecha():void{
+    this.ordenes.sort(
+      function (a, b) {
+        if (a.fechaOrden > b.fechaOrden) {
+          return 1;
+        }
+        if (a.fechaOrden < b.fechaOrden) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+  orderByEstado():void{
+    this.ordenes.sort(
+      function (a, b) {
+        if (a.estado > b.estado) {
+          return 1;
+        }
+        if (a.estado < b.estado) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+  orderByConcepto():void{
+    this.ordenes.sort(
+      function (a, b) {
+        if (a.concepto > b.concepto) {
+          return 1;
+        }
+        if (a.concepto < b.concepto) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+  orderByProyecto():void{
+    this.ordenes.sort(
+      function (a, b) {
+        if (a.acronimo > b.acronimo) {
+          return 1;
+        }
+        if (a.acronimo < b.acronimo) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+
 }

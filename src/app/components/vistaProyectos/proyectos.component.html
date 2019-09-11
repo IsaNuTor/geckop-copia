@@ -4,27 +4,15 @@
       <button class="btn btn-rounded btn btn-success" types="button" [routerLink] = "['/proyectos/form-proyectos.component']">Nuevo Proyecto</button>
     </div>
 
-
-    <!--Lista desplegable-->
-    <!--<div class="form-group my-3">
-    <label for="ordenProyectos">Ordenar por:</label>
-      <select class="custom-select">
-        <option selected>Seleccione</option>
-        <option value="estado">Estado</option>
-        <option value="acronimo">Acrónimo</option>
-        <option value="nombre">Nombre</option>
-      </select>
-    </div>-->
-
     <table class="table text-center">
       <thead class="thead-dark">
         <tr>
-          <th>Fecha de Inicio</th>
-          <th>Fecha de Cierre</th>
-          <th>Nombre</th>
-          <th>Acrónimo</th>
-          <th>Presupuesto</th>
-          <th>Nºcontabilidad</th>
+          <th  (click)="orderByFechaI()">Fecha de Inicio <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th  (click)="orderByFechaC()">Fecha de Cierre <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th  (click)="orderByNombre()">Nombre <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th  (click)="orderByProyecto()">Acrónimo <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th  (click)="orderByPresupuesto()">Presupuesto <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th  (click)="orderByNumConta()">Nºcontabilidad <img src="assets/iconos/ordenar.png" class="rounded"></th>
           <th>Ver</th>
         </tr>
       </thead>

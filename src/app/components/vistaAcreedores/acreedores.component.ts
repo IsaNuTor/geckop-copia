@@ -116,4 +116,49 @@ export class AcreedoresComponent implements OnInit {
   getOrdenPagindoIndex(a:number, actual:number):number{
     return a+actual*this.elementosPorPagina;
   }
+
+
+
+  orderByNombre():void{
+    this.acreedores.sort(
+      function (a, b) {
+        if (a.nombre > b.nombre) {
+          return 1;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+  orderByNIF():void{
+    this.acreedores.sort(
+      function (a, b) {
+        if (a.nif > b.nif) {
+          return 1;
+        }
+        if (a.nif < b.nif) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+  orderByIBAN():void{
+    this.acreedores.sort(
+      function (a, b) {
+        if (a.iban > b.iban) {
+          return 1;
+        }
+        if (a.iban < b.iban) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
 }

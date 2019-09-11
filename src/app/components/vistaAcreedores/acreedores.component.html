@@ -9,9 +9,9 @@
     <table class="table text-center">
       <thead class="thead-dark">
         <tr>
-          <th>Nombre</th>
-          <th>NIF</th>
-          <th>Iban</th>
+          <th (click)="orderByNombre()">Nombre  <img src="assets/iconos/ordenar.png" class="rounded"> </th>
+          <th (click)="orderByNIF()">NIF <img src="assets/iconos/ordenar.png" class="rounded"> </th>
+          <th (click)="orderByIBAN()">Iban <img src="assets/iconos/ordenar.png" class="rounded"> </th>
           <th>Editar</th>
           
         </tr>
@@ -19,7 +19,7 @@
 
       <tbody>
         <tr *ngFor="let a of elementos[0]">
-          <td>{{ acreedores[getOrdenPagindoIndex(a, paginaActual)].nombre }}</td>
+          <td >{{ acreedores[getOrdenPagindoIndex(a, paginaActual)].nombre }}</td>
           <td>{{ acreedores[getOrdenPagindoIndex(a, paginaActual)].nif }}</td>
           <td>{{ acreedores[getOrdenPagindoIndex(a, paginaActual)].iban }}</td>
           <td>

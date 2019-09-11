@@ -14,10 +14,10 @@
       <thead class="thead-dark">
         <tr>
 
-          <th scope="col">Fecha</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Concepto</th>
-          <th scope="col">Proyecto</th>
+          <th scope="col" (click)="orderByFecha()">Fecha <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th scope="col" (click)="orderByEstado()">Estado <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th scope="col" (click)="orderByConcepto()">Concepto <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th scope="col" (click)="orderByProyecto()">Proyecto <img src="assets/iconos/ordenar.png" class="rounded"></th>
           <th scope="col">Ver</th>
           <th scope="col">Borrar</th>
         </tr>
