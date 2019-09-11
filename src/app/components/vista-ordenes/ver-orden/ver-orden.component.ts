@@ -60,8 +60,6 @@ export class VerOrdenComponent implements OnInit {
       this.router.navigate(['/login']);
     else
      this.cargarOrden();
-
-
   }
 
 
@@ -75,35 +73,41 @@ export class VerOrdenComponent implements OnInit {
       this.ordenService.getOrdenID(id).subscribe(
         (orden) =>{
            this.orden = orden;
-           this.firmada = this.orden.estado != 'P';
-           this.isG = this.orden.tipo == 'G';
-           this.isV = this.orden.tipo == 'V';
-
-           if(this.firmada)
-            this.cargarDatosIP(this.orden.nif_IP);
-           /*Solo para pruebas */
-           this.cargarGastosGenerales(1);
-           this.cargarGastoViajes(16);
-           this.cargarAcreedor('05464654K');
-            this.comprobarIP(this.orden.acronimo);
-            
-
-
-
-
-           /*Cambiar fuera de pruebas*/
-         /*  this.cargarGastosGenerales(this.orden.id);
-           this.cargarGastoViajes(this.orden.id)
-           this.cargarAcreedor(this.orden.nif_acreedor);
+           
+            this.firmada = this.orden.estado != 'P';
+            this.isG = this.orden.tipo == 'G';
+            this.isV = this.orden.tipo == 'V';
+ 
+            if(this.firmada)
+             this.cargarDatosIP(this.orden.nif_IP);
+            /*Solo para pruebas */
+            this.cargarGastosGenerales(1);
+            this.cargarGastoViajes(16);
+            this.cargarAcreedor('05464654K');
            this.comprobarIP(this.orden.acronimo);
-*/
+             
+            /*Cambiar fuera de pruebas*/
+          /*  this.cargarGastosGenerales(this.orden.id);
+            this.cargarGastoViajes(this.orden.id)
+            this.cargarAcreedor(this.orden.nif_acreedor);
+            this.comprobarIP(this.orden.acronimo);
+          */ 
+           
+
           }
         );
       }
     })
-
-
   }
+  permitirVer():boolean{
+    if(this.orden.estado == 'PM' && this.orden.nif_user == this.sesionService.getDni())
+      return true;
+    if(this.orden.estado != 'PM' && (this.orden.nif_user == this.sesionService.getDni()  || this.isIP))  
+    
+    return false;
+  }
+
+
   cargarDatosIP(dni: string): void{
     this.usuarioService.getNombreUsuario(dni).subscribe(
       (usuario) => this.ip = usuario
@@ -141,10 +145,10 @@ export class VerOrdenComponent implements OnInit {
 
     this.ordenService.setOrden(this.orden).subscribe(
       (orden) => this.orden = orden
-
     );
     location.reload();
   }
+
   rechazarOrden():void{
     this.orden.estado = 'R';
     this.orden.nif_IP = this.sesionService.getDni();
@@ -153,25 +157,28 @@ export class VerOrdenComponent implements OnInit {
       (orden) => this.orden = orden
     );
     location.reload();
-
   }
 
   comprobarIP(acronimo:string):void{
     this.proyectoService.getProyecto(acronimo).subscribe(
-      (proyecto) => this.isIP = proyecto.ip1 == this.sesionService.getDni() || proyecto.ip2 == this.sesionService.getDni()
-    );
+      (proyecto) =>{
+        this.isIP = proyecto.ip1 == this.sesionService.getDni() || proyecto.ip2 == this.sesionService.getDni();
 
+        if(!this.permitirVer())
+        this.router.navigate(['/home']);
+
+      } 
+    );
   }
 
   verFoto(foto:String): void {
-
-
     swal.fire({
       imageUrl: this.rutaImagen + foto,
       imageAlt: 'Custom image',
       animation: false
     })
   }
+
   verFotoViaje(foto:String): void {
     let ruta =  this.rutaImagen2 + foto;
     if(foto == '' || foto == null){
@@ -190,6 +197,7 @@ export class VerOrdenComponent implements OnInit {
           this.ordenService.rellenarGastosPDF(this.gastosGenerales).subscribe(
             (result) => {
               this.ordenService.generarPDF(this.orden).subscribe();
+              this.mostrarPDF();
             }
           );
         }
@@ -200,13 +208,12 @@ export class VerOrdenComponent implements OnInit {
             this.ordenService.rellenarGastosPDFV(this.gastoViaje).subscribe(
               (result) => {
                 this.ordenService.generarPDF(this.orden).subscribe();
+                this.mostrarPDF();
               }
           );
         }
       );
     }
-
-
   }
 
   /* CARGAR la numeracion segun el acronimo del proyecto */
@@ -228,24 +235,15 @@ export class VerOrdenComponent implements OnInit {
       (orden) => this.orden = orden
 
     );
-    location.reload();
+    this.router.navigate(['/verOrdenes']);
 
   }
-
-  verPDF():void{
-    window.open(URL+"/pdfs/"+ this.orden.id+".pdf");
-  }
-
-  /*probarRutas():void{
-    this.ordenService.probarRutas().subscribe();
-  }*/
 
   mostrarPDF():void{
     this.ordenService.mostrarPDF(this.orden.id).subscribe((res) => {
       var file = new Blob([res], {type: 'application/pdf'});
       var url = URL.createObjectURL(file);
-      var printWindow = window.open(url, '_blank', 'width=800,height=500');
-      //printWindow.print()
+      /*var printWindow =*/ window.open(url, '_blank', 'width=800,height=500');
     });
   }
 
