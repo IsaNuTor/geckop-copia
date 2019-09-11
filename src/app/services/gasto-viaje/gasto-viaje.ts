@@ -6,7 +6,6 @@ export class GastoViaje {
   fechaVuelta: Date;
 
   // Avion
-  avion: string;
   importeAvion: number;
   fotoAvion: string;
 
@@ -17,17 +16,14 @@ export class GastoViaje {
   fotoCoche: string;
 
   // Tren
-  tren: string;
   importeTren: number;
   fotoTren: string;
 
   // Autobus
-  autobus: string;
   importeAutobus: number;
   fotoAutobus: string;
 
   // Taxi
-  taxi: string;
   importeTaxi: number;
   fotoTaxi: string;
 

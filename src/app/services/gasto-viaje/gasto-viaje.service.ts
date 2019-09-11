@@ -13,6 +13,8 @@ export class GastoViajeService {
   urlGastoViajeUpdate:string = URL_BACKEND + '/api/gastosViaje/update';
   urlGastoImagen:string = URL_BACKEND + '/api/gastosViaje/subirImagen';
   urlGastoByOrden:string = URL_BACKEND + '/api/gastosViaje/byidorden';
+  urlSetGasto:string = URL_BACKEND + '/api/setGastoViaje';
+
 
   //urlGastoViaje:string = URL_BACKEND + '/api/gastosViaje';
   //urlGastoViajeUpdate:string = URL_BACKEND + '/gastosViaje/update';
@@ -25,6 +27,10 @@ export class GastoViajeService {
 
   getGastosViaje(): Observable<GastoViaje[]> {
     return this.http.get<GastoViaje[]>(this.urlGastoViaje);
+  }
+
+  setGastoViaje(gastoViaje: GastoViaje):Observable<GastoViaje>{
+    return this.http.post<GastoViaje>(this.urlSetGasto, gastoViaje, {headers: this.httpHeaders});
   }
 
   crearGasto(gastoViaje: GastoViaje) : Observable<GastoViaje> {

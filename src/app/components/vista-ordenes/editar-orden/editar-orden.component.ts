@@ -37,6 +37,7 @@ export class EditarOrdenComponent implements OnInit {
   formOrden: FormGroup;
   idAux: number;
   formValid: boolean = true;
+  importeTotal: number = 0;
 
   //GASTOS
   crearGastoForm: boolean = true;
@@ -48,6 +49,7 @@ export class EditarOrdenComponent implements OnInit {
 
   // EDITAR ORDEN
   actualizar: boolean = false;
+  actualizarViaje: boolean = false;
 
   checkMP: boolean = false;
   checkME: boolean = false;
@@ -110,9 +112,9 @@ export class EditarOrdenComponent implements OnInit {
       });
 
       this.formGastosV = this.fb.group({
-        fechaIda: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-        fechaVuelta: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-        itinerario: ['', [Validators.required]],
+        fechaIda: ['', [Validators.minLength(10), Validators.maxLength(10)]],
+        fechaVuelta: ['', [Validators.minLength(10), Validators.maxLength(10)]],
+        itinerario: [''],
 
         avion: [ '', [Validators.maxLength(150)]],  //Concepto
         importeAvion: ['0'],  //Importe
@@ -168,11 +170,11 @@ export class EditarOrdenComponent implements OnInit {
   transportesUtilizadosFuncion(importeAvion:number, importeCoche:number,
     importeTren:number, importeAutobus:number, importeTaxi:number, importeOtros:number) {
       if(importeAvion != 0) this.checkAvion = true;
-      if(importeCoche != 0) this.checkAvion = true;
-      if(importeTren != 0) this.checkAvion = true;
-      if(importeAutobus != 0) this.checkAvion = true;
-      if(importeTaxi != 0) this.checkAvion = true;
-      if(importeOtros != 0) this.checkAvion = true;
+      if(importeCoche != 0) this.checkCoche = true;
+      if(importeTren != 0) this.checkTren = true;
+      if(importeAutobus != 0) this.checkAutobus = true;
+      if(importeTaxi != 0) this.checkTaxi = true;
+      if(importeOtros != 0) this.checkOtros = true;
   }
 
   capturarValorCheck(valor:string) {
@@ -315,10 +317,106 @@ export class EditarOrdenComponent implements OnInit {
     this.gastoViajeService.findByIdOrden(idOrden).subscribe(
       (gasto) => {
         this.gastoViaje = gasto;
+
+        this.importeTotal = this.gastoViaje.importeTotal;
+
+
+        this.formGastosV = this.fb.group({
+          fechaIda: [this.gastoViaje.fechaIda, [Validators.minLength(10), Validators.maxLength(10)]],
+          fechaVuelta: [this.gastoViaje.fechaVuelta, [Validators.minLength(10), Validators.maxLength(10)]],
+          itinerario: [this.gastoViaje.itinerario],
+
+          importeAvion: [this.gastoViaje.importeAvion],  //Importe
+
+          // Coche
+          nkilometros: [this.gastoViaje.nkilometros],  //nkilometros
+          // Preciokilometro es un atributo de la clase, siempre es el mismo.
+          importeCoche: [this.gastoViaje.importeCoche],  //Importe
+
+          //tren
+          importeTren: [this.gastoViaje.importeTren],  //Importe
+
+          //Autobus
+          importeAutobus: [this.gastoViaje.importeAutobus],  //Importe
+
+          //Taxi
+          importeTaxi: [this.gastoViaje.importeTaxi],  //Importe
+
+          //Otros
+          otros: [this.gastoViaje.otros, [Validators.maxLength(150)]],  //Concepto
+          importeOtros: [this.gastoViaje.importeOtros],  //Importe
+
+          // Hotel
+          importeHotel: [this.gastoViaje.importeHotel],  //Importe
+
+          // Manutencion
+          nDietas: [this.gastoViaje.nDietas],  //nDietas
+          precioDieta: [this.gastoViaje.precioDieta],  //precio
+          importeDietas: [this.gastoViaje.importeDietas],  //Importe
+
+          // Otros gastos
+          importeOtrosGastos: [this.gastoViaje.importeOtrosGastos],  //Importe
+
+          otrosAgencia: [this.gastoViaje.otrosAgencia, [Validators.maxLength(50)]],
+          checkAgenciaAvion: [this.gastoViaje.checkAgenciaAvion],
+          checkAgenciaTren: [this.gastoViaje.checkAgenciaTren],
+          checkAgenciaAlojamiento: [this.gastoViaje.checkAgenciaAlojamiento],
+
+        });
+
+
+
         this.transportesUtilizadosFuncion(gasto.importeAvion, gasto.importeAutobus,
           gasto.importeTren, gasto.importeTaxi, gasto.importeOtros, gasto.importeCoche);
       }
     );
+  }
+
+  actualizarGastoViaje(): void {
+
+    this.gastoViaje.fechaIda = this.formGastosV.value.fechaIda;
+
+    this.gastoViaje.fechaVuelta = this.formGastosV.value.fechaVuelta;
+
+    this.gastoViaje.itinerario = this.formGastosV.value.itinerario;
+
+    this.gastoViaje.importeAvion = this.formGastosV.value.importeAvion;
+
+    // Coche
+    this.gastoViaje.nkilometros = this.formGastosV.value.nkilometros;
+    // Preciokilometro es un atributo de la clase, siempre es el mismo.
+    this.gastoViaje.importeCoche = this.formGastosV.value.importeCoche;
+
+    //tren
+    this.gastoViaje.importeTren = this.formGastosV.value.importeTren;
+
+    //Autobus
+    this.gastoViaje.importeAutobus = this.formGastosV.value.importeAutobus;
+
+    //Taxi
+    this.gastoViaje.importeTaxi = this.formGastosV.value.importeTaxi;
+
+    //Otros
+    this.gastoViaje.otros = this.formGastosV.value.otros;
+
+    this.gastoViaje.importeOtros = this.formGastosV.value.importeOtros;
+
+    // Hotel
+    this.gastoViaje.importeHotel = this.formGastosV.value.importeHotel;
+
+    // Manutencion
+    this.gastoViaje.nDietas = this.formGastosV.value.nDietas;
+    this.gastoViaje.precioDieta = this.formGastosV.value.precioDieta;
+    this.gastoViaje.importeDietas = this.formGastosV.value.importeDietas;
+
+    // Otros gastos
+    this.gastoViaje.importeOtrosGastos = this.formGastosV.value.importeOtrosGastos;
+
+    this.gastoViaje.otrosAgencia = this.formGastosV.value.otrosAgencia;
+    this.gastoViaje.checkAgenciaAvion = this.formGastosV.value.checkAgenciaAvion;
+    this.gastoViaje.checkAgenciaTren = this.formGastosV.value.checkAgenciaTren;
+    this.gastoViaje.checkAgenciaAlojamiento = this.formGastosV.value.checkAgenciaAlojamiento;
+
   }
 
   cargarAcreedores(): void {
@@ -355,75 +453,97 @@ export class EditarOrdenComponent implements OnInit {
   }
 
   // EDITAR ORDEN GASTOS GENERALES
-  editarOrden(): void {
-    if(this.isG) {
-      if(this.formOrden.valid){
 
-        if(this.formOrden.value.acronimo != "" && this.formOrden.controls['acronimo'].status == 'VALID') {
-          this.actualizar = true;
-          this.orden.acronimo = this.formOrden.value.acronimo;
-        }
-        if(this.formOrden.value.nif_acreedor != "" && this.formOrden.controls['nif_acreedor'].status == 'VALID') {
-          this.actualizar = true;
-          this.orden.nif_acreedor = this.formOrden.value.nif_acreedor;
-        }
-        if(this.formOrden.value.concepto != "" && this.formOrden.controls['concepto'].status == 'VALID') {
-          this.actualizar = true;
-          this.orden.concepto = this.formOrden.value.concepto;
-        }
-        if(this.formOrden.value.num_contabilidad != "" && this.formOrden.controls['num_contabilidad'].status == 'VALID') {
-          this.actualizar = true;
-          this.orden.num_contabilidad = this.formOrden.value.num_contabilidad;
-        }
-        if(this.formOrden.value.memoria != "" && this.formOrden.controls['memoria'].status == 'VALID') {
-          this.actualizar = true;
-          this.orden.memoria = this.formOrden.value.memoria;
-        }
-        if(this.formOrden.value.relacion != "" && this.formOrden.controls['relacion'].status == 'VALID') {
-          this.actualizar = true;
-          this.orden.relacion = this.formOrden.value.relacion;
-        }
-        if(this.formOrden.value.observaciones != "" && this.formOrden.controls['observaciones'].status == 'VALID') {
-          this.actualizar = true;
-          this.orden.observaciones = this.formOrden.value.observaciones;
-        }
+    editarOrden(): void {
 
-        if(this.actualizar){
-          this.ordenService.setOrden(this.orden).subscribe(
-            resultado => {
-              if(resultado){
-              const ToastrModule = swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000
-              });
+        if(this.formOrden.valid){
 
-              ToastrModule.fire({
-                type: 'success',
-                title: 'Guardado con exito',
+          if(this.formOrden.value.acronimo != "" && this.formOrden.controls['acronimo'].status == 'VALID') {
+            this.actualizar = true;
+            this.orden.acronimo = this.formOrden.value.acronimo;
+          }
+          if(this.formOrden.value.nif_acreedor != "" && this.formOrden.controls['nif_acreedor'].status == 'VALID') {
+            this.actualizar = true;
+            this.orden.nif_acreedor = this.formOrden.value.nif_acreedor;
+          }
+          if(this.formOrden.value.concepto != "" && this.formOrden.controls['concepto'].status == 'VALID') {
+            this.actualizar = true;
+            this.orden.concepto = this.formOrden.value.concepto;
+          }
+          if(this.formOrden.value.num_contabilidad != "" && this.formOrden.controls['num_contabilidad'].status == 'VALID') {
+            this.actualizar = true;
+            this.orden.num_contabilidad = this.formOrden.value.num_contabilidad;
+          }
+          if(this.formOrden.value.memoria != "" && this.formOrden.controls['memoria'].status == 'VALID') {
+            this.actualizar = true;
+            this.orden.memoria = this.formOrden.value.memoria;
+          }
+          if(this.formOrden.value.relacion != "" && this.formOrden.controls['relacion'].status == 'VALID') {
+            this.actualizar = true;
+            this.orden.relacion = this.formOrden.value.relacion;
+          }
+          if(this.formOrden.value.observaciones != "" && this.formOrden.controls['observaciones'].status == 'VALID') {
+            this.actualizar = true;
+            this.orden.observaciones = this.formOrden.value.observaciones;
+          }
 
-              })
+            if(this.actualizar) {
+              this.ordenService.setOrden(this.orden).subscribe(
+                resultado => {
+                  if(resultado){
+                  const ToastrModule = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000
+                  });
 
-            this.router.navigate(['vista-ordenes'])
-            }else{
-              const ToastrModule = swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 5000
-              });
-              swal.fire({
-                  type: 'error',
-                  title: 'Error!',
-                  text: 'La orden no se ha podido editar',
-                  onClose: () => {
-                        location.reload();
+                  ToastrModule.fire({
+                    type: 'success',
+                    title: 'Guardado con exito',
+
+                  })
+                  if(this.isV) {
+                    this.actualizarGastoViaje();
+                    this.gastoViaje.importeTotal = this.importeTotal;
+
+                    this.gastoViajeService.setGastoViaje(this.gastoViaje).subscribe(
+                      resultado => {
+                        if(resultado == null) {
+                          const ToastrModule = swal.mixin({
+                              toast: true,
+                              position: 'top-end',
+                              showConfirmButton: false,
+                              timer: 5000
+                          });
+                          swal.fire({
+                              type: 'error',
+                              title: 'Error!',
+                              text: 'El gasto no se ha podido editar',
+                          })
+                        } else {
+                          this.router.navigate(['vista-ordenes'])
+                        }
                       }
+                    );
+                  }
+
+                }else{
+                  const ToastrModule = swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 5000
+                  });
+                  swal.fire({
+                      type: 'error',
+                      title: 'Error!',
+                      text: 'La orden no se ha podido editar',
+                  })
+                }
               })
             }
-          })
-        }else{
+        } else{
           this.formValid = false;
           const Toast = swal.mixin({
             toast: true,
@@ -437,11 +557,7 @@ export class EditarOrdenComponent implements OnInit {
             title: 'No se ha modificado ningún dato de la orden.'
           })
         }
-      }else{
-        this.formValid = false;
-      }
-    } // isG
-  }
+    }
 
 // GASTOS
 public crearGasto(): void {
@@ -578,6 +694,44 @@ public crearGasto(): void {
           this.gasto = gasto;
           //swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
       });
+  }
+
+  // FUNCIONES CALCULOS
+  calculoImporteTotal(campo:string): void {
+
+    if((campo == 'avion') || (campo == 'coche') || (campo == 'tren') || (campo == 'autobus') || (campo == 'taxi') || (campo == 'otros') || (campo == 'hotel') || (campo == 'otrosgastos') || (campo == 'dieta')){
+      this.importeTotal = Number(this.formGastosV.get('importeAvion').value) +
+      Number(this.formGastosV.get('importeCoche').value) + Number(this.formGastosV.get('importeTren').value)
+      + Number(this.formGastosV.get('importeAutobus').value) + Number(this.formGastosV.get('importeTaxi').value)
+      + + Number(this.formGastosV.get('importeOtros').value) + Number(this.formGastosV.get('importeHotel').value)
+      + Number(this.formGastosV.get('importeDietas').value) + Number(this.formGastosV.get('importeOtrosGastos').value);
+      this.actualizar = true;
+    }
+  }
+
+  calculoImporteCoche(): void {
+    let importeCalculado: number;
+    let nkm: number = Number(this.formGastosV.get('nkilometros').value);
+    importeCalculado = nkm * this.formGastosV.value.precioKilometro;
+    this.formGastosV.controls['importeCoche'].setValue(importeCalculado);
+
+    this.calculoImporteTotal('coche');
+    //console.log(this.formGastosV.get('importeCoche'))
+  }
+
+  calculoImporteDietas(): void {
+    let importeCalculadoDietas: number;
+    let numDietas: number = Number(this.formGastosV.get('nDietas').value);
+    let precioDieta: number = Number(this.formGastosV.get('precioDieta').value);
+    importeCalculadoDietas = numDietas * precioDieta;
+    this.formGastosV.controls['importeDietas'].setValue(importeCalculadoDietas);
+
+    this.calculoImporteTotal('dieta');
+    //console.log(this.formGastosV.get('importeCoche'))
+  }
+
+  public cancelar(){
+    this.router.navigate(['/vista-ordenes']);
   }
 
 }

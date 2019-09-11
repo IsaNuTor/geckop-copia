@@ -1,0 +1,3 @@
+[0911/210912.570:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0911/210912.632:ERROR:exception_snapshot_win.cc(98)] thread ID 4108 not found in process
+[0911/210912.632:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose. (0xc000010a)
