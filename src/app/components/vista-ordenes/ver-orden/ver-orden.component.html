@@ -236,7 +236,7 @@
     </table>
   </div>
 
-
+  
   <div class="col-md-12" *ngIf="orden.estado == 'PM' ">
       <table class="table table-bordered text-center">
         <thead>
@@ -268,18 +268,16 @@
           <textarea *ngIf="!firmada && isIP && modificacion" class="form-control textarea m-2" id="memoria" rows="3" [(ngModel)]="observacionesIP" placeholder="Escribe las modificaciones necesarias"  ></textarea>
       </div>
       <div class="col-md-2">
+        <img *ngIf="orden.estado == 'A'" src="assets/iconos/pdf.png" class="rounded ml-3" alt="ver foto"  (click)='generarPDF()' title="Ver PDF">
         <button  class="btn btn-rounded btn btn-outline-danger mt-2 m-2" types="button" (click)="cancelar()">Volver a Ordenes</button>
-
       </div>
 
   </div>
 
 
   <!-- <button class="btn btn-rounded btn btn-success m-0" types="button" (click)="pedirModificacionOrden()">Modificar Orden</button>-->
-  <button (click)="generarPDF()"> GENERAR PDF</button>
+  <!--<button (click)="generarPDF()"> GENERAR PDF</button>
   <button *ngIf="orden.estado == 'A'" class="ml-2" (click)="verPDF()"> Ver PDF</button>
 
-  <button class="ml-2" (click)="mostrarPDF()"> Probar Rutas PDF</button>
-
-
+  <button class="ml-2" (click)="generarPDF()"> Probar Rutas PDF</button>-->
 </div>

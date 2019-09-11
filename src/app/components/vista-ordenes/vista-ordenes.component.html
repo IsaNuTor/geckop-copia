@@ -34,9 +34,9 @@
             <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].concepto}}</td>
             <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].acronimo}}</td>
             <td>
-              <img src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a,   paginaActual)].id]" >
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a, paginaActual)].estado !='PM'" src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a,   paginaActual)].id]" >
               <!--Revisar enlace a editar orden-->
-              <img *ngIf="ordenes[getOrdenPagindoIndex(a, paginaActual)].estado =='PM'" src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden" [routerLink]="['/vistaOrdenes/verOrden/', ordenes[getOrdenPagindoIndex(a,   paginaActual)].id]" >
+              <img *ngIf="ordenes[getOrdenPagindoIndex(a, paginaActual)].estado =='PM'" src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden" [routerLink]="['/editarOrden/', ordenes[getOrdenPagindoIndex(a, paginaActual)].id]" >
             </td>
             <td>
                 <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden" (click)="borrarOrden(ordenes[getOrdenPagindoIndex(a,   paginaActual)])">
