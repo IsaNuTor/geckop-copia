@@ -333,4 +333,75 @@ export class EditarOrdenComponent implements OnInit {
     }
   }
   seleccionarFoto(event, s:string) {}
+
+  /*editarOrden(): void {
+    if(this.isG) {
+      if(this.formOrden.valid){
+        this.formOrden.value.cooncepto = this.orden.concepto;
+
+        if(this.formAcreedores.value.nombre != ""){
+            this.actualizar = true;
+            this.acreedor.nombre = this.formAcreedores.value.nombre;
+        }else{ this.formAcreedores.value.nombre = this.acreedor.nombre  }
+
+        if(this.formAcreedores.value.iban != ""){
+          this.actualizar = true;
+          this.acreedor.iban = this.formAcreedores.value.iban;
+        }else{ this.formAcreedores.value.iban = this.acreedor.iban  }
+
+        if(this.actualizar){
+          this.acreedorService.actualizarAcreedor(this.acreedor).subscribe(
+            resultado => {
+              if(resultado){
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+              });
+
+              ToastrModule.fire({
+                type: 'success',
+                title: 'Guardado con exito',
+
+              })
+
+              this.router.navigate(['/acreedores'])
+            }else{
+              const ToastrModule = swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 5000
+              });
+              swal.fire({
+                  type: 'error',
+                  title: 'Error!',
+                  text: 'El acreedor no se ha podido editar',
+                  onClose: () => {
+                        location.reload();
+                      }
+              })
+            }
+          })
+        }else{
+          this.formValid = false;
+          const Toast = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          Toast.fire({
+            type: 'error',
+            title: 'No se ha modificado ningún dato. '
+          })
+        }
+      }else{
+        this.formValid = false;
+      }
+
+    }
+  }*/
 }

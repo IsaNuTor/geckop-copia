@@ -269,13 +269,6 @@ subirFoto(idAux: number) {
     });
 }
 
-eliminarGasto(gasto: Gasto){
-  /*Cogemos el indice */
-  var i = this.gastos.indexOf (gasto);
-  /*Quitamos el gasto del array de gastos*/
-  this.gastos.splice(i, 1);
-}
-
 delete(gasto: Gasto): void {
   swal.fire({
   title: '¿Estás seguro?',
@@ -289,6 +282,7 @@ delete(gasto: Gasto): void {
   }).then((result) => {
     if (result.value) {
       this.gastoService.borrarGasto(gasto.id).subscribe (
+
         response => {
           this.gastos = this.gastos.filter(gast => gast !== gasto),
           swal.fire(
@@ -298,6 +292,11 @@ delete(gasto: Gasto): void {
           )
         }
       );
+
+      /*Cogemos el indice */
+      var i = this.gastos.indexOf (gasto);
+      /*Quitamos el gasto del array de gastos*/
+      this.gastos.splice(i, 1);
     }
   })
 }
@@ -306,7 +305,7 @@ delete(gasto: Gasto): void {
 cargarIdOrdenGasto(idAuxOrden: number): void {
 
     for(let g of this.gastos) {
-      console.log(g);
+    //  console.log(g);
 
       g.id_orden = this.idAuxOrden;
 
