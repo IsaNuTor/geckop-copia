@@ -15,7 +15,7 @@
             <option value="" selected>Seleccione acrónimo del proyecto</option>
             <option *ngFor="let proyecto of misProyectos; index as i" value="{{ misProyectos[i].acronimo }}">{{ proyecto.acronimo }}</option>
           </select>
-          <small *ngIf="!crear &&formOrden.get('acronimo').hasError('required')" class="alerta">No puede estar vacio. </small> 
+          <small *ngIf="!crear &&formOrden.get('acronimo').hasError('required')" class="alerta">No puede estar vacio. </small>
         </div>
 
         <div class="form-group col-md-6">
@@ -24,8 +24,8 @@
             <option value="" selected>Seleccione acreedor</option>
             <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
           </select>
-          <small *ngIf="!crear &&formOrden.get('nif_acreedor').hasError('required')" class="alerta">No puede estar vacio. </small> 
-          <small *ngIf="!ibanRegistrado" class="alerta">No estás registrado como acreedor. Registraté si quieres ser el acreedor de la orden </small> 
+          <small *ngIf="!crear &&formOrden.get('nif_acreedor').hasError('required')" class="alerta">No puede estar vacio. </small>
+          <small *ngIf="!ibanRegistrado" class="alerta">No estás registrado como acreedor. Registraté si quieres ser el acreedor de la orden </small>
         </div>
 
       </div>
@@ -35,13 +35,19 @@
           <div class="form-group col-md-6">
             <label class="texto-form">Concepto</label>
             <input type="text" class="form-control" formControlName="concepto" name="concepto" id="concepto" placeholder="Concepto" >
-            <small *ngIf="!crear &&formOrden.get('concepto').hasError('required')" class="alerta">No puede estar vacio. </small> 
+            <small *ngIf="!crear &&formOrden.get('concepto').hasError('required')" class="alerta">No puede estar vacio. </small>
           </div>
 
           <div class="form-group col-md-6">
             <label class="texto-form">Num. Contabilidad</label>
+<<<<<<< HEAD
             <input type="text" class="form-control"  name="num_contabilidad" id="num_contabilidad" placeholder="{{num_contabilidad}}" >
              </div>
+=======
+            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" >
+            <small *ngIf="!crear &&formOrden.get('num_contabilidad').hasError('required')" class="alerta">No puede estar vacio. </small>
+          </div>
+>>>>>>> d94118c3e3aabe4f12b8827c359bb991e90c4748
 
         </div>
       <div class="row">
@@ -129,8 +135,7 @@
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="avion"><b>Avion</b></label>
-                <input type="text" class="form-control" formControlName="avion" placeholder="(Máx 150 caracteres)" maxlength="200" id="avion" name="avion">
-                <div class="alerta">
+
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
               </div>
@@ -138,9 +143,7 @@
               <div class="col-md-2">
                 <label for="importeAvion">Importe</label>
                 <input type="number" class="form-control" formControlName="importeAvion" required min="0" value="0" step="any" name="importeAvion" id="importeAvion" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('avion')">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
           </div>
           <br>
@@ -167,25 +170,19 @@
               <div class="col-md-8">
                 <label for="nkilometros">Nº de Kilometros</label>
                 <input type="number" class="form-control" formControlName="nkilometros" required min="0" value="0" step="any" name="nkilometros" id="nkilometros" (change)="calculoImporteCoche()" onFocus="if (this.value==0) this.value='';">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
 
               <div class="col-md-2">
                 <label for="preciokm">€/km</label>
                 <input type="number" class="form-control" placeholder="{{precioKilometro}}" name="preciokm" id="preciokm" disabled>
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
 
               <div class="col-md-2">
                 <label for="importeCoche">Importe</label>
                 <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche" disabled onFocus="if (this.value==0) this.value='';">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
             </div>
 
@@ -211,8 +208,7 @@
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="tren"><b>Tren</b></label>
-                <input type="text" class="form-control" formControlName="tren" placeholder="(Máx 150 caracteres)" maxlength="200" id="tren" name="tren">
-                <div class="alerta">
+
                   <small *ngIf="false">No puede estar vacio <br></small>
                 </div>
               </div>
@@ -220,9 +216,7 @@
               <div class="col-md-2">
                 <label for="importeTren">Importe</label>
                 <input type="number" class="form-control" formControlName="importeTren" required min="0" value="0" step="any" name="importeTren" id="importeTren" (change)="calculoImporteTotal('tren')" onFocus="if (this.value==0) this.value='';">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
           </div>
           <br>
@@ -245,18 +239,14 @@
           <div class="row">
               <div class="col-md-10">
                 <label class ="tx-secondary" for="autobus"><b>Autobus</b></label>
-                <input type="text" class="form-control" formControlName="autobus" placeholder="(Máx 150 caracteres)" maxlength="200" id="autobus" name="autobus">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
+
               </div>
 
               <div class="col-md-2">
                 <label for="importeAutobus">Importe</label>
                 <input type="number" class="form-control" formControlName="importeAutobus" required min="0" value="0" step="any" name="importeAutobus" id="importeAutobus" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('autobus')">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
           </div>
           <br>
@@ -279,6 +269,7 @@
         <div class="form-group bordeTransporte" [hidden]="!checkTaxi">
           <div class="row">
               <div class="col-md-10">
+
                 <label class ="tx-secondary" for="taxi"><b>Taxi, Uber Cabify, etc.</b></label>
                 <input type="text" class="form-control" formControlName="taxi" placeholder="(Máx 150 caracteres)" maxlength="200" id="taxi" name="taxi">
                 <div class="alerta">
@@ -289,9 +280,7 @@
               <div class="col-md-2">
                 <label for="importeTaxi">Importe</label>
                 <input type="number" class="form-control" formControlName="importeTaxi" required min="0" value="0" step="any" name="importeTaxi" id="importeTaxi" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('taxi')">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
           </div>
           <br>
@@ -300,7 +289,6 @@
             <input (change)="seleccionarFoto($event, 'taxi')" type="file" class="form-control-file" id="fotoTaxi">
           </div>
           <br>
-        </div>
 
         <!--Checkbox otros-->
         <div class="form-check">
@@ -316,17 +304,13 @@
               <div class="col-md-10">
                 <label class ="tx-secondary" for="otros"><b>Otros</b></label>
                 <input type="text" class="form-control" formControlName="otros" placeholder="(Máx 150 caracteres)" maxlength="200" id="otros" name="otros">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
 
               <div class="col-md-2">
                 <label for="importeOtros">Importe</label>
                 <input type="number" class="form-control" formControlName="importeOtros" required min="0" value="0" step="any" name="importeOtros" id="importeOtros" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('otros')">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
           </div>
           <br>
@@ -337,7 +321,6 @@
         </div>
         <br>
 
-    </div>
         <!--Hotel-->
         <div class="form-group bordeDiv">
           <div class="row">
@@ -349,9 +332,7 @@
               <div class="col-md-2">
                 <label for="importeHotel">Importe</label>
                 <input type="number" class="form-control" formControlName="importeHotel" required min="0" value="0" step="any" name="importeHotel" id="importeHotel" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('hotel')">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
           </div>
           <br>
@@ -368,25 +349,19 @@
               <div class="col-md-3">
                 <label for="nDietas">Nº de dietas</label>
                 <input type="number" class="form-control" formControlName="nDietas" required min="0" value="0" step="any" name="nDietas" id="nDietas" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteDietas()">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
 
               <div class="col-md-7">
                 <label for="precioDieta">cuantía por dieta(€/día) <a href="https://www.ucm.es/data/cont/docs/32-2018-07-11-20180711_cuadro_dietas.pdf" target="_blank">[Ver cuadro de dietas]</a></label>
                 <input type="number" class="form-control" formControlName="precioDieta" required min="0" value="0" step="any" name="precioDieta" id="precioDieta" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteDietas()">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
 
               <div class="col-md-2">
                 <label for="importeDietas">Importe</label>
                 <input type="number" class="form-control" formControlName="importeDietas" required min="0" value="0" step="any" name="importeDietas" id="importeDietas" disabled>
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
             </div>
             <br>
@@ -403,9 +378,7 @@
               <div class="col-md-2">
                 <label for="importeOtrosGastos">Importe</label>
                 <input type="number" class="form-control" formControlName="importeOtrosGastos" required min="0" value="0" step="any" name="importeOtrosGastos" id="importeOtrosGastos" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteTotal('otrosgastos')">
-                <div class="alerta">
-                  <small *ngIf="false">No puede estar vacio <br></small>
-                </div>
+
               </div>
           </div>
           <br>
@@ -432,7 +405,6 @@
           <br>
         </div>
 
-      </div>
 
 
 
@@ -487,9 +459,7 @@
         <div class="form-group">
           <label class="texto-form" for="memoria">Objeto del desplazamiento en relación con la ejecución del proyecto</label>
           <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="Escribe la memoria explicativa" ></textarea>
-          <div class="alerta">
-            <small *ngIf="false">No puede estar vacio <br></small>
-          </div>
+
         </div>
 
         <br>
