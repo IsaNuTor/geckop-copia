@@ -45,9 +45,8 @@
 
           <div class="form-group col-md-6">
             <label class="texto-form">Num. Contabilidad</label>
-            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" maxlength="12" >
-            <small *ngIf="!crear &&formOrden.get('num_contabilidad').hasError('required')" class="alerta">No puede estar vacio. </small>
-          </div>
+            <input type="text" class="form-control"  name="num_contabilidad" id="num_contabilidad" placeholder="{{num_contabilidad}}" maxlength="12" disabled>
+           </div>
 
         </div>
 

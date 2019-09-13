@@ -47,7 +47,9 @@
 
             <!--No tiene mini porque  veces se referencian por la extensión dentro de la universidad-->
             <input id="placeColor" formControlName="telefono" type="text" placeholder="Teléfono" maxlength="9">
-
+            <div class="alerta">
+              <small *ngIf="!formValid && formRegistro.get('telefono').hasError('required')">Telefono no puede estar vacio<br></small>
+            </div>
             <input id="placeColor" formControlName="departamento" type="text" placeholder="Departamento" maxlength="50">
 
             <input id="placeColor" formControlName="centro" type="text" placeholder="Centro" maxlength="50">

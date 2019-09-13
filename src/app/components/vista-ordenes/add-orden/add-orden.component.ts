@@ -69,6 +69,7 @@ export class AddOrdenComponent implements OnInit {
   idAux: number;
   numeracionAux: number;
   ibanRegistrado: boolean = true;
+  num_contabilidad: string = ""; 
 
   constructor(private acreedorService: AcreedorService,
         private router: Router,
@@ -85,7 +86,6 @@ export class AddOrdenComponent implements OnInit {
             acronimo: ['', [Validators.required, Validators.maxLength(10)]],
             nif_acreedor: ['', [Validators.required, Validators.maxLength(10)]],
             concepto: ['', [Validators.required, Validators.maxLength(50)]],
-            num_contabilidad: ['', [Validators.maxLength(12)]],
             memoria: ['', [Validators.required, Validators.maxLength(150)]],
             relacion: ['', [Validators.required,  Validators.maxLength(150)]],
             observaciones: ['', [Validators.required, Validators.maxLength(150)]],
@@ -143,6 +143,9 @@ export class AddOrdenComponent implements OnInit {
     //this.opcionSeleccionada = this.formOrden.get('acronimo');
     this.verSeleccionada = this.formOrden.get('acronimo').value;
     this.relacion = this.getRelacionProyecto();
+    this.proyectoService.getProyecto(this.formOrden.value.acronimo).subscribe(
+      (result) =>  this.num_contabilidad = result.nContabilidad.toString()
+    );
     //console.log(this.verSeleccionada);
   }
 
@@ -150,7 +153,7 @@ export class AddOrdenComponent implements OnInit {
 /*--------------------------------------------FUNCIONES PARA GASTOS---------------------------------------------- */
 
 public crearGasto(): void {
-
+this.crear = true;
   if(this.formGastos.valid){
     //si falta algun dato marcamos el fallo y NO creamos el nuevo gasto
     if(this.formGastos.value.nFactura == ""){this.nFacturaVacio = true; this.crearGastoForm = false;}
@@ -232,6 +235,7 @@ anadirGasto(){
 
 /* CARGAR la numeracion segun el acronimo del proyecto */
 cargarNumProyectoOrden(): number {
+  this.crear = true;
   if(this.formOrden.value.acronimo == ""){this.proyectoVacio = true; this.crear = false;}
 
   if(this.crear){
@@ -239,7 +243,6 @@ cargarNumProyectoOrden(): number {
     this.ordenService.getNumAcronimo(this.formOrden.value.acronimo).subscribe(
       (numMax) =>{
         this.numeracionAux = numMax;
-
         this.crearOrden();
       });
 
@@ -354,11 +357,11 @@ cancelar(){
 // Crear orden
 crearOrden(): void {
     //console.log(this.gasto);
-
-    console.log(this.gastos);
+  console.log(this.gastos);
+  if(this.gastos.length > 0){
 
     if(this.formOrden.valid){
-
+      this.crear = true;
       //si falta algun dato marcamos el fallo y NO creamos la nueva Orden
       if(this.formOrden.value.acronimo == ""){this.proyectoVacio = true; this.crear = false;}
       if(this.formOrden.value.acreedor == ""){this.acreedorVacio = true; this.crear = false;}
@@ -376,6 +379,7 @@ crearOrden(): void {
         this.orden.fechaOrden = new Date();
         this.orden.numeracion = this.numeracionAux;
         this.orden.tipo = "G";
+        this.orden.num_contabilidad = this.num_contabilidad;
 
         this.ordenService.crearOrden(this.orden).subscribe(
           orden =>
@@ -387,33 +391,46 @@ crearOrden(): void {
                       position: 'top-end',
                       showConfirmButton: false,
                       timer: 5000
-                });
+              });
 
-                ToastrModule.fire({
-                  type: 'success',
-                  title: 'Éxito creada',
+              ToastrModule.fire({
+                type: 'success',
+                title: 'Éxito creada',
 
-                })
+              })
 
-                this.idAuxOrden = orden.id;
-                //alert(orden.id);
-                this.cargarIdOrdenGasto(this.idAuxOrden);
-                //alert("pasa por aqui");
+              this.idAuxOrden = orden.id;
+              //alert(orden.id);
+              this.cargarIdOrdenGasto(this.idAuxOrden);
+              //alert("pasa por aqui");
 
-          }else{
-            swal.fire({
-                        type: 'error',
-                        title: 'Error!',
-                        text: 'La orden no se ha podido crear',
-                        onClose: () => {
-                              location.reload();
-                            }
+            }else{
+              swal.fire({
+                          type: 'error',
+                          title: 'Error!',
+                          text: 'La orden no se ha podido crear',
+                          onClose: () => {
+                                location.reload();
+                              }
             })
           }
+        })
       }
-    )
+    }
+  }else{
+    const ToastrModule = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 5000
+    });
+
+    ToastrModule.fire({
+    type: 'error',
+    title: 'Es necesario que al menos haya un gasto.',
+
+    })
   }
-}
 }
 
 verFoto(foto:String): void {

@@ -93,6 +93,7 @@ export class AddOrdenViajesComponent implements OnInit {
 
   // Importe total
   importeTotal: number = 0;
+  num_contabilidad: string = "";
 
   numeracionAux: number;
   relacion: string = "";
@@ -159,7 +160,7 @@ export class AddOrdenViajesComponent implements OnInit {
             // Otros gastos
             importeOtrosGastos: ['0'],  //Importe
 
-            otrosAgencia: [false, [Validators.maxLength(50)]],
+            otrosAgencia: ['', [Validators.maxLength(50)]],
             checkAgenciaAvion: [false],
             checkAgenciaTren: [false],
             checkAgenciaAlojamiento: [false],
@@ -228,6 +229,9 @@ export class AddOrdenViajesComponent implements OnInit {
     //this.opcionSeleccionada = this.formOrden.get('acronimo');
     this.verSeleccionada = this.formOrden.get('acronimo').value;
     this.relacion = this.getRelacionProyecto();
+    this.proyectoService.getProyecto(this.formOrden.value.acronimo).subscribe(
+      (result) =>  this.num_contabilidad = result.nContabilidad.toString()
+    );
     //console.log(this.verSeleccionada);
   }
 
@@ -296,6 +300,7 @@ public crearOrden(): void {
         this.orden.numeracion = this.numeracionAux;
         this.orden.tipo = "V";
         this.orden.relacion = this.relacion;
+        this.orden.num_contabilidad = this.num_contabilidad;
 
         /*if(this.orden.tipo == 'V')
           this.orden.relacion = this.getRelacionProyecto();
@@ -502,12 +507,7 @@ rellenarFotos(id:string):void{
   subirFoto(idAux: number) {
 
     for(let f of this.fotos) {
-      this.gastoViajeService.subirImagen(f, idAux).subscribe(
-        gastoViaje => {
-            if(gastoViaje)
-            alert("Todo correcto!");
-            //swal.fire('Exito', `La foto se ha subido correctamente`, 'success');
-        });
+      this.gastoViajeService.subirImagen(f, idAux).subscribe();
     }
   }
 

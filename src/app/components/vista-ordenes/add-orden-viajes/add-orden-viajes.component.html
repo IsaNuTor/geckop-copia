@@ -40,9 +40,8 @@
 
           <div class="form-group col-md-6">
             <label class="texto-form">Num. Contabilidad</label>
-            <input type="text" class="form-control" formControlName="num_contabilidad" name="num_contabilidad" id="num_contabilidad" placeholder="Num. Contabilidad" >
-            <small *ngIf="!crear &&formOrden.get('num_contabilidad').hasError('required')" class="alerta">No puede estar vacio. </small> 
-          </div>
+            <input type="text" class="form-control"  name="num_contabilidad" id="num_contabilidad" placeholder="{{num_contabilidad}}" >
+             </div>
 
         </div>
       <div class="row">
@@ -109,8 +108,8 @@
           </div>
 
           <div class="form-group itinerario">
-            <label class ="tx-secondary mr-2" for="itinerario"><b>Itinerario:</b></label>
-            <input type="text" class="form-control" formControlName="itinerario" placeholder="(Máx 150 caracteres)" maxlength="150" id="itinerario" name="itinerario">
+            <label class ="tx-secondary mr-2 mt-3" for="itinerario"><b>Itinerario:</b></label>
+            <input type="text" class="form-control itinerario" formControlName="itinerario" placeholder="(Máx 150 caracteres)" maxlength="150" id="itinerario" name="itinerario">
           </div>
         </div>
 
@@ -165,7 +164,7 @@
         <div class="form-group bordeTransporte" [hidden]="!checkCoche">
           <label class ="tx-secondary"><b>Coche</b></label>
           <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-8">
                 <label for="nkilometros">Nº de Kilometros</label>
                 <input type="number" class="form-control" formControlName="nkilometros" required min="0" value="0" step="any" name="nkilometros" id="nkilometros" (change)="calculoImporteCoche()" onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
@@ -173,7 +172,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <label for="preciokm">€/km</label>
                 <input type="number" class="form-control" placeholder="{{precioKilometro}}" name="preciokm" id="preciokm" disabled>
                 <div class="alerta">
@@ -181,7 +180,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <label for="importeCoche">Importe</label>
                 <input type="number" class="form-control" formControlName="importeCoche" required min="0" value="0" step="any" name="importeCoche" id="importeCoche" disabled onFocus="if (this.value==0) this.value='';">
                 <div class="alerta">
@@ -272,7 +271,7 @@
         <div class="form-check">
           <input class="form-check-input ml-1" type="checkbox" value="" id="defaultCheck5" (change)="capturarValorCheck('taxi')">
           <label class="form-check-label ml-4" for="defaultCheck5">
-            Taxi
+            Taxi o Similares
           </label>
         </div>
 
@@ -280,7 +279,7 @@
         <div class="form-group bordeTransporte" [hidden]="!checkTaxi">
           <div class="row">
               <div class="col-md-10">
-                <label class ="tx-secondary" for="taxi"><b>Taxi</b></label>
+                <label class ="tx-secondary" for="taxi"><b>Taxi, Uber Cabify, etc.</b></label>
                 <input type="text" class="form-control" formControlName="taxi" placeholder="(Máx 150 caracteres)" maxlength="200" id="taxi" name="taxi">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>

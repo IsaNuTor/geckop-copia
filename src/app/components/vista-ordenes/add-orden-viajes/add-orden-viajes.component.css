@@ -70,6 +70,7 @@ select:hover{
 }
 
 .itinerario {
-  margin-left: 30%;
+  text-align: center;
   margin-top: 15px;
+  min-width: 90%;
 }
