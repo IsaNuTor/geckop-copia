@@ -138,19 +138,9 @@ export class VerOrdenComponent implements OnInit {
   }
 
 
-  aceptarOrden():void{
-    this.orden.estado = 'A';
-    this.orden.nif_IP = this.sesionService.getDni();
-    this.orden.iban = this.acreedor.iban;
 
-    this.ordenService.setOrden(this.orden).subscribe(
-      (orden) => this.orden = orden
-    );
-    location.reload();
-  }
-
-  rechazarOrden():void{
-    this.orden.estado = 'R';
+  cambiarEstadoOrden(estado: string):void{
+    this.orden.estado = estado;
     this.orden.nif_IP = this.sesionService.getDni();
 
     this.ordenService.setOrden(this.orden).subscribe(
@@ -226,7 +216,7 @@ export class VerOrdenComponent implements OnInit {
     this.ordenService.getNumAcronimo(this.orden.acronimo).subscribe(
       (numMax) =>{
         this.orden.numeracion = numMax;
-        this.aceptarOrden();
+        this.cambiarEstadoOrden('A');
       });
   }
 

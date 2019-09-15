@@ -488,6 +488,7 @@ export class EditarOrdenComponent implements OnInit {
           }
 
             if(this.actualizar) {
+              this.orden.estado == 'P';
               this.ordenService.setOrden(this.orden).subscribe(
                 resultado => {
                   if(resultado){

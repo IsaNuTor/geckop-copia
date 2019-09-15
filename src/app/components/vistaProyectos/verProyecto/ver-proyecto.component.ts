@@ -34,15 +34,17 @@ export class VerProyectoComponent implements OnInit {
   /*form */
   form: FormGroup;
 
-  fechaAntigua: Date;
-  NCAntiguo: number;
+
+
   /*Nuevos Usuarios */
   usuarios: Usuario[];
   editarUsuarios: Boolean = false;
   formInvestigador: FormGroup;
-  permitirEdicion: Boolean = false;
-  
 
+  /*Edicion */
+  permitirEdicion: Boolean = false;
+  fechaAntigua: Date;
+  NCAntiguo: number;
 
   constructor(
     private proyectoService: ProyectoService,

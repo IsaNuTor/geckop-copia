@@ -313,7 +313,7 @@
   <div class="col-md-12">
       <div class="col-md-6">
           <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-success m-2" types="button" (click)="firmarOrden()">Aceptar Orden</button>
-          <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-danger m-2" types="button" (click)="rechazarOrden()">Rechazar Orden</button>
+          <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-danger m-2" types="button" (click)="cambairEstadoOrden('R')">Rechazar Orden</button>
 
           <button *ngIf="!firmada && isIP && !modificacion" class="btn btn-rounded btn btn-warning m-2" types="button" (click)="pedirModificacionOrden()">Pedir Modificación</button>
           <button *ngIf="!firmada && isIP && modificacion" class="btn btn-rounded btn btn-outline-warning mt-2 m-2" types="button" (click)="enviarModificacion()">Enviar</button>
