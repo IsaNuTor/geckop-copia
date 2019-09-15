@@ -25,7 +25,7 @@
             <td>{{ proyecto.presupuesto }}</td>
             <td>
                 {{ proyecto.nContabilidad }}
-                <img *ngIf="!editarNCActiva && permitirEdicion" src="assets/iconos/editar2.png" class="ml-4 icon2" alt="Editar Proyecto" (click)="editarNC()">    
+                <img *ngIf="!editarNCActivo && permitirEdicion" src="assets/iconos/editar2.png" class="ml-4 icon2" alt="Editar Proyecto" (click)="editarNC()">    
             </td>
            </tr>
 
@@ -38,9 +38,9 @@
             </td>
             <td colspan="2"></td>
             <td >
-                <input *ngIf="editarNCActiva && permitirEdicion" type="text" class="form-control form-control-sm" formControlName="nContabilidad" id="nContabilidad" placeholder="Nº de Contabilidad" name="nContabilidad">                
-                <img  *ngIf="editarNCActiva && permitirEdicion" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarNC()">
-                <img  *ngIf="editarNCActiva && permitirEdicion" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarNC()">
+                <input *ngIf="editarNCActivo && permitirEdicion" type="text" class="form-control form-control-sm" formControlName="nContabilidad" id="nContabilidad" placeholder="Nº de Contabilidad" name="nContabilidad">                
+                <img  *ngIf="editarNCActivo && permitirEdicion" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarNC()">
+                <img  *ngIf="editarNCActivo && permitirEdicion" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarNC()">
             </td>
            </tr>
         </tbody>

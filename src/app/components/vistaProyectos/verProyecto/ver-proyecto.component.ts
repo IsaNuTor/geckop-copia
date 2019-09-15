@@ -33,8 +33,9 @@ export class VerProyectoComponent implements OnInit {
   editarNCActiva: Boolean = false;
   /*form */
   form: FormGroup;
+
   fechaAntigua: Date;
-  NCAntigua: number;
+  NCAntiguo: number;
   /*Nuevos Usuarios */
   usuarios: Usuario[];
   editarUsuarios: Boolean = false;
@@ -55,7 +56,8 @@ export class VerProyectoComponent implements OnInit {
   ) { 
       this.form = this.fb.group({
         fechaCierre: ['', [Validators.minLength(10), Validators.maxLength(10)]],
-        nContabilidad:['', [Validators.minLength(1), Validators.maxLength(20)]]
+        nContabilidad:['', [Validators.minLength(1), Validators.maxLength(20)]],
+        presupuesto: ['']
       });
       this.formInvestigador = this.fb.group({
         rol: ['Miembro del proyecto', Validators.required]  //rol del select
@@ -203,7 +205,7 @@ export class VerProyectoComponent implements OnInit {
   guardarNC():void{
     if(this.form.valid){
       this.editarNCActiva = !this.editarNCActiva;
-      this.NCAntigua =  this.form.value.nContabilidad;
+      this.NCAntiguo =  this.form.value.nContabilidad;
       this.proyecto.nContabilidad = this.form.value.nContabilidad
       this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
         result => {
@@ -231,14 +233,22 @@ export class VerProyectoComponent implements OnInit {
               type: 'error',
               title: 'Error al cambiar el Nº de Contabilidad'
             })
-            this.proyecto.nContabilidad = this.NCAntigua;
+            this.proyecto.nContabilidad = this.NCAntiguo;
 
           } 
         });
-    }
-
-    
+    }    
   }
+
+
+  editarProyecto(){
+
+  }
+
+
+
+
+
 
   cargarNuevosUsuarios():void{
     this.editarUsuarios = !this.editarUsuarios;
@@ -271,6 +281,155 @@ export class VerProyectoComponent implements OnInit {
     }
     
   }
+
+  eliminarInvestigador(usuario:UsuarioProyecto):void{
+    let i = this.investigadoresProyecto.indexOf(usuario);
+    this.investigadoresProyecto.splice(i, 1);
+    this.nombresInvestigadores.splice(i, 1);
+
+      this.usuariosProyectoService.eliminarUsuariosProyecto(usuario).subscribe(
+        result => {
+          if(result){
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'success',
+              title: 'Eliminado Correctamente' 
+            })
+            
+          }else{
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'error',
+              title: 'Error al Eliminar el Usuario'
+            })
+            location.reload();
+            
+
+          } 
+        }
+      );
+    }
+
+  noEditar():void{
+    this.editarUsuarios = !this.editarUsuarios;
+  }
+
+
+  borrarProyecto(): void{
+    if(this.ordenes.length == 0)
+      this.proyectoService.borrarProyecto(this.proyecto).subscribe(
+        (result) => {
+          if(result ){
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'success',
+              title: 'Eliminado Correctamente' 
+            })
+            this.eliminarInvestigadores();
+            this.router.navigate(['/proyectos']);
+          }else{
+            const ToastrModule = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000
+            });
+
+            ToastrModule.fire({
+              type: 'error',
+              title: 'Error al Eliminar el proyecto'
+            })
+            
+
+          } 
+        }
+      )
+      else{
+        const ToastrModule = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 5000
+        });
+
+        ToastrModule.fire({
+          type: 'error',
+          title: 'El proyecto tiene ordenes emitidas y no se puede eliminar.'
+        })
+        
+
+      } 
+  }
+
+
+
+  eliminarProyecto(): void{
+
+    swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Seguro que desea eliminar al proyecto ${this.proyecto.acronimo}?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+      cancelButtonText: 'No, cancelar',
+      }).then((result) => {
+      this.borrarProyecto();
+      });
+
+  }
+
+
+  eliminarInvestigadores(): void{
+    console.log(this.investigadoresProyecto);
+    let investigadores = new Array<UsuarioProyecto>();
+    
+    for(let inv of this.investigadoresProyecto){
+      investigadores.push(inv);
+    }
+
+    for(let inv of investigadores){
+      this.eliminarInvestigador(inv);
+    }
+  }
+
+  orderByFecha():void{
+    this.ordenes.sort(
+      function (a, b) {
+        if (a.fechaOrden > b.fechaOrden) {
+          return 1;
+        }
+        if (a.fechaOrden < b.fechaOrden) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+    );
+  }
+
+
+
+
 
   elementosPorPagina: number = 5; //numero MAXIMO de elementos a mostrar por pagina
   paginaActual: number = 0;  
@@ -322,150 +481,5 @@ export class VerProyectoComponent implements OnInit {
   getOrdenPagindoIndex(a:number, actual:number):number{
     return a+actual*this.elementosPorPagina;
   }
-
-  eliminarInvestigador(usuario:UsuarioProyecto):void{
-    let i = this.investigadoresProyecto.indexOf(usuario);
-    this.investigadoresProyecto.splice(i, 1);
-    this.nombresInvestigadores.splice(i, 1);
-
-      this.usuariosProyectoService.eliminarUsuariosProyecto(usuario).subscribe(
-        result => {
-          if(result){
-            const ToastrModule = swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 5000
-            });
-
-            ToastrModule.fire({
-              type: 'success',
-              title: 'Eliminado Correctamente' 
-            })
-            
-          }else{
-            const ToastrModule = swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 5000
-            });
-
-            ToastrModule.fire({
-              type: 'error',
-              title: 'Error al Eliminar el Usuario'
-            })
-            location.reload();
-            
-
-          } 
-        }
-      );
-    }
-
-    noEditar():void{
-      this.editarUsuarios = !this.editarUsuarios;
-    }
-
-
-    borrarProyecto(): void{
-     if(this.ordenes.length == 0)
-        this.proyectoService.borrarProyecto(this.proyecto).subscribe(
-          (result) => {
-            if(result ){
-              const ToastrModule = swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000
-              });
-  
-              ToastrModule.fire({
-                type: 'success',
-                title: 'Eliminado Correctamente' 
-              })
-              this.eliminarInvestigadores();
-              this.router.navigate(['/proyectos']);
-            }else{
-              const ToastrModule = swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000
-              });
-  
-              ToastrModule.fire({
-                type: 'error',
-                title: 'Error al Eliminar el proyecto'
-              })
-              
-  
-            } 
-          }
-        )
-        else{
-          const ToastrModule = swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 5000
-          });
-
-          ToastrModule.fire({
-            type: 'error',
-            title: 'El proyecto tiene ordenes emitidas y no se puede eliminar.'
-          })
-          
-
-        } 
-      }
-
-
-
-      eliminarProyecto(): void{
-
-        swal.fire({
-          title: '¿Estás seguro?',
-          text: `¿Seguro que desea eliminar al proyecto ${this.proyecto.acronimo}?`,
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí, eliminarlo',
-          cancelButtonText: 'No, cancelar',
-         }).then((result) => {
-          this.borrarProyecto();
-          });
-
-      }
-
-
-      eliminarInvestigadores(): void{
-        console.log(this.investigadoresProyecto);
-        let investigadores = new Array<UsuarioProyecto>();
-        
-        for(let inv of this.investigadoresProyecto){
-          investigadores.push(inv);
-        }
-
-        for(let inv of investigadores){
-          this.eliminarInvestigador(inv);
-        }
-      }
-
-      orderByFecha():void{
-        this.ordenes.sort(
-          function (a, b) {
-            if (a.fechaOrden > b.fechaOrden) {
-              return 1;
-            }
-            if (a.fechaOrden < b.fechaOrden) {
-              return -1;
-            }
-            // a must be equal to b
-            return 0;
-          }
-        );
-      }
 
 }
