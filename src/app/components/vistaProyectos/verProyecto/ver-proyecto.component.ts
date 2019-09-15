@@ -34,7 +34,11 @@ export class VerProyectoComponent implements OnInit {
   /*form */
   form: FormGroup;
 
-
+  ip1: Usuario  =new Usuario();
+  ip2: Usuario=new Usuario();
+  ips: UsuarioProyecto[];
+  modIP = false;
+  maxIP = true;
 
   /*Nuevos Usuarios */
   usuarios: Usuario[];
@@ -43,8 +47,8 @@ export class VerProyectoComponent implements OnInit {
 
   /*Edicion */
   permitirEdicion: Boolean = false;
-  fechaAntigua: Date;
-  NCAntiguo: number;
+  editarProyecto: Boolean = true;
+
 
   constructor(
     private proyectoService: ProyectoService,
@@ -76,6 +80,7 @@ export class VerProyectoComponent implements OnInit {
       this.cargarProyecto();
       this.cargarUsuariosProyecto();
       this.cargarOrdenesProyecto();
+      
     }
     
   }
@@ -85,15 +90,11 @@ export class VerProyectoComponent implements OnInit {
       this.activatedRoute.params.subscribe(params => {
       let acronimo = params['acronimo']
 
-      //this.proyecto = new Proyecto();
-      if(acronimo) {
-      //alert(acronimo);
-      /*this.proyectoService.getProyecto(acronimo).subscribe(
-          (proyecto) => this.proyecto = proyecto
-        )*/
+      if(acronimo) {      
         this.proyectoService.getProyecto(acronimo).subscribe((proyecto) => {
           this.proyecto = proyecto;
           this.permitirEdicion = this.proyecto.ip1 == this.sesionService.getDni() || this.proyecto.ip2 == this.sesionService.getDni();
+          this.cargarIPs();
         });
       }
     })
@@ -104,17 +105,11 @@ export class VerProyectoComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
         let acronimo = params['acronimo']
 
-        //this.proyecto = new Proyecto();
-        if(acronimo) {
-        //alert(acronimo);
-        /*this.proyectoService.getProyecto(acronimo).subscribe(
-            (proyecto) => this.proyecto = proyecto
-          )*/
+        if(acronimo) {  
           this.usuariosProyectoService.getInvestigadoresProyecto(acronimo).subscribe( 
             (listaInvestigadores) =>{
               this.investigadoresProyecto = listaInvestigadores;
               this.cargarNombres();
-              
             });
         }
       }) 
@@ -150,65 +145,47 @@ export class VerProyectoComponent implements OnInit {
 
   cargarNombres():void{  
     this.nombresInvestigadores = new Array<String>();  
+    this.ips = new Array<UsuarioProyecto>();
     for (let user of this.investigadoresProyecto) {
-      this.getNombre(user.dni);
-      
+      if(user.rol != "Investigador Principal")
+          this.getNombre(user.dni);
+      else{
+        this.ips.push(user);
+        this.maxIP = this.ips.length >=2;
+      }
     }
-   //alert(this.nombresInvestigadores);
-  }
-
-  editarFecha():void{
-    this.editarFechaActiva = !this.editarFechaActiva;
-  }
-  editarNC():void{
-    this.editarNCActiva = !this.editarNCActiva;
-  }
- 
-
-  guardarFecha():void{
-    if(this.form.valid){
-      this.editarFechaActiva = !this.editarFechaActiva;
-      this.fechaAntigua =  this.form.value.fechaCierre;
-      this.proyecto.fechaCierre = this.form.value.fechaCierre;
-      this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
-        result => {
-          if(result != null){
-            const ToastrModule = swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 5000
-            });
-
-            ToastrModule.fire({
-              type: 'success',
-              title: 'Guardado '+result.acronimo
-            })
-          }else{
-            const ToastrModule = swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 5000
-            });
-
-            ToastrModule.fire({
-              type: 'error',
-              title: 'Error al cambiar la fecha'
-            })
-            this.proyecto.fechaCierre = this.fechaAntigua;
-
-          } 
-        });
-    }
-
+    for(let user of this.ips)
+      this.investigadoresProyecto.splice(this.investigadoresProyecto.indexOf (user), 1);
     
   }
-  guardarNC():void{
+
+  cargarIPs(): void{
+    this.usuarioService.getNombreUsuario(this.proyecto.ip1).subscribe( (result) =>  this.ip1 = result );
+    if(this.proyecto.ip2 != "")
+    this.usuarioService.getNombreUsuario(this.proyecto.ip2).subscribe( (result) =>  this.ip2 = result );
+
+    
+
+  }
+
+
+  activarEdicion(){
+    this.editarProyecto = !this.editarProyecto;
+  }
+
+  modificarProyecto(){
     if(this.form.valid){
-      this.editarNCActiva = !this.editarNCActiva;
-      this.NCAntiguo =  this.form.value.nContabilidad;
-      this.proyecto.nContabilidad = this.form.value.nContabilidad
+
+      if(this.form.value.nContabilidad != '')
+        this.proyecto.nContabilidad = this.form.value.nContabilidad;
+      
+      if(this.form.value.fechaCierre != '')
+        this.proyecto.fechaCierre = this.form.value.fechaCierre;
+
+      if(this.form.value.presupuesto != '')
+        this.proyecto.presupuesto = this.form.value.presupuesto;
+
+      this.editarProyecto = !this.editarProyecto;
       this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
         result => {
           if(result != null){
@@ -233,18 +210,12 @@ export class VerProyectoComponent implements OnInit {
 
             ToastrModule.fire({
               type: 'error',
-              title: 'Error al cambiar el Nº de Contabilidad'
+              title: 'Error al actualizar los datos'
             })
-            this.proyecto.nContabilidad = this.NCAntiguo;
 
           } 
         });
-    }    
-  }
-
-
-  editarProyecto(){
-
+    }  
   }
 
 
@@ -284,6 +255,51 @@ export class VerProyectoComponent implements OnInit {
     
   }
 
+  modificarIP():void{
+    this.modIP = !this.modIP;
+  }
+  anadirIP(ip: UsuarioProyecto):void{
+    this.proyecto.ip2 = ip.dni;
+    this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
+      res =>{
+          ip.rol = "Investigador Principal";
+        this.usuariosProyectoService.insertarUsuariosProyecto(ip).subscribe(
+          (result) =>{
+            this.investigadoresProyecto.splice(this.investigadoresProyecto.indexOf (result), 1); 
+            this.nombresInvestigadores.splice(this.investigadoresProyecto.indexOf (result), 1);
+            this.ips.push(result);
+            this.maxIP = this.ips.length >= 2;
+            this.cargarIPs();
+            if(result != null){
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+              });
+
+              ToastrModule.fire({
+                type: 'success',
+                title: 'Guardado '+result.acronimo
+              })
+            }else{
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+              });
+
+              ToastrModule.fire({
+                type: 'error',
+                title: 'Eliminado el IP correctamente.'
+              })
+          }
+        }); 
+      });
+    }
+
+
   eliminarInvestigador(usuario:UsuarioProyecto):void{
     let i = this.investigadoresProyecto.indexOf(usuario);
     this.investigadoresProyecto.splice(i, 1);
@@ -322,6 +338,58 @@ export class VerProyectoComponent implements OnInit {
           } 
         }
       );
+    }
+
+    eliminarIP():void{
+    this.proyecto.ip2 = ""
+    this.proyectoService.actualizarProyecto(this.proyecto).subscribe(
+      res => {
+        let ip;
+        if(this.proyecto.ip2 == this.ips[0].dni){
+          ip = this.ips[0];
+          this.ips.splice(0, 1);
+        }
+        else{
+          ip = this.ips[1];
+          this.ips.splice(1, 1);
+        }
+        this.maxIP = this.ips.length >= 2;
+         
+          
+          ip.rol = "Miembro del proyecto";
+        this.usuariosProyectoService.insertarUsuariosProyecto(ip).subscribe(
+          (result) =>{
+            
+            this.investigadoresProyecto.push(result);
+            this.getNombre(result.dni);
+            if(result != null){
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+              });
+
+              ToastrModule.fire({
+                type: 'success',
+                title: 'Guardado '+result.acronimo
+              })
+            }else{
+              const ToastrModule = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+              });
+
+              ToastrModule.fire({
+                type: 'error',
+                title: 'Eliminado el IP correctamente.'
+              })
+              
+          }
+        }); 
+      });
     }
 
   noEditar():void{
@@ -483,5 +551,7 @@ export class VerProyectoComponent implements OnInit {
   getOrdenPagindoIndex(a:number, actual:number):number{
     return a+actual*this.elementosPorPagina;
   }
+
+  
 
 }

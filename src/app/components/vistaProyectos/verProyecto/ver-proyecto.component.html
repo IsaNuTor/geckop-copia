@@ -1,7 +1,7 @@
 
  <form [formGroup]="form">
     <!--<h3>Nombre completo del proyecto (acronimo) - Nº Contabilidad</h3>-->
-    <h3>{{proyecto.acronimo}}</h3>
+    <h3 class="mb-3">{{proyecto.acronimo}}</h3>
     <div>
       <table class="table text-center">
         <thead class="thead-dark">
@@ -11,37 +11,38 @@
             <th>Nombre</th>
             <th>Presupuesto</th>
             <th>Nºcontabilidad</th>
+            <th *ngIf="permitirEdicion">Editar</th>
           </tr>
         </thead>
 
         <tbody>
-           <tr>
-            <td>{{ proyecto.fechaInicio }}</td>
-            <td>
-              {{proyecto.fechaCierre}}
-              <img *ngIf="!editarFechaActiva && permitirEdicion" src="assets/iconos/editDate.png" class="ml-2 icon" alt="Editar Proyecto" (click)="editarFecha()">    
+          <tr>
+            <td> {{ proyecto.fechaInicio }} </td>
+            <td> {{ proyecto.fechaCierre }} </td>
+            <td> {{ proyecto.nombre }} </td>
+            <td> {{ proyecto.presupuesto }} </td>
+            <td> {{ proyecto.nContabilidad }} </td>
+            <td *ngIf="permitirEdicion">
+              <img *ngIf="editarProyecto" src="assets/iconos/editar.png" class="rounded icon" alt="Editar Proyecto" (click)="activarEdicion()">
+              <img *ngIf="!editarProyecto" src="assets/iconos/menos.png" class="rounded icon" alt="Cancelar" (click)="activarEdicion()">
             </td>
-            <td>{{ proyecto.nombre }}</td>
-            <td>{{ proyecto.presupuesto }}</td>
-            <td>
-                {{ proyecto.nContabilidad }}
-                <img *ngIf="!editarNCActivo && permitirEdicion" src="assets/iconos/editar2.png" class="ml-4 icon2" alt="Editar Proyecto" (click)="editarNC()">    
-            </td>
-           </tr>
+          </tr>
 
-           <tr>
-             <td></td>
-             <td >
-                <input *ngIf="editarFechaActiva && permitirEdicion" type="date" class="form-control form-control-sm" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">                
-                    <img  *ngIf="editarFechaActiva && permitirEdicion" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarFecha()">
-                    <img  *ngIf="editarFechaActiva && permitirEdicion" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarFecha()">
-            </td>
-            <td colspan="2"></td>
-            <td >
-                <input *ngIf="editarNCActivo && permitirEdicion" type="text" class="form-control form-control-sm" formControlName="nContabilidad" id="nContabilidad" placeholder="Nº de Contabilidad" name="nContabilidad">                
-                <img  *ngIf="editarNCActivo && permitirEdicion" src="assets/iconos/guardar.png" class="rounded icon" alt="Guardar Fecha" (click)="guardarNC()">
-                <img  *ngIf="editarNCActivo && permitirEdicion" src="assets/iconos/menos.png" class="rounded icon ml-3" alt="Cancelar" (click)="editarNC()">
-            </td>
+           <tr *ngIf="!editarProyecto">
+              <td></td>
+              <td>
+                  <input type="date" class="form-control form-control-sm" formControlName="fechaCierre" id="fechaCierre" placeholder="fecha de cierre" name="fechaCierre">                
+              </td>
+              <td></td>
+              <td>  
+                <input type="text" class="form-control form-control-sm" formControlName="presupuesto" id="presupuesto" placeholder="Presupuesto" name="presupuesto">                
+              </td>
+              <td>
+                <input type="text" class="form-control form-control-sm" formControlName="nContabilidad" id="nContabilidad" placeholder="Nº de Contabilidad" name="nContabilidad">                
+              </td>
+              <td>
+                <img  src="assets/iconos/guardar.png" class="rounded icon" alt="Editar Proyecto" (click)="modificarProyecto()">
+              </td>
            </tr>
         </tbody>
       </table>
@@ -95,14 +96,6 @@
       </div>
     </div>
 
-      <!--<div class="col-md-6">
-        <label>Fecha Ini</label>
-      </div>
-
-      <div class="col-md-6">
-        <label>Acronimo</label>
-      </div>-->
-
 
 
   </div>
@@ -110,6 +103,38 @@
 
   <!-- PARTE DERECHA -->
   <div class="col-md-6">
+      <div class="row">
+          <div class="col-lg-12 ml-2">
+              <h5>Investigadores Principales <small *ngIf="!maxIP && permitirEdicion" class="text-right text-secondary" (click)=modificarIP()>[Añadir IP]</small></h5>
+              <table class="table table-bordered table-striped text-center">
+                <thead class="thead-dark">
+                  <tr>
+                    <th></th>
+                    <th scope="col">Nombre</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr >
+                    <td>IP Principal</td>
+                    <td colspan="2">{{ip1.nombre}} {{ip1.apellido1}} {{ip1.apellido2}}</td>
+                    
+                  </tr>
+                  <tr *ngIf="proyecto.ip2 != '' ">
+                      <td>IP Secundario</td>
+                      <td> {{ip2.nombre}} {{ip2.apellido1}} {{ip2.apellido2}} </td>
+                      <td>
+                        <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador" (click)="eliminarIP()">
+                      </td>
+
+                  </tr>
+    
+                </tbody>
+              </table>
+    
+          </div>
+        </div>
+
     <div class="row">
       <div class="col-lg-12 ml-2">
           <h5>Investigadores del Proyecto</h5>
@@ -119,21 +144,25 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Rol</th>
                 <th scope="col" *ngIf="permitirEdicion">Eliminar</th>
+                <th scope="col" *ngIf="modIP &&  !maxIP && permitirEdicion">Hacer IP</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let inv of nombresInvestigadores; index as i" >
                 <td>{{ inv }}</td>
                 <td>{{ investigadoresProyecto[i].rol }}</td>
-                <td *ngIf="permitirEdicion">
+                <td >
                     <img src="assets/iconos/menos.png" class="rounded" alt="Quitar Investigador" (click)="eliminarInvestigador(investigadoresProyecto[i])">
+                </td>
+                <td *ngIf="modIP && !maxIP && permitirEdicion" >
+                    <img src="assets/iconos/mas.png" class="rounded" alt="Añadir IP" (click)="anadirIP(investigadoresProyecto[i])">
                 </td>
               </tr>
               <tr>
-                <td *ngIf="!editarUsuarios && permitirEdicion" colspan="3">
+                <td *ngIf="!editarUsuarios && permitirEdicion" colspan="4">
                   <img src="assets/iconos/mas.png" class="rounded" alt="Añadir Investigador" (click)="cargarNuevosUsuarios()">
                 </td>
-                <td *ngIf="editarUsuarios && permitirEdicion" colspan="3">
+                <td *ngIf="editarUsuarios && permitirEdicion" colspan="4">
                   <img src="assets/iconos/menos.png" class="rounded" alt="Añadir Investigador" (click)="!noEditar()">
                 </td>
               </tr>
