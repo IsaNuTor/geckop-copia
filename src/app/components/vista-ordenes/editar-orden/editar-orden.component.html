@@ -447,7 +447,7 @@
               </div>
 
               <div class="col-md-7">
-                <label for="precioDieta">cuantía por dieta(€/día) <a href="https://www.ucm.es/data/cont/docs/32-2018-07-11-20180711_cuadro_dietas.pdf" target="_blank">[Ver cuadro de dietas]</a></label>
+                <label for="precioDieta">cuantía por dieta(€/día) <a href="http://antares.sip.ucm.es/manolo/formularios/32-2018-07-11-20180711_cuadro_dietas.pdf" target="_blank">[Ver cuadro de dietas]</a></label>
                 <input type="number" class="form-control" formControlName="precioDieta" required min="0" value="{{gastoViaje.precioDieta}}" step="any" name="precioDieta" id="precioDieta" onFocus="if (this.value==0) this.value='';" (change)="calculoImporteDietas()">
                 <div class="alerta">
                   <small *ngIf="false">No puede estar vacio <br></small>

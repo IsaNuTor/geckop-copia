@@ -21,7 +21,7 @@
             <div class="alerta">
               <small *ngIf="!formValid && formRegistro.get('nombre').hasError('required')">Nombre no puede estar vacio<br></small>
             </div>
-           
+
 
             <input id="placeColor" formControlName="apellido1" type="text" placeholder="Primer Apellido" maxlength="20">
             <div class="alerta">
@@ -53,13 +53,13 @@
             <input id="placeColor" formControlName="departamento" type="text" placeholder="Departamento" maxlength="50">
 
             <input id="placeColor" formControlName="centro" type="text" placeholder="Centro" maxlength="50">
-            
+
 
             <div id="checkTerm" class="mt-5">
               <label for="checkTerminos">
-                  <input type="checkbox" id="checkTerminos" formControlName="tyc" value="checkTerminos" name="checkTerminos"> Al registrarse, aceptas nuestras <a href="#">Condiciones de uso</a> y <a href="#">Política de privacidad.</a>
+                  <input type="checkbox" id="checkTerminos" formControlName="tyc" value="checkTerminos" name="checkTerminos"> Al registrarse, aceptas nuestras <a href="https://ucm.es/aviso-legal">Condiciones de uso</a> y <a href="https://www.ucm.es/datos-personales">Política de privacidad.</a>
                   <div class="alerta">
-                    <small *ngIf="!formValid && formRegistro.get('tyc').hasError('required')">Tienes que aceptar los terminos y condiciones para poder registrate<br></small>
+                    <small *ngIf="!formValid && formRegistro.get('tyc').hasError('required')">Tienes que aceptar los terminos y condiciones y política de privacidad para poder registrate<br></small>
                   </div>
               </label>
             </div>
