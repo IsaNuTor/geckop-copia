@@ -49,7 +49,7 @@ export class FormProyectosComponent implements OnInit {
         nombre: ['', [Validators.required, Validators.maxLength(50)]],
         acronimo: ['', [Validators.required, Validators.maxLength(50)]],
         presupuesto: ['', [Validators.required, Validators.max(10000000000000000)]],
-        nContabilidad: ['', [Validators.max(100000000000000000)]],
+        nContabilidad: ['0', [Validators.max(100000000000000000)]],
         ip2: ['', [Validators.maxLength(50)]],
         investigadores: this.fb.array([''])
       });
@@ -61,7 +61,7 @@ export class FormProyectosComponent implements OnInit {
     }
 
 
-    
+
   ngOnInit() {
     if (!this.sesionService.isLogin())
       this.router.navigate(['/login']);
@@ -176,7 +176,7 @@ export class FormProyectosComponent implements OnInit {
                 inv.dni = this.proyecto.ip1,
                 inv.acronimo = this.proyecto.acronimo;
                 inv.rol = "Investigador Principal";
-                
+
 
                 this.usuarioProyectoService.insertarUsuariosProyecto(inv).subscribe();
 

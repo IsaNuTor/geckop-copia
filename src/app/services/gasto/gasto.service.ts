@@ -13,6 +13,8 @@ export class GastoService {
   urlGastoImagen:string = URL_BACKEND + '/api/gastos/subirImagen';
   urlGastoUpdate:string = URL_BACKEND +'/api/setGasto';
   urlGastoByOrden:string = URL_BACKEND + '/api/gastos/byidorden';
+  urlBorrarNull:string = URL_BACKEND + '/api/gastos/borrarnull';
+
 
   //urlGasto:string = URL_BACKEND + '/api/proyecto';
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -50,5 +52,9 @@ export class GastoService {
 
   findByIdOrden(id_o: number): Observable<Gasto[]>{
     return this.http.post<Gasto[]>(this.urlGastoByOrden, id_o, {headers: this.httpHeaders});
+	}
+
+  borrarGastoNull(id_o: number): Observable<Gasto[]>{
+    return this.http.post<Gasto[]>(this.urlBorrarNull, id_o, {headers: this.httpHeaders});
 	}
 }

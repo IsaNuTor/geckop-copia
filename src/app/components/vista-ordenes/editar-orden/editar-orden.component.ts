@@ -486,9 +486,10 @@ export class EditarOrdenComponent implements OnInit {
             this.actualizar = true;
             this.orden.observaciones = this.formOrden.value.observaciones;
           }
+            this.orden.estado = 'P';
 
             if(this.actualizar) {
-              this.orden.estado == 'P';
+
               this.ordenService.setOrden(this.orden).subscribe(
                 resultado => {
                   if(resultado){
@@ -510,6 +511,7 @@ export class EditarOrdenComponent implements OnInit {
 
                     this.gastoViajeService.setGastoViaje(this.gastoViaje).subscribe(
                       resultado => {
+
                         if(resultado == null) {
                           const ToastrModule = swal.mixin({
                               toast: true,
@@ -522,13 +524,12 @@ export class EditarOrdenComponent implements OnInit {
                               title: 'Error!',
                               text: 'El gasto no se ha podido editar',
                           })
-                        } else {
-                          this.router.navigate(['vista-ordenes'])
                         }
+                        this.router.navigate(['vista-ordenes']);
                       }
                     );
                   }
-
+                  this.router.navigate(['vista-ordenes']);
                 }else{
                   const ToastrModule = swal.mixin({
                       toast: true,
@@ -543,7 +544,7 @@ export class EditarOrdenComponent implements OnInit {
                   })
                 }
               })
-            }
+
         } else{
           this.formValid = false;
           const Toast = swal.mixin({
@@ -559,7 +560,7 @@ export class EditarOrdenComponent implements OnInit {
           })
         }
     }
-
+}
 // GASTOS
 public crearGasto(): void {
 

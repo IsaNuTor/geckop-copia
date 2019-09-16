@@ -553,26 +553,17 @@
 
       </div>
 
-      <div class="form-group" *ngIf="isG">
-        <label class="texto-form" for="memoria">Memoria explicativa de los gastos</label>
+      <div class="form-group">
+        <label *ngIf="isG" class="texto-form" for="memoria">Memoria explicativa de los gastos</label>
+        <label  *ngIf="isV" class="texto-form" for="memoria">Objeto del desplazamiento en relación con la ejecución del proyecto</label>
         <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="{{orden.memoria}}"  maxlength="150" ></textarea>
         <small *ngIf="!crear &&formOrden.get('memoria').hasError('required')" class="alerta">No puede estar vacio. </small>
       </div>
 
-      <br>
-
-        <div class="form-group" *ngIf="isV">
-          <label class="texto-form" for="memoria">Objeto del desplazamiento en relación con la ejecución del proyecto</label>
-          <textarea class="form-control" id="memoria" rows="3" formControlName="memoria" placeholder="{{orden.memoria}}" ></textarea>
-          <div class="alerta">
-            <small *ngIf="false">No puede estar vacio <br></small>
-          </div>
-        </div>
-
         <br>
         <div class="form-group" *ngIf="isG">
           <label class="texto-form" for="relacion">Relación con el proyecto</label>
-          <textarea class="form-control" id="relacion" rows="3" placeholder="{{orden.relacion}}"></textarea>
+          <textarea class="form-control" formControlName="relacion" id="relacion" rows="3" placeholder="{{orden.relacion}}"></textarea>
           <div class="alerta">
             <small *ngIf="false">No puede estar vacio <br></small>
           </div>
