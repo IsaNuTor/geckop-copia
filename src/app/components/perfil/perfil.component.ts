@@ -43,8 +43,8 @@ export class PerfilComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute
     ) {
-  
-    this.formPerfil = this.fbPerfil.group({ 
+
+    this.formPerfil = this.fbPerfil.group({
       email: ['', [Validators.email]],
       iban: [''],
       passOriginal: ['', [Validators.minLength(5)]],//, Validators.minLength(5)]],
@@ -70,9 +70,9 @@ export class PerfilComponent implements OnInit {
             this.ibanUsuario = "Aun no existe IBAN asignado al usuario";
           }
 
-        } 
+        }
       );
-      
+
       this.nombreCompleto = this.sesionService.getNombreCompleto();
     }
   }
@@ -139,8 +139,8 @@ export class PerfilComponent implements OnInit {
         });
     }
    }
-  
-   
+
+
    modificarDatos(): void{
     if(this.formPerfil.value.iban != "" ){ this.ibanUsuario = this.formPerfil.value.iban; this.modifiban = true; ;this.modificar = true}
 
@@ -148,7 +148,7 @@ export class PerfilComponent implements OnInit {
       //Comprobamos pass
       if(this.formPerfil.value.passNueva != ""){
         if(this.formPerfil.value.passNueva == this.formPerfil.value.passNueva2){
-          this.usuarioService.comprobarContrasena(this.sesionService.getDni(), this.formPerfil.value.passOriginal).subscribe( 
+          this.usuarioService.comprobarContrasena(this.sesionService.getDni(), this.formPerfil.value.passOriginal).subscribe(
           result=>{
               if(result){//comprobar contraseña en back this.usuarioService.comprobarPass(this.dni, this.passOriginal)
                 //set usuario
@@ -165,9 +165,11 @@ export class PerfilComponent implements OnInit {
           this.passIguales = false;
         }
       } else {
+        if(this.modifiban)
+          this.modificarIban();
         this.modificarUsuario();
       }
-  
+
     }else{ //Booleanos de validacion
 
       if(this.formPerfil.get('passNueva').hasError('minlength') ||  this.formPerfil.get('passNueva').hasError('minlength')) this.passValida=false;
@@ -218,7 +220,7 @@ export class PerfilComponent implements OnInit {
           }
       });
 
-    
+
     }else{
       this.acreedorService.crearAcreedor(a).subscribe(
         (ok) => {
@@ -237,7 +239,7 @@ export class PerfilComponent implements OnInit {
             })
             this.existeIban = true;
             this.formPerfil.value.iban = "";
-           
+
           }else{
             const ToastrModule = swal.mixin({
               toast: true,

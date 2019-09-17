@@ -228,8 +228,8 @@
             </td>
           </tr>
 
-          
-          
+
+
           <tr class="table-secondary">
             <th class="text-right" colspan="6">TOTAL GASTOS:</th>
             <td class="text-center">{{gastoViaje.importeTotal}}</td>
@@ -240,28 +240,28 @@
                   concertada, indique para qué tipo de gastos:
               </td>
               <td class="text-center" colspan="2">
-                <input class="form-check-input" type="checkbox" value="{{gastoViaje.checkAgenciaAvion}}"  disabled> Avion 
+                <input class="form-check-input" type="checkbox" value="{{gastoViaje.checkAgenciaAvion}}"  disabled> Avion
               </td>
-              <td class="text-center" >  
+              <td class="text-center" >
                 <input class="form-check-input" type="checkbox" value="{{gastoViaje.checkAgenciaTren}}" disabled> Tren
               </td>
-      
+
           </tr>
           <tr>
               <td class="text-center" colspan="2">
-                  <input class="form-check-input" type="checkbox" value="{{gastoViaje.checkAgenciaAlojamiento}}" disabled>Hotel 
+                  <input class="form-check-input" type="checkbox" value="{{gastoViaje.checkAgenciaAlojamiento}}" disabled>Hotel
               </td>
 
-              <td class="text-center" >  
+              <td class="text-center" >
                   <span> Otros: {{gastoViaje.otrosAgencia}} </span>
               </td>
-          
+
           </tr>
 
         </tbody>
       </table>
     </div>
-   
+
 
   <div *ngIf="isG" class="col-md-12">
     <table class="table table-bordered text-center">
@@ -293,7 +293,7 @@
     </table>
   </div>
 
-  
+
   <div class="col-md-12" *ngIf="orden.estado == 'PM' ">
       <table class="table table-bordered text-center">
         <thead>
@@ -313,7 +313,7 @@
   <div class="col-md-12">
       <div class="col-md-6">
           <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-success m-2" types="button" (click)="firmarOrden()">Aceptar Orden</button>
-          <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-danger m-2" types="button" (click)="cambairEstadoOrden('R')">Rechazar Orden</button>
+          <button *ngIf="!firmada && isIP" class="btn btn-rounded btn btn-danger m-2" types="button" (click)="cambiarEstadoOrden('R')">Rechazar Orden</button>
 
           <button *ngIf="!firmada && isIP && !modificacion" class="btn btn-rounded btn btn-warning m-2" types="button" (click)="pedirModificacionOrden()">Pedir Modificación</button>
           <button *ngIf="!firmada && isIP && modificacion" class="btn btn-rounded btn btn-outline-warning mt-2 m-2" types="button" (click)="enviarModificacion()">Enviar</button>
