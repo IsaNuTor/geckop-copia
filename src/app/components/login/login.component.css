@@ -40,13 +40,10 @@ body {
 .cont-login .cont-password {
     padding-right: 20px;
     width: 100%;
+    margin-right: 10px;
 }
 
-.cont-login .cont-email img,
-.cont-login .cont-password img {
-    background-color: #fff;
-    border-radius: 50%;
-}
+
 
 .cont-login input[type="text"],
 .cont-login input[type="password"] {

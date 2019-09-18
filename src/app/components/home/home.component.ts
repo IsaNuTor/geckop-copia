@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit {
    
   }
 
+  /*Carga las ordenes emitidas por el usuario*/
   cargarOrdenesUsuario(){
     this.aceptadas =  new Array<Orden>();
     this.rechazadas =  new Array<Orden>();
@@ -119,10 +120,6 @@ export class HomeComponent implements OnInit {
     )
 
   }
-
-
-  
-
 
 
   /* ----------------Funciones necesarias para cualquier paginado--------------------- */

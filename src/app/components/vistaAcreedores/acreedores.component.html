@@ -13,6 +13,7 @@
           <th (click)="orderByNIF()">NIF <img src="assets/iconos/ordenar.png" class="rounded"> </th>
           <th (click)="orderByIBAN()">Iban <img src="assets/iconos/ordenar.png" class="rounded"> </th>
           <th>Editar</th>
+          <th>Borrar</th>
           
         </tr>
       </thead>
@@ -24,6 +25,9 @@
           <td>{{ acreedores[getOrdenPagindoIndex(a, paginaActual)].iban }}</td>
           <td>
             <img src="assets/iconos/editar.png" class="rounded" alt="Editar Acreedor" [routerLink]="['/acreedores/form-acreedores.component', acreedores[getOrdenPagindoIndex(a,   paginaActual)].nif]">
+          </td>
+          <td>
+            <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Acreedor" (click) ="delete(acreedores[getOrdenPagindoIndex(a,   paginaActual)])" >
           </td>
           
         </tr>

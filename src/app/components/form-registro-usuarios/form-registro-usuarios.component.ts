@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Usuario } from '../../services/usuario/usuario';
 import { UsuarioService } from '../../services/usuario/usuario.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { SesionService } from 'src/app/services/sesion/sesion.service';
 

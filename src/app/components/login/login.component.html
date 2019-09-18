@@ -14,13 +14,13 @@
         <h1>LOGIN</h1>
         <form (ngSubmit)="login()">
             <!--Email-->
-            <div class="cont-email">
+            <div class="cont-email mr-2">
                 <img src="assets/iconos/user.png" alt="icono usuario">
                 <input type="text" class="input" placeholder="DNI" name="dni" [(ngModel)]="usuario.dni">
             </div>
 
             <!--Password-->
-            <div class="cont-password">
+            <div class="cont-password mr-2">
                 <img src="assets/iconos/lock.png" alt="icono usuario">
                 <input type="password" class="input" placeholder="Password" name="password" [(ngModel)]="usuario.password">
             </div>
