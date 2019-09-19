@@ -38,9 +38,9 @@
               <!--Revisar enlace a editar orden-->
               <img *ngIf="ordenes[getOrdenPagindoIndex(a, paginaActual)].estado =='PM'" src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden" [routerLink]="['/editarOrden/', ordenes[getOrdenPagindoIndex(a, paginaActual)].id]" >
             </td>
-            <td>
+            <!--<td>
                 <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden" (click)="borrarOrden(ordenes[getOrdenPagindoIndex(a,   paginaActual)])">
-            </td>
+            </td>-->
         </tr>
         <tr><!--Los botones llaman a las funciones anterior y siguiente y actualizan a la pagina correspondiente-->
           <button type="button" class="btn btn-link mr-2" (click) ="paginaActual= anterior(paginaActual, ordenes.length, 0)">
