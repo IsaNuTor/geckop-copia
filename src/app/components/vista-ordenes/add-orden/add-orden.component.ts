@@ -43,6 +43,7 @@ export class AddOrdenComponent implements OnInit {
   memoriaVacio:boolean = false;
   relacionVacio:boolean = false;
   observacionesVacio:boolean = false;
+  tipo_gastoVacio:boolean = false;
   relacion:string="";
 
   idAuxOrden: number;
@@ -89,6 +90,7 @@ export class AddOrdenComponent implements OnInit {
             memoria: ['', [Validators.required, Validators.maxLength(150)]],
             relacion: ['', [Validators.required,  Validators.maxLength(150)]],
             observaciones: ['', [Validators.required, Validators.maxLength(150)]],
+            tipo_gasto: ['', [Validators.required, Validators.maxLength(150)]],
           });
           this.formGastos = this.fb.group({
             nFactura: [ '', [Validators.required, Validators.maxLength(12)]], //Nº de Factura
@@ -370,6 +372,7 @@ crearOrden(): void {
       if(this.formOrden.value.memoria == ""){this.memoriaVacio = true; this.crear = false;}
       if(this.formOrden.value.relacion == ""){this.relacionVacio = true; this.crear = false;}
       if(this.formOrden.value.observaciones == ""){this.observacionesVacio = true; this.crear = false;}
+      if(this.formOrden.value.tipo_gasto == ""){this.tipo_gastoVacio = true; this.crear = false;}
 
       if(this.crear){
         this.orden = this.formOrden.value;
@@ -380,7 +383,6 @@ crearOrden(): void {
         this.orden.numeracion = this.numeracionAux;
         this.orden.tipo = "G";
         this.orden.num_contabilidad = this.num_contabilidad;
-
         this.ordenService.crearOrden(this.orden).subscribe(
           orden =>
           {

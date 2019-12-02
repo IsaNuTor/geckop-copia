@@ -18,8 +18,8 @@
           <th scope="col" (click)="orderByEstado()">Estado <img src="assets/iconos/ordenar.png" class="rounded"></th>
           <th scope="col" (click)="orderByConcepto()">Concepto <img src="assets/iconos/ordenar.png" class="rounded"></th>
           <th scope="col" (click)="orderByProyecto()">Proyecto <img src="assets/iconos/ordenar.png" class="rounded"></th>
+          <th scope="col"></th>
           <th scope="col">Ver</th>
-          <th scope="col">Borrar</th>
         </tr>
       </thead>
       <tbody>
@@ -38,6 +38,7 @@
               <!--Revisar enlace a editar orden-->
               <img *ngIf="ordenes[getOrdenPagindoIndex(a, paginaActual)].estado =='PM'" src="assets/iconos/lupa.png" class="rounded icon" alt="Editar Orden" [routerLink]="['/editarOrden/', ordenes[getOrdenPagindoIndex(a, paginaActual)].id]" >
             </td>
+            <td>{{ordenes[getOrdenPagindoIndex(a,   paginaActual)].tipo_gasto}}</td>
             <!--<td>
                 <img src="assets/iconos/papelera.png" class="rounded" alt="Eliminar Orden" (click)="borrarOrden(ordenes[getOrdenPagindoIndex(a,   paginaActual)])">
             </td>-->

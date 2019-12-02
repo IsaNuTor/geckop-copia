@@ -14,7 +14,7 @@
 
         <!--FECHA PRUEBAS-->
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label class="texto-form">Proyecto</label>
           <select class="custom-select" formControlName="acronimo" (change)="capturarValor()">
             <option value="" selected>Seleccione acrónimo del proyecto</option>
@@ -23,6 +23,11 @@
           <small *ngIf="!crear &&formOrden.get('acronimo').hasError('required')" class="alerta">No puede estar vacio. Seleccione un proyecto</small>
         </div>
 
+        <div class="form-group col-md-2">
+          <label class="texto-form">Num. Contabilidad</label>
+          <input type="text" class="form-control"  name="num_contabilidad" id="num_contabilidad" placeholder="{{num_contabilidad}}" maxlength="12" disabled>            
+        </div>
+        
         <div class="form-group col-md-6">
           <label class="texto-form">Acreedor</label>
           <select class="custom-select" formControlName="nif_acreedor">
@@ -30,9 +35,7 @@
             <option *ngFor="let acreedor of acreedores" value="{{ acreedor.nif }}">{{acreedor.nombre}} -- {{ acreedor.nif }}</option>
           </select>
           <small *ngIf="!ibanRegistrado" class="alerta">No estás registrado como acreedor. Registraté si quieres ser el acreedor de la orden </small>
-
         </div>
-
       </div>
 
       <div class="form-row">
@@ -44,9 +47,16 @@
           </div>
 
           <div class="form-group col-md-6">
-            <label class="texto-form">Num. Contabilidad</label>
-            <input type="text" class="form-control"  name="num_contabilidad" id="num_contabilidad" placeholder="{{num_contabilidad}}" maxlength="12" disabled>
-           </div>
+            <label class="texto-form">Tipo de gasto</label>
+            <select class="custom-select" formControlName="tipo_gasto">
+              <option value="" selected>Seleccione el tipo de gasto</option>
+              <option value="gasto1" >Gasto1</option>
+              <option value="gasto2" >Gasto2</option>
+              <option value="gasto3" >Gasto3</option>
+              <option value="gasto4" >Gasto4</option>
+            </select>
+            <small *ngIf="!crear &&formOrden.get('tipo_gasto').hasError('required')" class="alerta">Por favor seleccione el tipo de gastos que va a incluir la orden. </small>
+          </div>
 
         </div>
 
@@ -72,7 +82,7 @@
           <div class="col-md-6">
             <label for="nFactura">Nº de Factura</label>
             <input type="text" class="form-control" formControlName="nFactura" name="nFactura" id="nFactura" placeholder="Nº de Factura" maxlength="12">
-           </div>
+          </div>
         </div>
       </div>
 

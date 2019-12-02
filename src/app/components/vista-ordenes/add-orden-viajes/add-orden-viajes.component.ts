@@ -301,6 +301,7 @@ public crearOrden(): void {
         this.orden.tipo = "V";
         this.orden.relacion = this.relacion;
         this.orden.num_contabilidad = this.num_contabilidad;
+        this.orden.tipo_gasto = "Funcionamiento"
 
         /*if(this.orden.tipo == 'V')
           this.orden.relacion = this.getRelacionProyecto();
